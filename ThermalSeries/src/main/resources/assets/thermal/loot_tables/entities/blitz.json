@@ -1,0 +1,61 @@
+{
+	"pools": [
+		{
+			"name": "blitz_rod_blitz",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "thermal:rod_blitz",
+					"weight": 1,
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 0,
+								"max": 1
+							}
+						},
+						{
+							"function": "looting_enchant",
+							"count": {
+								"min": 0,
+								"max": 1
+							}
+						}
+					]
+				}
+			],
+			"conditions": [
+				{
+					"condition": "killed_by_player"
+				}
+			]
+		},
+		{
+			"name": "blitz_dust_niter",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "thermal:dust_niter",
+					"weight": 1,
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 0,
+								"max": 2
+							}
+						}
+					]
+				}
+			],
+			"conditions": [
+				{
+					"condition": "killed_by_player"
+				}
+			]
+		}
+	]
+}

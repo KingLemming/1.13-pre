@@ -1,0 +1,102 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "redstonearsenal:items/utils/quiver_flux_infused"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [
+				0,
+				260,
+				-40
+			],
+			"translation": [
+				-1,
+				-2,
+				3
+			],
+			"scale": [
+				0.6,
+				0.6,
+				0.6
+			]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [
+				0,
+				-260,
+				40
+			],
+			"translation": [
+				-1,
+				-2,
+				3
+			],
+			"scale": [
+				0.6,
+				0.6,
+				0.6
+			]
+		},
+		"firstperson_righthand": {
+			"rotation": [
+				90,
+				-90,
+				25
+			],
+			"translation": [
+				1.13,
+				3.2,
+				1.13
+			],
+			"scale": [
+				0.55,
+				0.55,
+				0.55
+			]
+		},
+		"firstperson_lefthand": {
+			"rotation": [
+				90,
+				90,
+				-25
+			],
+			"translation": [
+				1.13,
+				3.2,
+				1.13
+			],
+			"scale": [
+				0.55,
+				0.55,
+				0.55
+			]
+		},
+		"ground": {
+			"translation": [
+				0,
+				0.15,
+				0
+			],
+			"scale": [
+				0.5,
+				0.5,
+				0.5
+			]
+		}
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"charged": 1
+			},
+			"model": "redstonearsenal:item/utils/quiver_flux_infused_charged"
+		},
+		{
+			"predicate": {
+				"empowered": 1
+			},
+			"model": "redstonearsenal:item/utils/quiver_flux_infused_empowered"
+		}
+	]
+}

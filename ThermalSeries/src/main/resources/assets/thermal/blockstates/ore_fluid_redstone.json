@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"normal": {
+			"model": "thermal:ores/ore_fluid_redstone"
+		}
+	}
+}

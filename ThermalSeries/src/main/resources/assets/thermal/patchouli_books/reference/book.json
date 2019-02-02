@@ -1,0 +1,8 @@
+{
+	"name": "item.thermal.tome_reference.name",
+	"advancement_namespaces": [
+		"thermal"
+	],
+	"book_texture": "patchouli:textures/gui/book_red",
+	"model": "patchouli:book_red"
+}

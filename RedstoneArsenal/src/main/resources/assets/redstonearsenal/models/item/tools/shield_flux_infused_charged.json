@@ -1,0 +1,6 @@
+{
+	"parent": "redstonearsenal:item/tools/shield_flux_infused",
+	"textures": {
+		"all": "redstonearsenal:items/tools/shield_flux_infused_charged"
+	}
+}

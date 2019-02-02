@@ -1,0 +1,490 @@
+#en_US
+
+entity.thermal.basalz.name=Basalz
+entity.thermal.blitz.name=Blitz
+entity.thermal.blizz.name=Blizz
+
+#=======================================================================================================================
+# INFO - CORE
+#=======================================================================================================================
+
+gui.thermal.lexicon.clear_pref=Clear Preference
+gui.thermal.lexicon.next_entry=Next Entry
+gui.thermal.lexicon.prev_entry=Previous Entry
+gui.thermal.lexicon.search=Search
+gui.thermal.lexicon.set_pref=Set Preference
+gui.thermal.lexicon.single_entry=Only One Entry
+gui.thermal.lexicon.study=Lexicon - Knowledge
+gui.thermal.lexicon.transmute=Lexicon - Transmutation
+
+info.thermal.diagram.erase=Use while sneaking to erase.
+info.thermal.diagram.redprint.0=Use on a block to copy its settings.
+info.thermal.diagram.redprint.1=Use on a block to transfer stored settings.
+
+info.thermal.tome_lexicon.0=Converts items to equivalent forms.
+info.thermal.tome_lexicon.1=Also known as a Thesoreus.
+info.thermal.tome_lexicon.a.0=Right click (open) to study.
+info.thermal.tome_lexicon.a.1=Right click (open) to transmute items.
+info.thermal.tome_lexicon.b.0=§bPress (%s) to gain wisdom!§r
+info.thermal.tome_lexicon.b.1=§ePress (%s) to forsake knowledge.§r
+
+info.thermal.tome_xp.0=Stores experience within its pages.
+info.thermal.tome_xp.1=Use to store knowledge in the tome.
+info.thermal.tome_xp.2=Use while sneaking to retrieve stored knowledge.
+info.thermal.tome_xp.a.0=§bPress (%s) to enable auto-collect.§r
+info.thermal.tome_xp.a.1=§ePress (%s) to disable auto-collect.§r
+
+info.thermal.wrench.0=Rotates and dismantles blocks.
+info.thermal.wrench.1=Also known as a Wrench.
+
+tab.thermal.lexicon.study.0=Consult the knowledge of the world and alter your personal destiny.
+tab.thermal.lexicon.study.1=Empower the Lexicon to force the world to obey your choices.
+tab.thermal.lexicon.transmute.0=Transmute equivalent items according to an arcane set of rules laid down by higher powers.
+tab.thermal.lexicon.transmute.1=Quell the Lexicon to relinquish mastery over the world.
+
+#=======================================================================================================================
+# INFO - CULTIVATION
+#=======================================================================================================================
+
+info.thermal.watering_can.0=Irrigates farmland and speeds up plant growth.
+info.thermal.watering_can.1=Water may be collected while sneaking.
+info.thermal.watering_can.a.0=§ePress (%s) to adjust the area.§r
+
+#=======================================================================================================================
+# INFO - EXPANSION
+#=======================================================================================================================
+
+tab.thermal.dynamo_magmatic.0=Generates Redstone Flux using extremely hot fluids.
+
+tab.thermal.dynamo_steam.0=Generates Redstone Flux using Steam.
+tab.thermal.dynamo_steam.1=Solid Fuels and Water can be used to generate Steam.
+
+tab.thermal.machine_furnace.0=Smelts things using Redstone Flux.
+tab.thermal.machine_furnace.1=Uses very little energy to cook food.
+tab.thermal.machine_furnace.2=Om nom nom.
+
+tab.thermal.machine_pulverizer.0=Smashes things into other things.
+tab.thermal.machine_pulverizer.1=Useful for processing ores or converting items.
+tab.thermal.machine_pulverizer.2=This is typically not reversible.
+
+tab.thermal.machine_sawmill.0=Cuts logs into planks and reprocesses wooden things.
+tab.thermal.machine_sawmill.1=Very useful for making the most out of a tree.
+tab.thermal.machine_sawmill.2=Watch your hands.
+
+#=======================================================================================================================
+# INFO - INNOVATION
+#=======================================================================================================================
+
+info.thermal.potion_injector.0=Stores and injects potions. Can infuse the wielder.
+info.thermal.potion_injector.1=Use on an Entity to inject the contained potion.
+info.thermal.potion_injector.2=Use while sneaking to inject yourself.
+info.thermal.potion_injector.a.0=§bPress (%s) to enable auto-infuse.§r
+info.thermal.potion_injector.a.1=§ePress (%s) to disable auto-infuse.§r
+info.thermal.potion_injector.b.0=Auto-Infuse Disabled
+info.thermal.potion_injector.b.1=Auto-Infuse Enabled
+
+info.thermal.potion_quiver.0=Imbues arrows with potions.
+info.thermal.potion_quiver.1=Use to add arrows from your inventory to the quiver.
+info.thermal.potion_quiver.2=Use while sneaking to remove arrows from the quiver.
+info.thermal.potion_quiver.a.0=§bPress (%s) to enable arrow imbuing.§r
+info.thermal.potion_quiver.a.1=§ePress (%s) to disable arrow imbuing.§r
+info.thermal.potion_quiver.b.0=Imbuing Disabled
+info.thermal.potion_quiver.b.1=Imbuing Enabled
+
+info.thermal.rf_capacitor.0=Stores Redstone Flux. Can recharge equipment and items.
+info.thermal.rf_capacitor.1=Use while sneaking to activate.
+info.thermal.rf_capacitor.2=Use while sneaking to deactivate.
+info.thermal.rf_capacitor.a.0=§ePress (%s) to change Charge mode.§r
+info.thermal.rf_capacitor.b.0=Charging Equipment
+info.thermal.rf_capacitor.b.1=Charging Inventory
+info.thermal.rf_capacitor.b.2=Charging All Items
+
+info.thermal.rf_drill.0=Mines blocks using Redstone Flux.
+info.thermal.rf_drill.a.0=§ePress (%s) to adjust the drilling area.§r
+info.thermal.rf_drill.b.0=Single Block
+info.thermal.rf_drill.b.1=Tunnel: 1x2
+info.thermal.rf_drill.b.2=Area: 3x3
+info.thermal.rf_drill.b.3=Area: 3x3x3
+info.thermal.rf_drill.b.4=Area: 5x5
+
+info.thermal.rf_magnet.0=Attracts items to the wielder.
+info.thermal.rf_magnet.1=Use to attract items at the target location.
+info.thermal.rf_magnet.2=Use while sneaking to configure.
+info.thermal.rf_magnet.a.0=§bPress (%s) to enable attraction.§r
+info.thermal.rf_magnet.a.1=§ePress (%s) to disable attraction.§r
+info.thermal.rf_magnet.b.0=Attraction Disabled
+info.thermal.rf_magnet.b.1=Attraction Enabled
+
+info.thermal.rf_saw.0=Cuts blocks using Redstone Flux.
+info.thermal.rf_saw.a.0=§ePress (%s) to adjust the cutting area.§r
+info.thermal.rf_saw.b.0=Single Block
+info.thermal.rf_saw.b.1=Tunnel: 1x3
+info.thermal.rf_saw.b.2=Area: 3x3
+info.thermal.rf_saw.b.3=Area: 3x3x3
+info.thermal.rf_saw.b.4=Area: 5x5
+
+tab.thermal.rf_magnet.filter.0=Configure which items this Fluxomagnet can attract.
+tab.thermal.rf_magnet.filter.1=Clever, huh?
+
+#=======================================================================================================================
+# FLUIDS - CORE
+#=======================================================================================================================
+
+fluid.steam=Steam
+fluid.experience=Essence of Knowledge
+
+fluid.milk=Milk
+fluid.beetroot_soup=Beetroot Soup
+fluid.mushroom_stew=Mushroom Stew
+
+fluid.potion=Potion
+
+fluid.redstone=Destabilized Redstone
+fluid.glowstone=Energized Glowstone
+fluid.ender=Resonant Ender
+
+tile.thermal.fluid_redstone.name=Destabilized Redstone
+tile.thermal.fluid_glowstone.name=Energized Glowstone
+tile.thermal.fluid_ender.name=Resonant Ender
+
+tile.thermal.fluid_crude_oil.name=Crude Oil
+
+tile.thermal.fluid_pyrotheum.name=Blazing Pyrotheum
+tile.thermal.fluid_cryotheum.name=Gelid Cryotheum
+tile.thermal.fluid_aerotheum.name=Zephyrean Aerotheum
+tile.thermal.fluid_petrotheum.name=Tectonic Petrotheum
+
+#=======================================================================================================================
+# ITEMS - CORE
+#=======================================================================================================================
+
+itemGroup.thermal.blocks=Thermal Series: Blocks
+itemGroup.thermal.items=Thermal Series: Items
+itemGroup.thermal.tools=Thermal Series: Tools
+
+item.thermal.dust_charcoal.name=Pulverized Charcoal
+item.thermal.dust_coal.name=Pulverized Coal
+item.thermal.dust_obsidian.name=Pulverized Obsidian
+
+item.thermal.coal_coke.name=Coal Coke
+item.thermal.dust_sulfur.name=Sulfur
+item.thermal.dust_niter.name=Niter
+item.thermal.dust_wood.name=Sawdust
+
+item.thermal.coin_iron.name=Iron Coin
+item.thermal.coin_gold.name=Gold Coin
+item.thermal.coin_steel.name=Steel Coin
+item.thermal.coin_signalum.name=Signalum Coin
+item.thermal.coin_lumium.name=Lumium Coin
+item.thermal.coin_enderium.name=Enderium Coin
+
+item.thermal.dust_iron.name=Iron Dust
+item.thermal.dust_gold.name=Gold Dust
+item.thermal.dust_steel.name=Steel Blend
+item.thermal.dust_signalum.name=Signalum Blend
+item.thermal.dust_lumium.name=Lumium Blend
+item.thermal.dust_enderium.name=Enderium Blend
+
+item.thermal.dust_diamond.name=Diamond Dust
+item.thermal.dust_emerald.name=Emerald Dust
+
+item.thermal.gear_iron.name=Iron Gear
+item.thermal.gear_gold.name=Gold Gear
+item.thermal.gear_steel.name=Steel Gear
+item.thermal.gear_signalum.name=Signalum Gear
+item.thermal.gear_lumium.name=Lumium Gear
+item.thermal.gear_enderium.name=Enderium Gear
+
+item.thermal.gear_diamond.name=Diamond Gear
+item.thermal.gear_emerald.name=Emerald Gear
+
+item.thermal.gear_wood.name=Wooden Gear
+item.thermal.gear_stone.name=Stone Gear
+
+item.thermal.ingot_steel.name=Steel Ingot
+item.thermal.ingot_signalum.name=Signalum Ingot
+item.thermal.ingot_lumium.name=Lumium Ingot
+item.thermal.ingot_enderium.name=Enderium Ingot
+
+item.thermal.nugget_steel.name=Steel Nugget
+item.thermal.nugget_signalum.name=Signalum Nugget
+item.thermal.nugget_lumium.name=Lumium Nugget
+item.thermal.nugget_enderium.name=Enderium Nugget
+
+item.thermal.nugget_diamond.name=Diamond Nugget
+item.thermal.nugget_emerald.name=Emerald Nugget
+
+item.thermal.plate_iron.name=Iron Plate
+item.thermal.plate_gold.name=Gold Plate
+item.thermal.plate_steel.name=Steel Plate
+item.thermal.plate_signalum.name=Signalum Plate
+item.thermal.plate_lumium.name=Lumium Plate
+item.thermal.plate_enderium.name=Enderium Plate
+
+item.thermal.plate_diamond.name=Diamond Plate
+item.thermal.plate_emerald.name=Emerald Plate
+
+item.thermal.tome_experience.name=Tome of Knowledge
+item.thermal.tome_lexicon.name=Forge Lexicon
+item.thermal.tome_reference.name=Thermal Reference
+
+item.thermal.util_wrench.name=Crescent Hammer
+item.thermal.util_redprint.name=Redprint
+
+#=======================================================================================================================
+# ITEMS - FOUNDATION
+#=======================================================================================================================
+
+#-----------------------------------------------------------------------------------------------------------------------
+# COINS
+#-----------------------------------------------------------------------------------------------------------------------
+
+item.thermal.coin_copper.name=Copper Coin
+item.thermal.coin_tin.name=Tin Coin
+item.thermal.coin_lead.name=Lead Coin
+item.thermal.coin_silver.name=Silver Coin
+item.thermal.coin_nickel.name=Nickel Coin
+item.thermal.coin_platinum.name=Platinum Coin
+
+item.thermal.coin_zinc.name=Zinc Coin
+item.thermal.coin_aluminum.name=Aluminum Coin
+item.thermal.coin_titanium.name=Titanium Coin
+item.thermal.coin_osmium.name=Osmium Coin
+item.thermal.coin_iridium.name=Iridium Coin
+item.thermal.coin_tungsten.name=Tungsten Coin
+
+item.thermal.coin_bronze.name=Bronze Coin
+item.thermal.coin_invar.name=Invar Coin
+item.thermal.coin_electrum.name=Electrum Coin
+item.thermal.coin_constantan.name=Constantan Coin
+
+#-----------------------------------------------------------------------------------------------------------------------
+# DUSTS
+#-----------------------------------------------------------------------------------------------------------------------
+
+item.thermal.dust_copper.name=Copper Dust
+item.thermal.dust_tin.name=Tin Dust
+item.thermal.dust_lead.name=Lead Dust
+item.thermal.dust_silver.name=Silver Dust
+item.thermal.dust_nickel.name=Nickel Dust
+item.thermal.dust_platinum.name=Platinum Dust
+
+item.thermal.dust_zinc.name=Zinc Dust
+item.thermal.dust_aluminum.name=Aluminum Dust
+item.thermal.dust_titanium.name=Titanium Dust
+item.thermal.dust_osmium.name=Osmium Dust
+item.thermal.dust_iridium.name=Iridium Dust
+item.thermal.dust_tungsten.name=Tungsten Dust
+
+item.thermal.dust_bronze.name=Bronze Blend
+item.thermal.dust_invar.name=Invar Blend
+item.thermal.dust_electrum.name=Electrum Blend
+item.thermal.dust_constantan.name=Constantan Blend
+
+#-----------------------------------------------------------------------------------------------------------------------
+# GEARS
+#-----------------------------------------------------------------------------------------------------------------------
+
+item.thermal.gear_copper.name=Copper Gear
+item.thermal.gear_tin.name=Tin Gear
+item.thermal.gear_lead.name=Lead Gear
+item.thermal.gear_silver.name=Silver Gear
+item.thermal.gear_nickel.name=Nickel Gear
+item.thermal.gear_platinum.name=Platinum Gear
+
+item.thermal.gear_zinc.name=Zinc Gear
+item.thermal.gear_aluminum.name=Aluminum Gear
+item.thermal.gear_titanium.name=Titanium Gear
+item.thermal.gear_osmium.name=Osmium Gear
+item.thermal.gear_iridium.name=Iridium Gear
+item.thermal.gear_tungsten.name=Tungsten Gear
+
+item.thermal.gear_bronze.name=Bronze Gear
+item.thermal.gear_invar.name=Invar Gear
+item.thermal.gear_electrum.name=Electrum Gear
+item.thermal.gear_constantan.name=Constantan Gear
+
+#-----------------------------------------------------------------------------------------------------------------------
+# INGOTS
+#-----------------------------------------------------------------------------------------------------------------------
+
+item.thermal.ingot_copper.name=Copper Ingot
+item.thermal.ingot_tin.name=Tin Ingot
+item.thermal.ingot_lead.name=Lead Ingot
+item.thermal.ingot_silver.name=Silver Ingot
+item.thermal.ingot_nickel.name=Nickel Ingot
+item.thermal.ingot_platinum.name=Platinum Ingot
+
+item.thermal.ingot_zinc.name=Zinc Ingot
+item.thermal.ingot_aluminum.name=Aluminum Ingot
+item.thermal.ingot_titanium.name=Titanium Ingot
+item.thermal.ingot_osmium.name=Osmium Ingot
+item.thermal.ingot_iridium.name=Iridium Ingot
+item.thermal.ingot_tungsten.name=Tungsten Ingot
+
+item.thermal.ingot_bronze.name=Bronze Ingot
+item.thermal.ingot_invar.name=Invar Ingot
+item.thermal.ingot_electrum.name=Electrum Ingot
+item.thermal.ingot_constantan.name=Constantan Ingot
+
+#-----------------------------------------------------------------------------------------------------------------------
+# NUGGETS
+#-----------------------------------------------------------------------------------------------------------------------
+
+item.thermal.nugget_copper.name=Copper Nugget
+item.thermal.nugget_tin.name=Tin Nugget
+item.thermal.nugget_lead.name=Lead Nugget
+item.thermal.nugget_silver.name=Silver Nugget
+item.thermal.nugget_nickel.name=Nickel Nugget
+item.thermal.nugget_platinum.name=Platinum Nugget
+
+item.thermal.nugget_zinc.name=Zinc Nugget
+item.thermal.nugget_aluminum.name=Aluminum Nugget
+item.thermal.nugget_titanium.name=Titanium Nugget
+item.thermal.nugget_osmium.name=Osmium Nugget
+item.thermal.nugget_iridium.name=Iridium Nugget
+item.thermal.nugget_tungsten.name=Tungsten Nugget
+
+item.thermal.nugget_bronze.name=Bronze Nugget
+item.thermal.nugget_invar.name=Invar Nugget
+item.thermal.nugget_electrum.name=Electrum Nugget
+item.thermal.nugget_constantan.name=Constantan Nugget
+
+#-----------------------------------------------------------------------------------------------------------------------
+# PLATES
+#-----------------------------------------------------------------------------------------------------------------------
+
+item.thermal.plate_copper.name=Copper Plate
+item.thermal.plate_tin.name=Tin Plate
+item.thermal.plate_lead.name=Lead Plate
+item.thermal.plate_silver.name=Silver Plate
+item.thermal.plate_nickel.name=Nickel Plate
+item.thermal.plate_platinum.name=Platinum Plate
+
+item.thermal.plate_zinc.name=Zinc Plate
+item.thermal.plate_aluminum.name=Aluminum Plate
+item.thermal.plate_titanium.name=Titanium Plate
+item.thermal.plate_osmium.name=Osmium Plate
+item.thermal.plate_iridium.name=Iridium Plate
+item.thermal.plate_tungsten.name=Tungsten Plate
+
+item.thermal.plate_bronze.name=Bronze Plate
+item.thermal.plate_invar.name=Invar Plate
+item.thermal.plate_electrum.name=Electrum Plate
+item.thermal.plate_constantan.name=Constantan Plate
+
+#-----------------------------------------------------------------------------------------------------------------------
+# MOB DROPS
+#-----------------------------------------------------------------------------------------------------------------------
+
+item.thermal.dust_basalz.name=Basalz Powder
+item.thermal.dust_blitz.name=Blitz Powder
+item.thermal.dust_blizz.name=Blizz Powder
+
+item.thermal.rod_basalz.name=Basalz Rod
+item.thermal.rod_blitz.name=Blitz Rod
+item.thermal.rod_blizz.name=Blizz Rod
+
+#=======================================================================================================================
+# ITEMS - CULTIVATION
+#=======================================================================================================================
+
+item.thermal.watering_can_basic.name=Watering Can
+
+#=======================================================================================================================
+# ITEMS - INNOVATION
+#=======================================================================================================================
+
+item.thermal.potion_injector_basic.name=Hypoinfuser
+
+item.thermal.potion_quiver_basic.name=Alchemical Quiver
+
+item.thermal.rf_capacitor_basic.name=Flux Capacitor
+
+item.thermal.rf_drill_basic.name=Fluxbore
+
+item.thermal.rf_magnet_basic.name=Fluxomagnet
+
+item.thermal.rf_saw_basic.name=Fluxsaw
+
+#=======================================================================================================================
+# BLOCKS - CORE
+#=======================================================================================================================
+
+tile.thermal.block_charcoal.name=Block of Charcoal
+tile.thermal.block_coal_coke.name=Block of Coal Coke
+
+tile.thermal.block_steel.name=Block of Steel
+tile.thermal.block_signalum.name=Block of Signalum
+tile.thermal.block_lumium.name=Block of Lumium
+tile.thermal.block_enderium.name=Block of Enderium
+
+#=======================================================================================================================
+# BLOCKS - FOUNDATION
+#=======================================================================================================================
+
+#-----------------------------------------------------------------------------------------------------------------------
+# ORES
+#-----------------------------------------------------------------------------------------------------------------------
+
+tile.thermal.ore_sulfur.name=Sulfur Deposit
+tile.thermal.ore_niter.name=Niter Deposit
+tile.thermal.ore_cinnabar.name=Cinnabar Ore
+
+tile.thermal.ore_copper.name=Copper Ore
+tile.thermal.ore_tin.name=Tin Ore
+tile.thermal.ore_lead.name=Lead Ore
+tile.thermal.ore_silver.name=Silver Ore
+tile.thermal.ore_nickel.name=Nickel Ore
+tile.thermal.ore_platinum.name=Platinum Ore
+
+tile.thermal.ore_zinc.name=Zinc Ore
+tile.thermal.ore_aluminum.name=Aluminum Ore
+tile.thermal.ore_titanium.name=Titanium Ore
+tile.thermal.ore_osmium.name=Osmium Ore
+tile.thermal.ore_iridium.name=Iridium Ore
+tile.thermal.ore_tungsten.name=Tungsten Ore
+
+#-----------------------------------------------------------------------------------------------------------------------
+# STORAGE
+#-----------------------------------------------------------------------------------------------------------------------
+
+tile.thermal.block_copper.name=Block of Copper
+tile.thermal.block_tin.name=Block of Tin
+tile.thermal.block_lead.name=Block of Lead
+tile.thermal.block_silver.name=Block of Silver
+tile.thermal.block_nickel.name=Block of Nickel
+tile.thermal.block_platinum.name=Block of Platinum
+
+tile.thermal.block_zinc.name=Block of Zinc
+tile.thermal.block_aluminum.name=Block of Aluminum
+tile.thermal.block_titanium.name=Block of Titanium
+tile.thermal.block_osmium.name=Block of Osmium
+tile.thermal.block_iridium.name=Block of Iridium
+tile.thermal.block_tungsten.name=Block of Tungsten
+
+tile.thermal.block_bronze.name=Block of Bronze
+tile.thermal.block_invar.name=Block of Invar
+tile.thermal.block_electrum.name=Block of Electrum
+tile.thermal.block_constantan.name=Block of Constantan
+
+#=======================================================================================================================
+# BLOCKS - EXPANSION
+#=======================================================================================================================
+
+#-----------------------------------------------------------------------------------------------------------------------
+# DYNAMOS
+#-----------------------------------------------------------------------------------------------------------------------
+
+tile.thermal.dynamo_steam.name=Steam Dynamo
+tile.thermal.dynamo_magmatic.name=Magmatic Dynamo
+tile.thermal.dynamo_compression.name=Compression Dynamo
+
+#-----------------------------------------------------------------------------------------------------------------------
+# MACHINES
+#-----------------------------------------------------------------------------------------------------------------------
+
+tile.thermal.machine_furnace.name=Redstone Furnace
+tile.thermal.machine_pulverizer.name=Pulverizer
+tile.thermal.machine_sawmill.name=Sawmill
+tile.thermal.machine_insolator.name=Phytogenic Insolator

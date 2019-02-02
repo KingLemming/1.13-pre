@@ -1,0 +1,6 @@
+{
+	"parent": "redstonearsenal:item/tools/pickaxe_flux_infused",
+	"textures": {
+		"layer0": "redstonearsenal:items/tools/pickaxe_flux_infused_charged"
+	}
+}

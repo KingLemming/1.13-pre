@@ -1,0 +1,497 @@
+#en_US
+
+#-------------------------------------------------------------------------------
+# SWORDS
+#-------------------------------------------------------------------------------
+
+item.quartermastery.sword_obsidian.name=Obsidian Sword
+item.quartermastery.sword_emerald.name=Emerald Sword
+
+item.quartermastery.sword_copper.name=Copper Sword
+item.quartermastery.sword_tin.name=Tin Sword
+item.quartermastery.sword_lead.name=Lead Sword
+item.quartermastery.sword_silver.name=Silver Sword
+item.quartermastery.sword_nickel.name=Nickel Sword
+item.quartermastery.sword_platinum.name=Platinum Sword
+
+item.quartermastery.sword_zinc.name=Zinc Sword
+item.quartermastery.sword_aluminum.name=Aluminum Sword
+item.quartermastery.sword_titanium.name=Titanium Sword
+item.quartermastery.sword_osmium.name=Osmium Sword
+item.quartermastery.sword_iridium.name=Iridium Sword
+item.quartermastery.sword_tungsten.name=Tungsten Sword
+
+item.quartermastery.sword_steel.name=Steel Sword
+item.quartermastery.sword_bronze.name=Bronze Sword
+item.quartermastery.sword_invar.name=Invar Sword
+item.quartermastery.sword_electrum.name=Electrum Sword
+item.quartermastery.sword_constantan.name=Constantan Sword
+
+#-------------------------------------------------------------------------------
+# SHOVELS
+#-------------------------------------------------------------------------------
+
+item.quartermastery.shovel_obsidian.name=Obsidian Shovel
+item.quartermastery.shovel_emerald.name=Emerald Shovel
+
+item.quartermastery.shovel_copper.name=Copper Shovel
+item.quartermastery.shovel_tin.name=Tin Shovel
+item.quartermastery.shovel_lead.name=Lead Shovel
+item.quartermastery.shovel_silver.name=Silver Shovel
+item.quartermastery.shovel_nickel.name=Nickel Shovel
+item.quartermastery.shovel_platinum.name=Platinum Shovel
+
+item.quartermastery.shovel_zinc.name=Zinc Shovel
+item.quartermastery.shovel_aluminum.name=Aluminum Shovel
+item.quartermastery.shovel_titanium.name=Titanium Shovel
+item.quartermastery.shovel_osmium.name=Osmium Shovel
+item.quartermastery.shovel_iridium.name=Iridium Shovel
+item.quartermastery.shovel_tungsten.name=Tungsten Shovel
+
+item.quartermastery.shovel_steel.name=Steel Shovel
+item.quartermastery.shovel_bronze.name=Bronze Shovel
+item.quartermastery.shovel_invar.name=Invar Shovel
+item.quartermastery.shovel_electrum.name=Electrum Shovel
+item.quartermastery.shovel_constantan.name=Constantan Shovel
+
+#-------------------------------------------------------------------------------
+# PICKAXES
+#-------------------------------------------------------------------------------
+
+item.quartermastery.pickaxe_obsidian.name=Obsidian Pickaxe
+item.quartermastery.pickaxe_emerald.name=Emerald Pickaxe
+
+item.quartermastery.pickaxe_copper.name=Copper Pickaxe
+item.quartermastery.pickaxe_tin.name=Tin Pickaxe
+item.quartermastery.pickaxe_lead.name=Lead Pickaxe
+item.quartermastery.pickaxe_silver.name=Silver Pickaxe
+item.quartermastery.pickaxe_nickel.name=Nickel Pickaxe
+item.quartermastery.pickaxe_platinum.name=Platinum Pickaxe
+
+item.quartermastery.pickaxe_zinc.name=Zinc Pickaxe
+item.quartermastery.pickaxe_aluminum.name=Aluminum Pickaxe
+item.quartermastery.pickaxe_titanium.name=Titanium Pickaxe
+item.quartermastery.pickaxe_osmium.name=Osmium Pickaxe
+item.quartermastery.pickaxe_iridium.name=Iridium Pickaxe
+item.quartermastery.pickaxe_tungsten.name=Tungsten Pickaxe
+
+item.quartermastery.pickaxe_steel.name=Steel Pickaxe
+item.quartermastery.pickaxe_bronze.name=Bronze Pickaxe
+item.quartermastery.pickaxe_invar.name=Invar Pickaxe
+item.quartermastery.pickaxe_electrum.name=Electrum Pickaxe
+item.quartermastery.pickaxe_constantan.name=Constantan Pickaxe
+
+#-------------------------------------------------------------------------------
+# AXES
+#-------------------------------------------------------------------------------
+
+item.quartermastery.axe_obsidian.name=Obsidian Axe
+item.quartermastery.axe_emerald.name=Emerald Axe
+
+item.quartermastery.axe_copper.name=Copper Axe
+item.quartermastery.axe_tin.name=Tin Axe
+item.quartermastery.axe_lead.name=Lead Axe
+item.quartermastery.axe_silver.name=Silver Axe
+item.quartermastery.axe_nickel.name=Nickel Axe
+item.quartermastery.axe_platinum.name=Platinum Axe
+
+item.quartermastery.axe_zinc.name=Zinc Axe
+item.quartermastery.axe_aluminum.name=Aluminum Axe
+item.quartermastery.axe_titanium.name=Titanium Axe
+item.quartermastery.axe_osmium.name=Osmium Axe
+item.quartermastery.axe_iridium.name=Iridium Axe
+item.quartermastery.axe_tungsten.name=Tungsten Axe
+
+item.quartermastery.axe_steel.name=Steel Axe
+item.quartermastery.axe_bronze.name=Bronze Axe
+item.quartermastery.axe_invar.name=Invar Axe
+item.quartermastery.axe_electrum.name=Electrum Axe
+item.quartermastery.axe_constantan.name=Constantan Axe
+
+#-------------------------------------------------------------------------------
+# HOES
+#-------------------------------------------------------------------------------
+
+item.quartermastery.hoe_obsidian.name=Obsidian Hoe
+item.quartermastery.hoe_emerald.name=Emerald Hoe
+
+item.quartermastery.hoe_copper.name=Copper Hoe
+item.quartermastery.hoe_tin.name=Tin Hoe
+item.quartermastery.hoe_lead.name=Lead Hoe
+item.quartermastery.hoe_silver.name=Silver Hoe
+item.quartermastery.hoe_nickel.name=Nickel Hoe
+item.quartermastery.hoe_platinum.name=Platinum Hoe
+
+item.quartermastery.hoe_zinc.name=Zinc Hoe
+item.quartermastery.hoe_aluminum.name=Aluminum Hoe
+item.quartermastery.hoe_titanium.name=Titanium Hoe
+item.quartermastery.hoe_osmium.name=Osmium Hoe
+item.quartermastery.hoe_iridium.name=Iridium Hoe
+item.quartermastery.hoe_tungsten.name=Tungsten Hoe
+
+item.quartermastery.hoe_steel.name=Steel Hoe
+item.quartermastery.hoe_bronze.name=Bronze Hoe
+item.quartermastery.hoe_invar.name=Invar Hoe
+item.quartermastery.hoe_electrum.name=Electrum Hoe
+item.quartermastery.hoe_constantan.name=Constantan Hoe
+
+#-------------------------------------------------------------------------------
+# EXCAVATORS
+#-------------------------------------------------------------------------------
+
+item.quartermastery.excavator_obsidian.name=Obsidian Excavator
+item.quartermastery.excavator_emerald.name=Emerald Excavator
+
+item.quartermastery.excavator_wood.name=Wooden Excavator
+item.quartermastery.excavator_stone.name=Stone Excavator
+item.quartermastery.excavator_iron.name=Iron Excavator
+item.quartermastery.excavator_diamond.name=Diamond Excavator
+item.quartermastery.excavator_gold.name=Gold Excavator
+
+item.quartermastery.excavator_copper.name=Copper Excavator
+item.quartermastery.excavator_tin.name=Tin Excavator
+item.quartermastery.excavator_lead.name=Lead Excavator
+item.quartermastery.excavator_silver.name=Silver Excavator
+item.quartermastery.excavator_nickel.name=Nickel Excavator
+item.quartermastery.excavator_platinum.name=Platinum Excavator
+
+item.quartermastery.excavator_zinc.name=Zinc Excavator
+item.quartermastery.excavator_aluminum.name=Aluminum Excavator
+item.quartermastery.excavator_titanium.name=Titanium Excavator
+item.quartermastery.excavator_osmium.name=Osmium Excavator
+item.quartermastery.excavator_iridium.name=Iridium Excavator
+item.quartermastery.excavator_tungsten.name=Tungsten Excavator
+
+item.quartermastery.excavator_steel.name=Steel Excavator
+item.quartermastery.excavator_bronze.name=Bronze Excavator
+item.quartermastery.excavator_invar.name=Invar Excavator
+item.quartermastery.excavator_electrum.name=Electrum Excavator
+item.quartermastery.excavator_constantan.name=Constantan Excavator
+
+#-------------------------------------------------------------------------------
+# HAMMERS
+#-------------------------------------------------------------------------------
+
+item.quartermastery.hammer_wood.name=Wooden Hammer
+item.quartermastery.hammer_stone.name=Stone Hammer
+item.quartermastery.hammer_iron.name=Iron Hammer
+item.quartermastery.hammer_diamond.name=Diamond Hammer
+item.quartermastery.hammer_gold.name=Gold Hammer
+
+item.quartermastery.hammer_obsidian.name=Obsidian Hammer
+item.quartermastery.hammer_emerald.name=Emerald Hammer
+
+item.quartermastery.hammer_copper.name=Copper Hammer
+item.quartermastery.hammer_tin.name=Tin Hammer
+item.quartermastery.hammer_lead.name=Lead Hammer
+item.quartermastery.hammer_silver.name=Silver Hammer
+item.quartermastery.hammer_nickel.name=Nickel Hammer
+item.quartermastery.hammer_platinum.name=Platinum Hammer
+
+item.quartermastery.hammer_zinc.name=Zinc Hammer
+item.quartermastery.hammer_aluminum.name=Aluminum Hammer
+item.quartermastery.hammer_titanium.name=Titanium Hammer
+item.quartermastery.hammer_osmium.name=Osmium Hammer
+item.quartermastery.hammer_iridium.name=Iridium Hammer
+item.quartermastery.hammer_tungsten.name=Tungsten Hammer
+
+item.quartermastery.hammer_steel.name=Steel Hammer
+item.quartermastery.hammer_bronze.name=Bronze Hammer
+item.quartermastery.hammer_invar.name=Invar Hammer
+item.quartermastery.hammer_electrum.name=Electrum Hammer
+item.quartermastery.hammer_constantan.name=Constantan Hammer
+
+#-------------------------------------------------------------------------------
+# SICKLES
+#-------------------------------------------------------------------------------
+
+item.quartermastery.sickle_wood.name=Wooden Sickle
+item.quartermastery.sickle_stone.name=Stone Sickle
+item.quartermastery.sickle_iron.name=Iron Sickle
+item.quartermastery.sickle_diamond.name=Diamond Sickle
+item.quartermastery.sickle_gold.name=Gold Sickle
+
+item.quartermastery.sickle_obsidian.name=Obsidian Sickle
+item.quartermastery.sickle_emerald.name=Emerald Sickle
+
+item.quartermastery.sickle_copper.name=Copper Sickle
+item.quartermastery.sickle_tin.name=Tin Sickle
+item.quartermastery.sickle_lead.name=Lead Sickle
+item.quartermastery.sickle_silver.name=Silver Sickle
+item.quartermastery.sickle_nickel.name=Nickel Sickle
+item.quartermastery.sickle_platinum.name=Platinum Sickle
+
+item.quartermastery.sickle_zinc.name=Zinc Sickle
+item.quartermastery.sickle_aluminum.name=Aluminum Sickle
+item.quartermastery.sickle_titanium.name=Titanium Sickle
+item.quartermastery.sickle_osmium.name=Osmium Sickle
+item.quartermastery.sickle_iridium.name=Iridium Sickle
+item.quartermastery.sickle_tungsten.name=Tungsten Sickle
+
+item.quartermastery.sickle_steel.name=Steel Sickle
+item.quartermastery.sickle_bronze.name=Bronze Sickle
+item.quartermastery.sickle_invar.name=Invar Sickle
+item.quartermastery.sickle_electrum.name=Electrum Sickle
+item.quartermastery.sickle_constantan.name=Constantan Sickle
+
+#-------------------------------------------------------------------------------
+# SHEARS
+#-------------------------------------------------------------------------------
+
+item.quartermastery.shears_wood.name=Wooden Shears
+item.quartermastery.shears_stone.name=Stone Shears
+#item.quartermastery.shears_iron.name=Iron Shears
+item.quartermastery.shears_diamond.name=Diamond Shears
+item.quartermastery.shears_gold.name=Gold Shears
+
+item.quartermastery.shears_obsidian.name=Obsidian Shears
+item.quartermastery.shears_emerald.name=Emerald Shears
+
+item.quartermastery.shears_copper.name=Copper Shears
+item.quartermastery.shears_tin.name=Tin Shears
+item.quartermastery.shears_lead.name=Lead Shears
+item.quartermastery.shears_silver.name=Silver Shears
+item.quartermastery.shears_nickel.name=Nickel Shears
+item.quartermastery.shears_platinum.name=Platinum Shears
+
+item.quartermastery.shears_zinc.name=Zinc Shears
+item.quartermastery.shears_aluminum.name=Aluminum Shears
+item.quartermastery.shears_titanium.name=Titanium Shears
+item.quartermastery.shears_osmium.name=Osmium Shears
+item.quartermastery.shears_iridium.name=Iridium Shears
+item.quartermastery.shears_tungsten.name=Tungsten Shears
+
+item.quartermastery.shears_steel.name=Steel Shears
+item.quartermastery.shears_bronze.name=Bronze Shears
+item.quartermastery.shears_invar.name=Invar Shears
+item.quartermastery.shears_electrum.name=Electrum Shears
+item.quartermastery.shears_constantan.name=Constantan Shears
+
+#-------------------------------------------------------------------------------
+# BOWS
+#-------------------------------------------------------------------------------
+
+#item.quartermastery.bow_wood.name=Wooden Reinforced Bow
+item.quartermastery.bow_stone.name=Stone Reinforced Bow
+item.quartermastery.bow_iron.name=Iron Reinforced Bow
+item.quartermastery.bow_diamond.name=Diamond Reinforced Bow
+item.quartermastery.bow_gold.name=Gold Reinforced Bow
+
+item.quartermastery.bow_obsidian.name=Obsidian Reinforced Bow
+item.quartermastery.bow_emerald.name=Emerald Reinforced Bow
+
+item.quartermastery.bow_copper.name=Copper Reinforced Bow
+item.quartermastery.bow_tin.name=Tin Reinforced Bow
+item.quartermastery.bow_lead.name=Lead Reinforced Bow
+item.quartermastery.bow_silver.name=Silver Reinforced Bow
+item.quartermastery.bow_nickel.name=Nickel Reinforced Bow
+item.quartermastery.bow_platinum.name=Platinum Reinforced Bow
+
+item.quartermastery.bow_zinc.name=Zinc Reinforced Bow
+item.quartermastery.bow_aluminum.name=Aluminum Reinforced Bow
+item.quartermastery.bow_titanium.name=Titanium Reinforced Bow
+item.quartermastery.bow_osmium.name=Osmium Reinforced Bow
+item.quartermastery.bow_iridium.name=Iridium Reinforced Bow
+item.quartermastery.bow_tungsten.name=Tungsten Reinforced Bow
+
+item.quartermastery.bow_steel.name=Steel Reinforced Bow
+item.quartermastery.bow_bronze.name=Bronze Reinforced Bow
+item.quartermastery.bow_invar.name=Invar Reinforced Bow
+item.quartermastery.bow_electrum.name=Electrum Reinforced Bow
+item.quartermastery.bow_constantan.name=Constantan Reinforced Bow
+
+#-------------------------------------------------------------------------------
+# FISHING RODS
+#-------------------------------------------------------------------------------
+
+#item.quartermastery.fishing_rod_wood.name=Wooden Fishing Rod
+item.quartermastery.fishing_rod_stone.name=Stone Fishing Rod
+item.quartermastery.fishing_rod_iron.name=Iron Fishing Rod
+item.quartermastery.fishing_rod_diamond.name=Diamond Fishing Rod
+item.quartermastery.fishing_rod_gold.name=Gold Fishing Rod
+
+item.quartermastery.fishing_rod_obsidian.name=Obsidian Fishing Rod
+item.quartermastery.fishing_rod_emerald.name=Emerald Fishing Rod
+
+item.quartermastery.fishing_rod_copper.name=Copper Fishing Rod
+item.quartermastery.fishing_rod_tin.name=Tin Fishing Rod
+item.quartermastery.fishing_rod_lead.name=Lead Fishing Rod
+item.quartermastery.fishing_rod_silver.name=Silver Fishing Rod
+item.quartermastery.fishing_rod_nickel.name=Nickel Fishing Rod
+item.quartermastery.fishing_rod_platinum.name=Platinum Fishing Rod
+
+item.quartermastery.fishing_rod_zinc.name=Zinc Fishing Rod
+item.quartermastery.fishing_rod_aluminum.name=Aluminum Fishing Rod
+item.quartermastery.fishing_rod_titanium.name=Titanium Fishing Rod
+item.quartermastery.fishing_rod_osmium.name=Osmium Fishing Rod
+item.quartermastery.fishing_rod_iridium.name=Iridium Fishing Rod
+item.quartermastery.fishing_rod_tungsten.name=Tungsten Fishing Rod
+
+item.quartermastery.fishing_rod_steel.name=Steel Fishing Rod
+item.quartermastery.fishing_rod_bronze.name=Bronze Fishing Rod
+item.quartermastery.fishing_rod_invar.name=Invar Fishing Rod
+item.quartermastery.fishing_rod_electrum.name=Electrum Fishing Rod
+item.quartermastery.fishing_rod_constantan.name=Constantan Fishing rod
+
+#-------------------------------------------------------------------------------
+# SHIELDS
+#-------------------------------------------------------------------------------
+
+#item.quartermastery.shield_wood.name=Wooden Shield
+item.quartermastery.shield_stone.name=Stone Shield
+item.quartermastery.shield_iron.name=Iron Shield
+item.quartermastery.shield_diamond.name=Diamond Shield
+item.quartermastery.shield_gold.name=Gold Shield
+
+item.quartermastery.shield_obsidian.name=Obsidian Shield
+item.quartermastery.shield_emerald.name=Emerald Shield
+
+item.quartermastery.shield_copper.name=Copper Shield
+item.quartermastery.shield_tin.name=Tin Shield
+item.quartermastery.shield_lead.name=Lead Shield
+item.quartermastery.shield_silver.name=Silver Shield
+item.quartermastery.shield_nickel.name=Nickel Shield
+item.quartermastery.shield_platinum.name=Platinum Shield
+
+item.quartermastery.shield_zinc.name=Zinc Shield
+item.quartermastery.shield_aluminum.name=Aluminum Shield
+item.quartermastery.shield_titanium.name=Titanium Shield
+item.quartermastery.shield_osmium.name=Osmium Shield
+item.quartermastery.shield_iridium.name=Iridium Shield
+item.quartermastery.shield_tungsten.name=Tungsten Shield
+
+item.quartermastery.shield_steel.name=Steel Shield
+item.quartermastery.shield_bronze.name=Bronze Shield
+item.quartermastery.shield_invar.name=Invar Shield
+item.quartermastery.shield_electrum.name=Electrum Shield
+item.quartermastery.shield_constantan.name=Constantan Shield
+
+#-------------------------------------------------------------------------------
+# HELMETS
+#-------------------------------------------------------------------------------
+
+item.quartermastery.helmet_emerald.name=Emerald Helmet
+
+item.quartermastery.helmet_copper.name=Copper Helmet
+item.quartermastery.helmet_tin.name=Tin Helmet
+item.quartermastery.helmet_lead.name=Lead Helmet
+item.quartermastery.helmet_silver.name=Silver Helmet
+item.quartermastery.helmet_nickel.name=Nickel Helmet
+item.quartermastery.helmet_platinum.name=Platinum Helmet
+
+item.quartermastery.helmet_zinc.name=Zinc Helmet
+item.quartermastery.helmet_aluminum.name=Aluminum Helmet
+item.quartermastery.helmet_titanium.name=Titanium Helmet
+item.quartermastery.helmet_osmium.name=Osmium Helmet
+item.quartermastery.helmet_iridium.name=Iridium Helmet
+item.quartermastery.helmet_tungsten.name=Tungsten Helmet
+
+item.quartermastery.helmet_steel.name=Steel Helmet
+item.quartermastery.helmet_bronze.name=Bronze Helmet
+item.quartermastery.helmet_invar.name=Invar Helmet
+item.quartermastery.helmet_electrum.name=Electrum Helmet
+item.quartermastery.helmet_constantan.name=Constantan Helmet
+
+#-------------------------------------------------------------------------------
+# CHESTPLATES
+#-------------------------------------------------------------------------------
+
+item.quartermastery.chestplate_emerald.name=Emerald Chestplate
+
+item.quartermastery.chestplate_copper.name=Copper Chestplate
+item.quartermastery.chestplate_tin.name=Tin Chestplate
+item.quartermastery.chestplate_lead.name=Lead Chestplate
+item.quartermastery.chestplate_silver.name=Silver Chestplate
+item.quartermastery.chestplate_nickel.name=Nickel Chestplate
+item.quartermastery.chestplate_platinum.name=Platinum Chestplate
+
+item.quartermastery.chestplate_zinc.name=Zinc Chestplate
+item.quartermastery.chestplate_aluminum.name=Aluminum Chestplate
+item.quartermastery.chestplate_titanium.name=Titanium Chestplate
+item.quartermastery.chestplate_osmium.name=Osmium Chestplate
+item.quartermastery.chestplate_iridium.name=Iridium Chestplate
+item.quartermastery.chestplate_tungsten.name=Tungsten Chestplate
+
+item.quartermastery.chestplate_steel.name=Steel Chestplate
+item.quartermastery.chestplate_bronze.name=Bronze Chestplate
+item.quartermastery.chestplate_invar.name=Invar Chestplate
+item.quartermastery.chestplate_electrum.name=Electrum Chestplate
+item.quartermastery.chestplate_constantan.name=Constantan Chestplate
+
+#-------------------------------------------------------------------------------
+# LEGGINGS
+#-------------------------------------------------------------------------------
+
+item.quartermastery.leggings_emerald.name=Emerald Leggings
+
+item.quartermastery.leggings_copper.name=Copper Leggings
+item.quartermastery.leggings_tin.name=Tin Leggings
+item.quartermastery.leggings_lead.name=Lead Leggings
+item.quartermastery.leggings_silver.name=Silver Leggings
+item.quartermastery.leggings_nickel.name=Nickel Leggings
+item.quartermastery.leggings_platinum.name=Platinum Leggings
+
+item.quartermastery.leggings_zinc.name=Zinc Leggings
+item.quartermastery.leggings_aluminum.name=Aluminum Leggings
+item.quartermastery.leggings_titanium.name=Titanium Leggings
+item.quartermastery.leggings_osmium.name=Osmium Leggings
+item.quartermastery.leggings_iridium.name=Iridium Leggings
+item.quartermastery.leggings_tungsten.name=Tungsten Leggings
+
+item.quartermastery.leggings_steel.name=Steel Leggings
+item.quartermastery.leggings_bronze.name=Bronze Leggings
+item.quartermastery.leggings_invar.name=Invar Leggings
+item.quartermastery.leggings_electrum.name=Electrum Leggings
+item.quartermastery.leggings_constantan.name=Constantan Leggings
+
+#-------------------------------------------------------------------------------
+# BOOTS
+#-------------------------------------------------------------------------------
+
+item.quartermastery.boots_emerald.name=Emerald Boots
+
+item.quartermastery.boots_copper.name=Copper Boots
+item.quartermastery.boots_tin.name=Tin Boots
+item.quartermastery.boots_lead.name=Lead Boots
+item.quartermastery.boots_silver.name=Silver Boots
+item.quartermastery.boots_nickel.name=Nickel Boots
+item.quartermastery.boots_platinum.name=Platinum Boots
+
+item.quartermastery.boots_zinc.name=Zinc Boots
+item.quartermastery.boots_aluminum.name=Aluminum Boots
+item.quartermastery.boots_titanium.name=Titanium Boots
+item.quartermastery.boots_osmium.name=Osmium Boots
+item.quartermastery.boots_iridium.name=Iridium Boots
+item.quartermastery.boots_tungsten.name=Tungsten Boots
+
+item.quartermastery.boots_steel.name=Steel Boots
+item.quartermastery.boots_bronze.name=Bronze Boots
+item.quartermastery.boots_invar.name=Invar Boots
+item.quartermastery.boots_electrum.name=Electrum Boots
+item.quartermastery.boots_constantan.name=Constantan Boots
+
+#-------------------------------------------------------------------------------
+# HORSE ARMORS
+#-------------------------------------------------------------------------------
+
+item.quartermastery.horse_armor_emerald.name=Emerald Horse Armor
+
+item.quartermastery.horse_armor_copper.name=Copper Horse Armor
+item.quartermastery.horse_armor_tin.name=Tin Horse Armor
+item.quartermastery.horse_armor_lead.name=Lead Horse Armor
+item.quartermastery.horse_armor_silver.name=Silver Horse Armor
+item.quartermastery.horse_armor_nickel.name=Nickel Horse Armor
+item.quartermastery.horse_armor_platinum.name=Platinum Horse Armor
+
+item.quartermastery.horse_armor_zinc.name=Zinc Horse Armor
+item.quartermastery.horse_armor_aluminum.name=Aluminum Horse Armor
+item.quartermastery.horse_armor_titanium.name=Titanium Horse Armor
+item.quartermastery.horse_armor_osmium.name=Osmium Horse Armor
+item.quartermastery.horse_armor_iridium.name=Iridium Horse Armor
+item.quartermastery.horse_armor_tungsten.name=Tungsten Horse Armor
+
+item.quartermastery.horse_armor_steel.name=Steel Horse Armor
+item.quartermastery.horse_armor_bronze.name=Bronze Horse Armor
+item.quartermastery.horse_armor_invar.name=Invar Horse Armor
+item.quartermastery.horse_armor_electrum.name=Electrum Horse Armor
+item.quartermastery.horse_armor_constantan.name=Constantan Horse Armor

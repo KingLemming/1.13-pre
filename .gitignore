@@ -1,0 +1,20 @@
+#################
+## Top Level
+#################
+
+Patchouli/
+MinecraftForge/
+TabulaRasa/
+Workspace/
+Workspace-1.13-pre/
+
+############
+## Windows
+############
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+

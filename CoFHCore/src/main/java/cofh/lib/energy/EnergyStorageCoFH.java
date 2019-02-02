@@ -1,0 +1,198 @@
+/*
+ * (C) 2014-2018 Team CoFH / CoFH / Cult of the Full Hub
+ * http://www.teamcofh.com
+ */
+package cofh.lib.energy;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.energy.IEnergyStorage;
+
+/**
+ * Reference implementation of {@link IEnergyStorage}. Use/extend this or implement your own.
+ *
+ * @author King Lemming
+ */
+public class EnergyStorageCoFH implements IEnergyStorage {
+
+	protected int energy;
+	protected int capacity;
+	protected int maxReceive;
+	protected int maxExtract;
+
+	public EnergyStorageCoFH(int capacity) {
+
+		this(capacity, capacity, capacity, 0);
+	}
+
+	public EnergyStorageCoFH(int capacity, int maxTransfer) {
+
+		this(capacity, maxTransfer, maxTransfer, 0);
+	}
+
+	public EnergyStorageCoFH(int capacity, int maxReceive, int maxExtract) {
+
+		this(capacity, maxReceive, maxExtract, 0);
+	}
+
+	public EnergyStorageCoFH(int capacity, int maxReceive, int maxExtract, int energy) {
+
+		this.capacity = capacity;
+		this.maxReceive = maxReceive;
+		this.maxExtract = maxExtract;
+		this.energy = Math.max(0, Math.min(capacity, energy));
+	}
+
+	public EnergyStorageCoFH setCapacity(int capacity) {
+
+		this.capacity = capacity;
+		if (energy > capacity) {
+			energy = capacity;
+		}
+		return this;
+	}
+
+	public EnergyStorageCoFH setMaxTransfer(int maxTransfer) {
+
+		setMaxReceive(maxTransfer);
+		setMaxExtract(maxTransfer);
+		return this;
+	}
+
+	public EnergyStorageCoFH setMaxReceive(int maxReceive) {
+
+		this.maxReceive = maxReceive;
+		return this;
+	}
+
+	public EnergyStorageCoFH setMaxExtract(int maxExtract) {
+
+		this.maxExtract = maxExtract;
+		return this;
+	}
+
+	public EnergyStorageCoFH setEnergyStored(int amount) {
+
+		energy = amount;
+		if (energy > capacity) {
+			energy = capacity;
+		} else if (energy < 0) {
+			energy = 0;
+		}
+		return this;
+	}
+
+	public int getMaxReceive() {
+
+		return maxReceive;
+	}
+
+	public int getMaxExtract() {
+
+		return maxExtract;
+	}
+
+	public void modifyEnergyStored(int amount) {
+
+		energy += amount;
+		if (energy > capacity) {
+			energy = capacity;
+		} else if (energy < 0) {
+			energy = 0;
+		}
+	}
+
+	public boolean isEmpty() {
+
+		return energy <= 0 && capacity > 0;
+	}
+
+	public int getSpace() {
+
+		return energy >= capacity ? 0 : capacity - energy;
+	}
+
+	public int receiveEnergyOverride(int maxReceive, boolean simulate) {
+
+		int energyReceived = Math.min(capacity - energy, maxReceive);
+		if (!simulate) {
+			energy += energyReceived;
+		}
+		return energyReceived;
+	}
+
+	public int extractEnergyOverride(int maxExtract, boolean simulate) {
+
+		int energyExtracted = Math.min(energy, maxExtract);
+		if (!simulate) {
+			energy -= energyExtracted;
+		}
+		return energyExtracted;
+	}
+
+	// region NBT
+	public EnergyStorageCoFH readFromNBT(NBTTagCompound nbt) {
+
+		this.energy = nbt.getInteger("Energy");
+		if (energy > capacity) {
+			energy = capacity;
+		}
+		return this;
+	}
+
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+
+		if (energy < 0) {
+			energy = 0;
+		}
+		nbt.setInteger("Energy", energy);
+		return nbt;
+	}
+	// endregion
+
+	// region IEnergyStorage
+	@Override
+	public int receiveEnergy(int maxReceive, boolean simulate) {
+
+		int energyReceived = Math.min(capacity - energy, Math.min(this.maxReceive, maxReceive));
+		if (!simulate) {
+			energy += energyReceived;
+		}
+		return energyReceived;
+	}
+
+	@Override
+	public int extractEnergy(int maxExtract, boolean simulate) {
+
+		int energyExtracted = Math.min(energy, Math.min(this.maxExtract, maxExtract));
+		if (!simulate) {
+			energy -= energyExtracted;
+		}
+		return energyExtracted;
+	}
+
+	@Override
+	public int getEnergyStored() {
+
+		return energy;
+	}
+
+	@Override
+	public int getMaxEnergyStored() {
+
+		return capacity;
+	}
+
+	@Override
+	public boolean canExtract() {
+
+		return maxExtract > 0;
+	}
+
+	@Override
+	public boolean canReceive() {
+
+		return maxReceive > 0;
+	}
+	// endregion
+
+}

@@ -1,0 +1,6 @@
+{
+	"parent": "quartermastery:item/tools/bow_obsidian",
+	"textures": {
+		"layer0": "quartermastery:items/tools/bow_obsidian_1"
+	}
+}

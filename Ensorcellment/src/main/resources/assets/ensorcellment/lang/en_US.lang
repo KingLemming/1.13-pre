@@ -1,0 +1,47 @@
+#en_US
+
+#-----------------------------------------------------------------------------------------------------------------------
+# NAMES
+#-----------------------------------------------------------------------------------------------------------------------
+
+enchantment.ensorcellment.preservation=Preservation
+
+enchantment.ensorcellment.holding=Holding
+enchantment.ensorcellment.soulbound=Soulbound
+
+enchantment.ensorcellment.leech=Leech
+enchantment.ensorcellment.vorpal=Vorpal
+
+enchantment.ensorcellment.insight=Insight
+enchantment.ensorcellment.smashing=Smashing
+enchantment.ensorcellment.smelting=Smelting
+
+enchantment.ensorcellment.multishot=Multishot
+enchantment.ensorcellment.quickdraw=Quickdraw
+enchantment.ensorcellment.trueshot=Trueshot
+
+enchantment.ensorcellment.bulwark=Bulwark
+enchantment.ensorcellment.phalanx=Phalanx
+
+#-----------------------------------------------------------------------------------------------------------------------
+# DESCRIPTIONS
+#-----------------------------------------------------------------------------------------------------------------------
+
+enchantment.ensorcellment.preservation.desc=Removes the increasing XP cost for repairing an item.
+
+enchantment.ensorcellment.holding.desc=Increases the storage capacity of certain items.
+enchantment.ensorcellment.soulbound.desc=The item will remain with the owner after an untimely demise.
+
+enchantment.ensorcellment.leech.desc=Restores health when a mob is killed.
+enchantment.ensorcellment.vorpal.desc=Randomly performs powerful attacks and decapitations.
+
+enchantment.ensorcellment.insight.desc=Increases experience gain when using the item.
+enchantment.ensorcellment.smashing.desc=Harvested ores will be smashed to pieces, improving yield.
+enchantment.ensorcellment.smelting.desc=Harvested blocks will automatically be smelted, as if by a Furnace.
+
+enchantment.ensorcellment.multishot.desc=Additional arrows are fired with each shot. Only one arrow is consumed.
+enchantment.ensorcellment.quickdraw.desc=Decreases the amount of time needed to fully draw a bow.
+enchantment.ensorcellment.trueshot.desc=Increases the accuracy and speed of arrows.
+
+enchantment.ensorcellment.bulwark.desc=Prevents the wielder from being knocked back.
+enchantment.ensorcellment.phalanx.desc=Allows the wielder to move faster while using the shield.

@@ -1,0 +1,6 @@
+{
+	"parent": "quartermastery:item/tools/bow_constantan",
+	"textures": {
+		"layer0": "quartermastery:items/tools/bow_constantan_0"
+	}
+}

@@ -1,0 +1,6 @@
+{
+	"parent": "redstonearsenal:item/tools/bow_flux_infused",
+	"textures": {
+		"layer0": "redstonearsenal:items/tools/bow_flux_infused_charged_2"
+	}
+}

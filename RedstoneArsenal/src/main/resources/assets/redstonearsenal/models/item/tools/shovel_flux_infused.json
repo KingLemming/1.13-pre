@@ -1,0 +1,20 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "redstonearsenal:items/tools/shovel_flux_infused"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"charged": 1
+			},
+			"model": "redstonearsenal:item/tools/shovel_flux_infused_charged"
+		},
+		{
+			"predicate": {
+				"empowered": 1
+			},
+			"model": "redstonearsenal:item/tools/shovel_flux_infused_empowered"
+		}
+	]
+}

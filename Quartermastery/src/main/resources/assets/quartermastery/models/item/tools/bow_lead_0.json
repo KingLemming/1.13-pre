@@ -1,0 +1,6 @@
+{
+	"parent": "quartermastery:item/tools/bow_lead",
+	"textures": {
+		"layer0": "quartermastery:items/tools/bow_lead_0"
+	}
+}

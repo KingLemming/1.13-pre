@@ -1,0 +1,10 @@
+{
+	"constants": [
+		{
+			"constant": "sawdust",
+			"entry": {
+				"item": "thermal:dust_wood"
+			}
+		}
+	]
+}

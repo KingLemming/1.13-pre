@@ -1,0 +1,111 @@
+{
+	"pulverizer": [
+		{
+			"input": {
+				"item": "minecraft:bone"
+			},
+			"output": {
+				"item": "minecraft:dye",
+				"data": 15,
+				"count": 6
+			},
+			"energy_mod": 0.75
+		},
+		{
+			"input": {
+				"item": "minecraft:coal"
+			},
+			"output": [
+				{
+					"ore": "dustCoal"
+				},
+				{
+					"ore": "dustSulfur",
+					"chance": 0.15
+				}
+			],
+			"energy_mod": 0.50
+		},
+		{
+			"input": {
+				"item": "minecraft:coal",
+				"data": 1
+			},
+			"output": {
+				"ore": "dustCharcoal"
+			},
+			"energy_mod": 0.50
+		},
+		{
+			"input": {
+				"item": "minecraft:cobblestone"
+			},
+			"output": [
+				{
+					"item": "minecraft:gravel"
+				},
+				{
+					"item": "minecraft:sand",
+					"chance": 0.15
+				}
+			]
+		},
+		{
+			"input": {
+				"item": "minecraft:gravel"
+			},
+			"output": [
+				{
+					"item": "minecraft:sand"
+				},
+				{
+					"item": "minecraft:flint",
+					"chance": 0.15
+				}
+			]
+		},
+		{
+			"input": {
+				"item": "minecraft:netherrack"
+			},
+			"output": [
+				{
+					"item": "minecraft:gravel"
+				},
+				{
+					"ore": "dustSulfur",
+					"chance": 0.15
+				}
+			]
+		},
+		{
+			"input": {
+				"item": "minecraft:obsidian"
+			},
+			"output": {
+				"ore": "dustObsidian",
+				"count": 4
+			},
+			"energy_mod": 1.50
+		},
+		{
+			"input": {
+				"item": "minecraft:stone"
+			},
+			"output": {
+				"item": "minecraft:cobblestone"
+			},
+			"energy_mod": 0.25
+		},
+		{
+			"input": {
+				"item": "minecraft:stone_brick"
+			},
+			"output": {
+				"item": "minecraft:stone_brick",
+				"data": 2
+			},
+			"energy_mod": 0.25
+		}
+	]
+}

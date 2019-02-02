@@ -1,0 +1,6 @@
+{
+	"parent": "redstonearsenal:item/tools/hammer_flux_infused",
+	"textures": {
+		"layer0": "redstonearsenal:items/tools/hammer_flux_infused_empowered"
+	}
+}

@@ -1,0 +1,6 @@
+{
+	"parent": "thermal:block/machines/machine_base",
+	"textures": {
+		"front": "thermal:blocks/machines/machine_front_sawmill"
+	}
+}

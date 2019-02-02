@@ -1,0 +1,6 @@
+{
+	"parent": "redstonearsenal:item/tools/shield_blocking",
+	"textures": {
+		"all": "redstonearsenal:items/tools/shield_flux_infused_charged"
+	}
+}

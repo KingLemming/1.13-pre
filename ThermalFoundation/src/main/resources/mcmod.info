@@ -1,0 +1,19 @@
+[
+	{
+		"modid": "thermal_foundation",
+		"name": "Thermal Foundation",
+		"description": "The Foundation of a Thermally enhanced world!",
+		"version": "${version}",
+		"credits": "Team CoFH",
+		"logoFile": "assets/logo.png",
+		"mcversion": "${mc_version}",
+		"url": "http://www.teamcofh.com",
+		"updateUrl": "",
+		"authorList": [ "Team CoFH" ],
+		"parent": "thermal",
+		"screenshots": [],
+		"dependencies": [
+			"forge,cofh.core"
+		]
+	}
+]

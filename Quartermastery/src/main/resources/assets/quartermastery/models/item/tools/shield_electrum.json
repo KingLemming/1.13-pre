@@ -1,0 +1,14 @@
+{
+	"parent": "quartermastery:item/tools/shield",
+	"textures": {
+		"all": "quartermastery:items/tools/shield_electrum"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"blocking": 1
+			},
+			"model": "quartermastery:item/tools/shield_electrum_blocking"
+		}
+	]
+}

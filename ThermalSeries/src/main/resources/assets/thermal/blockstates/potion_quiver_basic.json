@@ -1,0 +1,211 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "textures": {
+      "layer0": "thermal:items/utils/potion_quiver/potion_quiver_basic",
+      "layer1": "thermal:items/blank",
+      "layer2": "thermal:items/blank",
+      "layer3": "thermal:items/blank",
+      "layer4": "thermal:items/blank"
+    },
+    "transform": {
+      "thirdperson_righthand": {
+        "rotation": [
+          {
+            "y": -90
+          },
+          {
+            "z": -35
+          }
+        ],
+        "translation": [
+          0,
+          -0.15,
+          0
+        ],
+        "scale": [
+          0.6,
+          0.6,
+          0.6
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          {
+            "y": 90
+          },
+          {
+            "z": 35
+          }
+        ],
+        "translation": [
+          0,
+          -0.15,
+          0
+        ],
+        "scale": [
+          0.6,
+          0.6,
+          0.6
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          {
+            "y": -90
+          },
+          {
+            "z": -55
+          }
+        ],
+        "translation": [
+          0,
+          0.25,
+          0.1
+        ],
+        "scale": [
+          0.55,
+          0.55,
+          0.55
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          {
+            "y": 90
+          },
+          {
+            "z": 55
+          }
+        ],
+        "translation": [
+          0,
+          0.25,
+          0.1
+        ],
+        "scale": [
+          0.55,
+          0.55,
+          0.55
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          0.15,
+          0
+        ],
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    }
+  },
+  "variants": {
+    "arrows": {
+      "0": {},
+      "1": {
+        "textures": {
+          "layer4": "thermal:items/utils/potion_quiver/potion_quiver_arrows_1"
+        }
+      },
+      "2": {
+        "textures": {
+          "layer4": "thermal:items/utils/potion_quiver/potion_quiver_arrows_2"
+        }
+      },
+      "3": {
+        "textures": {
+          "layer4": "thermal:items/utils/potion_quiver/potion_quiver_arrows_3"
+        }
+      },
+      "4": {
+        "textures": {
+          "layer4": "thermal:items/utils/potion_quiver/potion_quiver_arrows_4"
+        }
+      }
+    },
+    "color_bottom": {
+      "0": {},
+      "1": {
+        "textures": {
+          "layer2": "thermal:items/utils/potion_quiver/potion_quiver_color_bottom"
+        }
+      }
+    },
+    "color_top": {
+      "0": {},
+      "1": {
+        "textures": {
+          "layer3": "thermal:items/utils/potion_quiver/potion_quiver_color_top"
+        }
+      }
+    },
+    "fill": {
+      "0": {},
+      "1": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_quiver/potion_quiver_fill_1"
+        }
+      },
+      "2": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_quiver/potion_quiver_fill_2"
+        }
+      },
+      "3": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_quiver/potion_quiver_fill_3"
+        }
+      },
+      "4": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_quiver/potion_quiver_fill_4"
+        }
+      },
+      "5": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_quiver/potion_quiver_fill_5"
+        }
+      },
+      "6": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_quiver/potion_quiver_fill_6"
+        }
+      },
+      "7": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_quiver/potion_quiver_fill_7"
+        }
+      },
+      "8": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_quiver/potion_quiver_fill_8"
+        }
+      },
+      "9": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_quiver/potion_quiver_fill_9"
+        }
+      },
+      "10": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_quiver/potion_quiver_fill_10"
+        }
+      },
+      "11": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_quiver/potion_quiver_fill_11"
+        }
+      },
+      "12": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_quiver/potion_quiver_fill_12"
+        }
+      }
+    }
+  }
+}

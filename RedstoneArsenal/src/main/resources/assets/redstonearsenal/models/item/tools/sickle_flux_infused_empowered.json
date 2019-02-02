@@ -1,0 +1,6 @@
+{
+	"parent": "redstonearsenal:item/tools/sickle_flux_infused",
+	"textures": {
+		"layer0": "redstonearsenal:items/tools/sickle_flux_infused_empowered"
+	}
+}

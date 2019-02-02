@@ -1,0 +1,6 @@
+{
+	"parent": "quartermastery:item/tools/shield_blocking",
+	"textures": {
+		"all": "quartermastery:items/tools/shield_steel"
+	}
+}

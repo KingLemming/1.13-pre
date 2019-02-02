@@ -1,0 +1,6 @@
+{
+	"parent": "quartermastery:item/tools/bow_nickel",
+	"textures": {
+		"layer0": "quartermastery:items/tools/bow_nickel_2"
+	}
+}

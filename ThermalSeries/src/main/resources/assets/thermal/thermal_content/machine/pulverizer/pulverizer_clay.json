@@ -1,0 +1,33 @@
+{
+	"pulverizer": [
+		{
+			"input": {
+				"item": "minecraft:clay"
+			},
+			"output": {
+				"item": "minecraft:clay_ball",
+				"count": 4
+			},
+			"energy_mod": 0.75
+		},
+		{
+			"input": {
+				"item": "minecraft:hardened_clay"
+			},
+			"output": {
+				"item": "minecraft:clay_ball",
+				"count": 4
+			}
+		},
+		{
+			"input": {
+				"item": "minecraft:stained_hardened_clay",
+				"wildcard": true
+			},
+			"output": {
+				"item": "minecraft:clay_ball",
+				"count": 4
+			}
+		}
+	]
+}

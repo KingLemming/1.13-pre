@@ -1,0 +1,38 @@
+#en_US
+
+gui.enstoragement.satchel=Satchel
+
+info.enstoragement.satchel.0=Stores and collects items. Can be secured.
+info.enstoragement.satchel.1=Use on an inventory while sneaking to transfer into it.
+info.enstoragement.satchel.2=Use while sneaking to configure.
+info.enstoragement.satchel.a.0=§bPress (%s) to enable auto-collect.§r
+info.enstoragement.satchel.a.1=§ePress (%s) to disable auto-collect.§r
+info.enstoragement.satchel.b.0=Auto-collect Disabled
+info.enstoragement.satchel.b.1=Auto-collect Enabled
+info.enstoragement.satchel.c=Stores an unlimited amount of a single item. Can be secured.
+info.enstoragement.satchel.v=Removes items from existence. Can be secured.
+
+item.enstoragement.satchel_leather.name=Leather Satchel
+item.enstoragement.satchel_iron.name=Iron Satchel
+item.enstoragement.satchel_gold.name=Gold Satchel
+item.enstoragement.satchel_diamond.name=Diamond Satchel
+item.enstoragement.satchel_emerald.name=Emerald Satchel
+
+item.enstoragement.satchel_creative.name=Creative Satchel
+item.enstoragement.satchel_void.name=Void Satchel
+
+tab.enstoragement.satchel.0=It's a satchel. It lets you carry more things.
+tab.enstoragement.satchel.1=Will not store some objects.
+
+tab.enstoragement.satchel_c.0=It's a satchel, sort of. It creates copies of whatever you put inside.
+tab.enstoragement.satchel_c.1=Will not store some objects.
+tab.enstoragement.satchel_c.2=It's "Creative" as in the mode. It's not meant to be all that clever.
+
+tab.enstoragement.satchel_v.0=It's a satchel, sort of. Anything you put in disappears forever.
+tab.enstoragement.satchel_v.1=This includes items which are automatically picked up.
+tab.enstoragement.satchel_v.2=Watch your hands!
+
+tab.enstoragement.satchel.filter.0=Configure which items this Satchel can automatically pick up.
+tab.enstoragement.satchel.filter.1=Reclaim your inventory!
+
+tab.enstoragement.storage.enchant=Can be enchanted to increase storage capacity.

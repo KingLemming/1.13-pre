@@ -1,0 +1,21 @@
+{
+	"pulverizer": [
+		{
+			"input": {
+				"item": "minecraft:glass"
+			},
+			"output": {
+				"item": "minecraft:sand"
+			}
+		},
+		{
+			"input": {
+				"item": "minecraft:stained_glass",
+				"wildcard": true
+			},
+			"output": {
+				"item": "minecraft:sand"
+			}
+		}
+	]
+}

@@ -1,0 +1,53 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "builtin/generated",
+		"textures": {
+			"layer0": "enstoragement:items/satchel/satchel_leather",
+			"layer1": "enstoragement:items/satchel/access_public",
+			"layer2": "enstoragement:items/blank",
+			"layer3": "enstoragement:items/blank"
+		},
+		"transform": "forge:default-item"
+	},
+	"variants": {
+		"access": {
+			"public": {
+				"textures": {
+					"layer1": "enstoragement:items/satchel/satchel_access_public"
+				}
+			},
+			"friends": {
+				"textures": {
+					"layer1": "enstoragement:items/satchel/satchel_access_friends"
+				}
+			},
+			"team": {
+				"textures": {
+					"layer1": "enstoragement:items/satchel/satchel_access_team"
+				}
+			},
+			"private": {
+				"textures": {
+					"layer1": "enstoragement:items/satchel/satchel_access_private"
+				}
+			}
+		},
+		"color_bottom": {
+			"0": {},
+			"1": {
+				"textures": {
+					"layer2": "enstoragement:items/satchel/satchel_color_bottom"
+				}
+			}
+		},
+		"color_top": {
+			"0": {},
+			"1": {
+				"textures": {
+					"layer3": "enstoragement:items/satchel/satchel_color_top"
+				}
+			}
+		}
+	}
+}

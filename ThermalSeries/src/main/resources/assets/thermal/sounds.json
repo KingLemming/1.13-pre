@@ -1,0 +1,97 @@
+{
+	"mob_blizz_ambient": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "thermal:mob/blizz/ambient",
+				"stream": false
+			},
+			{
+				"name": "thermal:mob/blizz/breathe0",
+				"stream": false
+			},
+			{
+				"name": "thermal:mob/blizz/breathe1",
+				"stream": false
+			},
+			{
+				"name": "thermal:mob/blizz/breathe2",
+				"stream": false
+			}
+		]
+	},
+	"mob_blizz_attack": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "thermal:mob/blizz/attack",
+				"stream": false
+			}
+		]
+	},
+	"mob_blitz_ambient": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "thermal:mob/blitz/ambient",
+				"stream": false
+			},
+			{
+				"name": "thermal:mob/blitz/breathe0",
+				"stream": false
+			},
+			{
+				"name": "thermal:mob/blitz/breathe1",
+				"stream": false
+			},
+			{
+				"name": "thermal:mob/blitz/breathe2",
+				"stream": false
+			}
+		]
+	},
+	"mob_blitz_attack": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "thermal:mob/blitz/attack",
+				"stream": false
+			}
+		]
+	},
+	"mob_basalz_ambient": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "thermal:mob/basalz/ambient",
+				"stream": false
+			},
+			{
+				"name": "thermal:mob/basalz/breathe0",
+				"stream": false
+			},
+			{
+				"name": "thermal:mob/basalz/breathe1",
+				"stream": false
+			}
+		]
+	},
+	"mob_basalz_attack": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "thermal:mob/basalz/attack",
+				"stream": false
+			}
+		]
+	},
+	"player_magnet_use": {
+		"category": "player",
+		"sounds": [
+			{
+				"name": "minecraft:mob/endermen/portal2",
+				"stream": false
+			}
+		]
+	}
+}

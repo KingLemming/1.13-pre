@@ -1,0 +1,28 @@
+{
+	"parent": "quartermastery:item/tools/bow",
+	"textures": {
+		"layer0": "quartermastery:items/tools/bow_electrum"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"pulling": 1
+			},
+			"model": "quartermastery:item/tools/bow_electrum_0"
+		},
+		{
+			"predicate": {
+				"pulling": 1,
+				"pull": 0.65
+			},
+			"model": "quartermastery:item/tools/bow_electrum_1"
+		},
+		{
+			"predicate": {
+				"pulling": 1,
+				"pull": 0.9
+			},
+			"model": "quartermastery:item/tools/bow_electrum_2"
+		}
+	]
+}

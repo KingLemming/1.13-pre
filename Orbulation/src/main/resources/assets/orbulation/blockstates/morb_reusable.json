@@ -1,0 +1,22 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "builtin/generated",
+		"textures": {
+			"layer0": "orbulation:items/morb_reusable"
+		},
+		"transform": "forge:default-item"
+	},
+	"variants": {
+		"full": {
+			"0": {
+			},
+			"1": {
+				"textures": {
+					"layer1": "orbulation:items/morb_mask_1",
+					"layer2": "orbulation:items/morb_mask_2"
+				}
+			}
+		}
+	}
+}

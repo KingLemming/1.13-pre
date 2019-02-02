@@ -1,0 +1,6 @@
+{
+	"parent": "quartermastery:item/tools/bow_invar",
+	"textures": {
+		"layer0": "quartermastery:items/tools/bow_invar_1"
+	}
+}

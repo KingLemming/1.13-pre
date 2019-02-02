@@ -1,0 +1,6 @@
+{
+	"parent": "quartermastery:item/tools/bow_electrum",
+	"textures": {
+		"layer0": "quartermastery:items/tools/bow_electrum_1"
+	}
+}

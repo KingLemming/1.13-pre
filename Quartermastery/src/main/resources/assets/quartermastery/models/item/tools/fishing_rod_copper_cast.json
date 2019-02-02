@@ -1,0 +1,6 @@
+{
+	"parent": "quartermastery:item/tools/fishing_rod_copper",
+	"textures": {
+		"layer0": "quartermastery:items/tools/fishing_rod_copper_cast"
+	}
+}

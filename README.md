@@ -1,0 +1,5 @@
+ALL RIGHTS RESERVED
+
+DO NOT DISTRIBUTE LOL :P
+
+©2012-2019 Cult of the Full Hub / Team CoFH / CoFH

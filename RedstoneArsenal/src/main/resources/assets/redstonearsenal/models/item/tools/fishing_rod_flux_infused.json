@@ -1,0 +1,34 @@
+{
+	"parent": "item/handheld_rod",
+	"textures": {
+		"layer0": "redstonearsenal:items/tools/fishing_rod_flux_infused"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"charged": 1
+			},
+			"model": "redstonearsenal:item/tools/fishing_rod_flux_infused_charged"
+		},
+		{
+			"predicate": {
+				"cast": 1,
+				"charged": 1
+			},
+			"model": "redstonearsenal:item/tools/fishing_rod_flux_infused_charged_cast"
+		},
+		{
+			"predicate": {
+				"empowered": 1
+			},
+			"model": "redstonearsenal:item/tools/fishing_rod_flux_infused_empowered"
+		},
+		{
+			"predicate": {
+				"cast": 1,
+				"empowered": 1
+			},
+			"model": "redstonearsenal:item/tools/fishing_rod_flux_infused_empowered_cast"
+		}
+	]
+}

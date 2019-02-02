@@ -1,0 +1,17 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"inventory": {
+			"model": "forge:forgebucket",
+			"textures": {
+				"base": "orbulation:items/florb_magmatic",
+				"fluid": "orbulation:items/florb_mask"
+			},
+			"transform": "forge:default-item",
+			"custom": {
+				"fluid": "lava",
+				"flipGas": false
+			}
+		}
+	}
+}

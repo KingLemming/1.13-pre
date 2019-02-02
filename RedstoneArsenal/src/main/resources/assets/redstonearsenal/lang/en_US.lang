@@ -1,0 +1,44 @@
+#en_US
+
+info.redstonearsenal.tool.charge_off=§ePress (%s) to Quell§r
+info.redstonearsenal.tool.charge_on=§bPress (%s) to Empower§r
+
+info.redstonearsenal.tool.energyPerUse=RF Per Use
+info.redstonearsenal.tool.shovel=Also serves as a Hoe while sneaking.
+info.redstonearsenal.tool.wrench=Also serves as Shears.
+
+itemGroup.redstonearsenal=Redstone Arsenal
+
+item.redstonearsenal.dust_flux_infused.name=Flux-Infused Blend
+item.redstonearsenal.gear_flux_infused.name=Flux-Infused Gear
+item.redstonearsenal.gem_flux_crystal.name=Fluxed Crystal
+item.redstonearsenal.ingot_flux_infused.name=Flux-Infused Ingot
+item.redstonearsenal.nugget_flux_infused.name=Flux-Infused Nugget
+item.redstonearsenal.plate_flux_infused.name=Flux-Infused Plate
+item.redstonearsenal.plate_armor_flux.name=Fluxed Armor Plating
+item.redstonearsenal.rod_obsidian.name=Obsidian Rod
+item.redstonearsenal.rod_obsidian_flux.name=Flux-Infused Obsidian Rod
+
+item.redstonearsenal.axe_flux_infused.name=Flux-Infused Axe
+item.redstonearsenal.battle_wrench_flux_infused.name=Flux-Infused BattleWrench
+item.redstonearsenal.bow_flux_infused.name=Flux-Infused Bow
+item.redstonearsenal.excavator_flux_infused.name=Flux-Infused Excavator
+item.redstonearsenal.fishing_rod_flux_infused.name=Flux-Infused Fishing Rod
+item.redstonearsenal.hammer_flux_infused.name=Flux-Infused Hammer
+item.redstonearsenal.hoe_flux_infused.name=Flux-Infused Hoe
+item.redstonearsenal.pickaxe_flux_infused.name=Flux-Infused Pickaxe
+item.redstonearsenal.shield_flux_infused.name=Flux-Infused Shield
+item.redstonearsenal.shovel_flux_infused.name=Flux-Infused Shovel
+item.redstonearsenal.sickle_flux_infused.name=Flux-Infused Sickle
+item.redstonearsenal.sword_flux_infused.name=Flux-Infused Sword
+item.redstonearsenal.wrench_flux_infused.name=Flux-Infused OmniWrench
+
+item.redstonearsenal.quiver_flux_infused.name=Flux-Infused Quiver
+
+item.redstonearsenal.boots_flux_infused.name=Flux-Infused Boots
+item.redstonearsenal.chestplate_flux_infused.name=Flux-Infused Chestplate
+item.redstonearsenal.helmet_flux_infused.name=Flux-Infused Helm
+item.redstonearsenal.leggings_flux_infused.name=Flux-Infused Leggings
+
+tile.redstonearsenal.block_flux_crystal.name=Fluxed Crystal Block
+tile.redstonearsenal.block_flux_infused.name=Flux-Infused Block

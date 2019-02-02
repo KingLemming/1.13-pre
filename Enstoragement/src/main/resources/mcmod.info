@@ -1,0 +1,19 @@
+[
+	{
+		"modid": "enstoragement",
+		"name": "Enstoragement",
+		"description": "No, it's not a real word. But it adds Satchels and Strongboxes.",
+		"version": "${version}",
+		"credits": "Team CoFH",
+		"logoFile": "assets/logo.png",
+		"mcversion": "${mc_version}",
+		"url": "http://www.teamcofh.com",
+		"updateUrl": "",
+		"authorList": [ "Team CoFH" ],
+		"parent": "",
+		"screenshots": [],
+		"dependencies": [
+			"forge,cofhcore"
+		]
+	}
+]

@@ -1,0 +1,6 @@
+{
+	"parent": "quartermastery:item/tools/bow_aluminum",
+	"textures": {
+		"layer0": "quartermastery:items/tools/bow_aluminum_0"
+	}
+}

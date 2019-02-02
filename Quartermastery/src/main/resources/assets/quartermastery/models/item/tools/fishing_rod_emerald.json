@@ -1,0 +1,14 @@
+{
+	"parent": "item/handheld_rod",
+	"textures": {
+		"layer0": "quartermastery:items/tools/fishing_rod_emerald"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"cast": 1
+			},
+			"model": "quartermastery:item/tools/fishing_rod_emerald_cast"
+		}
+	]
+}

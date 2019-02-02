@@ -1,0 +1,153 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "textures": {
+      "layer0": "thermal:items/utils/potion_injector/potion_injector_basic",
+      "layer1": "thermal:items/blank",
+      "layer2": "thermal:items/blank"
+    },
+    "transform": {
+      "thirdperson_righthand": {
+        "rotation": [
+          {
+            "y": 90
+          },
+          {
+            "z": 30
+          }
+        ],
+        "translation": [
+          0,
+          -0.15,
+          0
+        ],
+        "scale": [
+          0.85,
+          0.85,
+          0.85
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          {
+            "y": -90
+          },
+          {
+            "z": -30
+          }
+        ],
+        "translation": [
+          0,
+          -0.15,
+          0
+        ],
+        "scale": [
+          0.85,
+          0.85,
+          0.85
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          {
+            "y": -90
+          },
+          {
+            "z": 55
+          }
+        ],
+        "translation": [
+          0,
+          0.25,
+          0.1
+        ],
+        "scale": [
+          0.68,
+          0.68,
+          0.68
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          {
+            "y": 90
+          },
+          {
+            "z": -55
+          }
+        ],
+        "translation": [
+          0,
+          0.25,
+          0.1
+        ],
+        "scale": [
+          0.68,
+          0.68,
+          0.68
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          0.15,
+          0
+        ],
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    }
+  },
+  "variants": {
+    "color": {
+      "0": {},
+      "1": {
+        "textures": {
+          "layer2": "thermal:items/utils/potion_injector/potion_injector_color"
+        }
+      }
+    },
+    "fill": {
+      "0": {},
+      "1": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_injector/potion_injector_fill_1"
+        }
+      },
+      "2": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_injector/potion_injector_fill_2"
+        }
+      },
+      "3": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_injector/potion_injector_fill_3"
+        }
+      },
+      "4": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_injector/potion_injector_fill_4"
+        }
+      },
+      "5": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_injector/potion_injector_fill_5"
+        }
+      },
+      "6": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_injector/potion_injector_fill_6"
+        }
+      },
+      "7": {
+        "textures": {
+          "layer1": "thermal:items/utils/potion_injector/potion_injector_fill_7"
+        }
+      }
+    }
+  }
+}
