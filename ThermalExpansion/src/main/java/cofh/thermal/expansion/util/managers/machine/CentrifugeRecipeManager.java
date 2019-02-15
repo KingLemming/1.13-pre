@@ -2,36 +2,31 @@ package cofh.thermal.expansion.util.managers.machine;
 
 import cofh.thermal.core.util.managers.SimpleItemRecipeManager;
 
-import static cofh.lib.util.Constants.*;
+import static cofh.lib.util.Constants.PREFIX_DUST;
 import static cofh.thermal.core.ThermalSeries.config;
 
-public class CrucibleRecipeManager extends SimpleItemRecipeManager {
+public class CentrifugeRecipeManager extends SimpleItemRecipeManager {
 
-	private static final CrucibleRecipeManager INSTANCE = new CrucibleRecipeManager();
-	protected static final int DEFAULT_ENERGY = 40000;
+	private static final CentrifugeRecipeManager INSTANCE = new CentrifugeRecipeManager();
+	protected static final int DEFAULT_ENERGY = 8000;
 
-	public static CrucibleRecipeManager instance() {
+	public static CentrifugeRecipeManager instance() {
 
 		return INSTANCE;
 	}
 
-	private CrucibleRecipeManager() {
+	private CentrifugeRecipeManager() {
 
-		super(DEFAULT_ENERGY, 0, 1);
+		super(DEFAULT_ENERGY, 4, 1);
 
 		defaultValidator.addPrefix(PREFIX_DUST);
-		defaultValidator.addPrefix(PREFIX_GEAR);
-		defaultValidator.addPrefix(PREFIX_ORE);
-		defaultValidator.addPrefix(PREFIX_INGOT);
-		defaultValidator.addPrefix(PREFIX_NUGGET);
-		defaultValidator.addPrefix(PREFIX_PLATE);
 	}
 
 	// region IRecipeManager
 	@Override
 	public void config() {
 
-		String category = "Machines.Crucible";
+		String category = "Machines.Centrifuge";
 		String comment;
 
 		comment = "Adjust this value to change the default energy value for this machine's recipes.";

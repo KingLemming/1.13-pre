@@ -202,10 +202,6 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 		return false;
 	}
 
-	public void addSlotsToContainer(Container container) {
-
-	}
-
 	public void receiveGuiNetworkData(int id, int data) {
 
 	}

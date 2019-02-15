@@ -11,9 +11,9 @@ import net.minecraft.item.ItemStack;
 
 import static cofh.lib.util.Constants.MAX_ENCHANT_LEVEL;
 
-public class EnchantmentMultishot extends EnchantmentBase {
+public class EnchantmentVolley extends EnchantmentBase {
 
-	public EnchantmentMultishot(String id) {
+	public EnchantmentVolley(String id) {
 
 		super(id, Rarity.UNCOMMON, EnumEnchantmentType.BOW, new EntityEquipmentSlot[] { EntityEquipmentSlot.MAINHAND });
 	}
@@ -21,8 +21,8 @@ public class EnchantmentMultishot extends EnchantmentBase {
 	@Override
 	protected void config() {
 
-		String category = "Enchantment.Multishot";
-		String comment = "If TRUE, the Multishot Enchantment is available for various Bows.";
+		String category = "Enchantment.Volley";
+		String comment = "If TRUE, the Volley Enchantment is available for various Bows.";
 		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
 
 		comment = "This option adjusts the maximum allowable level for the Enchantment.";

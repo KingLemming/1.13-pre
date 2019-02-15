@@ -58,10 +58,12 @@ public class SimpleItemHandler implements IItemHandler {
 		if (slot < 0 || slot > getSlots()) {
 			return stack;
 		}
+		ItemStack ret = slots.get(slot).insertItem(slot, stack, simulate);
+
 		if (tile != null && !simulate) {
 			tile.onInventoryChange(slot);
 		}
-		return slots.get(slot).insertItem(slot, stack, simulate);
+		return ret;
 	}
 
 	@Nonnull
@@ -71,10 +73,12 @@ public class SimpleItemHandler implements IItemHandler {
 		if (slot < 0 || slot > getSlots()) {
 			return ItemStack.EMPTY;
 		}
+		ItemStack ret = slots.get(slot).extractItem(slot, amount, simulate);
+
 		if (tile != null && !simulate) {
 			tile.onInventoryChange(slot);
 		}
-		return slots.get(slot).extractItem(slot, amount, simulate);
+		return ret;
 	}
 
 	@Override

@@ -4,15 +4,18 @@
  */
 package cofh.lib.energy;
 
+import cofh.lib.util.IResourceStorage;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.energy.IEnergyStorage;
+
+import static cofh.lib.util.Constants.TAG_ENERGY;
 
 /**
  * Reference implementation of {@link IEnergyStorage}. Use/extend this or implement your own.
  *
  * @author King Lemming
  */
-public class EnergyStorageCoFH implements IEnergyStorage {
+public class EnergyStorageCoFH implements IEnergyStorage, IResourceStorage {
 
 	protected int energy;
 	protected int capacity;
@@ -91,26 +94,6 @@ public class EnergyStorageCoFH implements IEnergyStorage {
 		return maxExtract;
 	}
 
-	public void modifyEnergyStored(int amount) {
-
-		energy += amount;
-		if (energy > capacity) {
-			energy = capacity;
-		} else if (energy < 0) {
-			energy = 0;
-		}
-	}
-
-	public boolean isEmpty() {
-
-		return energy <= 0 && capacity > 0;
-	}
-
-	public int getSpace() {
-
-		return energy >= capacity ? 0 : capacity - energy;
-	}
-
 	public int receiveEnergyOverride(int maxReceive, boolean simulate) {
 
 		int energyReceived = Math.min(capacity - energy, maxReceive);
@@ -132,7 +115,7 @@ public class EnergyStorageCoFH implements IEnergyStorage {
 	// region NBT
 	public EnergyStorageCoFH readFromNBT(NBTTagCompound nbt) {
 
-		this.energy = nbt.getInteger("Energy");
+		this.energy = nbt.getInteger(TAG_ENERGY);
 		if (energy > capacity) {
 			energy = capacity;
 		}
@@ -144,7 +127,7 @@ public class EnergyStorageCoFH implements IEnergyStorage {
 		if (energy < 0) {
 			energy = 0;
 		}
-		nbt.setInteger("Energy", energy);
+		nbt.setInteger(TAG_ENERGY, energy);
 		return nbt;
 	}
 	// endregion
@@ -195,4 +178,46 @@ public class EnergyStorageCoFH implements IEnergyStorage {
 	}
 	// endregion
 
+	// region IResourceStorage
+	@Override
+	public void modifyAmount(int amount) {
+
+		energy += amount;
+		if (energy > capacity) {
+			energy = capacity;
+		} else if (energy < 0) {
+			energy = 0;
+		}
+	}
+
+	@Override
+	public boolean isEmpty() {
+
+		return energy <= 0 && capacity > 0;
+	}
+
+	@Override
+	public int getSpace() {
+
+		return energy >= capacity ? 0 : capacity - energy;
+	}
+
+	@Override
+	public int getStored() {
+
+		return getEnergyStored();
+	}
+
+	@Override
+	public int getMaxStored() {
+
+		return getMaxEnergyStored();
+	}
+
+	@Override
+	public String getUnit() {
+
+		return "RF";
+	}
+	// endregion
 }

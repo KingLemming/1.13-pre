@@ -68,4 +68,7 @@ public abstract class EnchantmentBase extends Enchantment {
 		return enable;
 	}
 
+	// region HELPERS
+
+	// endregion
 }

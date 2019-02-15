@@ -4,6 +4,7 @@
  */
 package cofh.lib.fluid;
 
+import cofh.lib.util.IResourceStorage;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -21,7 +22,7 @@ import java.util.function.Predicate;
  *
  * @author King Lemming, cpw (LiquidTank)
  */
-public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder {
+public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder, IResourceStorage {
 
 	private final Predicate<FluidStack> validator;
 
@@ -107,27 +108,6 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder {
 		}
 	}
 
-	public void modifyFluidStored(int amount) {
-
-		if (!locked || fluid == null) {
-			return;
-		}
-		this.fluid.amount += amount;
-		if (this.fluid.amount > capacity) {
-			this.fluid.amount = capacity;
-		} else if (this.fluid.amount < 0) {
-			this.fluid.amount = 0;
-		}
-	}
-
-	public int getSpace() {
-
-		if (fluid == null) {
-			return capacity;
-		}
-		return fluid.amount >= capacity ? 0 : capacity - fluid.amount;
-	}
-
 	public IFluidTankProperties getProperties() {
 
 		if (properties == null) {
@@ -201,6 +181,7 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder {
 		return fluid;
 	}
 
+	@Override
 	public boolean isEmpty() {
 
 		return fluid == null || fluid.amount <= 0;
@@ -290,6 +271,49 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder {
 			}
 		}
 		return stack;
+	}
+	// endregion
+
+	// region IResourceStorage
+	@Override
+	public void modifyAmount(int amount) {
+
+		if (!locked || fluid == null) {
+			return;
+		}
+		this.fluid.amount += amount;
+		if (this.fluid.amount > capacity) {
+			this.fluid.amount = capacity;
+		} else if (this.fluid.amount < 0) {
+			this.fluid.amount = 0;
+		}
+	}
+
+	@Override
+	public int getSpace() {
+
+		if (fluid == null) {
+			return capacity;
+		}
+		return fluid.amount >= capacity ? 0 : capacity - fluid.amount;
+	}
+
+	@Override
+	public int getStored() {
+
+		return getFluidAmount();
+	}
+
+	@Override
+	public int getMaxStored() {
+
+		return getCapacity();
+	}
+
+	@Override
+	public String getUnit() {
+
+		return "mB";
 	}
 	// endregion
 }

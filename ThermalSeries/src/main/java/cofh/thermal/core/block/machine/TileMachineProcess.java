@@ -97,7 +97,7 @@ public abstract class TileMachineProcess extends TileMachine {
 
 		List<? extends IItemStackHolder> slotOutputs = getOutputSlots();
 		List<ItemStack> recipeOutputItems = curRecipe.getOutputItems(getInputSlots(), getInputTanks());
-		boolean used[] = new boolean[getOutputSlots().size()];
+		boolean[] used = new boolean[getOutputSlots().size()];
 		for (ItemStack recipeOutput : recipeOutputItems) {
 			boolean matched = false;
 			for (int j = 0; j < slotOutputs.size(); j++) {
@@ -222,7 +222,8 @@ public abstract class TileMachineProcess extends TileMachine {
 		if (Utils.isServerWorld(world) && slot < inventory.getInputSlots().size()) {
 			if (isActive) {
 				IMachineRecipe tempRecipe = curRecipe;
-				if (!validateInputs() || tempRecipe != curRecipe) {
+				int tempSubtype = curRecipe.getSubtype(getInputSlots(), getInputTanks());
+				if (!validateInputs() || tempRecipe != curRecipe || tempSubtype != curRecipe.getSubtype(getInputSlots(), getInputTanks())) {
 					processOff();
 				}
 			}

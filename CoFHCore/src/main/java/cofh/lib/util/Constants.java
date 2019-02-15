@@ -80,6 +80,7 @@ public class Constants {
 	public static final String PREFIX_BLOCK = "block";
 	public static final String PREFIX_CROP = "crop";
 	public static final String PREFIX_DUST = "dust";
+	public static final String PREFIX_GEAR = "gear";
 	public static final String PREFIX_GEM = "gem";
 	public static final String PREFIX_INGOT = "ingot";
 	public static final String PREFIX_LOG = "log";
@@ -98,6 +99,7 @@ public class Constants {
 	public static final String TAG_AUGMENTS = "Augments";
 	public static final String TAG_COLORS = "Colors";
 	public static final String TAG_CREATIVE = "Creative";
+	public static final String TAG_ENDER_ANCHOR = "EnderAnchor";
 	public static final String TAG_ENERGY = "Energy";
 	public static final String TAG_EXP = "Experience";
 	public static final String TAG_FILTER = "Filter";

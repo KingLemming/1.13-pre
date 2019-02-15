@@ -131,7 +131,6 @@ public class Utils {
 	public static boolean teleportEntityTo(EntityLivingBase entity, double x, double y, double z) {
 
 		EnderTeleportEvent event = new EnderTeleportEvent(entity, x, y, z, 0);
-
 		if (MinecraftForge.EVENT_BUS.post(event)) {
 			return false;
 		}

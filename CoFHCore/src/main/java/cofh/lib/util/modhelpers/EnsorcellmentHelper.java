@@ -15,12 +15,17 @@ public class EnsorcellmentHelper {
 	public static final String ID_PROTECTION = "minecraft:protection";
 	public static final String ID_THORNS = "minecraft:thorns";
 	public static final String ID_FROST_WALKER = "minecraft:frost_walker";
+	public static final String ID_KNOCKBACK = "minecraft:knockback";
 	public static final String ID_FIRE_ASPECT = "minecraft:fire_aspect";
 	public static final String ID_LOOTING = "minecraft:looting";
 	public static final String ID_MENDING = "minecraft:mending";
 
 	public static final String ID_HOLDING = ID_ENSORCELLMENT + ":holding";
 	public static final String ID_SOULBOUND = ID_ENSORCELLMENT + ":soulbound";
+
+	public static final String ID_AIR_WORKER = ID_ENSORCELLMENT + ":air_worker";
+	public static final String ID_DISPLACEMENT = ID_ENSORCELLMENT + ":displacement";
+	public static final String ID_GOURMAND = ID_ENSORCELLMENT + ":gourmand";
 
 	public static final String ID_LEECH = ID_ENSORCELLMENT + ":leech";
 	public static final String ID_VORPAL = ID_ENSORCELLMENT + ":vorpal";
@@ -29,12 +34,16 @@ public class EnsorcellmentHelper {
 	public static final String ID_SMASHING = ID_ENSORCELLMENT + ":smashing";
 	public static final String ID_SMELTING = ID_ENSORCELLMENT + ":smelting";
 
-	public static final String ID_MULTISHOT = ID_ENSORCELLMENT + ":multishot";
 	public static final String ID_QUICKDRAW = ID_ENSORCELLMENT + ":quickdraw";
 	public static final String ID_TRUESHOT = ID_ENSORCELLMENT + ":trueshot";
+	public static final String ID_VOLLEY = ID_ENSORCELLMENT + ":volley";
 
 	public static final String ID_BULWARK = ID_ENSORCELLMENT + ":bulwark";
 	public static final String ID_PHALANX = ID_ENSORCELLMENT + ":phalanx";
+
+	public static final String ID_ANGLER = ID_ENSORCELLMENT + ":angler";
+	public static final String ID_FARMER = ID_ENSORCELLMENT + ":farmer";
+	public static final String ID_HUNTER = ID_ENSORCELLMENT + ":hunter";
 	// endregion
 
 	// region ENCHANTMENTS
@@ -46,6 +55,16 @@ public class EnsorcellmentHelper {
 
 	@ObjectHolder (ID_SOULBOUND)
 	public static final Enchantment SOULBOUND = null;
+
+	/**
+	 * ARMOR
+	 */
+	@ObjectHolder (ID_AIR_WORKER)
+	public static final Enchantment AIR_WORKER = null;
+	@ObjectHolder (ID_DISPLACEMENT)
+	public static final Enchantment DISPLACEMENT = null;
+	@ObjectHolder (ID_GOURMAND)
+	public static final Enchantment GOURMAND = null;
 
 	/**
 	 * WEAPON
@@ -71,8 +90,8 @@ public class EnsorcellmentHelper {
 	/**
 	 * BOW
 	 */
-	@ObjectHolder (ID_MULTISHOT)
-	public static final Enchantment MULTISHOT = null;
+	@ObjectHolder (ID_VOLLEY)
+	public static final Enchantment VOLLEY = null;
 
 	@ObjectHolder (ID_QUICKDRAW)
 	public static final Enchantment QUICKDRAW = null;
@@ -88,5 +107,17 @@ public class EnsorcellmentHelper {
 
 	@ObjectHolder (ID_PHALANX)
 	public static final Enchantment PHALANX = null;
+
+	/**
+	 * LOOTING BONUS
+	 */
+	@ObjectHolder (ID_ANGLER)
+	public static final Enchantment ANGLER = null;
+
+	@ObjectHolder (ID_FARMER)
+	public static final Enchantment FARMER = null;
+
+	@ObjectHolder (ID_HUNTER)
+	public static final Enchantment HUNTER = null;
 	// endregion
 }

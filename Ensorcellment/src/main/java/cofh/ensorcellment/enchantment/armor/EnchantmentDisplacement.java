@@ -1,9 +1,8 @@
-package cofh.ensorcellment.enchantment.override;
+package cofh.ensorcellment.enchantment.armor;
 
 import cofh.ensorcellment.Ensorcellment;
-import cofh.ensorcellment.enchantment.EnchantmentOverride;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentThorns;
+import cofh.ensorcellment.enchantment.EnchantmentBase;
+import cofh.lib.util.Utils;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,28 +11,27 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
-import net.minecraftforge.common.ISpecialArmor;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.util.FakePlayer;
 
 import java.util.Random;
 
 import static cofh.lib.util.Constants.MAX_ENCHANT_LEVEL;
 
-public class EnchantmentThornsImp extends EnchantmentOverride {
+public class EnchantmentDisplacement extends EnchantmentBase {
 
-	public static int chance = 15;
+	public static int chance = 20;
 
-	public EnchantmentThornsImp(String id) {
+	public EnchantmentDisplacement(String id) {
 
-		super(id, Rarity.VERY_RARE, EnumEnchantmentType.ARMOR, EntityEquipmentSlot.values());
-		setName("thorns");
+		super(id, Rarity.RARE, EnumEnchantmentType.ARMOR, EntityEquipmentSlot.values());
 	}
 
 	@Override
 	protected void config() {
 
-		String category = "Override.Thorns";
-		String comment = "If TRUE, the Thorns Enchantment is replaced with a more configurable version which works on more items, such as Shields and Horse Armor.";
+		String category = "Enchantment.Displacement";
+		String comment = "If TRUE, the Displacement Enchantment is available for Armor, Shields, and Horse Armor.";
 		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
 
 		comment = "This option adjusts the maximum allowable level for the Enchantment.";
@@ -46,7 +44,7 @@ public class EnchantmentThornsImp extends EnchantmentOverride {
 	@Override
 	public int getMinEnchantability(int enchantmentLevel) {
 
-		return 10 + 20 * (enchantmentLevel - 1);
+		return 5 + 10 * (enchantmentLevel - 1);
 	}
 
 	@Override
@@ -66,40 +64,26 @@ public class EnchantmentThornsImp extends EnchantmentOverride {
 	@Override
 	public void onUserHurt(EntityLivingBase user, Entity attacker, int level) {
 
-		if (level <= 0) {
+		if (level <= 0 || !(attacker instanceof EntityLivingBase) || attacker instanceof FakePlayer) {
 			return;
 		}
 		Random rand = user.getRNG();
-		ItemStack stack = EnchantmentHelper.getEnchantedItem(this, user);
 		if (shouldHit(level, rand)) {
-			if (attacker != null) {
-				attacker.attackEntityFrom(DamageSource.causeThornsDamage(user), (float) EnchantmentThorns.getDamage(level, rand));
-			}
-			if (!stack.isEmpty()) {
-				damageArmor(stack, 3, user);
-			}
-		} else if (!stack.isEmpty()) {
-			damageArmor(stack, 1, user);
+			teleportEntity(level, rand, attacker);
 		}
 	}
 
-	private void damageArmor(ItemStack stack, int amount, EntityLivingBase entity) {
+	public static boolean teleportEntity(int level, Random rand, Entity attacker) {
 
-		int slot = -1;
-		int x = 0;
-		for (ItemStack i : entity.getArmorInventoryList()) {
-			if (i == stack) {
-				slot = x;
-				break;
-			}
-			x++;
+		if (!(attacker instanceof EntityLivingBase) || attacker instanceof FakePlayer) {
+			return false;
 		}
-		if (slot == -1 || !(stack.getItem() instanceof ISpecialArmor)) {
-			stack.damageItem(1, entity);
-			return;
-		}
-		ISpecialArmor armor = (ISpecialArmor) stack.getItem();
-		armor.damageArmor(entity, stack, DamageSource.causeThornsDamage(entity), amount, slot);
+		int radius = 8 * (2 ^ level);
+		int bound = radius * 2 + 1;
+		BlockPos pos = new BlockPos(attacker.posX, attacker.posY, attacker.posZ);
+		BlockPos randPos = pos.add(-radius + rand.nextInt(bound), rand.nextInt(8), -radius + rand.nextInt(bound));
+		Utils.teleportEntityTo(attacker, randPos);
+		return true;
 	}
 
 	public static boolean shouldHit(int level, Random rand) {

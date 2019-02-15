@@ -73,7 +73,7 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 				processFinish();
 				transferOutput();
 				transferInput();
-				energyStorage.modifyEnergyStored(-process);
+				energyStorage.modifyAmount(-process);
 
 				if (!redstoneControl.getState() || !canProcessStart()) {
 					processOff();
@@ -181,7 +181,7 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 			return 0;
 		}
 		int energy = calcEnergy();
-		energyStorage.modifyEnergyStored(-energy);
+		energyStorage.modifyAmount(-energy);
 		process -= energy;
 		return energy;
 	}

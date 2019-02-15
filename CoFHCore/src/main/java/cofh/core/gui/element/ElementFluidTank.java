@@ -15,6 +15,7 @@ import static cofh.lib.util.Constants.PATH_ELEMENTS;
 import static cofh.lib.util.helpers.StringHelper.formatNumber;
 import static cofh.lib.util.helpers.StringHelper.localize;
 
+// TODO: Migrate to genericized system.
 public class ElementFluidTank extends ElementBase {
 
 	public static final ResourceLocation LARGE_TEXTURE = new ResourceLocation(PATH_ELEMENTS + "fluid_tank_large.png");
@@ -25,6 +26,7 @@ public class ElementFluidTank extends ElementBase {
 	protected float durationFactor = 1.0F;
 	protected boolean infinite;
 	protected String unit = "mB";
+	protected TextureAtlasSprite fluidTexture;
 
 	// If this is enabled, 1 pixel of fluid will always show in the tank as long as fluid is present.
 	protected boolean alwaysShowMinimum = false;
@@ -32,8 +34,6 @@ public class ElementFluidTank extends ElementBase {
 	protected int gaugeType;
 	protected boolean drawTank;
 	protected boolean isThin;
-
-	protected TextureAtlasSprite fluidTextureOverride;
 
 	public ElementFluidTank(IGuiAccess gui, int posX, int posY, IFluidTank tank) {
 
@@ -51,6 +51,36 @@ public class ElementFluidTank extends ElementBase {
 
 		this.width = 16;
 		this.height = 60;
+	}
+
+	public ElementFluidTank setAlwaysShow(boolean show) {
+
+		alwaysShowMinimum = show;
+		return this;
+	}
+
+	public ElementFluidTank setDurationFactor(float durationFactor) {
+
+		this.durationFactor = durationFactor;
+		return this;
+	}
+
+	public ElementFluidTank setInfinite(boolean infinite) {
+
+		this.infinite = infinite;
+		return this;
+	}
+
+	public ElementFluidTank setUnit(String unit) {
+
+		this.unit = unit;
+		return this;
+	}
+
+	public ElementFluidTank setFluidTexture(TextureAtlasSprite fluidTexture) {
+
+		this.fluidTexture = fluidTexture;
+		return this;
 	}
 
 	public ElementFluidTank setGauge(int gaugeType) {
@@ -81,27 +111,9 @@ public class ElementFluidTank extends ElementBase {
 		return this;
 	}
 
-	public ElementFluidTank setFluidTextureOverride(TextureAtlasSprite fluidTextureOverride) {
-
-		this.fluidTextureOverride = fluidTextureOverride;
-		return this;
-	}
-
 	public ElementFluidTank drawTank(boolean drawTank) {
 
 		this.drawTank = drawTank;
-		return this;
-	}
-
-	public ElementFluidTank setAlwaysShow(boolean show) {
-
-		alwaysShowMinimum = show;
-		return this;
-	}
-
-	public ElementFluidTank setInfinite(boolean infinite) {
-
-		this.infinite = infinite;
 		return this;
 	}
 
@@ -109,12 +121,6 @@ public class ElementFluidTank extends ElementBase {
 
 		this.isThin = thin;
 		this.width = 7;
-		return this;
-	}
-
-	public ElementFluidTank setDurationFactor(float durationFactor) {
-
-		this.durationFactor = durationFactor;
 		return this;
 	}
 
@@ -170,9 +176,9 @@ public class ElementFluidTank extends ElementBase {
 
 		int amount = getScaled();
 
-		if (fluidTextureOverride != null) {
+		if (fluidTexture != null) {
 			RenderHelper.setBlockTextureSheet();
-			RenderHelper.drawTiledTexture(posX, posY + height - amount, fluidTextureOverride, width, amount);
+			RenderHelper.drawTiledTexture(posX, posY + height - amount, fluidTexture, width, amount);
 		} else {
 			RenderHelper.drawFluid(posX, posY + height - amount, tank.getFluid(), width, amount);
 		}

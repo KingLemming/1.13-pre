@@ -47,7 +47,7 @@ public class EnchantmentFrostWalkerImp extends EnchantmentOverride {
 	public boolean canApply(ItemStack stack) {
 
 		Item item = stack.getItem();
-		return enable && (type.canEnchantItem(item) || item.getHorseArmorType(stack) != HorseArmorType.NONE || capabilityCompatible(stack));
+		return enable && (type != null && type.canEnchantItem(item) || item.getHorseArmorType(stack) != HorseArmorType.NONE || capabilityCompatible(stack));
 	}
 
 	@Override

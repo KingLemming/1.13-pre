@@ -190,7 +190,7 @@ public class TileDynamo extends TileCoFH implements ITickable, ISecurableTile, I
 			return 0;
 		}
 		int energy = calcEnergy();
-		energyStorage.modifyEnergyStored(-energy);
+		energyStorage.modifyAmount(-energy);
 		fuel -= energy;
 		transferEnergy();
 

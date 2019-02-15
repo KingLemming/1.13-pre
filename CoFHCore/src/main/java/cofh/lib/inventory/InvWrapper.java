@@ -47,6 +47,7 @@ public class InvWrapper implements IInventory {
 		ItemStack stack = inSlot.splitStack(count);
 		if (inSlot.getCount() <= 0) {
 			inventory.set(index, ItemStack.EMPTY);
+			inventory.tile.onInventoryChange(index);
 		}
 		return stack;
 	}

@@ -24,6 +24,7 @@ public class BlocksTE {
 		machineFurnace = registerBlock("machine_furnace", new ItemBlockCoFH(new BlockMachine(FURNACE), GROUP_MACHINES));
 		machinePulverizer = registerBlock("machine_pulverizer", new ItemBlockCoFH(new BlockMachine(PULVERIZER), GROUP_MACHINES));
 		machineSawmill = registerBlock("machine_sawmill", new ItemBlockCoFH(new BlockMachine(SAWMILL), GROUP_MACHINES));
+		machineCrucible = registerBlock("machine_crucible", new ItemBlockCoFH(new BlockMachine(CRUCIBLE), GROUP_MACHINES));
 
 		dynamoSteam = registerBlock("dynamo_steam", new ItemBlockCoFH(new BlockDynamo(STEAM), GROUP_DYNAMOS));
 		dynamoMagmatic = registerBlock("dynamo_magmatic", new ItemBlockCoFH(new BlockDynamo(MAGMATIC), GROUP_DYNAMOS));
@@ -34,6 +35,7 @@ public class BlocksTE {
 	public static ItemStack machineFurnace;
 	public static ItemStack machinePulverizer;
 	public static ItemStack machineSawmill;
+	public static ItemStack machineCrucible;
 	// endregion
 
 	// region DYNAMOS

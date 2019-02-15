@@ -59,6 +59,10 @@ tab.thermal.dynamo_magmatic.0=Generates Redstone Flux using extremely hot fluids
 tab.thermal.dynamo_steam.0=Generates Redstone Flux using Steam.
 tab.thermal.dynamo_steam.1=Solid Fuels and Water can be used to generate Steam.
 
+tab.thermal.machine_crucible.0=Turns solid materials into fluids!
+tab.thermal.machine_crucible.1=Very useful for building advanced blocks.
+tab.thermal.machine_crucible.2=Keep away from small children and pets.
+
 tab.thermal.machine_furnace.0=Smelts things using Redstone Flux.
 tab.thermal.machine_furnace.1=Uses very little energy to cook food.
 tab.thermal.machine_furnace.2=Om nom nom.
@@ -488,3 +492,4 @@ tile.thermal.machine_furnace.name=Redstone Furnace
 tile.thermal.machine_pulverizer.name=Pulverizer
 tile.thermal.machine_sawmill.name=Sawmill
 tile.thermal.machine_insolator.name=Phytogenic Insolator
+tile.thermal.machine_crucible.name=Magma Crucible

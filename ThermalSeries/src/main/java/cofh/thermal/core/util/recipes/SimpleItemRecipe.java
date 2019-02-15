@@ -26,14 +26,14 @@ public class SimpleItemRecipe extends AbstractRecipe {
 		this.outputItems.add(output);
 		this.outputChances.add(chance);
 	}
+	// endregion
 
+	// region MULTIPLE ITEM OUTPUT
 	public SimpleItemRecipe(ItemStack input, List<ItemStack> output, int energy) {
 
 		this(input, output, null, energy);
 	}
-	// endregion
 
-	// region MULTIPLE ITEM OUTPUT
 	public SimpleItemRecipe(ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, int energy) {
 
 		super(energy);

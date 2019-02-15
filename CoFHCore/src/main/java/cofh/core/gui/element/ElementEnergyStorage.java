@@ -12,6 +12,7 @@ import static cofh.lib.util.Constants.PATH_ELEMENTS;
 import static cofh.lib.util.helpers.StringHelper.formatNumber;
 import static cofh.lib.util.helpers.StringHelper.localize;
 
+// TODO: Migrate to genericized system.
 public class ElementEnergyStorage extends ElementBase {
 
 	public static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(PATH_ELEMENTS + "energy_storage.png");

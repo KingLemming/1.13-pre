@@ -12,7 +12,6 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
-import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArrow;
@@ -36,6 +35,7 @@ import static cofh.lib.util.Constants.DAMAGE_ARROW;
 import static cofh.lib.util.Constants.MAX_ENCHANT_LEVEL;
 import static cofh.lib.util.helpers.ArcheryHelper.*;
 import static cofh.lib.util.modhelpers.EnsorcellmentHelper.*;
+import static net.minecraft.init.Enchantments.*;
 
 public class EventHandlerArchery {
 
@@ -70,7 +70,7 @@ public class EventHandlerArchery {
 		boolean customArrow = false;
 		boolean flag = player.capabilities.isCreativeMode || (arrowStack.getItem() instanceof ItemArrow && ((ItemArrow) arrowStack.getItem()).isInfinite(arrowStack, bowStack, player));
 
-		if (arrowStack.isEmpty() && EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, bowStack) > 0) {
+		if (arrowStack.isEmpty() && EnchantmentHelper.getEnchantmentLevel(INFINITY, bowStack) > 0) {
 			flag = true;
 		}
 		if (!arrowStack.isEmpty() || flag) {
@@ -90,11 +90,11 @@ public class EventHandlerArchery {
 			}
 			if (arrowVelocity >= 0.1F) {
 				if (Utils.isServerWorld(world)) {
-					int encMultishot = MathHelper.clamp(EnchantmentHelper.getEnchantmentLevel(MULTISHOT, bowStack), 0, MAX_ENCHANT_LEVEL);
+					int encVolley = MathHelper.clamp(EnchantmentHelper.getEnchantmentLevel(VOLLEY, bowStack), 0, MAX_ENCHANT_LEVEL);
 					int encTrueshot = EnchantmentHelper.getEnchantmentLevel(TRUESHOT, bowStack);
-					int encPunch = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, bowStack);
-					int encPower = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, bowStack);
-					int encFlame = EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, bowStack);
+					int encPunch = EnchantmentHelper.getEnchantmentLevel(PUNCH, bowStack);
+					int encPower = EnchantmentHelper.getEnchantmentLevel(POWER, bowStack);
+					int encFlame = EnchantmentHelper.getEnchantmentLevel(FLAME, bowStack);
 
 					if (bow != null) {
 						bow.onFired(bowStack, player);
@@ -108,7 +108,7 @@ public class EventHandlerArchery {
 						accuracyMod = 0.25F;
 						arrowVelocity = MathHelper.clamp(0.1F, arrowVelocity + 0.25F, 1.5F);
 					}
-					for (int shot = 0; shot <= encMultishot; shot++) {
+					for (int shot = 0; shot <= encVolley; shot++) {
 						EntityArrow arrow = createArrow(world, arrowStack, bowStack, customArrow, player);
 						arrow.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, arrowVelocity * 3.0F * speedMod, accuracyMod * (1.5F - arrowVelocity) * (shot * 2));
 						arrow.setDamage(arrow.getDamage() * damageMod);
@@ -130,7 +130,7 @@ public class EventHandlerArchery {
 						}
 						world.spawnEntity(arrow);
 					}
-					bowStack.damageItem(1 + (encMultishot > 0 ? 1 : 0), player);
+					bowStack.damageItem(1 + (encVolley > 0 ? 1 : 0), player);
 				}
 				world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (world.rand.nextFloat() * 0.4F + 1.2F) + arrowVelocity * 0.5F);
 
@@ -160,7 +160,7 @@ public class EventHandlerArchery {
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack arrowStack = findAmmo(player);
 
-		if (arrowStack.isEmpty() && EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0) {
+		if (arrowStack.isEmpty() && EnchantmentHelper.getEnchantmentLevel(INFINITY, stack) > 0) {
 			arrowStack = new ItemStack(Items.ARROW);
 		}
 		if (!arrowStack.isEmpty()) {
@@ -194,8 +194,8 @@ public class EventHandlerArchery {
 			return;
 		}
 		if (source.damageType.equals(DAMAGE_ARROW)) {
-			int encMultishot = getHeldEnchantmentLevel((EntityLivingBase) attacker, MULTISHOT);
-			if (encMultishot > 0) {
+			int encVolley = getHeldEnchantmentLevel((EntityLivingBase) attacker, VOLLEY);
+			if (encVolley > 0) {
 				entity.hurtResistantTime = 0;
 			}
 		}

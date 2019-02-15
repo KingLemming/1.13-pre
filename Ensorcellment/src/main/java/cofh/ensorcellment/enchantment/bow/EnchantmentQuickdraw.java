@@ -9,9 +9,9 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class EnchantmentQuickDraw extends EnchantmentBase {
+public class EnchantmentQuickdraw extends EnchantmentBase {
 
-	public EnchantmentQuickDraw(String id) {
+	public EnchantmentQuickdraw(String id) {
 
 		super(id, Rarity.UNCOMMON, EnumEnchantmentType.BOW, new EntityEquipmentSlot[] { EntityEquipmentSlot.MAINHAND });
 	}
@@ -19,8 +19,8 @@ public class EnchantmentQuickDraw extends EnchantmentBase {
 	@Override
 	protected void config() {
 
-		String category = "Enchantment.QuickDraw";
-		String comment = "If TRUE, the QuickDraw Enchantment is available for various Bows.";
+		String category = "Enchantment.Quickdraw";
+		String comment = "If TRUE, the Quickdraw Enchantment is available for various Bows.";
 		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
 	}
 
