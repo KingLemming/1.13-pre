@@ -84,12 +84,18 @@ public class Ensorcellment {
 	// endregion
 
 	// region HELPERS
+	public static boolean preventFarmlandTrampling = true;
 	public static boolean hardDisable = false;
 
 	public static void config() {
 
-		String category = "~MODPACK OPTIONS~";
-		String comment = "If TRUE, then disabled Enchantments WILL NOT BE REGISTERED. Only do this if you fully understand the consequences. World backup is recommended.";
+		String category = "Enchantment.FeatherFalling";
+		String comment = "If TRUE, Feather Falling will prevent Farmland from being trampled.";
+
+		preventFarmlandTrampling = config.getBoolean("Prevent Farmland Trampling", category, true, comment);
+
+		category = "~MODPACK OPTIONS~";
+		comment = "If TRUE, then disabled Enchantments WILL NOT BE REGISTERED. Only do this if you fully understand the consequences. World backup is recommended.";
 
 		hardDisable = config.getBoolean("Disable Prevents Registration", category, true, comment);
 	}

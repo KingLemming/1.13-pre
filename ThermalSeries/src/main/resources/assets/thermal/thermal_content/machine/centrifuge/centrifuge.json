@@ -1,0 +1,18 @@
+{
+	"centrifuge": [
+		{
+			"input": {
+				"item": "minecraft:magma_cream"
+			},
+			"output": [
+				{
+					"item": "minecraft:slime_ball"
+				},
+				{
+					"item": "minecraft:blaze_powder"
+				}
+			],
+			"energy_mod": 0.50
+		}
+	]
+}

@@ -59,6 +59,10 @@ tab.thermal.dynamo_magmatic.0=Generates Redstone Flux using extremely hot fluids
 tab.thermal.dynamo_steam.0=Generates Redstone Flux using Steam.
 tab.thermal.dynamo_steam.1=Solid Fuels and Water can be used to generate Steam.
 
+tab.thermal.machine_centrifuge.0=
+tab.thermal.machine_centrifuge.1=
+tab.thermal.machine_centrifuge.2=
+
 tab.thermal.machine_crucible.0=Turns solid materials into fluids!
 tab.thermal.machine_crucible.1=Very useful for building advanced blocks.
 tab.thermal.machine_crucible.2=Keep away from small children and pets.
@@ -393,6 +397,12 @@ item.thermal.rod_blizz.name=Blizz Rod
 # ITEMS - CULTIVATION
 #=======================================================================================================================
 
+item.thermal.crop_bell_pepper.name=Bell Pepper
+item.thermal.crop_green_bean.name=Green Bean
+item.thermal.crop_onion.name=Onion
+item.thermal.crop_spinach.name=Spinach
+item.thermal.crop_tomato.name=Tomato
+
 item.thermal.watering_can_basic.name=Watering Can
 
 #=======================================================================================================================
@@ -493,3 +503,4 @@ tile.thermal.machine_pulverizer.name=Pulverizer
 tile.thermal.machine_sawmill.name=Sawmill
 tile.thermal.machine_insolator.name=Phytogenic Insolator
 tile.thermal.machine_crucible.name=Magma Crucible
+tile.thermal.machine_centrifuge.name=Centrifugal Separator

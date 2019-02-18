@@ -2,6 +2,7 @@ package cofh.core.item;
 
 import cofh.lib.util.IModelRegister;
 import cofh.lib.util.Utils;
+import cofh.lib.util.helpers.SecurityHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -65,8 +66,7 @@ public class ItemBlockCoFH extends ItemBlock implements IModelRegister {
 	@Override
 	public boolean hasCustomEntity(ItemStack stack) {
 
-		// return SecurityHelper.isSecure(stack);
-		return false;
+		return SecurityHelper.hasSecurity(stack);
 	}
 
 	@Override

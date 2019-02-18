@@ -12,7 +12,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
 /**
- * This class provides a simple way to wrap an IEnergyContainerItem to allow for capability support. It will seamlessly allow for Forge Energy to be supported in addition to RF.
+ * This class provides a simple way to wrap an IEnergyContainerItem to allow for capability support.
  *
  * @author King Lemming
  */

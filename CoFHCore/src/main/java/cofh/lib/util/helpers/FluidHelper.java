@@ -32,7 +32,7 @@ public class FluidHelper {
 	// region COMPARISON
 	public static boolean fluidsEqual(FluidStack resourceA, FluidStack resourceB) {
 
-		return resourceA != null && resourceA.isFluidEqual(resourceB);
+		return resourceA != null && resourceA.isFluidEqual(resourceB) || resourceA == null && resourceB == null;
 	}
 
 	public static boolean fluidsEqual(Fluid fluidA, FluidStack resourceB) {

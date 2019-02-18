@@ -1,0 +1,71 @@
+{
+	"centrifuge": [
+		{
+			"input": {
+				"ore": "dustBronze",
+				"count": 4
+			},
+			"output": [
+				{
+					"ore": "dustCopper",
+					"count": 3
+				},
+				{
+					"ore": "dustTin",
+					"count": 1
+				}
+			]
+		},
+		{
+			"input": {
+				"ore": "dustInvar",
+				"count": 3
+			},
+			"output": [
+				{
+					"ore": "dustIron",
+					"count": 2
+				},
+				{
+					"ore": "dustNickel",
+					"count": 1
+				}
+			],
+			"energy_mod": 0.75
+		},
+		{
+			"input": {
+				"ore": "dustElectrum",
+				"count": 2
+			},
+			"output": [
+				{
+					"ore": "dustGold",
+					"count": 1
+				},
+				{
+					"ore": "dustSilver",
+					"count": 1
+				}
+			],
+			"energy_mod": 0.50
+		},
+		{
+			"input": {
+				"ore": "dustConstantan",
+				"count": 2
+			},
+			"output": [
+				{
+					"ore": "dustCopper",
+					"count": 1
+				},
+				{
+					"ore": "dustNickel",
+					"count": 1
+				}
+			],
+			"energy_mod": 0.50
+		}
+	]
+}

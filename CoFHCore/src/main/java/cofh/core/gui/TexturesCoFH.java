@@ -50,17 +50,18 @@ public class TexturesCoFH {
 		ICON_ARROW_UP_INACTIVE = register(ICONS_ + "icon_arrow_up_inactive");
 	}
 
-	/* HELPERS */
+	// region HELPERS
 	private static TextureMap textureMap;
 
 	private static TextureAtlasSprite register(String sprite) {
 
 		return textureMap.registerSprite(new ResourceLocation(sprite));
 	}
+	// endregion
 
+	// region ICONS
 	private static final String ICONS_ = "cofh:gui/icons/";
 
-	/* REFERENCES */
 	public static TextureAtlasSprite ICON_ACCESS_PUBLIC;
 	public static TextureAtlasSprite ICON_ACCESS_TEAM;
 	public static TextureAtlasSprite ICON_ACCESS_FRIENDS;
@@ -95,5 +96,5 @@ public class TexturesCoFH {
 
 	public static TextureAtlasSprite ICON_ARROW_UP;
 	public static TextureAtlasSprite ICON_ARROW_UP_INACTIVE;
-
+	// endregion
 }

@@ -7,6 +7,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static cofh.lib.util.Constants.GROUP_UTILS;
+import static cofh.lib.util.Constants.TAG_ACCESSIBLE;
 
 public class ItemInventoryContainer extends ItemCoFH implements IInventoryContainerItem {
 
@@ -51,7 +52,7 @@ public class ItemInventoryContainer extends ItemCoFH implements IInventoryContai
 	// region HELPERS
 	public static boolean needsDefaultTag(ItemStack stack) {
 
-		return stack.getTagCompound() == null || !stack.getTagCompound().hasKey("Accessible");
+		return stack.getTagCompound() == null || !stack.getTagCompound().hasKey(TAG_ACCESSIBLE);
 	}
 
 	public static ItemStack setDefaultTag(ItemStack stack) {
@@ -59,7 +60,7 @@ public class ItemInventoryContainer extends ItemCoFH implements IInventoryContai
 		if (stack.getTagCompound() == null) {
 			stack.setTagCompound(new NBTTagCompound());
 		}
-		stack.getTagCompound().setBoolean("Accessible", true);
+		stack.getTagCompound().setBoolean(TAG_ACCESSIBLE, true);
 		return stack;
 	}
 	// endregion

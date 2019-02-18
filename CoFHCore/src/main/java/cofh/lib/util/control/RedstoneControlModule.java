@@ -1,5 +1,6 @@
 package cofh.lib.util.control;
 
+import cofh.core.network.PacketBufferCoFH;
 import cofh.core.network.packet.PacketRedstoneControl;
 import cofh.lib.util.Utils;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,6 +19,22 @@ public class RedstoneControlModule implements IRedstoneControllable {
 
 		this.tile = tile;
 	}
+
+	// region NETWORK
+	public void readFromBuffer(PacketBufferCoFH buffer) {
+
+		power = buffer.readByte();
+		threshold = buffer.readByte();
+		mode = ControlMode.VALUES[buffer.readByte()];
+	}
+
+	public void writeToBuffer(PacketBufferCoFH buffer) {
+
+		buffer.writeByte(power);
+		buffer.writeByte(threshold);
+		buffer.writeByte(mode.ordinal());
+	}
+	// endregion
 
 	// region NBT
 	public RedstoneControlModule readFromNBT(NBTTagCompound nbt) {

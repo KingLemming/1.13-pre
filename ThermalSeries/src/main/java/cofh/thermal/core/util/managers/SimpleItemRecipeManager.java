@@ -135,6 +135,29 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 	}
 	// endregion
 
+	// region MULTIPLE ITEM + SINGLE FLUID OUTPUT
+	public IMachineRecipe addRecipe(int energy, ItemStack input, List<ItemStack> output, List<Float> chance, FluidStack fluid) {
+
+		if (input.isEmpty() || output.isEmpty() && fluid == null || output.size() > maxOutputItems || energy <= 0 || validRecipe(input)) {
+			return null;
+		}
+		for (ItemStack stack : output) {
+			if (stack.isEmpty()) {
+				return null;
+			}
+		}
+		energy = (energy * scaleFactor) / 100;
+
+		SimpleItemRecipe recipe = new SimpleItemRecipe(input, output, chance, fluid, energy);
+		if (hasCustomOreID(input)) {
+			customMap.put(customInput(input), recipe);
+		} else {
+			defaultMap.put(defaultInput(input), recipe);
+		}
+		return recipe;
+	}
+	// endregion
+
 	// region IRecipeManager
 	@Override
 	public boolean validRecipe(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {

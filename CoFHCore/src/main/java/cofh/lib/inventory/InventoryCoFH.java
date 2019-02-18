@@ -65,6 +65,11 @@ public class InventoryCoFH extends SimpleItemHandler {
 		return slots.get(slot).getItemStack();
 	}
 
+	public ItemStorageCoFH getSlot(int slot) {
+
+		return slots.get(slot);
+	}
+
 	// region NBT
 	public InventoryCoFH readFromNBT(NBTTagCompound nbt) {
 

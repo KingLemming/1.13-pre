@@ -1,8 +1,10 @@
 package cofh.thermal.core.block.machine;
 
 import cofh.core.block.TileCoFH;
+import cofh.core.network.PacketBufferCoFH;
 import cofh.core.network.packet.PacketTile;
 import cofh.lib.energy.EnergyStorageCoFH;
+import cofh.lib.fluid.FluidStorageCoFH;
 import cofh.lib.fluid.IFluidStackHolder;
 import cofh.lib.fluid.TankArrayManaged;
 import cofh.lib.inventory.IItemStackHolder;
@@ -27,6 +29,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 
@@ -42,7 +45,7 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 	protected InventoryCoFH augments = new InventoryCoFH(this, TAG_AUGMENTS);
 	protected InventoryManaged inventory = new InventoryManaged(this, TAG_INVENTORY);
 	protected TankArrayManaged tankInv = new TankArrayManaged(this, TAG_TANK_ARRAY);
-	protected EnergyStorageCoFH energyStorage = new EnergyStorageCoFH(0);
+	protected EnergyStorageCoFH energyStorage = new EnergyStorageCoFH(32000);
 
 	protected SecurityControlModule securityControl = new SecurityControlModule(this);
 	protected RedstoneControlModule redstoneControl = new RedstoneControlModule(this);
@@ -66,6 +69,8 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 	public void update() {
 
 		boolean curActive = isActive;
+
+		energyStorage.receiveEnergy(200, false);
 
 		if (isActive) {
 			processTick();
@@ -119,6 +124,50 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 	// endregion
 
 	// region GUI
+	protected boolean cacheRenderFluid() {
+
+		return false;
+	}
+
+	public EnergyStorageCoFH getEnergyStorage() {
+
+		return energyStorage;
+	}
+
+	public ItemStorageCoFH getSlot(int slot) {
+
+		return inventory.getSlot(slot);
+	}
+
+	public FluidStorageCoFH getTank(int tank) {
+
+		return tankInv.getTank(tank);
+	}
+
+	public FluidStack getRenderFluid() {
+
+		return null;
+	}
+
+	public int getScaledProgress(int scale) {
+
+		if (!isActive || processMax <= 0 || process <= 0) {
+			return 0;
+		}
+		return scale * (processMax - process) / processMax;
+	}
+
+	public int getScaledSpeed(int scale) {
+
+		if (!isActive) {
+			return 0;
+		}
+		return scale;
+		//		double power = energyStorage.getEnergyStored() / energyConfig.energyRamp;
+		//		power = MathHelper.clip(power, energyConfig.minPower, energyConfig.maxPower);
+		//		return MathHelper.round(scale * power / energyConfig.maxPower);
+	}
+
 	@Override
 	public Object getGuiClient(InventoryPlayer inventory) {
 
@@ -142,6 +191,73 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 			player.sendMessage(new TextComponentTranslation("chat.cofh.secure.warning", getOwnerName()));
 		}
 		return false;
+	}
+	// endregion
+
+	// region NETWORK
+	@Override
+	public PacketBufferCoFH getTilePacket(PacketBufferCoFH buffer) {
+
+		super.getTilePacket(buffer);
+
+		buffer.writeBoolean(isActive);
+		buffer.writeInt(energyStorage.getMaxEnergyStored());
+		buffer.writeInt(energyStorage.getEnergyStored());
+
+		securityControl.writeToBuffer(buffer);
+		redstoneControl.writeToBuffer(buffer);
+		transferControl.writeToBuffer(buffer);
+
+		return buffer;
+	}
+
+	@Override
+	public PacketBufferCoFH getGuiPacket(PacketBufferCoFH buffer) {
+
+		super.getGuiPacket(buffer);
+
+		buffer.writeBoolean(isActive);
+		buffer.writeInt(energyStorage.getMaxEnergyStored());
+		buffer.writeInt(energyStorage.getEnergyStored());
+
+		buffer.writeInt(processMax);
+		buffer.writeInt(process);
+
+		for (int i = 0; i < tankInv.getTanks(); i++) {
+			buffer.writeFluidStack(tankInv.get(i));
+		}
+		return buffer;
+	}
+
+	@Override
+	public void handleTilePacket(PacketBufferCoFH buffer) {
+
+		super.handleTilePacket(buffer);
+
+		isActive = buffer.readBoolean();
+		energyStorage.setCapacity(buffer.readInt());
+		energyStorage.setEnergyStored(buffer.readInt());
+
+		securityControl.readFromBuffer(buffer);
+		redstoneControl.readFromBuffer(buffer);
+		transferControl.readFromBuffer(buffer);
+	}
+
+	@Override
+	public void handleGuiPacket(PacketBufferCoFH buffer) {
+
+		super.handleGuiPacket(buffer);
+
+		isActive = buffer.readBoolean();
+		energyStorage.setCapacity(buffer.readInt());
+		energyStorage.setEnergyStored(buffer.readInt());
+
+		processMax = buffer.readInt();
+		process = buffer.readInt();
+
+		for (int i = 0; i < tankInv.getTanks(); i++) {
+			tankInv.set(i, buffer.readFluidStack());
+		}
 	}
 	// endregion
 

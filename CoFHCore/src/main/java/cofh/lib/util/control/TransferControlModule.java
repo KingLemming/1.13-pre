@@ -1,5 +1,6 @@
 package cofh.lib.util.control;
 
+import cofh.core.network.PacketBufferCoFH;
 import cofh.core.network.packet.PacketTransferControl;
 import cofh.lib.util.Utils;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,6 +26,26 @@ public class TransferControlModule implements ITransferControllable {
 		this.hasAutoInput = hasAutoInput;
 		this.hasAutoOutput = hasAutoOutput;
 	}
+
+	// region NETWORK
+	public void readFromBuffer(PacketBufferCoFH buffer) {
+
+		hasAutoInput = buffer.readBoolean();
+		hasAutoOutput = buffer.readBoolean();
+
+		enableAutoInput = buffer.readBoolean();
+		enableAutoOutput = buffer.readBoolean();
+	}
+
+	public void writeToBuffer(PacketBufferCoFH buffer) {
+
+		buffer.writeBoolean(hasAutoInput);
+		buffer.writeBoolean(hasAutoOutput);
+
+		buffer.writeBoolean(enableAutoInput);
+		buffer.writeBoolean(enableAutoOutput);
+	}
+	// endregion
 
 	// region NBT
 	public TransferControlModule readFromNBT(NBTTagCompound nbt) {

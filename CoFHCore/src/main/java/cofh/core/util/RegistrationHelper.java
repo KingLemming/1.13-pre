@@ -1,11 +1,11 @@
 package cofh.core.util;
 
 import cofh.core.fluid.BlockFluidCoFH;
-import cofh.core.item.ItemBlockCoFH;
-import cofh.core.item.ItemCoFH;
 import cofh.lib.util.IModelRegister;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
@@ -28,7 +28,7 @@ public class RegistrationHelper {
 	}
 
 	// region BLOCKS
-	public ItemStack registerBlock(String blockName, ItemBlockCoFH itemBlock, CreativeTabs tab) {
+	public ItemStack registerBlock(String blockName, ItemBlock itemBlock, CreativeTabs tab) {
 
 		Block block = itemBlock.getBlock();
 
@@ -44,25 +44,25 @@ public class RegistrationHelper {
 
 		if (block instanceof BlockFluidCoFH) {
 			fluidList.add((BlockFluidCoFH) block);
-		} else {
-			blockList.add(itemBlock);
+		} else if (itemBlock instanceof IModelRegister) {
+			blockList.add((IModelRegister) itemBlock);
 		}
 		return new ItemStack(block);
 	}
 
-	public ItemStack registerBlock(String blockName, ItemBlockCoFH itemBlock) {
+	public ItemStack registerBlock(String blockName, ItemBlock itemBlock) {
 
 		return registerBlock(blockName, itemBlock, defaultBlockTab);
 	}
 
-	public ItemStack registerBlock(String blockName, String oreName, ItemBlockCoFH itemBlock, CreativeTabs tab) {
+	public ItemStack registerBlock(String blockName, String oreName, ItemBlock itemBlock, CreativeTabs tab) {
 
 		ItemStack retStack = registerBlock(blockName, itemBlock, tab);
 		OreDictionary.registerOre(oreName, retStack);
 		return retStack;
 	}
 
-	public ItemStack registerBlock(String blockName, String oreName, ItemBlockCoFH itemBlock) {
+	public ItemStack registerBlock(String blockName, String oreName, ItemBlock itemBlock) {
 
 		return registerBlock(blockName, oreName, itemBlock, defaultBlockTab);
 	}
@@ -88,31 +88,32 @@ public class RegistrationHelper {
 	// endregion
 
 	// region ITEMS
-	public ItemStack registerItem(String itemName, ItemCoFH item, CreativeTabs tab) {
+	public ItemStack registerItem(String itemName, Item item, CreativeTabs tab) {
 
 		item.setCreativeTab(tab);
 		item.setRegistryName(modId, itemName);
 		item.setUnlocalizedName(modId + "." + itemName);
 		ForgeRegistries.ITEMS.register(item);
 
-		itemList.add(item);
-
+		if (item instanceof IModelRegister) {
+			itemList.add((IModelRegister) item);
+		}
 		return new ItemStack(item);
 	}
 
-	public ItemStack registerItem(String itemName, ItemCoFH item) {
+	public ItemStack registerItem(String itemName, Item item) {
 
 		return registerItem(itemName, item, defaultItemTab);
 	}
 
-	public ItemStack registerItem(String itemName, String oreName, ItemCoFH item, CreativeTabs tab) {
+	public ItemStack registerItem(String itemName, String oreName, Item item, CreativeTabs tab) {
 
 		ItemStack retStack = registerItem(itemName, item, tab);
 		OreDictionary.registerOre(oreName, retStack);
 		return retStack;
 	}
 
-	public ItemStack registerItem(String itemName, String oreName, ItemCoFH item) {
+	public ItemStack registerItem(String itemName, String oreName, Item item) {
 
 		return registerItem(itemName, oreName, item, defaultItemTab);
 	}

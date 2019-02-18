@@ -1,11 +1,16 @@
 package cofh.thermal.expansion.block.machine;
 
+import cofh.lib.inventory.IItemStackHolder;
 import cofh.thermal.core.block.machine.TileMachineProcess;
 import cofh.thermal.expansion.init.MachinesTE;
 import cofh.thermal.expansion.util.managers.machine.SawmillRecipeManager;
+import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 import static cofh.lib.util.StorageGroup.INPUT;
 import static cofh.lib.util.StorageGroup.OUTPUT;
+import static cofh.lib.util.helpers.ItemHelper.itemsIdentical;
 
 public class TileMachineSawmill extends TileMachineProcess {
 
@@ -27,6 +32,7 @@ public class TileMachineSawmill extends TileMachineProcess {
 		return curRecipe != null;
 	}
 
+	// region OPTIMIZATION
 	@Override
 	protected boolean validateInputs() {
 
@@ -36,43 +42,43 @@ public class TileMachineSawmill extends TileMachineProcess {
 		return getInputSlots().get(0).getItemStack().getCount() >= itemInputCounts.get(0);
 	}
 
-	//	@Override
-	//	protected boolean validateOutputs() {
-	//
-	//		List<? extends IItemStackHolder> slotOutputs = getOutputSlots();
-	//		List<ItemStack> recipeOutputItems = curRecipe.getOutputItems(getInputSlots(), getInputTanks());
-	//
-	//		boolean used[] = new boolean[getOutputSlots().size()];
-	//		for (ItemStack recipeOutput : recipeOutputItems) {
-	//			boolean matched = false;
-	//			for (int j = 0; j < slotOutputs.size(); j++) {
-	//				if (used[j]) {
-	//					continue;
-	//				}
-	//				ItemStack output = slotOutputs.get(j).getItemStack();
-	//				if (itemsIdentical(output, recipeOutput)) {
-	//					used[j] = true;
-	//					matched = true;
-	//					break;
-	//				}
-	//			}
-	//			if (!matched) {
-	//				for (int j = 0; j < slotOutputs.size(); j++) {
-	//					if (used[j]) {
-	//						continue;
-	//					}
-	//					if (slotOutputs.get(j).isEmpty()) {
-	//						used[j] = true;
-	//						matched = true;
-	//						break;
-	//					}
-	//				}
-	//			}
-	//			if (!matched) {
-	//				return false;
-	//			}
-	//		}
-	//		return true;
-	//	}
+	@Override
+	protected boolean validateOutputs() {
 
+		List<? extends IItemStackHolder> slotOutputs = getOutputSlots();
+		List<ItemStack> recipeOutputItems = curRecipe.getOutputItems(getInputSlots(), getInputTanks());
+
+		boolean[] used = new boolean[getOutputSlots().size()];
+		for (ItemStack recipeOutput : recipeOutputItems) {
+			boolean matched = false;
+			for (int j = 0; j < slotOutputs.size(); j++) {
+				if (used[j]) {
+					continue;
+				}
+				ItemStack output = slotOutputs.get(j).getItemStack();
+				if (itemsIdentical(output, recipeOutput)) {
+					used[j] = true;
+					matched = true;
+					break;
+				}
+			}
+			if (!matched) {
+				for (int j = 0; j < slotOutputs.size(); j++) {
+					if (used[j]) {
+						continue;
+					}
+					if (slotOutputs.get(j).isEmpty()) {
+						used[j] = true;
+						matched = true;
+						break;
+					}
+				}
+			}
+			if (!matched) {
+				return false;
+			}
+		}
+		return true;
+	}
+	// endregion
 }

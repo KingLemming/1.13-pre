@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -60,6 +61,20 @@ public abstract class AbstractContentParser implements IContentParser {
 	// endregion
 
 	// region HELPERS
+	public boolean preCheck(JsonObject object) {
+
+		if (object.has(COMMENT)) {
+			return false;
+		}
+		if (object.has(ENABLE) && !object.get(ENABLE).getAsBoolean()) {
+			return false;
+		}
+		if (object.has(DEPENDENCY)) {
+			return parseDependencies(object.get(DEPENDENCY));
+		}
+		return true;
+	}
+
 	public static ItemStack parseItemStack(JsonElement element) {
 
 		if (element == null || element.isJsonNull()) {
@@ -177,7 +192,7 @@ public abstract class AbstractContentParser implements IContentParser {
 		return stack;
 	}
 
-	public static Float parseChance(JsonElement element) {
+	public static float parseChance(JsonElement element) {
 
 		JsonObject object = element.getAsJsonObject();
 
@@ -187,24 +202,52 @@ public abstract class AbstractContentParser implements IContentParser {
 		return 1.0F;
 	}
 
-	public static void parseItemStackArray(List<ItemStack> stacks, JsonArray array) {
+	public static boolean parseDependency(JsonElement element) {
 
-		if (!array.isJsonArray()) {
-			return;
+		JsonObject depObject = element.getAsJsonObject();
+
+		if (depObject.has(MOD)) {
+			return Loader.isModLoaded(depObject.get(MOD).getAsString());
+		} else if (depObject.has(ORE)) {
+			return oreNameExists(depObject.get(ORE).getAsString());
 		}
-		for (JsonElement element : array) {
+		return true;
+	}
+
+	public static void parseItemStacks(List<ItemStack> stacks, JsonElement element) {
+
+		if (element.isJsonArray()) {
+			for (JsonElement arrayElement : element.getAsJsonArray()) {
+				stacks.add(parseItemStack(arrayElement));
+			}
+		} else {
 			stacks.add(parseItemStack(element));
 		}
 	}
 
-	public static void parseItemStackArray(List<ItemStack> stacks, List<Float> chances, JsonArray array) {
+	public static void parseItemStacks(List<ItemStack> stacks, List<Float> chances, JsonElement element) {
 
-		if (!array.isJsonArray()) {
-			return;
-		}
-		for (JsonElement element : array) {
+		if (element.isJsonArray()) {
+			for (JsonElement arrayElement : element.getAsJsonArray()) {
+				stacks.add(parseItemStack(arrayElement));
+				chances.add(parseChance(arrayElement));
+			}
+		} else {
 			stacks.add(parseItemStack(element));
 			chances.add(parseChance(element));
+		}
+	}
+
+	public static boolean parseDependencies(JsonElement element) {
+
+		if (element.isJsonArray()) {
+			boolean check = true;
+			for (JsonElement arrayElement : element.getAsJsonArray()) {
+				check &= parseDependency(arrayElement);
+			}
+			return check;
+		} else {
+			return parseDependency(element);
 		}
 	}
 	// endregion
@@ -217,6 +260,7 @@ public abstract class AbstractContentParser implements IContentParser {
 	public static final String CONSTANT = "constant";
 	public static final String COUNT = "count";
 	public static final String DATA = "data";
+	public static final String DEPENDENCY = "dependency";
 	public static final String ENABLE = "enable";
 	public static final String ENERGY = "energy";
 	public static final String ENERGY_MOD = "energy_mod";
@@ -224,9 +268,10 @@ public abstract class AbstractContentParser implements IContentParser {
 	public static final String FLUID = "fluid";
 	public static final String INPUT = "input";
 	public static final String ITEM = "item";
+	public static final String MOD = "mod";
+	public static final String NBT = "nbt";
 	public static final String ORE = "ore";
 	public static final String OUTPUT = "output";
-	public static final String NBT = "nbt";
 	public static final String REMOVE = "remove";
 	public static final String TYPE = "type";
 	public static final String WILDCARD = "wildcard";

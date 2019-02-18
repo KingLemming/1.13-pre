@@ -7,14 +7,8 @@ import cofh.thermal.core.init.RecipesTSeries;
 import cofh.thermal.expansion.init.BlocksTE;
 import cofh.thermal.expansion.init.ItemsTE;
 import cofh.thermal.expansion.proxy.ProxyCommon;
-import cofh.thermal.expansion.util.managers.machine.CrucibleRecipeManager;
-import cofh.thermal.expansion.util.managers.machine.FurnaceRecipeManager;
-import cofh.thermal.expansion.util.managers.machine.PulverizerRecipeManager;
-import cofh.thermal.expansion.util.managers.machine.SawmillRecipeManager;
-import cofh.thermal.expansion.util.parsers.machine.CrucibleRecipeParser;
-import cofh.thermal.expansion.util.parsers.machine.FurnaceRecipeParser;
-import cofh.thermal.expansion.util.parsers.machine.PulverizerRecipeParser;
-import cofh.thermal.expansion.util.parsers.machine.SawmillRecipeParser;
+import cofh.thermal.expansion.util.managers.machine.*;
+import cofh.thermal.expansion.util.parsers.machine.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
@@ -91,11 +85,13 @@ public class ThermalExpansion implements IModule {
 		RecipesTSeries.registerManager(PulverizerRecipeManager.instance());
 		RecipesTSeries.registerManager(SawmillRecipeManager.instance());
 		RecipesTSeries.registerManager(CrucibleRecipeManager.instance());
+		RecipesTSeries.registerManager(CentrifugeRecipeManager.instance());
 
 		ParsersTSeries.registerParser("furnace", FurnaceRecipeParser.instance());
 		ParsersTSeries.registerParser("pulverizer", PulverizerRecipeParser.instance());
 		ParsersTSeries.registerParser("sawmill", SawmillRecipeParser.instance());
 		ParsersTSeries.registerParser("crucible", CrucibleRecipeParser.instance());
+		ParsersTSeries.registerParser("centrifuge", CentrifugeRecipeParser.instance());
 	}
 
 	@Override

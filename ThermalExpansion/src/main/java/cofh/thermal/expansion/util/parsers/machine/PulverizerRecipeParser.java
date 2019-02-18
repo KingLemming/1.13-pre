@@ -25,7 +25,7 @@ public class PulverizerRecipeParser extends AbstractContentParser {
 	@Override
 	protected void parseObject(JsonObject object) {
 
-		if (object.has(COMMENT) || object.has(ENABLE) && !object.get(ENABLE).getAsBoolean()) {
+		if (!preCheck(object)) {
 			return;
 		}
 		ItemStack input;
@@ -43,12 +43,7 @@ public class PulverizerRecipeParser extends AbstractContentParser {
 		}
 
 		/* OUTPUT */
-		if (object.get(OUTPUT).isJsonArray()) {
-			parseItemStackArray(output, chance, object.get(OUTPUT).getAsJsonArray());
-		} else {
-			output.add(parseItemStack(object.get(OUTPUT)));
-			chance.add(parseChance(object.get(OUTPUT)));
-		}
+		parseItemStacks(output, chance, object.get(OUTPUT));
 
 		/* ENERGY */
 		if (object.has(ENERGY)) {

@@ -60,6 +60,27 @@ public class SimpleItemRecipe extends AbstractRecipe {
 	}
 	// endregion
 
+	// region ITEM + FLUID OUTPUT
+	public SimpleItemRecipe(ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, FluidStack fluid, int energy) {
+
+		super(energy);
+		this.inputItems.add(input);
+		this.outputItems.addAll(output);
+
+		if (chance != null) {
+			this.outputChances.addAll(chance);
+		}
+		if (this.outputChances.size() < this.outputItems.size()) {
+			for (int i = this.outputChances.size(); i < this.outputItems.size(); i++) {
+				this.outputChances.add(-BASE_CHANCE);
+			}
+		}
+		if (fluid != null) {
+			this.outputFluids.add(fluid);
+		}
+	}
+	// endregion
+
 	@Override
 	public List<Integer> getInputItemCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
 

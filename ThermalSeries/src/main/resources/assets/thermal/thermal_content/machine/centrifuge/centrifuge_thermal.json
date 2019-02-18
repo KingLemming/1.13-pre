@@ -1,0 +1,64 @@
+{
+	"centrifuge": [
+		{
+			"input": {
+				"ore": "dustSignalum",
+				"count": 4
+			},
+			"output": [
+				{
+					"ore": "dustCopper",
+					"count": 3
+				},
+				{
+					"ore": "dustSilver",
+					"count": 1
+				}
+			],
+			"fluid": {
+				"fluid": "redstone",
+				"amount": 1000
+			}
+		},
+		{
+			"input": {
+				"ore": "dustLumium",
+				"count": 4
+			},
+			"output": [
+				{
+					"ore": "dustTin",
+					"count": 3
+				},
+				{
+					"ore": "dustSilver",
+					"count": 1
+				}
+			],
+			"fluid": {
+				"fluid": "glowstone",
+				"amount": 1000
+			}
+		},
+		{
+			"input": {
+				"ore": "dustEnderium",
+				"count": 4
+			},
+			"output": [
+				{
+					"ore": "dustLead",
+					"count": 3
+				},
+				{
+					"ore": "dustPlatinum",
+					"count": 1
+				}
+			],
+			"fluid": {
+				"fluid": "ender",
+				"amount": 1000
+			}
+		}
+	]
+}

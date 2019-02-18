@@ -1,13 +1,21 @@
 package cofh.redstonearsenal.item.tool;
 
+import cofh.lib.energy.EnergyEnchantableItemWrapper;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
+import java.util.ArrayList;
 
 import static cofh.lib.util.Constants.TOOL_SICKLE;
+import static cofh.lib.util.modhelpers.EnsorcellmentHelper.FARMER;
+import static cofh.lib.util.modhelpers.EnsorcellmentHelper.HOLDING;
 
 public class ItemSickleFlux extends ItemToolFlux {
 
@@ -67,6 +75,20 @@ public class ItemSickleFlux extends ItemToolFlux {
 			useEnergy(stack, player.capabilities.isCreativeMode);
 		}
 		return true;
+	}
+
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
+
+		ArrayList<ResourceLocation> enchants = new ArrayList<>();
+
+		if (HOLDING != null) {
+			enchants.add(HOLDING.getRegistryName());
+		}
+		if (FARMER != null) {
+			enchants.add(FARMER.getRegistryName());
+		}
+		return new EnergyEnchantableItemWrapper(stack, this, enchants);
 	}
 
 }

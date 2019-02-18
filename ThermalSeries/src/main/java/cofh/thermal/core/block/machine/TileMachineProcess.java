@@ -47,6 +47,11 @@ public abstract class TileMachineProcess extends TileMachine {
 
 		processMax = curRecipe.getEnergy(getInputSlots(), getInputTanks());
 		process = processMax;
+
+		// TODO: Tile update packet.
+		if (cacheRenderFluid()) {
+
+		}
 	}
 
 	@Override
@@ -95,32 +100,33 @@ public abstract class TileMachineProcess extends TileMachine {
 	@Override
 	protected boolean validateOutputs() {
 
+		// ITEMS
 		List<? extends IItemStackHolder> slotOutputs = getOutputSlots();
 		List<ItemStack> recipeOutputItems = curRecipe.getOutputItems(getInputSlots(), getInputTanks());
 		boolean[] used = new boolean[getOutputSlots().size()];
 		for (ItemStack recipeOutput : recipeOutputItems) {
 			boolean matched = false;
-			for (int j = 0; j < slotOutputs.size(); j++) {
-				if (used[j]) {
+			for (int i = 0; i < slotOutputs.size(); i++) {
+				if (used[i]) {
 					continue;
 				}
-				ItemStack output = slotOutputs.get(j).getItemStack();
+				ItemStack output = slotOutputs.get(i).getItemStack();
 				if (output.getCount() >= output.getMaxStackSize()) {
 					continue;
 				}
 				if (itemsIdentical(output, recipeOutput)) {
-					used[j] = true;
+					used[i] = true;
 					matched = true;
 					break;
 				}
 			}
 			if (!matched) {
-				for (int j = 0; j < slotOutputs.size(); j++) {
-					if (used[j]) {
+				for (int i = 0; i < slotOutputs.size(); i++) {
+					if (used[i]) {
 						continue;
 					}
-					if (slotOutputs.get(j).isEmpty()) {
-						used[j] = true;
+					if (slotOutputs.get(i).isEmpty()) {
+						used[i] = true;
 						matched = true;
 						break;
 					}
@@ -130,14 +136,37 @@ public abstract class TileMachineProcess extends TileMachine {
 				return false;
 			}
 		}
+		// FLUIDS
 		List<? extends IFluidStackHolder> tankOutputs = getOutputTanks();
 		List<FluidStack> recipeOutputFluids = curRecipe.getOutputFluids(getInputSlots(), getInputTanks());
+		used = new boolean[getOutputTanks().size()];
 		for (FluidStack recipeOutput : recipeOutputFluids) {
-			for (IFluidStackHolder tankOutput : tankOutputs) {
-				FluidStack output = tankOutput.getFluidStack();
-				if (!(output == null || fluidsEqual(output, recipeOutput) && output.amount + recipeOutput.amount <= tankOutput.getCapacity())) {
-					return false;
+			boolean matched = false;
+			for (int i = 0; i < tankOutputs.size(); i++) {
+				if (used[i] || tankOutputs.get(i).getSpace() <= 0) {
+					continue;
 				}
+				FluidStack output = tankOutputs.get(i).getFluidStack();
+				if (fluidsEqual(output, recipeOutput)) {
+					used[i] = true;
+					matched = true;
+					break;
+				}
+			}
+			if (!matched) {
+				for (int i = 0; i < tankOutputs.size(); i++) {
+					if (used[i]) {
+						continue;
+					}
+					if (tankOutputs.get(i).isEmpty()) {
+						used[i] = true;
+						matched = true;
+						break;
+					}
+				}
+			}
+			if (!matched) {
+				return false;
 			}
 		}
 		return true;

@@ -29,6 +29,7 @@ public class TileMachineFurnace extends TileMachineProcess {
 		return curRecipe != null;
 	}
 
+	// region OPTIMIZATION
 	@Override
 	protected boolean validateInputs() {
 
@@ -48,5 +49,5 @@ public class TileMachineFurnace extends TileMachineProcess {
 		ItemStack recipeOutput = curRecipe.getOutputItems(getInputSlots(), getInputTanks()).get(0);
 		return itemsIdentical(output, recipeOutput) && output.getCount() < recipeOutput.getMaxStackSize();
 	}
-
+	// endregion
 }

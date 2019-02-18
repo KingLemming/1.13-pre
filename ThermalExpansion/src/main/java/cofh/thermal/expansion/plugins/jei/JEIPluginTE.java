@@ -1,6 +1,8 @@
 package cofh.thermal.expansion.plugins.jei;
 
 import cofh.thermal.core.plugins.jei.JEIPluginTSeries;
+import cofh.thermal.expansion.plugins.jei.machine.centrifuge.CentrifugeRecipeCategory;
+import cofh.thermal.expansion.plugins.jei.machine.crucible.CrucibleRecipeCategory;
 import cofh.thermal.expansion.plugins.jei.machine.furnace.FurnaceRecipeCategory;
 import cofh.thermal.expansion.plugins.jei.machine.pulverizer.PulverizerRecipeCategory;
 import cofh.thermal.expansion.plugins.jei.machine.sawmill.SawmillRecipeCategory;
@@ -15,10 +17,14 @@ public class JEIPluginTE implements IModPlugin {
 		JEIPluginTSeries.addCategory(new FurnaceRecipeCategory(FURNACE));
 		JEIPluginTSeries.addCategory(new PulverizerRecipeCategory(PULVERIZER));
 		JEIPluginTSeries.addCategory(new SawmillRecipeCategory(SAWMILL));
+		JEIPluginTSeries.addCategory(new CrucibleRecipeCategory(CRUCIBLE));
+		JEIPluginTSeries.addCategory(new CentrifugeRecipeCategory(CENTRIFUGE));
 	}
 
 	public static final String FURNACE = "thermal:machine_furnace";
 	public static final String PULVERIZER = "thermal:machine_pulverizer";
 	public static final String SAWMILL = "thermal:machine_sawmill";
+	public static final String CRUCIBLE = "thermal:machine_crucible";
+	public static final String CENTRIFUGE = "thermal:machine_centrifuge";
 
 }

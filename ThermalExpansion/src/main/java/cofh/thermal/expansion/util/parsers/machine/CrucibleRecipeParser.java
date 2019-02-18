@@ -26,7 +26,7 @@ public class CrucibleRecipeParser extends AbstractContentParser {
 	@Override
 	protected void parseObject(JsonObject object) {
 
-		if (object.has(COMMENT) || object.has(ENABLE) && !object.get(ENABLE).getAsBoolean()) {
+		if (!preCheck(object)) {
 			return;
 		}
 		ItemStack input;

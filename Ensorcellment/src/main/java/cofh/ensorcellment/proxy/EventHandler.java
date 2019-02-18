@@ -1,5 +1,6 @@
 package cofh.ensorcellment.proxy;
 
+import cofh.ensorcellment.Ensorcellment;
 import cofh.ensorcellment.enchantment.EnchantmentsEnsorc;
 import cofh.ensorcellment.enchantment.armor.EnchantmentDisplacement;
 import cofh.ensorcellment.enchantment.digger.EnchantmentInsight;
@@ -59,6 +60,7 @@ import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent.FarmlandTrampleEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -100,6 +102,21 @@ public class EventHandler {
 	//
 	//		NBTTagCompound tag = entity.getEntityData();
 	//	}
+
+	@SubscribeEvent
+	public void handleFarmlandTrampleEvent(FarmlandTrampleEvent event) {
+
+		if (!Ensorcellment.preventFarmlandTrampling) {
+			return;
+		}
+		Entity entity = event.getEntity();
+		if (entity instanceof EntityLivingBase) {
+			int encFeatherFalling = EnchantmentHelper.getMaxEnchantmentLevel(FEATHER_FALLING, (EntityLivingBase) entity);
+			if (encFeatherFalling > 0) {
+				event.setCanceled(true);
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public void handleLivingAttackEvent(LivingAttackEvent event) {

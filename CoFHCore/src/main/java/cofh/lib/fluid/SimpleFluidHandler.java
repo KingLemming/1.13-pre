@@ -26,13 +26,28 @@ public class SimpleFluidHandler implements IFluidHandler {
 
 		properties = new IFluidTankProperties[tanks.size()];
 		for (int i = 0; i < properties.length; i++) {
-			properties[i] = tanks.get(0).getProperties();
+			properties[i] = tanks.get(i).getProperties();
 		}
 	}
 
 	public boolean hasTanks() {
 
 		return tanks.size() > 0;
+	}
+
+	public boolean isEmpty() {
+
+		for (FluidStorageCoFH tank : tanks) {
+			if (!tank.isEmpty()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public int getTanks() {
+
+		return tanks.size();
 	}
 
 	// region IFluidHandler

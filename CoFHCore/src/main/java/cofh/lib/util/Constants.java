@@ -68,6 +68,7 @@ public class Constants {
 
 	// region PACKET
 	public static final int PACKET_TILE = 1;
+	public static final int PACKET_GUI = 2;
 	public static final int PACKET_CHAT = 8;
 	public static final int PACKET_SECURITY = 16;
 	public static final int PACKET_FILTER = 17;
@@ -93,6 +94,7 @@ public class Constants {
 
 	// region TAGS
 	public static final String TAG_ACCESS = "Access";
+	public static final String TAG_ACCESSIBLE = "Accessible";
 	public static final String TAG_ACTIVE = "Active";
 	public static final String TAG_AMOUNT = "Amount";
 	public static final String TAG_ARROWS = "Arrows";
@@ -142,6 +144,7 @@ public class Constants {
 	public static final String GROUP_MACHINES = "machines";
 
 	public static final String GROUP_COINS = "coins";
+	public static final String GROUP_CROPS = "crops";
 	public static final String GROUP_DUSTS = "dusts";
 	public static final String GROUP_GEARS = "gears";
 	public static final String GROUP_GEMS = "gems";

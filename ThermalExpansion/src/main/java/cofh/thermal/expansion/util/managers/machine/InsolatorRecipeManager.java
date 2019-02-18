@@ -8,6 +8,7 @@ public class InsolatorRecipeManager extends SimpleItemRecipeManager {
 
 	private static final InsolatorRecipeManager INSTANCE = new InsolatorRecipeManager();
 	protected static final int DEFAULT_ENERGY = 20000;
+	protected static boolean defaultSeedRecipes = true;
 
 	public static InsolatorRecipeManager instance() {
 
@@ -34,8 +35,15 @@ public class InsolatorRecipeManager extends SimpleItemRecipeManager {
 		comment = "Adjust this value to change the relative energy cost of all of this machine's recipes. Scale is in percentage.";
 		int scaleFactor = config.getInt("Energy Factor", category, DEFAULT_SCALE, DEFAULT_SCALE_MIN, DEFAULT_SCALE_MAX, comment);
 
+		comment = "If TRUE, default Seed processing recipes will be created based on registered items.";
+		defaultSeedRecipes = config.getBoolean("Default Seed Recipes", category, defaultSeedRecipes, comment);
+
 		setDefaultEnergy(defaultEnergy);
 		setScaleFactor(scaleFactor);
 	}
+	// endregion
+
+	// region HELPERS
+
 	// endregion
 }

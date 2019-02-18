@@ -2,6 +2,7 @@ package cofh.lib.fluid;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -34,6 +35,28 @@ public class TankArrayCoFH extends SimpleFluidHandler {
 
 		super(tile, tanks);
 		this.tag = tag;
+	}
+
+	public void clear() {
+
+		for (FluidStorageCoFH tank : tanks) {
+			tank.drain(tank.getFluidAmount(), true);
+		}
+	}
+
+	public void set(int tank, FluidStack stack) {
+
+		tanks.get(tank).setFluid(stack);
+	}
+
+	public FluidStack get(int tank) {
+
+		return tanks.get(tank).getFluidStack();
+	}
+
+	public FluidStorageCoFH getTank(int tank) {
+
+		return tanks.get(tank);
 	}
 
 	// region NBT

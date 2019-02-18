@@ -100,7 +100,7 @@ public class PulverizerRecipeManager extends SimpleItemRecipeManager {
 		comment = "Adjust this value to change the default Ore -> Dust Multiplier for this machine.";
 		oreMultiplier = config.getFloat("Ore -> Dust Multiplier", category, oreMultiplier, 1.0F, 8.0F, comment);
 
-		comment = "If TRUE, default Ore processing recipes will be created.";
+		comment = "If TRUE, default Ore processing recipes will be created based on registered items.";
 		defaultOreRecipes = config.getBoolean("Default Ore Recipes", category, defaultOreRecipes, comment);
 
 		comment = "If TRUE, default Ingot -> Dust recipes will be created as part of the default recipe set.";

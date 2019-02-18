@@ -1,7 +1,6 @@
 package cofh.thermal.core;
 
 import cofh.core.item.ItemBlockCoFH;
-import cofh.core.item.ItemCoFH;
 import cofh.core.network.PacketHandler;
 import cofh.core.util.RegistrationHelper;
 import cofh.lib.capabilities.CapabilityEnchantable;
@@ -18,6 +17,7 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
@@ -255,7 +255,7 @@ public class ThermalSeries {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.INSTANCE);
 	}
 
-	public static ItemStack registerBlock(String blockName, ItemBlockCoFH itemBlock, CreativeTabs tab) {
+	public static ItemStack registerBlock(String blockName, ItemBlock itemBlock, CreativeTabs tab) {
 
 		return registrar.registerBlock(blockName, itemBlock, tab);
 	}
@@ -265,37 +265,37 @@ public class ThermalSeries {
 		return registrar.registerBlock(blockName, new ItemBlockCoFH(block));
 	}
 
-	public static ItemStack registerBlock(String blockName, ItemBlockCoFH itemBlock) {
+	public static ItemStack registerBlock(String blockName, ItemBlock itemBlock) {
 
 		return registrar.registerBlock(blockName, itemBlock);
 	}
 
-	public static ItemStack registerBlock(String blockName, String oreName, ItemBlockCoFH itemBlock, CreativeTabs tab) {
+	public static ItemStack registerBlock(String blockName, String oreName, ItemBlock itemBlock, CreativeTabs tab) {
 
 		return registrar.registerBlock(blockName, oreName, itemBlock, tab);
 	}
 
-	public static ItemStack registerBlock(String blockName, String oreName, ItemBlockCoFH itemBlock) {
+	public static ItemStack registerBlock(String blockName, String oreName, ItemBlock itemBlock) {
 
 		return registrar.registerBlock(blockName, oreName, itemBlock);
 	}
 
-	public static ItemStack registerItem(String itemName, ItemCoFH item, CreativeTabs tab) {
+	public static ItemStack registerItem(String itemName, Item item, CreativeTabs tab) {
 
 		return registrar.registerItem(itemName, item, tab);
 	}
 
-	public static ItemStack registerItem(String itemName, ItemCoFH item) {
+	public static ItemStack registerItem(String itemName, Item item) {
 
 		return registrar.registerItem(itemName, item);
 	}
 
-	public static ItemStack registerItem(String itemName, String oreName, ItemCoFH item, CreativeTabs tab) {
+	public static ItemStack registerItem(String itemName, String oreName, Item item, CreativeTabs tab) {
 
 		return registrar.registerItem(itemName, oreName, item, tab);
 	}
 
-	public static ItemStack registerItem(String itemName, String oreName, ItemCoFH item) {
+	public static ItemStack registerItem(String itemName, String oreName, Item item) {
 
 		return registrar.registerItem(itemName, oreName, item);
 	}
