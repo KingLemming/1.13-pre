@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "normal": {
-      "model": "thermal:storage/block_coal_coke"
-    }
-  }
+	"variants": {
+		"normal": {
+			"model": "thermal:storage/block_coal_coke"
+		}
+	}
 }

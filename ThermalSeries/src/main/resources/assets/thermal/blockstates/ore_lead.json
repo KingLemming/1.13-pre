@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "normal": {
-      "model": "thermal:ores/ore_lead"
-    }
-  }
+	"variants": {
+		"normal": {
+			"model": "thermal:ores/ore_lead"
+		}
+	}
 }

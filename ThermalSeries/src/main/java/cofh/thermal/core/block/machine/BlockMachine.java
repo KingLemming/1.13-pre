@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import static cofh.lib.util.Constants.ACTIVE;
 import static cofh.lib.util.Constants.FACING_HORIZONTAL;
 
 public class BlockMachine extends BlockTileCoFH {
@@ -23,12 +24,14 @@ public class BlockMachine extends BlockTileCoFH {
 	public BlockMachine(Machine machine) {
 
 		this.machine = machine;
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING_HORIZONTAL, EnumFacing.NORTH));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING_HORIZONTAL, EnumFacing.NORTH).withProperty(ACTIVE, false));
 	}
 
-	protected void addProperties(BlockStateContainer.Builder builder) {
+	protected void addBlockStateProperties(BlockStateContainer.Builder builder) {
 
+		super.addBlockStateProperties(builder);
 		builder.add(FACING_HORIZONTAL);
+		builder.add(ACTIVE);
 	}
 
 	@Override
@@ -40,7 +43,7 @@ public class BlockMachine extends BlockTileCoFH {
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 
-		return getDefaultState().withProperty(FACING_HORIZONTAL, placer.getHorizontalFacing().getOpposite());
+		return getDefaultState().withProperty(FACING_HORIZONTAL, placer.getHorizontalFacing().getOpposite()).withProperty(ACTIVE, false);
 	}
 
 	@Override
@@ -54,7 +57,7 @@ public class BlockMachine extends BlockTileCoFH {
 	@Override
 	public int getMetaFromState(IBlockState state) {
 
-		return state.getValue(FACING_HORIZONTAL).getIndex();
+		return state.getValue(FACING_HORIZONTAL).getIndex() + (state.getValue(ACTIVE) ? 4 : 0);
 	}
 
 	@Override
@@ -67,11 +70,12 @@ public class BlockMachine extends BlockTileCoFH {
 	public IBlockState getStateFromMeta(int meta) {
 
 		EnumFacing facing = EnumFacing.getFront(meta);
+		boolean active = meta >= 4;
 
 		if (facing.getAxis() == EnumFacing.Axis.Y) {
 			facing = EnumFacing.NORTH;
 		}
-		return getDefaultState().withProperty(FACING_HORIZONTAL, facing);
+		return getDefaultState().withProperty(FACING_HORIZONTAL, facing).withProperty(ACTIVE, active);
 	}
 	// endregion
 }

@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "normal": {
-      "model": "thermal:ores/ore_nickel"
-    }
-  }
+	"variants": {
+		"normal": {
+			"model": "thermal:ores/ore_nickel"
+		}
+	}
 }

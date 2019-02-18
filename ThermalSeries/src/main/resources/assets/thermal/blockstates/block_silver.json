@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "normal": {
-      "model": "thermal:storage/block_silver"
-    }
-  }
+	"variants": {
+		"normal": {
+			"model": "thermal:storage/block_silver"
+		}
+	}
 }

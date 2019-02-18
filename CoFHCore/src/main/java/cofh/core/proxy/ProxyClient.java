@@ -29,7 +29,7 @@ public class ProxyClient extends ProxyCommon {
 
 		EventHandlerClient.register();
 		EventHandlerClientLib.register();
-        ModelLoaderRegistry.registerLoader(LayeredTemplateModel.Loader.INSTANCE);
+		ModelLoaderRegistry.registerLoader(LayeredTemplateModel.Loader.INSTANCE);
 	}
 
 	@Override

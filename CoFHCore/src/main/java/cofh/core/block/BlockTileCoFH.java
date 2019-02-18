@@ -54,11 +54,11 @@ public abstract class BlockTileCoFH extends Block implements IDismantleable {
 	protected BlockStateContainer createBlockState() {
 
 		BlockStateContainer.Builder builder = new BlockStateContainer.Builder(this);
-		addProperties(builder);
+		addBlockStateProperties(builder);
 		return builder.build();
 	}
 
-	protected void addProperties(BlockStateContainer.Builder builder) {
+	protected void addBlockStateProperties(BlockStateContainer.Builder builder) {
 
 		builder.add(MODEL_PROPERTIES);
 	}

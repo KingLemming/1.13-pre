@@ -27,8 +27,9 @@ public class BlockDynamo extends BlockTileCoFH {
 	}
 
 	@Override
-	protected void addProperties(BlockStateContainer.Builder builder) {
+	protected void addBlockStateProperties(BlockStateContainer.Builder builder) {
 
+		super.addBlockStateProperties(builder);
 		builder.add(FACING_ALL);
 	}
 

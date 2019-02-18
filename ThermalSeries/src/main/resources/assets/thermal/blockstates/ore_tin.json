@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "normal": {
-      "model": "thermal:ores/ore_tin"
-    }
-  }
+	"variants": {
+		"normal": {
+			"model": "thermal:ores/ore_tin"
+		}
+	}
 }

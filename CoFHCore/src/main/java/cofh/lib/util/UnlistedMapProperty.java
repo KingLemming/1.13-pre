@@ -10,39 +10,44 @@ import java.util.Map;
 @Deprecated//Will be removed in 1.13 update, this system has been changed.
 public class UnlistedMapProperty<K, V> implements IUnlistedProperty<Map<K, V>> {
 
-    private final String name;
+	private final String name;
 
-    public UnlistedMapProperty(String name) {
-        this.name = name;
-    }
+	public UnlistedMapProperty(String name) {
 
-    @Override
-    public String getName() {
-        return name;
-    }
+		this.name = name;
+	}
 
-    @Override
-    public boolean isValid(Map<K, V> value) {
-        return true;
-    }
+	@Override
+	public String getName() {
 
-    @Override
-    @SuppressWarnings ("unchecked")
-    public Class<Map<K, V>> getType() {
-        Class<?> clazz = Map.class;//Java! wheeeee ;_;
-        return (Class<Map<K, V>>) clazz;
-    }
+		return name;
+	}
 
-    @Override
-    public String valueToString(Map<K, V> value) {
-        StringBuilder builder = new StringBuilder("Map [ ");
-        for (Map.Entry<K, V> entry : value.entrySet()) {
-            builder.append(entry.getKey());
-            builder.append(": ");
-            builder.append(entry.getValue());
-            builder.append(" ");
-        }
-        builder.append("]");
-        return builder.toString();
-    }
+	@Override
+	public boolean isValid(Map<K, V> value) {
+
+		return true;
+	}
+
+	@Override
+	@SuppressWarnings ("unchecked")
+	public Class<Map<K, V>> getType() {
+
+		Class<?> clazz = Map.class;//Java! wheeeee ;_;
+		return (Class<Map<K, V>>) clazz;
+	}
+
+	@Override
+	public String valueToString(Map<K, V> value) {
+
+		StringBuilder builder = new StringBuilder("Map [ ");
+		for (Map.Entry<K, V> entry : value.entrySet()) {
+			builder.append(entry.getKey());
+			builder.append(": ");
+			builder.append(entry.getValue());
+			builder.append(" ");
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 }
