@@ -2,6 +2,7 @@ package cofh.core.proxy;
 
 import cofh.core.key.KeyHandler;
 import cofh.core.key.KeyMultiModeItem;
+import cofh.core.model.LayeredTemplateModel;
 import cofh.lib.event.EventHandlerClientLib;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -9,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -27,6 +29,7 @@ public class ProxyClient extends ProxyCommon {
 
 		EventHandlerClient.register();
 		EventHandlerClientLib.register();
+        ModelLoaderRegistry.registerLoader(LayeredTemplateModel.Loader.INSTANCE);
 	}
 
 	@Override

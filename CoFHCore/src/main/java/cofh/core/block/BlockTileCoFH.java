@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,6 +27,8 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
+import static cofh.lib.util.Constants.MODEL_PROPERTIES;
+
 public abstract class BlockTileCoFH extends Block implements IDismantleable {
 
 	public BlockTileCoFH() {
@@ -45,6 +48,19 @@ public abstract class BlockTileCoFH extends Block implements IDismantleable {
 		setHardness(3.0F);
 		setResistance(5.0F);
 		setSoundType(SoundType.METAL);
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+
+		BlockStateContainer.Builder builder = new BlockStateContainer.Builder(this);
+		addProperties(builder);
+		return builder.build();
+	}
+
+	protected void addProperties(BlockStateContainer.Builder builder) {
+
+		builder.add(MODEL_PROPERTIES);
 	}
 
 	@Override

@@ -23,6 +23,9 @@ public class Constants {
 	public static final PropertyBool ACTIVE = PropertyBool.create("active");
 	public static final PropertyDirection FACING_ALL = PropertyDirection.create("facing");
 	public static final PropertyDirection FACING_HORIZONTAL = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+
+	@Deprecated//Remove in 1.13, UnlistedProperties have been changed up.
+    public static final UnlistedMapProperty<String, String> MODEL_PROPERTIES = new UnlistedMapProperty<>("model_properties");
 	// endregion
 
 	// region MOD IDS

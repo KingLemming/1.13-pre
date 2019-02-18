@@ -21,12 +21,18 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.util.FakePlayer;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
+
+import static cofh.lib.util.Constants.MODEL_PROPERTIES;
 
 public abstract class TileCoFH extends TileEntity implements ITileCallback {
 
+	private final Map<String, String> modelProperties = new HashMap<>();
 	protected IBlockState blockState;
 
 	@Override
@@ -125,6 +131,10 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 	}
 
 	protected IBlockState getExtendedState(IBlockState state) {
+
+		if (state instanceof IExtendedBlockState) {
+			((IExtendedBlockState) state).withProperty(MODEL_PROPERTIES, modelProperties);
+		}
 
 		return state;
 	}
@@ -254,6 +264,13 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 
 	}
 	// endregion
+
+	//region MODELS
+	public void setModelProperty(String key, String value) {
+
+		modelProperties.put(key, value);
+	}
+	//endregion
 
 	// region ITileCallback
 	@Override

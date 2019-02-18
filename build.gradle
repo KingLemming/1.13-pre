@@ -1,0 +1,69 @@
+//Super basic buildscript for WorkspaceTool to get the gist of whats going on.
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'maven'
+
+group = "cofh"
+archivesBaseName = "Pre-1.13"
+
+targetCompatibility = "1.8"
+sourceCompatibility = "1.8"
+
+version = "1.0.0"
+
+minecraft {
+    version = "1.12.2-14.23.4.2718"
+    mappings = 'snapshot_20171003'
+    runDir = "run"
+    replace '${mod_version}', project.config.mod_version
+    makeObfSourceJar = false
+}
+
+repositories {
+    maven { url "http://dvs1.progwml6.com/files/maven" }
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    compile "mezz.jei:jei_1.12.2:4.14.4.+"
+}
+
+def modules = [
+        "CoFHCore",
+        "CoFHWorld",
+        "Encsorcellment",
+        "Enstoragement",
+        "Orbulation",
+        "Quartermastery",
+        "RedstoneArsenal",
+        "ThermalAtomics",
+        "ThermalCultivation",
+        "ThermalDynamics",
+        "ThermalExpansion",
+        "ThermalFoundation",
+        "ThermalInnovation",
+        "ThermalLocomotion",
+        "ThermalSeries",
+        "CodeChickenLib"
+]
+
+sourceSets {
+    modules.each {
+        main.java.srcDir file("$it/src/main/java")
+        main.resources.srcDir file("$it/src/main/resources")
+        api.java.srcDir file("$it/src/api/java")
+    }
+
+}

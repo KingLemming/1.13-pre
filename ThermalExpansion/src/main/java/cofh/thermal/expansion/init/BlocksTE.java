@@ -21,7 +21,7 @@ public class BlocksTE {
 	// region REGISTRATION
 	public static void registerBlocks() {
 
-		machineFurnace = registerBlock("machine_furnace", new ItemBlockCoFH(new BlockMachine(FURNACE), GROUP_MACHINES));
+		machineFurnace = registerBlock("machine_furnace", new ItemBlockCoFH(new BlockMachine(FURNACE)));
 		machinePulverizer = registerBlock("machine_pulverizer", new ItemBlockCoFH(new BlockMachine(PULVERIZER), GROUP_MACHINES));
 		machineSawmill = registerBlock("machine_sawmill", new ItemBlockCoFH(new BlockMachine(SAWMILL), GROUP_MACHINES));
 		machineCrucible = registerBlock("machine_crucible", new ItemBlockCoFH(new BlockMachine(CRUCIBLE), GROUP_MACHINES));

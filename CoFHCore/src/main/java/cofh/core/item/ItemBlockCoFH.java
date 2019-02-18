@@ -81,7 +81,7 @@ public class ItemBlockCoFH extends ItemBlock implements IModelRegister {
 	public void registerModel() {
 
 		if (group.isEmpty()) {
-			ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.block.getRegistryName(), "normal"));
+			ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.block.getRegistryName(), "inventory"));
 		} else {
 			ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.block.getRegistryName().getResourceDomain() + ":" + group + "/" + this.block.getRegistryName().getResourcePath(), "normal"));
 		}

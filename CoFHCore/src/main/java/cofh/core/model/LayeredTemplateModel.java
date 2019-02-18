@@ -1,0 +1,976 @@
+package cofh.core.model;
+
+import codechicken.lib.bakedmodel.SimpleBakedModel;
+import codechicken.lib.bakedmodel.*;
+import codechicken.lib.bakedmodel.properties.IModelProperties;
+import codechicken.lib.bakedmodel.properties.ModelProperties;
+import cofh.lib.util.Constants;
+import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableMap;
+import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.*;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.VertexFormat;
+import net.minecraft.client.resources.IResourceManager;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.*;
+import net.minecraftforge.common.model.IModelState;
+import net.minecraftforge.common.model.TRSRTransformation;
+import net.minecraftforge.common.property.IExtendedBlockState;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import static java.util.Locale.ROOT;
+
+/**
+ * Created by covers1624 on 19/01/19.
+ */
+public class LayeredTemplateModel implements IModel {
+
+    private static final Logger logger = LogManager.getLogger("LayeredTemplateModel");
+    private static final Joiner colonJoiner = Joiner.on(":");
+
+    private static final Class<? extends IModel> c_FancyMissingModel;
+    private static final Constructor<? extends IModel> ctr_FancyMissingModel;
+
+    private static final Class<?> c_VanillaLoader;
+    private static final Method m_getLoader;
+    private static final Field f_instance;
+
+    private static final Class<?> c_VanillaModelWrapper;
+    private static final Field f_VMW_model;
+
+    static {
+        try {
+            //noinspection unchecked
+            c_FancyMissingModel = (Class<? extends IModel>) Class.forName("net.minecraftforge.client.model.FancyMissingModel");
+            ctr_FancyMissingModel = c_FancyMissingModel.getDeclaredConstructor(IModel.class, String.class);
+
+            c_VanillaLoader = Class.forName("net.minecraftforge.client.model.ModelLoader$VanillaLoader");
+            m_getLoader = c_VanillaLoader.getDeclaredMethod("getLoader");
+            f_instance = c_VanillaLoader.getDeclaredField("INSTANCE");
+
+            c_VanillaModelWrapper = Class.forName("net.minecraftforge.client.model.ModelLoader$VanillaModelWrapper");
+            f_VMW_model = c_VanillaModelWrapper.getDeclaredField("model");
+
+            m_getLoader.setAccessible(true);
+            f_instance.setAccessible(true);
+            f_VMW_model.setAccessible(true);
+
+        } catch (ClassNotFoundException | NoSuchMethodException | NoSuchFieldException e) {
+            throw new RuntimeException("Unable to reflect FancyMissingModel", e);
+        }
+    }
+
+    private final IModelProperties modelProperties;
+    private final boolean isUVLock;
+    private final ResourceLocation template;
+    private final List<KickEntry> kickList;
+    private final List<TintEntry> tintList;
+    private final List<TextureEntry> textures;
+
+    private IModel resolvedTemplate = null;
+
+    //Default
+    public LayeredTemplateModel() {
+        this(ModelProperties.DEFAULT_BLOCK, false, null, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    }
+
+    //Clone.
+    private LayeredTemplateModel(IModelProperties modelProperties, boolean isUVLock, ResourceLocation template, List<KickEntry> kickList, List<TintEntry> tintList, List<TextureEntry> textures) {
+        this.modelProperties = modelProperties;
+        this.isUVLock = isUVLock;
+        this.template = template;
+        this.kickList = kickList;
+        this.tintList = tintList;
+        this.textures = textures;
+    }
+
+    //Specific clone.
+    private LayeredTemplateModel(LayeredTemplateModel other, IModelProperties properties) {
+        this(properties, other.isUVLock, other.template, other.kickList, other.tintList, other.textures);
+    }
+
+    private LayeredTemplateModel(LayeredTemplateModel other, boolean isUVLock) {
+        this(other.modelProperties, isUVLock, other.template, other.kickList, other.tintList, other.textures);
+    }
+
+    public LayeredTemplateModel(LayeredTemplateModel other, ResourceLocation template, List<KickEntry> kickList, List<TintEntry> tintList) {
+        this(other.modelProperties, other.isUVLock, template, kickList, tintList, other.textures);
+    }
+
+    public LayeredTemplateModel(LayeredTemplateModel other, List<TextureEntry> textures) {
+        this(other.modelProperties, other.isUVLock, other.template, other.kickList, other.tintList, textures);
+    }
+
+    @Override
+    public Collection<ResourceLocation> getDependencies() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public Collection<ResourceLocation> getTextures() {
+        List<ResourceLocation> textures = new ArrayList<>();
+        this.textures.stream().filter(TextureEntry.IS_TEXTURE).map(e -> e.texture).forEach(textures::add);
+        if (template != null) {
+            textures.addAll(getTemplate().getTextures());
+        }
+        return textures;
+    }
+
+    @Override
+    public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> texFunc) {
+        IModelProperties modelProps = ModelProperties.builder(modelProperties).withState(state).build();
+        //If the model has any properties for this variant, add a simple model for dynamic baking.
+        if (textures.stream().anyMatch(TextureEntry.IS_PROPERTY)) {
+            List<String> validProps = textures.stream().filter(TextureEntry.IS_PROPERTY).map(e -> e.property).collect(Collectors.toList());//Add all texture props.
+            validProps.addAll(tintList.stream().map(e -> e.tintSourceProp).collect(Collectors.toList()));//Add all tint props.
+            //Anon model class for dynamically baking.
+            return new BakedPropertiesModel(modelProps) {
+                //This is thrown away when models are reloaded.
+                private Map<String, IBakedModel> bakedPropertyCache = new HashMap<>();
+                //Errors are a hard lock on the model.
+                private IBakedModel error = null;
+
+                @Override
+                public List<BakedQuad> getQuads(@Nullable IBlockState stateIn, @Nullable EnumFacing side, long rand) {
+                    IBakedModel retModel = error;//Short circuit everything if we have an error.
+                    if (retModel == null && !(stateIn instanceof IExtendedBlockState)) {
+                        //We arent an IExendedBlockstate, dev forgot stuff.
+                        retModel = error = makeFancyMissingModel("Blockstate is not an IExtendedBlockstate").bake(state, format, texFunc);
+                    }
+
+                    IExtendedBlockState extendedState = (IExtendedBlockState) stateIn;
+                    if (retModel == null && !extendedState.getUnlistedProperties().containsKey(Constants.MODEL_PROPERTIES)) {
+                        //Dev also forgot stuff, we dont have MODEL_PROPERTIES property.
+                        retModel = error = makeFancyMissingModel("Blockstate does not have MODEL_PROPERTIES UnlistedProperty.").bake(state, format, texFunc);
+                    }
+
+                    Map<String, String> modelProperties = extendedState.getValue(Constants.MODEL_PROPERTIES);
+                    if (retModel == null && !modelProperties.keySet().containsAll(validProps)) {
+                        //Ohes no, we are missing some properties.
+                        StringBuilder builder = new StringBuilder("Missing properties: ");
+                        for (String prop : validProps) {
+                            if (!modelProperties.containsKey(prop)) {
+                                builder.append("'").append(prop).append("' ");
+                            }
+                        }
+                        retModel = error = makeFancyMissingModel(builder.toString()).bake(state, format, texFunc);
+                    }
+
+                    if (retModel == null) {
+                        //Everything seems to be in order, Gen cache key and compute if absent.
+                        StringBuilder keyBuilder = new StringBuilder();
+                        boolean first = true;
+                        for (String prop : validProps) {
+                            if (!first) {
+                                keyBuilder.append(",");
+                            }
+                            first = false;
+                            keyBuilder.append(prop).append("=").append(modelProperties.get(prop));
+                        }
+                        String cacheExt = modelProperties.get("model.cache.ext");
+                        if (cacheExt != null) {
+                            keyBuilder.append(",model.cache.ext=").append(cacheExt);
+                        }
+                        retModel = bakedPropertyCache.computeIfAbsent(keyBuilder.toString(), e -> bakeImpl(modelProps, state, format, texFunc, modelProperties));
+                    }
+                    return retModel.getQuads(stateIn, side, rand);
+                }
+            };
+        } else {//Doesn't have any properties, just bake it normally.
+            return bakeImpl(modelProps, state, format, texFunc, Collections.emptyMap());
+        }
+    }
+
+    /**
+     * Attempts to resolve any TextureEntry properties then bake the model.
+     * This will always return a model, but may return a FancyMissingModel if an error occurs.
+     *
+     * @param modelProps The IModelProperties.
+     * @param state      The IModelState.
+     * @param format     The VertexFormat.
+     * @param texFunc    The texture lookup function.
+     * @param properties The Properties.
+     * @return The baked model.
+     */
+    public IBakedModel bakeImpl(IModelProperties modelProps, IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> texFunc, Map<String, String> properties) {
+        //Resolve our textures.
+        List<TextureEntry> resolvedTextures = textures.stream()//
+                .map(e -> e.resolve(properties))//
+                .collect(Collectors.toList());
+        //We haven't resolved all textures. Make a FancyMissingModel for it.
+        if (resolvedTextures.stream().anyMatch(TextureEntry.IS_PROPERTY)) {
+            StringBuilder builder = new StringBuilder("Unresolved Properties: ");
+            resolvedTextures.stream().filter(TextureEntry.IS_PROPERTY).forEach(e -> builder.append(e.property));
+            return makeFancyMissingModel(builder.toString()).bake(state, format, texFunc);
+        }
+        //Collect and sort our layerIndexes.
+        List<String> sortedLayerIndexes = resolvedTextures.stream()//
+                .map(e -> e.layerIndex)//
+                .distinct()//
+                .sorted(Comparator.comparingInt(e -> Integer.parseUnsignedInt(e.replace("layer", ""))))//
+                .collect(Collectors.toList());
+        //Collect all used BlockRenderLayers
+        List<BlockRenderLayer> validRenderLayers = resolvedTextures.stream()//
+                .map(e -> e.renderLayer)//
+                .distinct()//
+                .collect(Collectors.toList());
+        //Master final model map.
+        Map<BlockRenderLayer, IBakedModel> renderLayerModels = new EnumMap<>(BlockRenderLayer.class);
+        for (BlockRenderLayer renderLayer : validRenderLayers) {
+            List<IBakedModel> layerModels = new ArrayList<>();
+            for (String layerIndex : sortedLayerIndexes) {
+                //Build the textures map for the template.
+                ImmutableMap.Builder<String, String> textures = ImmutableMap.builder();
+                resolvedTextures.stream().filter(e -> e.equals(layerIndex, renderLayer)).forEach(e -> {
+                    textures.put(colonJoiner.join(layerIndex, e.name), e.texture.toString());
+                    textures.put(colonJoiner.join(layerIndex, renderLayer.name().toLowerCase(ROOT), e.name), e.texture.toString());
+                });
+                //Build the custom data for the template.
+                ImmutableMap.Builder<String, String> customData = ImmutableMap.builder();
+                //Give it the layer index.
+                customData.put("layerIndex", layerIndex);
+                //Give it the first kick that matches for this layerIndex + renderLayer.
+                kickList.stream()//
+                        .filter(e -> e.equals(layerIndex, renderLayer))//
+                        .findFirst()//
+                        .ifPresent(e -> customData.put("kick", Float.toString(e.kick)));
+                //Map unresolved texture properties to their tint counterpart and pass the values to the template.
+                this.textures.stream()//
+                        .filter(TextureEntry.IS_PROPERTY)//
+                        .filter(e -> e.equals(layerIndex, renderLayer))//
+                        .forEach(e -> {//
+                            Optional<String> tintOpt = tintList.stream()//
+                                    .filter(e2 -> e2.tintTargetProp.equals(e.property))//
+                                    .map(e2 -> e2.tintSourceProp)//
+                                    .findFirst();
+                            tintOpt.ifPresent(prop -> {
+                                customData.put("tint:#" + colonJoiner.join(layerIndex, e.name), properties.get(prop));
+                                customData.put("tint:#" + colonJoiner.join(layerIndex, renderLayer.name().toLowerCase(ROOT), e.name), properties.get(prop));
+                            });
+                        });
+
+                //Setup and bake the model.
+                IModel model = getTemplate()//
+                        .smoothLighting(modelProps.isAO())//
+                        .gui3d(modelProps.isGui3D())//
+                        .uvlock(isUVLock)//
+                        .process(customData.build())//
+                        .retexture(textures.build());
+                layerModels.add(model.bake(state, format, texFunc));
+            }
+            renderLayerModels.put(renderLayer, new SimpleMultiModel(modelProps, layerModels));
+        }
+        return new LayeredWrappedModel(modelProps, renderLayerModels);
+    }
+
+    @Override
+    public IModel smoothLighting(boolean value) {
+        if (modelProperties.isAO() == value) {
+            return this;
+        }
+        ModelProperties.Builder props = ModelProperties.builder(modelProperties)//
+                .withAO(value);
+        return new LayeredTemplateModel(this, props.build());
+    }
+
+    @Override
+    public IModel gui3d(boolean value) {
+        if (modelProperties.isGui3D() == value) {
+            return this;
+        }
+        ModelProperties.Builder props = ModelProperties.builder(modelProperties)//
+                .withGui3D(value);
+        return new LayeredTemplateModel(this, props.build());
+    }
+
+    @Override
+    public IModel uvlock(boolean value) {
+        if (isUVLock == value) {
+            return this;
+        }
+        return new LayeredTemplateModel(this, value);
+    }
+
+    @Override
+    public IModel retexture(ImmutableMap<String, String> textures) {
+        List<TextureEntry> newTex = new ArrayList<>(this.textures);
+        for (Map.Entry<String, String> entry : textures.entrySet()) {
+            if (entry.getValue().isEmpty()) {
+                newTex.removeIf(e -> e.key.equals(entry.getKey()));
+            } else {
+                newTex.add(TextureEntry.parse(entry.getKey(), entry.getValue()));
+            }
+        }
+        return new LayeredTemplateModel(this, newTex);
+    }
+
+    @Override
+    public IModel process(ImmutableMap<String, String> _data) {
+        Map<String, String> customData = new HashMap<>();
+        //Thanks forge, Passes a JsonPrimitive to us using JsonElement.toString().
+        //Meaning it gets converted back to valid json, hence has quotes around it.
+        //We have to copy and replace all quotes with nothing, This also assumes that
+        ///We will only ever be passed Strings, in the future we may need to change this up..
+        _data.forEach((k, v) -> customData.put(k, v.replace("\"", "")));
+        String template = customData.get("template");
+        if (template == null) {
+            throw new RuntimeException("Null template.");
+        }
+        List<KickEntry> kickList = new ArrayList<>(this.kickList);
+        List<TintEntry> tintList = new ArrayList<>(this.tintList);
+        customData.forEach((key, value) -> {
+            if (key.endsWith("kick")) {
+                String kickKey = key.replace("kick", "");
+                if (kickKey.endsWith(":")) {
+                    kickKey = kickKey.substring(0, kickKey.length() - 1);
+                }
+                String[] segs = kickKey.split(":");
+                if (segs.length > 2) {
+                    throw new RuntimeException("Invalid kick key. " + kickKey);
+                }
+                String layerIndex = segs[0];
+                BlockRenderLayer renderLayer = segs.length > 1 ? parseLayer(segs[1]) : null;
+                //Always remove.
+                kickList.removeIf(e -> e.equals(layerIndex, renderLayer));
+                if (!value.isEmpty()) {
+                    //Add new kick if the value is not empty.
+                    kickList.add(new KickEntry(layerIndex, renderLayer, Float.parseFloat(value)));
+                }
+            }
+            if (key.startsWith("tint:")) {
+                String targetProp = key.replace("tint:", "");
+                //Same comments as kick parsing.
+                tintList.removeIf(e -> e.tintTargetProp.equals(targetProp));
+                if (!value.isEmpty()) {
+                    tintList.add(new TintEntry(targetProp, value));
+                }
+            }
+        });
+        return new LayeredTemplateModel(this, new ResourceLocation(template), kickList, tintList);
+    }
+
+    private IModel getTemplate() {
+        if (resolvedTemplate == null) {
+            resolvedTemplate = ModelBlockWrapper.load(template);
+        }
+        return resolvedTemplate;
+    }
+
+    /**
+     * Parses a BlockRenderLayer from a string.
+     * Input must be the enum name but lowercase.
+     *
+     * @param name The name.
+     * @return The layer.
+     * TODO, Utils class?
+     */
+    private static BlockRenderLayer parseLayer(String name) {
+        for (BlockRenderLayer layer : BlockRenderLayer.values()) {
+            if (layer.name().toLowerCase(ROOT).equals(name)) {
+                return layer;
+            }
+        }
+        throw new IllegalArgumentException("Unknown render layer '" + name + "'.");
+    }
+
+    /**
+     * Makes a FancyMissingModel, uses reflection to access the constructor of FancyMissingModel.
+     *
+     * @param message The message to display.
+     * @return The model.
+     */
+    private static IModel makeFancyMissingModel(String message) {
+        try {
+            return ctr_FancyMissingModel.newInstance(ModelLoaderRegistry.getMissingModel(), message);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException("Unable to create FancyMissingModel.");
+        }
+    }
+
+    /**
+     * Simple helper to invoke methods without exceptions.
+     *
+     * @param method   The method.
+     * @param instance The instance to call it on.
+     * @param args     The arguments.
+     * @return If the method returns anything.
+     * TODO, Helpers? or CCL reflection?
+     */
+    @SuppressWarnings ("unchecked")
+    public static <T> T invokeMethod(Method method, Object instance, Object... args) {
+        try {
+            return (T) method.invoke(instance, args);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Simple helper to get a field without exceptions.
+     *
+     * @param field    The field.
+     * @param instance The instance to get the field from.
+     * @return The value in the field.
+     * TODO, Helpers? or CCL reflection?
+     */
+    @SuppressWarnings ("unchecked")
+    private static <T> T getField(Field field, Object instance) {
+        try {
+            return (T) field.get(instance);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * The ICustomModelLoader for LayeredTemplateModel.
+     */
+    public static class Loader implements ICustomModelLoader {
+
+        public static final Loader INSTANCE = new Loader();
+
+        private Loader() {
+        }
+
+        @Override
+        public void onResourceManagerReload(IResourceManager resourceManager) {
+            ModelBlockWrapper.clearCache();
+        }
+
+        @Override
+        public boolean accepts(ResourceLocation modelLocation) {
+            String path = modelLocation.getResourcePath();
+            return modelLocation.getResourceDomain().equals("cofh") && (path.equals("layered_template") || path.equals("models/block/layered_template"));
+        }
+
+        @Override
+        public IModel loadModel(ResourceLocation modelLocation) throws Exception {
+            return new LayeredTemplateModel();
+        }
+    }
+
+    /**
+     * A Wrapper around a ModelBlock.
+     * Heavily based off {@link ModelLoader.VanillaModelWrapper},
+     * but supports our tinting, kicking, and removal of quads that
+     * did not have a texture resolved, forge would instead resolve to missing sprite.
+     */
+    public static class ModelBlockWrapper implements IModel {
+
+        public static final Map<ResourceLocation, IModel> cache = new HashMap<>();
+        private static final ThreadLocal<Quad> transformerQuads = ThreadLocal.withInitial(Quad::new);
+
+        private static ModelLoader loader;
+
+        private final ModelBlock model;
+        private final boolean uvLock;
+        private final OptionalDouble kick;
+        private final Object2IntMap<String> tints;
+        private final int layerIndex;
+
+        public ModelBlockWrapper(ModelBlock model, boolean uvLock, OptionalDouble kick, Object2IntMap<String> tints, int layerIndex) {
+            this.model = model;
+            this.uvLock = uvLock;
+            this.kick = kick;
+            this.tints = tints;
+            this.layerIndex = layerIndex;
+        }
+
+        /**
+         * Bakes the _basically_ the same way Forge does for VanillaModelWrapper.
+         */
+        @Override
+        public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> texFunc) {
+            //Build the composite Item Transform.
+            Map<ItemCameraTransforms.TransformType, TRSRTransformation> tMap = new EnumMap<>(ItemCameraTransforms.TransformType.class);
+            tMap.putAll(PerspectiveMapWrapper.getTransforms(model.getAllTransforms()));
+            tMap.putAll(PerspectiveMapWrapper.getTransforms(state));
+            IModelState newState = new SimpleModelState(ImmutableMap.copyOf(tMap));
+
+            List<BakedQuad> generalQuads = new ArrayList<>();
+            Map<EnumFacing, List<BakedQuad>> faceQuads = new HashMap<>();
+
+            //Get the default transformation for the provided state.
+            //This will usually be a ModelRotation.
+            TRSRTransformation baseState = state.apply(Optional.empty()).orElse(TRSRTransformation.identity());
+            FaceBakery bakery = getLoader().faceBakery;
+            for (BlockPart part : model.getElements()) {
+                //Try and resolve the texture for the partFace
+                part.mapFaces.forEach((face, partFace) -> tryResolve(model, partFace.texture)//
+                        .map(ResourceLocation::new)//
+                        .map(texFunc)//
+                        .ifPresent(tex -> {
+                            //Yayyy, tell the bakery to make a quad!
+                            BakedQuad quad = bakery.makeBakedQuad(part.positionFrom, part.positionTo, partFace, tex, face, baseState, part.partRotation, uvLock, part.shade);
+
+                            //Use parts of CCL's BakedPipeline to transform the quads.
+                            CachedFormat fmt = CachedFormat.lookup(quad.getFormat());
+                            Quad transformerQuad = transformerQuads.get();//This is a ThreadLocal since Quad is a shared Mutable state. Someone may thread baking(\o/).
+                            transformerQuad.reset(fmt);//Reset quad to the given format.
+                            quad.pipe(transformerQuad);//Pipe the BakedQuad into the transformerQuad.
+                            if (kick.isPresent()) {//If we have a kick, apply it.
+                                for (Quad.Vertex vertex : transformerQuad.vertices) {
+                                    for (int i = 0; i < 3; i++) {
+                                        vertex.vec[i] += vertex.normal[i] * kick.getAsDouble();
+                                    }
+                                }
+                            }//If we have a tint, apply it.
+                            if (tints.containsKey(partFace.texture)) {
+                                int tint = tints.getInt(partFace.texture);
+                                //TODO, Complain if there is no color?
+                                if (fmt.hasColor) {
+                                    float r = (tint >> 0x10 & 0xFF) / 255F;
+                                    float g = (tint >> 0x08 & 0xFF) / 255F;
+                                    float b = (tint & 0xFF) / 255F;
+                                    for (Quad.Vertex vertex : transformerQuad.vertices) {
+                                        vertex.color[0] *= r;
+                                        vertex.color[1] *= g;
+                                        vertex.color[2] *= b;
+                                    }
+                                }
+                            }
+                            //Set the tintIndex.
+                            transformerQuad.tintIndex = layerIndex;
+                            //Bake the quad back to an UnpackedBakedQuad, to _mildly_ speed up the lighter.
+                            quad = transformerQuad.bakeUnpacked();
+
+                            //Decide where to put the quad.
+                            if (partFace.cullFace == null || !TRSRTransformation.isInteger(baseState.getMatrix())) {
+                                generalQuads.add(quad);
+                            } else {
+                                faceQuads.computeIfAbsent(baseState.rotate(partFace.cullFace), e -> new ArrayList<>()).add(quad);
+                            }
+                        }));
+            }
+            //Build the item model state.
+            IModelProperties modelProps = ModelProperties.builder()//
+                    .withAO(model.isAmbientOcclusion())//
+                    .withGui3D(model.isGui3d())//
+                    .withState(newState)//
+                    .build();
+
+            return new SimpleBakedModel(modelProps, faceQuads, generalQuads);
+        }
+
+        @Override
+        public IModel process(ImmutableMap<String, String> customData) {
+            String kickVal = customData.get("kick");
+            String layerVal = customData.get("layerIndex");
+            OptionalInt layerIndex = layerVal == null ? OptionalInt.empty() : OptionalInt.of(Integer.parseUnsignedInt(layerVal.replace("layer", "")));
+            OptionalDouble kick = kickVal == null ? OptionalDouble.empty() : OptionalDouble.of(Float.parseFloat(kickVal));
+            Object2IntMap<String> tints = new Object2IntArrayMap<>(this.tints);
+            customData.forEach((k, v) -> {
+                if (k.startsWith("tint:")) {
+                    String tintKey = k.replace("tint:", "");
+                    tints.put(tintKey, Integer.parseInt(v));
+                }
+            });
+            return new ModelBlockWrapper(model, uvLock, kick, tints, layerIndex.orElse(-1));
+        }
+
+        @Override//Clone of forge's impl.
+        public IModel retexture(ImmutableMap<String, String> textures) {
+            if (textures.isEmpty()) {
+                return this;
+            }
+            List<BlockPart> elements = new ArrayList<>();
+            model.getElements().forEach(e -> elements.add(new BlockPart(e.positionFrom, e.positionTo, new HashMap<>(e.mapFaces), e.partRotation, e.shade)));
+            ModelBlock newModel = new ModelBlock(model.getParentLocation(), elements, new HashMap<>(model.textures), model.isAmbientOcclusion(), model.isGui3d(), model.getAllTransforms(), new ArrayList<>(model.getOverrides()));
+            newModel.name = model.name;
+            newModel.parent = model.parent;
+
+            Set<String> removed = new HashSet<>();
+            textures.forEach((k, v) -> {
+                if (v.equals("")) {
+                    removed.add(k);
+                    newModel.textures.remove(k);
+                } else {
+                    newModel.textures.put(k, v);
+                }
+            });
+            Map<String, String> remapped = new HashMap<>();
+            textures.forEach((k, v) -> {
+                if (v.startsWith("#")) {
+                    String k2 = v.substring(1);
+                    if (newModel.textures.containsKey(k2)) {
+                        remapped.put(k, newModel.textures.get(k2));
+                    }
+                }
+            });
+            newModel.textures.putAll(remapped);
+            newModel.getElements().forEach(e -> e.mapFaces.values().removeIf(v -> removed.contains(v.texture)));
+            return new ModelBlockWrapper(newModel, uvLock, kick, tints, layerIndex);
+        }
+
+        @Override
+        public IModel smoothLighting(boolean value) {
+            if (model.isAmbientOcclusion() == value) {
+                return this;
+            }
+            ModelBlock newModel = new ModelBlock(model.getParentLocation(), model.getElements(), new HashMap<>(model.textures), value, model.isGui3d(), model.getAllTransforms(), new ArrayList<>(model.getOverrides()));
+            newModel.name = model.name;
+            newModel.parent = model.parent;
+            return new ModelBlockWrapper(newModel, uvLock, kick, tints, layerIndex);
+        }
+
+        @Override
+        public IModel gui3d(boolean value) {
+            if (model.isGui3d() == value) {
+                return this;
+            }
+            ModelBlock newModel = new ModelBlock(model.getParentLocation(), model.getElements(), new HashMap<>(model.textures), model.isAmbientOcclusion(), value, model.getAllTransforms(), new ArrayList<>(model.getOverrides()));
+            newModel.name = model.name;
+            newModel.parent = model.parent;
+            return new ModelBlockWrapper(newModel, uvLock, kick, tints, layerIndex);
+        }
+
+        @Override
+        public IModel uvlock(boolean value) {
+            if (uvLock == value) {
+                return this;
+            }
+            return new ModelBlockWrapper(model, value, kick, tints, layerIndex);
+        }
+
+        /**
+         * Loads a ModelBlockWrapper, may return MissingModel.
+         * Unlike forge, we resolve the parent hierarchy immediately.
+         *
+         * @param model The ResourceLocation for the model, will have 'model/' pre pended to the path.
+         * @return The IModel.
+         */
+        public static IModel load(ResourceLocation model) {
+            return cache.computeIfAbsent(model, e -> {
+                try {
+                    ModelBlock loadedModel = loadModel(ModelLoaderRegistry.getActualLocation(model));
+                    ModelBlockWrapper wrapper = new ModelBlockWrapper(loadedModel, false, OptionalDouble.empty(), new Object2IntArrayMap<>(), -1);
+                    if (loadedModel.getParentLocation() != null) {
+                        if (loadedModel.getParentLocation().getResourcePath().equals("builtin/generated")) {
+                            loadedModel.parent = ModelLoader.MODEL_GENERATED;
+                        } else {
+                            IModel parent = load(loadedModel.getParentLocation());
+                            if (parent instanceof ModelBlockWrapper) {
+                                loadedModel.parent = ((ModelBlockWrapper) parent).model;
+                            } else if (c_VanillaModelWrapper.isAssignableFrom(parent.getClass())) {
+                                loadedModel.parent = getField(f_VMW_model, parent);
+                            } else {
+                                logger.error("Non vanilla parent model for '{}'. Parent: '{}'.", model, loadedModel.getParentLocation());
+                            }
+                        }
+                    }
+                    return wrapper;
+                } catch (IOException ex) {
+                    //TODO, Hook into Forge's Model error map?
+                    logger.error("Failed to load model '{}'.", model, ex);
+                    return ModelLoaderRegistry.getMissingModel();
+                }
+            });
+        }
+
+        private static Optional<String> tryResolve(ModelBlock model, String name) {
+            if (name.charAt(0) != '#') {
+                name = '#' + name;
+            }
+            return tryResolve(model, name, new ModelBlock.Bookkeep(model));
+        }
+
+        //Re implementation of ModelBlock.resolveTextureName, but allows us to distinguish between explicit missing texture
+        //and unresolved.
+        private static Optional<String> tryResolve(ModelBlock model, String name, ModelBlock.Bookkeep bookkeep) {
+            if (name.charAt(0) == '#') {
+                if (model == bookkeep.modelExt) {
+                    logger.warn("Unable to resolved texture due to upward reference: {} in {}", name, model.name);
+                    return Optional.empty();
+                }
+                Optional<String> s = Optional.ofNullable(model.textures.get(name.substring(1)));
+                if (!s.isPresent() && model.hasParent()) {
+                    s = tryResolve(model.parent, name, bookkeep);
+                }
+                bookkeep.modelExt = model;
+                if (s.isPresent() && s.get().charAt(0) == '#') {
+                    s = tryResolve(bookkeep.model, s.get(), bookkeep);
+                }
+                if (s.isPresent() && s.get().charAt(0) == '#') {
+                    return Optional.empty();
+                }
+                return s;
+            } else {
+                return Optional.of(name);
+            }
+        }
+
+        /**
+         * Used ModeLoader to resolve the ModelBLock.
+         *
+         * @param model The model to resolve.
+         * @return The ModelBlock
+         * @throws IOException idk, shit fucked.
+         */
+        private static ModelBlock loadModel(ResourceLocation model) throws IOException {
+            return getLoader().loadModel(model);
+        }
+
+        /**
+         * Whilst we can retrieve instances of ModelLoader from the ModelBakeEvent
+         * that is fired _after_ model loading, so we pull it from
+         * ModelLoader$VanillaLoader.INSTANCE via reflection and cache it.
+         * Whilst this can _technically_ return null, it never will unless someone
+         * severely fucks with model loading and calls us before Forge has initialized.
+         *
+         * @return The ModelLoader.
+         */
+        public static ModelLoader getLoader() {
+            if (loader == null) {
+                loader = invokeMethod(m_getLoader, getField(f_instance, null));
+            }
+            return loader;
+        }
+
+        /**
+         * Clear our ModelBlock loading cache and ModelLoader instance.
+         */
+        public static void clearCache() {
+            cache.clear();
+            loader = null;
+        }
+    }
+
+    /**
+     * Simple tuple for holding tint target -> source mapping.
+     */
+    public static class TintEntry {
+
+        @Nonnull
+        public final String tintTargetProp;
+        @Nonnull
+        public final String tintSourceProp;
+
+        public TintEntry(@Nonnull String tintTargetProp, @Nonnull String tintSourceProp) {
+            this.tintTargetProp = tintTargetProp;
+            this.tintSourceProp = tintSourceProp;
+        }
+
+        @Override
+        public boolean equals(@Nullable Object obj) {
+            if (super.equals(obj)) {
+                return true;
+            }
+            if (!(obj instanceof TintEntry)) {
+                return false;
+            }
+            TintEntry other = (TintEntry) obj;
+            return other.tintTargetProp.equals(tintTargetProp) && other.tintSourceProp.equals(tintSourceProp);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = 31 * result + tintTargetProp.hashCode();
+            result = 31 * result + tintSourceProp.hashCode();
+            return result;
+        }
+    }
+
+    /**
+     * Simple triple for holding a kick entry.
+     */
+    public static class KickEntry {
+
+        @Nonnull
+        public final String layerIndex;
+        @Nullable
+        public final BlockRenderLayer renderLayer;
+        public final float kick;
+
+        public KickEntry(@Nonnull String layerIndex, @Nullable BlockRenderLayer renderLayer, float kick) {
+            this.layerIndex = layerIndex;
+            this.renderLayer = renderLayer;
+            this.kick = kick;
+        }
+
+        /**
+         * Checks if this KickEntry can be applied to the provided layerIndex and renderLayer.
+         *
+         * @param layerIndex  The layerIndex.
+         * @param renderLayer The renderLayer
+         * @return If this KickEntry is applicable.
+         */
+        public boolean equals(@Nonnull String layerIndex, @Nullable BlockRenderLayer renderLayer) {
+            return this.layerIndex.equals(layerIndex) && Objects.equals(this.renderLayer, renderLayer);
+        }
+
+        @Override
+        public boolean equals(@Nullable Object obj) {
+            if (super.equals(obj)) {
+                return true;
+            }
+            if (!(obj instanceof KickEntry)) {
+                return false;
+            }
+            KickEntry other = (KickEntry) obj;
+            return other.layerIndex.equals(layerIndex)//
+                    && Objects.equals(other.renderLayer, renderLayer)//
+                    && other.kick == kick;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = 31 * result + layerIndex.hashCode();
+            result = 31 * result + (renderLayer != null ? renderLayer.hashCode() : 0);
+            result = 31 * result + Float.floatToIntBits(kick);
+            return result;
+        }
+    }
+
+    /**
+     * A resolved or property Texture.
+     * In the case of a property, will be dynamically evaluated and baked.
+     */
+    private static class TextureEntry {
+
+        public static final Predicate<TextureEntry> IS_PROPERTY = e -> e.type == EntryType.PROPERTY;
+        public static final Predicate<TextureEntry> IS_TEXTURE = e -> e.type == EntryType.TEXTURE;
+
+        @Nonnull
+        public final String key;
+        @Nonnull
+        public final String name;
+        @Nonnull
+        public final String layerIndex;
+        @Nonnull
+        public final BlockRenderLayer renderLayer;
+        @Nullable
+        public final ResourceLocation texture;
+        @Nullable
+        public final String property;
+
+        @Nonnull
+        public final EntryType type;
+
+        public TextureEntry(@Nonnull String key, @Nonnull String name, @Nonnull String layerIndex, @Nonnull BlockRenderLayer renderLayer, @Nullable ResourceLocation texture, @Nullable String property, @Nonnull EntryType type) {
+            this.key = key;
+            this.name = name;
+            this.layerIndex = layerIndex;
+            this.renderLayer = renderLayer;
+            this.texture = texture;
+            this.property = property;
+            this.type = type;
+        }
+
+        /**
+         * Resolves he TextureEntry, or returns the same instance if already resolved..
+         *
+         * @param properties The properties.
+         * @return The resolved TextureEntry.
+         */
+        public TextureEntry resolve(@Nonnull Map<String, String> properties) {
+            if (type == EntryType.PROPERTY) {
+                String prop = properties.get(property);
+                if (prop != null) {
+                    ResourceLocation tex = new ResourceLocation(prop);
+                    return new TextureEntry(key, name, layerIndex, renderLayer, tex, null, EntryType.TEXTURE);
+                }
+            }
+            return this;
+        }
+
+        /**
+         * Parses a TextureEntry from key and value, See the design doc for more info on the format.
+         * //TODO, make design doc available somewhere.
+         *
+         * @param key     The Key.
+         * @param texture The Value.
+         * @return
+         */
+        public static TextureEntry parse(@Nonnull String key, @Nonnull String texture) {
+            boolean isProperty = texture.startsWith("model_property:");
+
+            String name;
+            String layerIndex = "layer0";
+            BlockRenderLayer renderLayer = BlockRenderLayer.SOLID;
+
+            String[] segs = key.split(":");
+            if (segs.length > 3 || segs.length == 0) {
+                throw new RuntimeException("Malformed TextureEntry key. Greater than 3 segments. " + key);
+            }
+            name = segs[segs.length - 1];
+            if (segs.length == 2) {
+                renderLayer = parseLayer(segs[0]);
+            } else if (segs.length == 3) {
+                layerIndex = segs[0];
+                renderLayer = parseLayer(segs[1]);
+            }
+            ResourceLocation tex = !isProperty ? new ResourceLocation(texture) : null;
+            String property = isProperty ? texture.substring(15) : null;
+            return new TextureEntry(key, name, layerIndex, renderLayer, tex, property, isProperty ? EntryType.PROPERTY : EntryType.TEXTURE);
+        }
+
+        /**
+         * Checks if this TextureEntry is applicable to the provided layerIndex and renderLayer.
+         *
+         * @param layerIndex  The layerIndex.
+         * @param renderLayer The renderLayer.
+         * @return if it matches.
+         */
+        public boolean equals(@Nonnull String layerIndex, @Nonnull BlockRenderLayer renderLayer) {
+            return this.layerIndex.equals(layerIndex) && this.renderLayer.equals(renderLayer);
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (super.equals(obj)) {
+                return true;
+            }
+            if (!(obj instanceof TextureEntry)) {
+                return false;
+            }
+            TextureEntry other = (TextureEntry) obj;
+            return other.key.equals(key)//
+                    && other.name.equals(name)//
+                    && other.layerIndex.equals(layerIndex)//
+                    && other.renderLayer.equals(renderLayer)//
+                    && Objects.equals(other.texture, texture)//
+                    && Objects.equals(other.property, property)//
+                    && other.type.equals(type);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = 31 * result + key.hashCode();
+            result = 31 * result + name.hashCode();
+            result = 31 * result + layerIndex.hashCode();
+            result = 31 * result + renderLayer.hashCode();
+            result = 31 * result + (texture != null ? texture.hashCode() : 0);
+            result = 31 * result + (property != null ? property.hashCode() : 0);
+            result = 31 * result + type.hashCode();
+            return result;
+        }
+
+    }
+
+    public enum EntryType {
+        TEXTURE,
+        PROPERTY
+    }
+
+}

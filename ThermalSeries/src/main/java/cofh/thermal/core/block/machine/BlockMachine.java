@@ -26,12 +26,9 @@ public class BlockMachine extends BlockTileCoFH {
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING_HORIZONTAL, EnumFacing.NORTH));
 	}
 
-	@Override
-	protected BlockStateContainer createBlockState() {
+	protected void addProperties(BlockStateContainer.Builder builder) {
 
-		BlockStateContainer.Builder builder = new BlockStateContainer.Builder(this);
 		builder.add(FACING_HORIZONTAL);
-		return builder.build();
 	}
 
 	@Override
