@@ -14,9 +14,9 @@ import static cofh.lib.util.Constants.PACKET_REDSTONE_CONTROL;
 
 public class PacketRedstoneControl extends PacketBase<PacketRedstoneControl> implements IPacketServer<PacketRedstoneControl> {
 
-	BlockPos pos;
-	int threshold;
-	byte mode;
+	protected BlockPos pos;
+	protected int threshold;
+	protected byte mode;
 
 	public PacketRedstoneControl() {
 

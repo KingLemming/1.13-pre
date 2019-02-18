@@ -9,8 +9,8 @@ import static cofh.lib.util.Constants.PACKET_FILTER;
 
 public class PacketFilter extends PacketBase<PacketFilter> implements IPacketServer<PacketFilter> {
 
-	int flag;
-	boolean value;
+	protected int flag;
+	protected boolean value;
 
 	public PacketFilter() {
 

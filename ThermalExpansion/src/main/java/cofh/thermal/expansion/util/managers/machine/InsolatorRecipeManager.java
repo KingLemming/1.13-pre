@@ -2,6 +2,7 @@ package cofh.thermal.expansion.util.managers.machine;
 
 import cofh.thermal.core.util.managers.SimpleItemRecipeManager;
 
+import static cofh.lib.util.Constants.PREFIX_SEED;
 import static cofh.thermal.core.ThermalSeries.config;
 
 public class InsolatorRecipeManager extends SimpleItemRecipeManager {
@@ -19,7 +20,7 @@ public class InsolatorRecipeManager extends SimpleItemRecipeManager {
 
 		super(DEFAULT_ENERGY, 4, 0);
 
-		defaultValidator.addPrefix("seed");
+		defaultValidator.addPrefix(PREFIX_SEED);
 	}
 
 	// region IRecipeManager

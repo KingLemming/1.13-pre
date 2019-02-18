@@ -14,8 +14,8 @@ import static cofh.lib.util.Constants.PACKET_GUI;
 
 public class PacketGui extends PacketBase<PacketGui> implements IPacketClient<PacketGui> {
 
-	BlockPos pos;
-	PacketBufferCoFH buffer;
+	protected BlockPos pos;
+	protected PacketBufferCoFH buffer;
 
 	public PacketGui() {
 

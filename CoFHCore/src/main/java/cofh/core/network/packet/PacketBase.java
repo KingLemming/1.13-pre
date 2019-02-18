@@ -7,9 +7,9 @@ import cofh.core.network.PacketHandler;
  */
 public abstract class PacketBase<P extends PacketBase<P>> implements IPacket<P> {
 
-	private final int id;
-	private final PacketHandler handler;
-	private boolean shouldCompress = false;
+	protected final int id;
+	protected final PacketHandler handler;
+	protected boolean shouldCompress = false;
 
 	protected PacketBase(int id, PacketHandler handler) {
 

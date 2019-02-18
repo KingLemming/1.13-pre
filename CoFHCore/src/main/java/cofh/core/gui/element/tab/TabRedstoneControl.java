@@ -3,8 +3,13 @@ package cofh.core.gui.element.tab;
 import cofh.core.gui.IGuiAccess;
 import cofh.core.gui.TexturesCoFH;
 import cofh.lib.util.control.IRedstoneControllable;
+import cofh.lib.util.helpers.SoundHelper;
 import net.minecraft.client.renderer.GlStateManager;
 
+import java.util.List;
+
+import static cofh.lib.util.control.IRedstoneControllable.ControlMode.*;
+import static cofh.lib.util.helpers.StringHelper.YELLOW;
 import static cofh.lib.util.helpers.StringHelper.localize;
 
 public class TabRedstoneControl extends TabBase {
@@ -15,14 +20,14 @@ public class TabRedstoneControl extends TabBase {
 	public static int defaultTextColor = 0x000000;
 	public static int defaultBackgroundColor = 0xd0230a;
 
-	private IRedstoneControllable myContainer;
+	private IRedstoneControllable myRSControllable;
 
-	public TabRedstoneControl(IGuiAccess gui, IRedstoneControllable container) {
+	public TabRedstoneControl(IGuiAccess gui, IRedstoneControllable rsControllable) {
 
-		this(gui, defaultSide, container);
+		this(gui, defaultSide, rsControllable);
 	}
 
-	public TabRedstoneControl(IGuiAccess gui, int side, IRedstoneControllable container) {
+	public TabRedstoneControl(IGuiAccess gui, int side, IRedstoneControllable rsControllable) {
 
 		super(gui, side);
 
@@ -33,9 +38,10 @@ public class TabRedstoneControl extends TabBase {
 
 		maxHeight = 92;
 		maxWidth = 112;
-		myContainer = container;
+		myRSControllable = rsControllable;
 	}
 
+	// TODO: Fully support new Redstone Control system.
 	@Override
 	protected void drawForeground() {
 
@@ -44,28 +50,35 @@ public class TabRedstoneControl extends TabBase {
 			return;
 		}
 		getFontRenderer().drawStringWithShadow(localize("info.cofh.redstone_control"), sideOffset() + 18, 6, headerColor);
-		// getFontRenderer().drawStringWithShadow(localize("info.cofh.control_status") + ":", sideOffset() + 6, 42, subheaderColor);
-		// getFontRenderer().drawStringWithShadow(localize("info.cofh.signal_required") + ":", sideOffset() + 6, 66, subheaderColor);
-		//
-		//		if (myContainer.getControl().isDisabled()) {
-		//			gui.drawButton(CoreTextures.ICON_REDSTONE_OFF, 28, 20, 1);
-		//			gui.drawButton(CoreTextures.ICON_RS_TORCH_OFF, 48, 20, 0);
-		//			gui.drawButton(CoreTextures.ICON_RS_TORCH_ON, 68, 20, 0);
-		//			getFontRenderer().drawString(StringHelper.localize("info.cofh.disabled"), sideOffset() + 14, 54, textColor);
-		//			getFontRenderer().drawString(StringHelper.localize("info.cofh.ignored"), sideOffset() + 14, 78, textColor);
-		//		} else {
-		//			getFontRenderer().drawString(StringHelper.localize("info.cofh.enabled"), sideOffset() + 14, 54, textColor);
-		//			gui.drawButton(CoreTextures.ICON_REDSTONE_OFF, 28, 20, 0);
-		//			if (myContainer.getControl().isLow()) {
-		//				gui.drawButton(CoreTextures.ICON_RS_TORCH_OFF, 48, 20, 1);
-		//				gui.drawButton(CoreTextures.ICON_RS_TORCH_ON, 68, 20, 0);
-		//				getFontRenderer().drawString(StringHelper.localize("info.cofh.low"), sideOffset() + 14, 78, textColor);
-		//			} else {
-		//				gui.drawButton(CoreTextures.ICON_RS_TORCH_OFF, 48, 20, 0);
-		//				gui.drawButton(CoreTextures.ICON_RS_TORCH_ON, 68, 20, 1);
-		//				getFontRenderer().drawString(StringHelper.localize("info.cofh.high"), sideOffset() + 14, 78, textColor);
-		//			}
-		//		}
+		getFontRenderer().drawStringWithShadow(localize("info.cofh.control_status") + ":", sideOffset() + 6, 42, subheaderColor);
+		getFontRenderer().drawStringWithShadow(localize("info.cofh.signal_required") + ":", sideOffset() + 6, 66, subheaderColor);
+
+		gui.drawIcon(TexturesCoFH.ICON_BUTTON, 28, 20);
+		gui.drawIcon(TexturesCoFH.ICON_BUTTON, 48, 20);
+		gui.drawIcon(TexturesCoFH.ICON_BUTTON, 68, 20);
+
+		switch (myRSControllable.getMode()) {
+			case DISABLED:
+				gui.drawIcon(TexturesCoFH.ICON_BUTTON_HIGHLIGHT, 28, 20);
+				getFontRenderer().drawString(localize("info.cofh.disabled"), sideOffset() + 14, 54, textColor);
+				getFontRenderer().drawString(localize("info.cofh.ignored"), sideOffset() + 14, 78, textColor);
+				break;
+			case LOW:
+				gui.drawIcon(TexturesCoFH.ICON_BUTTON_HIGHLIGHT, 48, 20);
+				getFontRenderer().drawString(localize("info.cofh.enabled"), sideOffset() + 14, 54, textColor);
+				getFontRenderer().drawString(localize("info.cofh.low"), sideOffset() + 14, 78, textColor);
+				break;
+			case HIGH:
+				gui.drawIcon(TexturesCoFH.ICON_BUTTON_HIGHLIGHT, 68, 20);
+				getFontRenderer().drawString(localize("info.cofh.enabled"), sideOffset() + 14, 54, textColor);
+				getFontRenderer().drawString(localize("info.cofh.high"), sideOffset() + 14, 78, textColor);
+				break;
+			default:
+		}
+		gui.drawIcon(TexturesCoFH.ICON_REDSTONE_OFF, 28, 20);
+		gui.drawIcon(TexturesCoFH.ICON_RS_TORCH_OFF, 48, 20);
+		gui.drawIcon(TexturesCoFH.ICON_RS_TORCH_ON, 68, 20);
+
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
@@ -85,64 +98,66 @@ public class TabRedstoneControl extends TabBase {
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	//	@Override
-	//	public void addTooltip(List<String> list) {
-	//
-	//		if (!isFullyOpened()) {
-	//			list.add(StringHelper.localize("info.cofh.redstoneControl"));
-	//			if (myContainer.getControl().isDisabled()) {
-	//				list.add(StringHelper.YELLOW + StringHelper.localize("info.cofh.disabled"));
-	//				return;
-	//			} else if (myContainer.getControl().isLow()) {
-	//				list.add(StringHelper.YELLOW + StringHelper.localize("info.cofh.enabled") + ", " + StringHelper.localize("info.cofh.low"));
-	//				return;
-	//			}
-	//			list.add(StringHelper.YELLOW + StringHelper.localize("info.cofh.enabled") + ", " + StringHelper.localize("info.cofh.high"));
-	//			return;
-	//		}
-	//		int x = gui.getMouseX() - currentShiftX;
-	//		int y = gui.getMouseY() - currentShiftY;
-	//		if (28 <= x && x < 44 && 20 <= y && y < 36) {
-	//			list.add(StringHelper.localize("info.cofh.ignored"));
-	//		} else if (48 <= x && x < 64 && 20 <= y && y < 36) {
-	//			list.add(StringHelper.localize("info.cofh.low"));
-	//		} else if (68 <= x && x < 84 && 20 <= y && y < 36) {
-	//			list.add(StringHelper.localize("info.cofh.high"));
-	//		}
-	//	}
-	//
-	//	@Override
-	//	public boolean onMousePressed(int mouseX, int mouseY, int mouseButton) {
-	//
-	//		if (!isFullyOpened()) {
-	//			return false;
-	//		}
-	//		if (side == LEFT) {
-	//			mouseX += currentWidth;
-	//		}
-	//		mouseX -= currentShiftX;
-	//		mouseY -= currentShiftY;
-	//
-	//		if (mouseX < 24 || mouseX >= 88 || mouseY < 16 || mouseY >= 40) {
-	//			return false;
-	//		}
-	//		if (28 <= mouseX && mouseX < 44 && 20 <= mouseY && mouseY < 36) {
-	//			if (!myContainer.getControl().isDisabled()) {
-	//				myContainer.setControl(IRedstoneControl.ControlMode.DISABLED);
-	//				GuiContainerCore.playClickSound(0.4F);
-	//			}
-	//		} else if (48 <= mouseX && mouseX < 64 && 20 <= mouseY && mouseY < 36) {
-	//			if (!myContainer.getControl().isLow()) {
-	//				myContainer.setControl(IRedstoneControl.ControlMode.LOW);
-	//				GuiContainerCore.playClickSound(0.6F);
-	//			}
-	//		} else if (68 <= mouseX && mouseX < 84 && 20 <= mouseY && mouseY < 36) {
-	//			if (!myContainer.getControl().isHigh()) {
-	//				myContainer.setControl(IRedstoneControl.ControlMode.HIGH);
-	//				GuiContainerCore.playClickSound(0.8F);
-	//			}
-	//		}
-	//		return true;
-	//	}
+	@Override
+	public void addTooltip(List<String> tooltip, int mouseX, int mouseY) {
+
+		if (!fullyOpen) {
+			tooltip.add(localize("info.cofh.redstone_control"));
+			switch (myRSControllable.getMode()) {
+				case DISABLED:
+					tooltip.add(YELLOW + localize("info.cofh.disabled"));
+					break;
+				case LOW:
+					tooltip.add(YELLOW + localize("info.cofh.low"));
+					break;
+				case HIGH:
+					tooltip.add(YELLOW + localize("info.cofh.high"));
+					break;
+				default:
+			}
+			return;
+		}
+		int x = mouseX - this.posX();
+		int y = mouseY - this.posY;
+
+		if (28 <= x && x < 44 && 20 <= y && y < 36) {
+			tooltip.add(localize("info.cofh.ignored"));
+		} else if (48 <= x && x < 64 && 20 <= y && y < 36) {
+			tooltip.add(localize("info.cofh.low"));
+		} else if (68 <= x && x < 84 && 20 <= y && y < 36) {
+			tooltip.add(localize("info.cofh.high"));
+		}
+	}
+
+	@Override
+	public boolean mouseClicked(int mouseX, int mouseY, int mouseButton) {
+
+		if (!fullyOpen) {
+			return false;
+		}
+		int x = mouseX - this.posX();
+		int y = mouseY - this.posY;
+
+		if (x < 24 || x >= 88 || y < 16 || y >= 40) {
+			return false;
+		}
+		if (28 <= x && x < 44 && 20 <= y && y < 36) {
+			if (myRSControllable.getMode() != DISABLED) {
+				myRSControllable.setControl(0, DISABLED);
+				SoundHelper.playClickSound(0.4F);
+			}
+		} else if (48 <= x && x < 64 && 20 <= y && y < 36) {
+			if (myRSControllable.getMode() != LOW) {
+				myRSControllable.setControl(0, LOW);
+				SoundHelper.playClickSound(0.6F);
+			}
+		} else if (68 <= x && x < 84 && 20 <= y && y < 36) {
+			if (myRSControllable.getMode() != HIGH) {
+				myRSControllable.setControl(0, HIGH);
+				SoundHelper.playClickSound(0.8F);
+			}
+		}
+		return true;
+	}
 
 }

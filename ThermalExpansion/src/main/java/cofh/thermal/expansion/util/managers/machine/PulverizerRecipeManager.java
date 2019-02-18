@@ -46,10 +46,10 @@ public class PulverizerRecipeManager extends SimpleItemRecipeManager {
 		}
 		String suffix = titleCase(oreType);
 
-		String oreName = "ore" + suffix;
-		String gemName = "gem" + suffix;
-		String dustName = "dust" + suffix;
-		String ingotName = "ingot" + suffix;
+		String oreName = PREFIX_ORE + suffix;
+		String gemName = PREFIX_GEM + suffix;
+		String dustName = PREFIX_DUST + suffix;
+		String ingotName = PREFIX_INGOT + suffix;
 
 		String oreNetherName = "oreNether" + suffix;
 		String oreEndName = "oreEnd" + suffix;
@@ -115,9 +115,9 @@ public class PulverizerRecipeManager extends SimpleItemRecipeManager {
 
 		if (defaultOreRecipes) {
 			for (String oreName : OreDictionary.getOreNames()) {
-				if (oreName.startsWith("ore") || oreName.startsWith("gem")) {
+				if (oreName.startsWith(PREFIX_ORE) || oreName.startsWith(PREFIX_GEM)) {
 					addDefaultRecipes(oreName.substring(3));
-				} else if (oreName.startsWith("dust")) {
+				} else if (oreName.startsWith(PREFIX_DUST)) {
 					addDefaultRecipes(oreName.substring(4));
 				}
 			}

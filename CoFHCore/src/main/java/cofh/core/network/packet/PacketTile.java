@@ -5,6 +5,7 @@ import cofh.core.block.TileCoFH;
 import cofh.core.network.PacketBufferCoFH;
 import cofh.core.util.CoreUtils;
 import io.netty.buffer.Unpooled;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -14,8 +15,8 @@ import static cofh.lib.util.Constants.PACKET_TILE;
 
 public class PacketTile extends PacketBase<PacketTile> implements IPacketClient<PacketTile> {
 
-	BlockPos pos;
-	PacketBufferCoFH buffer;
+	protected BlockPos pos;
+	protected PacketBufferCoFH buffer;
 
 	public PacketTile() {
 
@@ -29,6 +30,8 @@ public class PacketTile extends PacketBase<PacketTile> implements IPacketClient<
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile instanceof TileCoFH) {
 			((TileCoFH) tile).handleTilePacket(buffer);
+			IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+			tile.getWorld().notifyBlockUpdate(tile.getPos(), state, state, 3);
 		}
 	}
 

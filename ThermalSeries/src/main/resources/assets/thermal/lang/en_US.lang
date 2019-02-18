@@ -59,9 +59,13 @@ tab.thermal.dynamo_magmatic.0=Generates Redstone Flux using extremely hot fluids
 tab.thermal.dynamo_steam.0=Generates Redstone Flux using Steam.
 tab.thermal.dynamo_steam.1=Solid Fuels and Water can be used to generate Steam.
 
-tab.thermal.machine_centrifuge.0=
-tab.thermal.machine_centrifuge.1=
-tab.thermal.machine_centrifuge.2=
+tab.thermal.machine_brewer.0=Brews potions and imbues fluids.
+tab.thermal.machine_brewer.1=You might want a few of these in a row.
+tab.thermal.machine_brewer.2=Bottles not included.
+
+tab.thermal.machine_centrifuge.0=Separates items into their components.
+tab.thermal.machine_centrifuge.1=Some items will result in a fluid component.
+tab.thermal.machine_centrifuge.2=Spin to win!
 
 tab.thermal.machine_crucible.0=Turns solid materials into fluids!
 tab.thermal.machine_crucible.1=Very useful for building advanced blocks.
@@ -504,3 +508,4 @@ tile.thermal.machine_sawmill.name=Sawmill
 tile.thermal.machine_insolator.name=Phytogenic Insolator
 tile.thermal.machine_crucible.name=Magma Crucible
 tile.thermal.machine_centrifuge.name=Centrifugal Separator
+tile.thermal.machine_brewer.name=Alchemical Imbuer

@@ -120,6 +120,7 @@ public class CoFHCore {
 		packetHandler.registerPacket(PACKET_CHAT, PacketIndexedChat::new);
 		packetHandler.registerPacket(PACKET_SECURITY, PacketSecurity::new);
 		packetHandler.registerPacket(PACKET_FILTER, PacketFilter::new);
+		packetHandler.registerPacket(PACKET_REDSTONE_CONTROL, PacketRedstoneControl::new);
 		packetHandler.registerPacket(PACKET_KEY, PacketKey::new);
 
 		MinecraftForge.EVENT_BUS.register(KeyHandler.INSTANCE);

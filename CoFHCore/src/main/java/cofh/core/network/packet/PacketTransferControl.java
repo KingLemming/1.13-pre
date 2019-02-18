@@ -13,9 +13,9 @@ import static cofh.lib.util.Constants.PACKET_TRANSFER_CONTROL;
 
 public class PacketTransferControl extends PacketBase<PacketTransferControl> implements IPacketServer<PacketTransferControl> {
 
-	BlockPos pos;
-	boolean transferIn;
-	boolean transferOut;
+	protected BlockPos pos;
+	protected boolean transferIn;
+	protected boolean transferOut;
 
 	public PacketTransferControl() {
 

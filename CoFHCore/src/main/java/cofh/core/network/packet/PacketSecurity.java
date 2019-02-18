@@ -10,7 +10,7 @@ import static cofh.lib.util.Constants.PACKET_SECURITY;
 
 public class PacketSecurity extends PacketBase<PacketSecurity> implements IPacketServer<PacketSecurity> {
 
-	byte mode;
+	protected byte mode;
 
 	public PacketSecurity() {
 

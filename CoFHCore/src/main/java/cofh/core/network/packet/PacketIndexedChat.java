@@ -11,8 +11,8 @@ import static cofh.lib.util.Constants.PACKET_CHAT;
 
 public class PacketIndexedChat extends PacketBase<PacketIndexedChat> implements IPacketClient<PacketIndexedChat> {
 
-	int index;
-	String message;
+	protected int index;
+	protected String message;
 
 	public PacketIndexedChat() {
 

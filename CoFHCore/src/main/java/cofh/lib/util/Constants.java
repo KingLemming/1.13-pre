@@ -1,5 +1,6 @@
 package cofh.lib.util;
 
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.Fluid;
@@ -19,6 +20,7 @@ public class Constants {
 	// endregion
 
 	// region BLOCK PROPERTIES
+	public static final PropertyBool ACTIVE = PropertyBool.create("active");
 	public static final PropertyDirection FACING_ALL = PropertyDirection.create("facing");
 	public static final PropertyDirection FACING_HORIZONTAL = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	// endregion

@@ -15,15 +15,15 @@ public class TabSecurity extends TabBase {
 
 	// public static int defaultBackgroundColor = 0xe66a10;
 
-	private ISecurable myContainer;
+	private ISecurable mySecurable;
 	private UUID myPlayer;
 
-	public TabSecurity(IGuiAccess gui, ISecurable container, UUID playerID) {
+	public TabSecurity(IGuiAccess gui, ISecurable securable, UUID playerID) {
 
-		this(gui, defaultSide, container, playerID);
+		this(gui, defaultSide, securable, playerID);
 	}
 
-	public TabSecurity(IGuiAccess gui, int side, ISecurable container, UUID playerID) {
+	public TabSecurity(IGuiAccess gui, int side, ISecurable securable, UUID playerID) {
 
 		super(gui, side);
 
@@ -34,7 +34,7 @@ public class TabSecurity extends TabBase {
 
 		maxHeight = 92;
 		maxWidth = 112;
-		myContainer = container;
+		mySecurable = securable;
 		myPlayer = playerID;
 	}
 
@@ -148,7 +148,7 @@ public class TabSecurity extends TabBase {
 	@Override
 	public void setFullyOpen() {
 
-		if (!myPlayer.equals(myContainer.getOwner().getId())) {
+		if (!myPlayer.equals(mySecurable.getOwner().getId())) {
 			return;
 		}
 		super.setFullyOpen();

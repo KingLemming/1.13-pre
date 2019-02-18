@@ -57,12 +57,6 @@ public class ItemWrench extends ItemCoFH implements IToolHammer {
 	}
 
 	@Override
-	public boolean doesSneakBypassUse(ItemStack stack, IBlockAccess world, BlockPos pos, EntityPlayer player) {
-
-		return true;
-	}
-
-	@Override
 	@SideOnly (Side.CLIENT)
 	public boolean isFull3D() {
 
@@ -86,14 +80,9 @@ public class ItemWrench extends ItemCoFH implements IToolHammer {
 			((IDismantleable) block).dismantleBlock(world, pos, state, player, false);
 			return EnumActionResult.SUCCESS;
 		}
-		//		if (BlockHelper.canRotate(block)) {
-		//			world.setBlockState(pos, BlockHelper.rotateVanillaBlock(world, state, pos), 3);
-		//			player.swingArm(hand);
-		//			return Utils.isServerWorld(world) ? EnumActionResult.SUCCESS : EnumActionResult.PASS;
-		//		} else
 		if (!player.isSneaking() && block.rotateBlock(world, pos, side)) {
 			player.swingArm(hand);
-			return Utils.isServerWorld(world) ? EnumActionResult.SUCCESS : EnumActionResult.PASS;
+			return EnumActionResult.SUCCESS;
 		}
 		return EnumActionResult.PASS;
 	}

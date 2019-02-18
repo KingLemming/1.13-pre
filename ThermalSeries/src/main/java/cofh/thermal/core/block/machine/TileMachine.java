@@ -234,6 +234,7 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 
 		super.handleTilePacket(buffer);
 
+		boolean prevActive = isActive;
 		isActive = buffer.readBoolean();
 		energyStorage.setCapacity(buffer.readInt());
 		energyStorage.setEnergyStored(buffer.readInt());
@@ -241,6 +242,10 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 		securityControl.readFromBuffer(buffer);
 		redstoneControl.readFromBuffer(buffer);
 		transferControl.readFromBuffer(buffer);
+
+		if (isActive != prevActive) {
+			world.checkLight(pos);
+		}
 	}
 
 	@Override
