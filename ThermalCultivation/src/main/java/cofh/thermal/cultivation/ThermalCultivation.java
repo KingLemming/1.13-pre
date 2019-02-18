@@ -2,6 +2,7 @@ package cofh.thermal.cultivation;
 
 import cofh.lib.util.IModule;
 import cofh.thermal.core.ThermalSeries;
+import cofh.thermal.cultivation.init.BlocksTC;
 import cofh.thermal.cultivation.init.ItemsTC;
 import cofh.thermal.cultivation.proxy.ProxyCommon;
 import net.minecraft.block.Block;
@@ -59,6 +60,7 @@ public class ThermalCultivation implements IModule {
 	@Override
 	public void registerBlocks(RegistryEvent.Register<Block> event) {
 
+		BlocksTC.registerBlocks();
 	}
 
 	@Override
