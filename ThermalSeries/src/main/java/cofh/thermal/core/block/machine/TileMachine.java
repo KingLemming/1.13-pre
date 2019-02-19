@@ -2,7 +2,8 @@ package cofh.thermal.core.block.machine;
 
 import cofh.core.block.TileCoFH;
 import cofh.core.network.PacketBufferCoFH;
-import cofh.core.network.packet.PacketTile;
+import cofh.core.network.packet.client.PacketTileControl;
+import cofh.core.network.packet.client.PacketTileState;
 import cofh.lib.energy.EnergyStorageCoFH;
 import cofh.lib.fluid.FluidStorageCoFH;
 import cofh.lib.fluid.IFluidStackHolder;
@@ -42,7 +43,6 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 	protected final Machine machine;
 
 	protected TimeTracker timeTracker = new TimeTracker();
-	protected InventoryCoFH augments = new InventoryCoFH(this, TAG_AUGMENTS);
 	protected InventoryManaged inventory = new InventoryManaged(this, TAG_INVENTORY);
 	protected TankArrayManaged tankInv = new TankArrayManaged(this, TAG_TANK_ARRAY);
 	protected EnergyStorageCoFH energyStorage = new EnergyStorageCoFH(32000);
@@ -196,13 +196,9 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 
 	// region NETWORK
 	@Override
-	public PacketBufferCoFH getTilePacket(PacketBufferCoFH buffer) {
+	public PacketBufferCoFH getControlPacket(PacketBufferCoFH buffer) {
 
-		super.getTilePacket(buffer);
-
-		buffer.writeBoolean(isActive);
-		buffer.writeInt(energyStorage.getMaxEnergyStored());
-		buffer.writeInt(energyStorage.getEnergyStored());
+		super.getControlPacket(buffer);
 
 		securityControl.writeToBuffer(buffer);
 		redstoneControl.writeToBuffer(buffer);
@@ -230,22 +226,23 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 	}
 
 	@Override
-	public void handleTilePacket(PacketBufferCoFH buffer) {
+	public PacketBufferCoFH getStatePacket(PacketBufferCoFH buffer) {
 
-		super.handleTilePacket(buffer);
+		super.getControlPacket(buffer);
 
-		wasActive = isActive;
-		isActive = buffer.readBoolean();
-		energyStorage.setCapacity(buffer.readInt());
-		energyStorage.setEnergyStored(buffer.readInt());
+		buffer.writeBoolean(isActive);
+
+		return buffer;
+	}
+
+	@Override
+	public void handleControlPacket(PacketBufferCoFH buffer) {
+
+		super.handleControlPacket(buffer);
 
 		securityControl.readFromBuffer(buffer);
 		redstoneControl.readFromBuffer(buffer);
 		transferControl.readFromBuffer(buffer);
-
-		if (isActive != wasActive) {
-			world.checkLight(pos);
-		}
 	}
 
 	@Override
@@ -262,6 +259,18 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 
 		for (int i = 0; i < tankInv.getTanks(); i++) {
 			tankInv.set(i, buffer.readFluidStack());
+		}
+	}
+
+	@Override
+	public void handleStatePacket(PacketBufferCoFH buffer) {
+
+		super.handleControlPacket(buffer);
+
+		isActive = buffer.readBoolean();
+
+		if (machine.getLight() != 0) {
+			world.checkLight(pos);
 		}
 	}
 	// endregion
@@ -314,11 +323,6 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 		return inventory.getSlots();
 	}
 
-	public InventoryCoFH getAugments() {
-
-		return augments;
-	}
-
 	public InventoryCoFH getInventory() {
 
 		return inventory;
@@ -349,11 +353,13 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 
 	protected void updateActiveState(boolean curActive) {
 
-		if (!wasActive && curActive != isActive || wasActive && timeTracker.hasDelayPassed(world, ConfigTSeries.tileUpdateDelay)) {
+		if (!wasActive && curActive != isActive || wasActive && (timeTracker.hasDelayPassed(world, ConfigTSeries.tileUpdateDelay) || timeTracker.notSet())) {
+			wasActive = false;
+			world.setBlockState(pos, getBlockState().withProperty(ACTIVE, isActive));
 			if (machine.getLight() != 0) {
 				updateLighting();
 			}
-			PacketTile.sendToClient(this);
+			PacketTileState.sendToClient(this);
 		}
 	}
 
@@ -406,7 +412,10 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 	public void readFromNBT(NBTTagCompound nbt) {
 
 		super.readFromNBT(nbt);
-		augments.readFromNBT(nbt);
+
+		isActive = nbt.getBoolean(TAG_ACTIVE);
+		wasActive = nbt.getBoolean(TAG_ACTIVE_TRACK);
+
 		inventory.readFromNBT(nbt);
 		tankInv.readFromNBT(nbt);
 		energyStorage.readFromNBT(nbt);
@@ -420,7 +429,10 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 
 		super.writeToNBT(nbt);
-		augments.writeToNBT(nbt);
+
+		nbt.setBoolean(TAG_ACTIVE, isActive);
+		nbt.setBoolean(TAG_ACTIVE_TRACK, wasActive);
+
 		inventory.writeToNBT(nbt);
 		tankInv.writeToNBT(nbt);
 		energyStorage.writeToNBT(nbt);
@@ -446,7 +458,7 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 	@Override
 	public void onControlUpdate() {
 
-		PacketTile.sendToClient(this);
+		PacketTileControl.sendToClient(this);
 	}
 	// endregion
 

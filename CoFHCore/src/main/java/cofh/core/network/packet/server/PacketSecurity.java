@@ -1,7 +1,9 @@
-package cofh.core.network.packet;
+package cofh.core.network.packet.server;
 
 import cofh.core.CoFHCore;
 import cofh.core.network.PacketBufferCoFH;
+import cofh.core.network.packet.IPacketServer;
+import cofh.core.network.packet.PacketBase;
 import cofh.lib.util.control.ISecurable;
 import cofh.lib.util.control.ISecurable.AccessMode;
 import net.minecraft.entity.player.EntityPlayerMP;

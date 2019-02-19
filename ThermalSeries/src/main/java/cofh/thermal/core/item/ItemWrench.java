@@ -81,7 +81,7 @@ public class ItemWrench extends ItemCoFH implements IToolHammer {
 		}
 		if (!player.isSneaking() && block.rotateBlock(world, pos, side)) {
 			player.swingArm(hand);
-			return EnumActionResult.SUCCESS;
+			return Utils.isServerWorld(world) ? EnumActionResult.SUCCESS : EnumActionResult.PASS;
 		}
 		return EnumActionResult.PASS;
 	}

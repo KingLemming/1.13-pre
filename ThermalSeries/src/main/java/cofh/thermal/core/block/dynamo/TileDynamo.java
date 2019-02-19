@@ -1,7 +1,7 @@
 package cofh.thermal.core.block.dynamo;
 
 import cofh.core.block.TileCoFH;
-import cofh.core.network.packet.PacketTile;
+import cofh.core.network.packet.client.PacketTileControl;
 import cofh.lib.energy.EnergyStorageCoFH;
 import cofh.lib.fluid.TankArrayManaged;
 import cofh.lib.inventory.InventoryCoFH;
@@ -38,7 +38,6 @@ public class TileDynamo extends TileCoFH implements ITickable, ISecurableTile, I
 	protected final Dynamo dynamo;
 
 	protected TimeTracker timeTracker = new TimeTracker();
-	protected InventoryCoFH augments = new InventoryCoFH(this, TAG_AUGMENTS);
 	protected InventoryManaged inventory = new InventoryManaged(this, TAG_INVENTORY);
 	protected TankArrayManaged tankInv = new TankArrayManaged(this, TAG_TANK_ARRAY);
 	protected EnergyStorageCoFH energyStorage = new EnergyStorageCoFH(0);
@@ -212,11 +211,6 @@ public class TileDynamo extends TileCoFH implements ITickable, ISecurableTile, I
 		return inventory.getSlots();
 	}
 
-	public InventoryCoFH getAugments() {
-
-		return augments;
-	}
-
 	public InventoryCoFH getInventory() {
 
 		return inventory;
@@ -243,7 +237,7 @@ public class TileDynamo extends TileCoFH implements ITickable, ISecurableTile, I
 
 		if (!wasActive && curActive != isActive || wasActive && timeTracker.hasDelayPassed(world, ConfigTSeries.tileUpdateDelay)) {
 			updateLighting();
-			PacketTile.sendToClient(this);
+			PacketTileControl.sendToClient(this);
 		}
 	}
 	// endregion
@@ -253,7 +247,10 @@ public class TileDynamo extends TileCoFH implements ITickable, ISecurableTile, I
 	public void readFromNBT(NBTTagCompound nbt) {
 
 		super.readFromNBT(nbt);
-		augments.readFromNBT(nbt);
+
+		isActive = nbt.getBoolean(TAG_ACTIVE);
+		wasActive = nbt.getBoolean(TAG_ACTIVE_TRACK);
+
 		inventory.readFromNBT(nbt);
 		tankInv.readFromNBT(nbt);
 		energyStorage.readFromNBT(nbt);
@@ -266,7 +263,10 @@ public class TileDynamo extends TileCoFH implements ITickable, ISecurableTile, I
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 
 		super.writeToNBT(nbt);
-		augments.writeToNBT(nbt);
+
+		nbt.setBoolean(TAG_ACTIVE, isActive);
+		nbt.setBoolean(TAG_ACTIVE_TRACK, wasActive);
+
 		inventory.writeToNBT(nbt);
 		tankInv.writeToNBT(nbt);
 		energyStorage.writeToNBT(nbt);
@@ -281,7 +281,7 @@ public class TileDynamo extends TileCoFH implements ITickable, ISecurableTile, I
 	@Override
 	public void onControlUpdate() {
 
-		PacketTile.sendToClient(this);
+		PacketTileControl.sendToClient(this);
 	}
 	// endregion
 

@@ -1,7 +1,9 @@
-package cofh.core.network.packet;
+package cofh.core.network.packet.client;
 
 import cofh.core.CoFHCore;
 import cofh.core.network.PacketBufferCoFH;
+import cofh.core.network.packet.IPacketClient;
+import cofh.core.network.packet.PacketBase;
 import cofh.core.util.ChatHelper;
 import cofh.core.util.CoreUtils;
 import net.minecraft.entity.player.EntityPlayerMP;

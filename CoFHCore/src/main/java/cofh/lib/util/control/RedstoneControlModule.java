@@ -1,7 +1,7 @@
 package cofh.lib.util.control;
 
 import cofh.core.network.PacketBufferCoFH;
-import cofh.core.network.packet.PacketRedstoneControl;
+import cofh.core.network.packet.server.PacketRedstoneControl;
 import cofh.lib.util.Utils;
 import net.minecraft.nbt.NBTTagCompound;
 

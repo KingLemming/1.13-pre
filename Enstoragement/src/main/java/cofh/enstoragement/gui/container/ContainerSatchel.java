@@ -1,7 +1,7 @@
 package cofh.enstoragement.gui.container;
 
 import cofh.core.gui.container.ContainerInventoryItem;
-import cofh.core.network.packet.PacketSecurity;
+import cofh.core.network.packet.server.PacketSecurity;
 import cofh.core.util.CoreUtils;
 import cofh.enstoragement.item.ItemSatchel;
 import cofh.lib.gui.slot.SlotLocked;

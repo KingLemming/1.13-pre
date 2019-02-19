@@ -30,4 +30,8 @@ public class TimeTracker {
 		lastMark = world.getTotalWorldTime();
 	}
 
+	public boolean notSet() {
+
+		return lastMark == Long.MIN_VALUE;
+	}
 }

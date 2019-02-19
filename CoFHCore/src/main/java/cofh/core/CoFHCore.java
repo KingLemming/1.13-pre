@@ -3,7 +3,13 @@ package cofh.core;
 import cofh.core.key.KeyHandler;
 import cofh.core.key.PacketKey;
 import cofh.core.network.PacketHandler;
-import cofh.core.network.packet.*;
+import cofh.core.network.packet.client.PacketIndexedChat;
+import cofh.core.network.packet.client.PacketTileControl;
+import cofh.core.network.packet.client.PacketTileGui;
+import cofh.core.network.packet.client.PacketTileState;
+import cofh.core.network.packet.server.PacketFilter;
+import cofh.core.network.packet.server.PacketRedstoneControl;
+import cofh.core.network.packet.server.PacketSecurity;
 import cofh.core.proxy.ProxyCommon;
 import cofh.core.util.CoreUtils;
 import cofh.core.util.oredict.OreDictionaryArbiter;
@@ -115,8 +121,9 @@ public class CoFHCore {
 	private void registerHandlers() {
 
 		packetHandler = new PacketHandler("cofh");
-		packetHandler.registerPacket(PACKET_TILE, PacketTile::new);
-		packetHandler.registerPacket(PACKET_GUI, PacketGui::new);
+		packetHandler.registerPacket(PACKET_CONTROL, PacketTileControl::new);
+		packetHandler.registerPacket(PACKET_GUI, PacketTileGui::new);
+		packetHandler.registerPacket(PACKET_STATE, PacketTileState::new);
 		packetHandler.registerPacket(PACKET_CHAT, PacketIndexedChat::new);
 		packetHandler.registerPacket(PACKET_SECURITY, PacketSecurity::new);
 		packetHandler.registerPacket(PACKET_FILTER, PacketFilter::new);

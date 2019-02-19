@@ -1,8 +1,10 @@
-package cofh.core.network.packet;
+package cofh.core.network.packet.client;
 
 import cofh.core.CoFHCore;
 import cofh.core.block.TileCoFH;
 import cofh.core.network.PacketBufferCoFH;
+import cofh.core.network.packet.IPacketClient;
+import cofh.core.network.packet.PacketBase;
 import cofh.core.util.CoreUtils;
 import io.netty.buffer.Unpooled;
 import net.minecraft.block.state.IBlockState;
@@ -11,16 +13,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import static cofh.lib.util.Constants.NETWORK_UPDATE_DISTANCE;
-import static cofh.lib.util.Constants.PACKET_TILE;
+import static cofh.lib.util.Constants.PACKET_CONTROL;
 
-public class PacketTile extends PacketBase<PacketTile> implements IPacketClient<PacketTile> {
+public class PacketTileControl extends PacketBase<PacketTileControl> implements IPacketClient<PacketTileControl> {
 
 	protected BlockPos pos;
 	protected PacketBufferCoFH buffer;
 
-	public PacketTile() {
+	public PacketTileControl() {
 
-		super(PACKET_TILE, CoFHCore.packetHandler);
+		super(PACKET_CONTROL, CoFHCore.packetHandler);
 	}
 
 	@Override
@@ -29,9 +31,9 @@ public class PacketTile extends PacketBase<PacketTile> implements IPacketClient<
 		World world = CoreUtils.getClientPlayer().world;
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile instanceof TileCoFH) {
-			((TileCoFH) tile).handleTilePacket(buffer);
-			IBlockState state = tile.getWorld().getBlockState(tile.getPos());
-			tile.getWorld().notifyBlockUpdate(tile.getPos(), state, state, 3);
+			((TileCoFH) tile).handleControlPacket(buffer);
+			IBlockState state = tile.getWorld().getBlockState(pos);
+			tile.getWorld().notifyBlockUpdate(pos, state, state, 3);
 		}
 	}
 
@@ -51,9 +53,9 @@ public class PacketTile extends PacketBase<PacketTile> implements IPacketClient<
 
 	public static void sendToClient(TileCoFH tile) {
 
-		PacketTile packet = new PacketTile();
+		PacketTileControl packet = new PacketTileControl();
 		packet.pos = tile.pos();
-		packet.buffer = tile.getTilePacket(new PacketBufferCoFH(Unpooled.buffer()));
+		packet.buffer = tile.getControlPacket(new PacketBufferCoFH(Unpooled.buffer()));
 		packet.sendToAllAround(packet.pos, NETWORK_UPDATE_DISTANCE, tile.world().provider.getDimension());
 	}
 

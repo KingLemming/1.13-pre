@@ -131,10 +131,10 @@ gui.cofh.transferOutEnabled=Auto-Output Enabled
 gui.cofh.transferOutUnavailable=Auto-Output Unavailable
 
 info.cofh.access=Access
-info.cofh.accessPrivate=Owner Only
-info.cofh.accessPublic=Public Access
-info.cofh.accessRestricted=Restricted
-info.cofh.accessTeam=Team Only
+info.cofh.access_friends=Restricted
+info.cofh.access_private=Owner Only
+info.cofh.access_public=Public Access
+info.cofh.access_team=Team Only
 info.cofh.amount=Amount
 info.cofh.another_player=Another Player
 info.cofh.area=Area

@@ -1,6 +1,6 @@
 package cofh.core.util;
 
-import cofh.core.network.packet.PacketIndexedChat;
+import cofh.core.network.packet.client.PacketIndexedChat;
 import cofh.lib.util.Utils;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;

@@ -1,7 +1,7 @@
 package cofh.core.block;
 
 import cofh.core.network.PacketBufferCoFH;
-import cofh.core.network.packet.PacketGui;
+import cofh.core.network.packet.client.PacketTileGui;
 import cofh.lib.block.ITileCallback;
 import cofh.lib.util.Utils;
 import net.minecraft.block.Block;
@@ -220,7 +220,7 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 	public void sendGuiNetworkData(Container container, IContainerListener player) {
 
 		if (player instanceof EntityPlayerMP && (!(player instanceof FakePlayer))) {
-			PacketGui.sendToClient(this, (EntityPlayerMP) player);
+			PacketTileGui.sendToClient(this, (EntityPlayerMP) player);
 		}
 	}
 	// endregion
@@ -245,7 +245,7 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 		return this.writeToNBT(new NBTTagCompound());
 	}
 
-	public PacketBufferCoFH getTilePacket(PacketBufferCoFH buffer) {
+	public PacketBufferCoFH getControlPacket(PacketBufferCoFH buffer) {
 
 		return buffer;
 	}
@@ -255,11 +255,24 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 		return buffer;
 	}
 
-	public void handleTilePacket(PacketBufferCoFH buffer) {
+	public PacketBufferCoFH getStatePacket(PacketBufferCoFH buffer) {
+
+		return buffer;
+	}
+
+	public void handleControlPacket(PacketBufferCoFH buffer) {
 
 	}
 
 	public void handleGuiPacket(PacketBufferCoFH buffer) {
+
+	}
+
+	public void handleStatePacket(PacketBufferCoFH buffer) {
+
+	}
+
+	public void setActive(boolean active) {
 
 	}
 	// endregion

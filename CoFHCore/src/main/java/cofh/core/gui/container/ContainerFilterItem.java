@@ -1,7 +1,7 @@
 package cofh.core.gui.container;
 
-import cofh.core.network.packet.PacketFilter;
-import cofh.core.network.packet.PacketSecurity;
+import cofh.core.network.packet.server.PacketFilter;
+import cofh.core.network.packet.server.PacketSecurity;
 import cofh.core.util.CoreUtils;
 import cofh.lib.gui.slot.SlotFalseCopy;
 import cofh.lib.gui.slot.SlotLocked;

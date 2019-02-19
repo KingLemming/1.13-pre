@@ -44,9 +44,9 @@ public class TileMachineCrucible extends TileMachineProcess {
 
 	// region NETWORK
 	@Override
-	public PacketBufferCoFH getTilePacket(PacketBufferCoFH buffer) {
+	public PacketBufferCoFH getControlPacket(PacketBufferCoFH buffer) {
 
-		super.getTilePacket(buffer);
+		super.getControlPacket(buffer);
 
 		buffer.writeFluidStack(renderFluid);
 
@@ -64,9 +64,9 @@ public class TileMachineCrucible extends TileMachineProcess {
 	}
 
 	@Override
-	public void handleTilePacket(PacketBufferCoFH buffer) {
+	public void handleControlPacket(PacketBufferCoFH buffer) {
 
-		super.handleTilePacket(buffer);
+		super.handleControlPacket(buffer);
 
 		renderFluid = buffer.readFluidStack();
 	}

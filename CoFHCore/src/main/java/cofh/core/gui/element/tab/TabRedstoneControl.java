@@ -8,13 +8,14 @@ import net.minecraft.client.renderer.GlStateManager;
 
 import java.util.List;
 
+import static cofh.core.gui.TexturesCoFH.*;
 import static cofh.lib.util.control.IRedstoneControllable.ControlMode.*;
 import static cofh.lib.util.helpers.StringHelper.YELLOW;
 import static cofh.lib.util.helpers.StringHelper.localize;
 
 public class TabRedstoneControl extends TabBase {
 
-	public static int defaultSide = 1;
+	public static int defaultSide = RIGHT;
 	public static int defaultHeaderColor = 0xe1c92f;
 	public static int defaultSubHeaderColor = 0xaaafb8;
 	public static int defaultTextColor = 0x000000;
@@ -53,9 +54,9 @@ public class TabRedstoneControl extends TabBase {
 		getFontRenderer().drawStringWithShadow(localize("info.cofh.control_status") + ":", sideOffset() + 6, 42, subheaderColor);
 		getFontRenderer().drawStringWithShadow(localize("info.cofh.signal_required") + ":", sideOffset() + 6, 66, subheaderColor);
 
-		gui.drawIcon(TexturesCoFH.ICON_BUTTON, 28, 20);
-		gui.drawIcon(TexturesCoFH.ICON_BUTTON, 48, 20);
-		gui.drawIcon(TexturesCoFH.ICON_BUTTON, 68, 20);
+		gui.drawIcon(ICON_BUTTON, 28, 20);
+		gui.drawIcon(ICON_BUTTON, 48, 20);
+		gui.drawIcon(ICON_BUTTON, 68, 20);
 
 		switch (myRSControllable.getMode()) {
 			case DISABLED:
@@ -75,9 +76,9 @@ public class TabRedstoneControl extends TabBase {
 				break;
 			default:
 		}
-		gui.drawIcon(TexturesCoFH.ICON_REDSTONE_OFF, 28, 20);
-		gui.drawIcon(TexturesCoFH.ICON_RS_TORCH_OFF, 48, 20);
-		gui.drawIcon(TexturesCoFH.ICON_RS_TORCH_ON, 68, 20);
+		gui.drawIcon(ICON_REDSTONE_OFF, 28, 20);
+		gui.drawIcon(ICON_RS_TORCH_OFF, 48, 20);
+		gui.drawIcon(ICON_RS_TORCH_ON, 68, 20);
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	}

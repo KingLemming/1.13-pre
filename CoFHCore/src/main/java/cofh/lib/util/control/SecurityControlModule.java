@@ -1,7 +1,7 @@
 package cofh.lib.util.control;
 
 import cofh.core.network.PacketBufferCoFH;
-import cofh.core.network.packet.PacketSecurity;
+import cofh.core.network.packet.server.PacketSecurity;
 import cofh.lib.util.Utils;
 import cofh.lib.util.helpers.SecurityHelper;
 import com.mojang.authlib.GameProfile;

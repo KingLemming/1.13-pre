@@ -72,8 +72,9 @@ public class Constants {
 	// endregion
 
 	// region PACKET
-	public static final int PACKET_TILE = 1;
+	public static final int PACKET_CONTROL = 1;
 	public static final int PACKET_GUI = 2;
+	public static final int PACKET_STATE = 3;
 	public static final int PACKET_CHAT = 8;
 	public static final int PACKET_SECURITY = 16;
 	public static final int PACKET_FILTER = 17;
@@ -101,6 +102,7 @@ public class Constants {
 	public static final String TAG_ACCESS = "Access";
 	public static final String TAG_ACCESSIBLE = "Accessible";
 	public static final String TAG_ACTIVE = "Active";
+	public static final String TAG_ACTIVE_TRACK = "WasActive";
 	public static final String TAG_AMOUNT = "Amount";
 	public static final String TAG_ARROWS = "Arrows";
 	public static final String TAG_AUGMENTS = "Augments";
