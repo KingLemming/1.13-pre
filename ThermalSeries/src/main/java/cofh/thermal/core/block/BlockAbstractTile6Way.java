@@ -1,4 +1,4 @@
-package cofh.thermal.core.block.machine;
+package cofh.thermal.core.block;
 
 import cofh.core.block.BlockTileCoFH;
 import net.minecraft.block.state.BlockStateContainer;
@@ -14,36 +14,36 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static cofh.lib.util.Constants.ACTIVE;
-import static cofh.lib.util.Constants.FACING_HORIZONTAL;
+import static cofh.lib.util.Constants.FACING_ALL;
 
-public class BlockMachine extends BlockTileCoFH {
+public class BlockAbstractTile6Way extends BlockTileCoFH {
 
-	public final Machine machine;
+	public final AbstractTileType type;
 
-	public BlockMachine(Machine machine) {
+	public BlockAbstractTile6Way(AbstractTileType type) {
 
-		this.machine = machine;
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING_HORIZONTAL, EnumFacing.NORTH).withProperty(ACTIVE, false));
+		this.type = type;
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING_ALL, EnumFacing.UP));//.withProperty(ACTIVE, false));
 	}
 
+	@Override
 	protected void addBlockStateProperties(BlockStateContainer.Builder builder) {
 
 		super.addBlockStateProperties(builder);
-		builder.add(FACING_HORIZONTAL);
-		builder.add(ACTIVE);
+		builder.add(FACING_ALL);
+		// builder.add(ACTIVE);
 	}
 
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
 
-		return machine.createTileEntity(world, state);
+		return type.createTileEntity(world, state);
 	}
 
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 
-		return getDefaultState().withProperty(FACING_HORIZONTAL, placer.getHorizontalFacing().getOpposite()).withProperty(ACTIVE, false);
+		return getDefaultState().withProperty(FACING_ALL, EnumFacing.getDirectionFromEntityLiving(pos, placer));
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class BlockMachine extends BlockTileCoFH {
 	@Override
 	public int getMetaFromState(IBlockState state) {
 
-		return state.getValue(FACING_HORIZONTAL).getIndex() + (state.getValue(ACTIVE) ? 4 : 0);
+		return state.getValue(FACING_ALL).getIndex();
 	}
 
 	@Override
@@ -70,12 +70,9 @@ public class BlockMachine extends BlockTileCoFH {
 	public IBlockState getStateFromMeta(int meta) {
 
 		EnumFacing facing = EnumFacing.getFront(meta);
-		boolean active = meta >= 4;
-
-		if (facing.getAxis() == EnumFacing.Axis.Y) {
-			facing = EnumFacing.NORTH;
-		}
-		return getDefaultState().withProperty(FACING_HORIZONTAL, facing).withProperty(ACTIVE, active);
+		//		boolean active = meta >= 6;
+		//		return getDefaultState().withProperty(FACING_ALL, facing).withProperty(ACTIVE, active);
+		return getDefaultState().withProperty(FACING_ALL, facing);
 	}
 	// endregion
 }

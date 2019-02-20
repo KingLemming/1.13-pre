@@ -37,4 +37,10 @@ public interface IRedstoneControllableTile extends IRedstoneControllable, ITileC
 		redstoneControl().setControl(threshold, mode);
 	}
 
+	@Override
+	default boolean isControllable() {
+
+		return redstoneControl().isControllable();
+	}
+	// endregion
 }

@@ -75,7 +75,7 @@ public class Constants {
 	public static final int PACKET_CONTROL = 1;
 	public static final int PACKET_GUI = 2;
 	public static final int PACKET_STATE = 3;
-	public static final int PACKET_CHAT = 8;
+	public static final int PACKET_CHAT = 12;
 	public static final int PACKET_SECURITY = 16;
 	public static final int PACKET_FILTER = 17;
 	public static final int PACKET_REDSTONE_CONTROL = 24;
@@ -119,6 +119,8 @@ public class Constants {
 	public static final String TAG_OWNER_NAME = "OwnerName";
 	public static final String TAG_OWNER_UUID = "OwnerUUID";
 	public static final String TAG_POTION = "Potion";
+	public static final String TAG_PROCESS = "Proc";
+	public static final String TAG_PROCESS_MAX = "ProcMax";
 	public static final String TAG_REDSTONE = "Redstone";
 	public static final String TAG_RS_MODE = "RSMode";
 	public static final String TAG_RS_POWER = "RSPower";

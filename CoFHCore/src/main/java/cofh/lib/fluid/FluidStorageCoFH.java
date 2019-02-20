@@ -290,6 +290,16 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder, IResourc
 	}
 
 	@Override
+	public boolean clear() {
+
+		if (isEmpty()) {
+			return false;
+		}
+		drain(capacity, true);
+		return true;
+	}
+
+	@Override
 	public int getSpace() {
 
 		if (fluid == null) {

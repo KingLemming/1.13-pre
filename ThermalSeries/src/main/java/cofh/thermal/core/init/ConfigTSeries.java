@@ -24,7 +24,7 @@ public class ConfigTSeries {
 		disableAllHostileMobSpawns = config.getBoolean("Disable ALL Hostile Mob Spawns", category, false, comment);
 
 		comment = "Adjust this value to change the render update delay for many Thermal Series tiles. You should really only change this if you know what you're doing. This is a server-wide setting.";
-		tileUpdateDelay = config.getInt("Tile Update Delay", category, tileUpdateDelay, 80, 1600, comment);
+		tileUpdateDelay = config.getInt("Tile Update Delay", category, tileUpdateDelay, 10, 1600, comment);
 		// endregion
 
 		// region CRAFTING

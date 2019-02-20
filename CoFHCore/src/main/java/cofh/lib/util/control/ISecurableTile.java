@@ -8,6 +8,7 @@ public interface ISecurableTile extends ISecurable, ITileCallback {
 
 	SecurityControlModule securityControl();
 
+	// region ISecurable
 	@Override
 	default boolean canAccess(EntityPlayer player) {
 
@@ -38,4 +39,10 @@ public interface ISecurableTile extends ISecurable, ITileCallback {
 		return securityControl().getOwner();
 	}
 
+	@Override
+	default boolean isSecurable() {
+
+		return securityControl().isSecurable();
+	}
+	// endregion
 }

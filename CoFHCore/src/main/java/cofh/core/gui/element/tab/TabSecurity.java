@@ -43,6 +43,8 @@ public class TabSecurity extends TabBase {
 		maxWidth = 112;
 		mySecurable = securable;
 		myPlayer = playerID;
+
+		this.setVisible(mySecurable.isSecurable());
 	}
 
 	@Override

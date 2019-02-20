@@ -40,6 +40,8 @@ public class TabRedstoneControl extends TabBase {
 		maxHeight = 92;
 		maxWidth = 112;
 		myRSControllable = rsControllable;
+
+		this.setVisible(myRSControllable.isControllable());
 	}
 
 	// TODO: Fully support new Redstone Control system.

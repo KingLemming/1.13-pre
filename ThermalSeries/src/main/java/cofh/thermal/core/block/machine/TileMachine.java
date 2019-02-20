@@ -1,54 +1,24 @@
 package cofh.thermal.core.block.machine;
 
-import cofh.core.block.TileCoFH;
 import cofh.core.network.PacketBufferCoFH;
-import cofh.core.network.packet.client.PacketTileControl;
-import cofh.core.network.packet.client.PacketTileState;
-import cofh.lib.energy.EnergyStorageCoFH;
-import cofh.lib.fluid.FluidStorageCoFH;
-import cofh.lib.fluid.IFluidStackHolder;
-import cofh.lib.fluid.TankArrayManaged;
-import cofh.lib.inventory.IItemStackHolder;
-import cofh.lib.inventory.InventoryCoFH;
-import cofh.lib.inventory.InventoryManaged;
-import cofh.lib.inventory.ItemStorageCoFH;
 import cofh.lib.util.StorageGroup;
-import cofh.lib.util.TimeTracker;
-import cofh.lib.util.Utils;
-import cofh.lib.util.control.*;
-import cofh.thermal.core.ThermalSeries;
-import cofh.thermal.core.init.ConfigTSeries;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
+import cofh.lib.util.control.ITransferControllableTile;
+import cofh.lib.util.control.TransferControlModule;
+import cofh.thermal.core.block.AbstractTileBase;
+import cofh.thermal.core.block.AbstractTileType;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-import java.util.List;
-
 import static cofh.lib.util.Constants.*;
 
-public abstract class TileMachine extends TileCoFH implements ITickable, ISecurableTile, IRedstoneControllableTile, ITransferControllableTile {
+public abstract class TileMachine extends AbstractTileBase implements ITickable, ITransferControllableTile {
 
-	protected final Machine machine;
-
-	protected TimeTracker timeTracker = new TimeTracker();
-	protected InventoryManaged inventory = new InventoryManaged(this, TAG_INVENTORY);
-	protected TankArrayManaged tankInv = new TankArrayManaged(this, TAG_TANK_ARRAY);
-	protected EnergyStorageCoFH energyStorage = new EnergyStorageCoFH(32000);
-
-	protected SecurityControlModule securityControl = new SecurityControlModule(this);
-	protected RedstoneControlModule redstoneControl = new RedstoneControlModule(this);
 	protected TransferControlModule transferControl = new TransferControlModule(this);
 
 	protected int process;
@@ -57,12 +27,9 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 	protected float outputMod = 1.0F;
 	protected float energyMod = 1.0F;
 
-	public boolean isActive;
-	public boolean wasActive;
+	public TileMachine(AbstractTileType type) {
 
-	public TileMachine(Machine machine) {
-
-		this.machine = machine;
+		super(type);
 	}
 
 	@Override
@@ -70,6 +37,7 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 
 		boolean curActive = isActive;
 
+		// TODO: Remove
 		energyStorage.receiveEnergy(200, false);
 
 		if (isActive) {
@@ -102,178 +70,6 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 		updateActiveState(curActive);
 		// chargeEnergy();
 	}
-
-	// region PASSTHROUGHS
-	@Override
-	protected void onBlockBroken(World world, BlockPos pos, IBlockState state) {
-
-		for (ItemStorageCoFH slot : inventory.getAccessibleSlots()) {
-			ItemStack stack = slot.getItemStack();
-			if (stack.getCount() > stack.getMaxStackSize()) {
-				Utils.dropItemStackIntoWorldWithVelocity(stack.splitStack(stack.getCount() - stack.getMaxStackSize()), world, pos);
-			}
-			Utils.dropItemStackIntoWorldWithVelocity(slot.getItemStack(), world, pos);
-		}
-	}
-
-	@Override
-	protected int getLightValue() {
-
-		return isActive ? machine.getLight() : 0;
-	}
-	// endregion
-
-	// region GUI
-	protected boolean cacheRenderFluid() {
-
-		return false;
-	}
-
-	public EnergyStorageCoFH getEnergyStorage() {
-
-		return energyStorage;
-	}
-
-	public ItemStorageCoFH getSlot(int slot) {
-
-		return inventory.getSlot(slot);
-	}
-
-	public FluidStorageCoFH getTank(int tank) {
-
-		return tankInv.getTank(tank);
-	}
-
-	public FluidStack getRenderFluid() {
-
-		return null;
-	}
-
-	public int getScaledProgress(int scale) {
-
-		if (!isActive || processMax <= 0 || process <= 0) {
-			return 0;
-		}
-		return scale * (processMax - process) / processMax;
-	}
-
-	public int getScaledSpeed(int scale) {
-
-		if (!isActive) {
-			return 0;
-		}
-		return scale;
-		//		double power = energyStorage.getEnergyStored() / energyConfig.energyRamp;
-		//		power = MathHelper.clip(power, energyConfig.minPower, energyConfig.maxPower);
-		//		return MathHelper.round(scale * power / energyConfig.maxPower);
-	}
-
-	@Override
-	public Object getGuiClient(InventoryPlayer inventory) {
-
-		return machine.getGuiClient(inventory, this);
-	}
-
-	@Override
-	public Object getGuiServer(InventoryPlayer inventory) {
-
-		return machine.getGuiServer(inventory, this);
-	}
-
-	@Override
-	public boolean openGui(EntityPlayer player) {
-
-		if (canAccess(player)) {
-			player.openGui(ThermalSeries.instance, GUI_TILE, world, pos.getX(), pos.getY(), pos.getZ());
-			return true;
-		}
-		if (Utils.isServerWorld(world)) {
-			player.sendMessage(new TextComponentTranslation("chat.cofh.secure.warning", getOwnerName()));
-		}
-		return false;
-	}
-	// endregion
-
-	// region NETWORK
-	@Override
-	public PacketBufferCoFH getControlPacket(PacketBufferCoFH buffer) {
-
-		super.getControlPacket(buffer);
-
-		securityControl.writeToBuffer(buffer);
-		redstoneControl.writeToBuffer(buffer);
-		transferControl.writeToBuffer(buffer);
-
-		return buffer;
-	}
-
-	@Override
-	public PacketBufferCoFH getGuiPacket(PacketBufferCoFH buffer) {
-
-		super.getGuiPacket(buffer);
-
-		buffer.writeBoolean(isActive);
-		buffer.writeInt(energyStorage.getMaxEnergyStored());
-		buffer.writeInt(energyStorage.getEnergyStored());
-
-		buffer.writeInt(processMax);
-		buffer.writeInt(process);
-
-		for (int i = 0; i < tankInv.getTanks(); i++) {
-			buffer.writeFluidStack(tankInv.get(i));
-		}
-		return buffer;
-	}
-
-	@Override
-	public PacketBufferCoFH getStatePacket(PacketBufferCoFH buffer) {
-
-		super.getControlPacket(buffer);
-
-		buffer.writeBoolean(isActive);
-
-		return buffer;
-	}
-
-	@Override
-	public void handleControlPacket(PacketBufferCoFH buffer) {
-
-		super.handleControlPacket(buffer);
-
-		securityControl.readFromBuffer(buffer);
-		redstoneControl.readFromBuffer(buffer);
-		transferControl.readFromBuffer(buffer);
-	}
-
-	@Override
-	public void handleGuiPacket(PacketBufferCoFH buffer) {
-
-		super.handleGuiPacket(buffer);
-
-		isActive = buffer.readBoolean();
-		energyStorage.setCapacity(buffer.readInt());
-		energyStorage.setEnergyStored(buffer.readInt());
-
-		processMax = buffer.readInt();
-		process = buffer.readInt();
-
-		for (int i = 0; i < tankInv.getTanks(); i++) {
-			tankInv.set(i, buffer.readFluidStack());
-		}
-	}
-
-	@Override
-	public void handleStatePacket(PacketBufferCoFH buffer) {
-
-		super.handleControlPacket(buffer);
-
-		isActive = buffer.readBoolean();
-
-		if (machine.getLight() != 0) {
-			world.checkLight(pos);
-		}
-	}
-	// endregion
 
 	// region PROCESS
 	protected boolean canProcessStart() {
@@ -318,14 +114,9 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 	// endregion
 
 	// region HELPERS
-	public int invSize() {
+	protected boolean cacheRenderFluid() {
 
-		return inventory.getSlots();
-	}
-
-	public InventoryCoFH getInventory() {
-
-		return inventory;
+		return false;
 	}
 
 	protected boolean cacheRecipe() {
@@ -351,18 +142,6 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 		}
 	}
 
-	protected void updateActiveState(boolean curActive) {
-
-		if (!wasActive && curActive != isActive || wasActive && (timeTracker.hasDelayPassed(world, ConfigTSeries.tileUpdateDelay) || timeTracker.notSet())) {
-			wasActive = false;
-			world.setBlockState(pos, getBlockState().withProperty(ACTIVE, isActive));
-			if (machine.getLight() != 0) {
-				updateLighting();
-			}
-			PacketTileState.sendToClient(this);
-		}
-	}
-
 	protected boolean validateInputs() {
 
 		return true;
@@ -385,25 +164,72 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 		//		return energyStorage.getEnergyStored() / energyConfig.energyRamp;
 		return 20;
 	}
+	// endregion
 
-	protected List<? extends IItemStackHolder> getInputSlots() {
+	// region GUI
+	public FluidStack getRenderFluid() {
 
-		return inventory.getInputSlots();
+		return null;
 	}
 
-	protected List<? extends IFluidStackHolder> getInputTanks() {
+	public int getScaledProgress(int scale) {
 
-		return tankInv.getInputTanks();
+		if (!isActive || processMax <= 0 || process <= 0) {
+			return 0;
+		}
+		return scale * (processMax - process) / processMax;
 	}
 
-	protected List<? extends IItemStackHolder> getOutputSlots() {
+	public int getScaledSpeed(int scale) {
 
-		return inventory.getOutputSlots();
+		// TODO: Fix
+		if (!isActive) {
+			return 0;
+		}
+		return scale;
+		//		double power = energyStorage.getEnergyStored() / energyConfig.energyRamp;
+		//		power = MathHelper.clip(power, energyConfig.minPower, energyConfig.maxPower);
+		//		return MathHelper.round(scale * power / energyConfig.maxPower);
+	}
+	// endregion
+
+	// region NETWORK
+	@Override
+	public PacketBufferCoFH getControlPacket(PacketBufferCoFH buffer) {
+
+		super.getControlPacket(buffer);
+
+		transferControl.writeToBuffer(buffer);
+
+		return buffer;
 	}
 
-	protected List<? extends IFluidStackHolder> getOutputTanks() {
+	@Override
+	public PacketBufferCoFH getGuiPacket(PacketBufferCoFH buffer) {
 
-		return tankInv.getOutputTanks();
+		super.getGuiPacket(buffer);
+
+		buffer.writeInt(processMax);
+		buffer.writeInt(process);
+
+		return buffer;
+	}
+
+	@Override
+	public void handleControlPacket(PacketBufferCoFH buffer) {
+
+		super.handleControlPacket(buffer);
+
+		transferControl.readFromBuffer(buffer);
+	}
+
+	@Override
+	public void handleGuiPacket(PacketBufferCoFH buffer) {
+
+		super.handleGuiPacket(buffer);
+
+		processMax = buffer.readInt();
+		process = buffer.readInt();
 	}
 	// endregion
 
@@ -413,15 +239,9 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 
 		super.readFromNBT(nbt);
 
-		isActive = nbt.getBoolean(TAG_ACTIVE);
-		wasActive = nbt.getBoolean(TAG_ACTIVE_TRACK);
+		processMax = nbt.getInteger(TAG_PROCESS_MAX);
+		process = nbt.getInteger(TAG_PROCESS);
 
-		inventory.readFromNBT(nbt);
-		tankInv.readFromNBT(nbt);
-		energyStorage.readFromNBT(nbt);
-
-		nbt.setTag(TAG_SECURITY, securityControl.writeToNBT(new NBTTagCompound()));
-		nbt.setTag(TAG_REDSTONE, redstoneControl.writeToNBT(new NBTTagCompound()));
 		nbt.setTag(TAG_TRANSFER, transferControl.writeToNBT(new NBTTagCompound()));
 	}
 
@@ -430,51 +250,16 @@ public abstract class TileMachine extends TileCoFH implements ITickable, ISecura
 
 		super.writeToNBT(nbt);
 
-		nbt.setBoolean(TAG_ACTIVE, isActive);
-		nbt.setBoolean(TAG_ACTIVE_TRACK, wasActive);
+		nbt.setInteger(TAG_PROCESS_MAX, processMax);
+		nbt.setInteger(TAG_PROCESS, process);
 
-		inventory.writeToNBT(nbt);
-		tankInv.writeToNBT(nbt);
-		energyStorage.writeToNBT(nbt);
-
-		securityControl.readFromNBT(nbt.getCompoundTag(TAG_SECURITY));
-		redstoneControl.readFromNBT(nbt.getCompoundTag(TAG_REDSTONE));
 		transferControl.readFromNBT(nbt.getCompoundTag(TAG_TRANSFER));
+
 		return nbt;
 	}
 	// endregion
 
-	// region ITileCallback
-	@Override
-	public void onInventoryChange(int slot) {
-
-		if (Utils.isServerWorld(world) && slot < inventory.getInputSlots().size()) {
-			if (isActive && !validateInputs()) {
-				processOff();
-			}
-		}
-	}
-
-	@Override
-	public void onControlUpdate() {
-
-		PacketTileControl.sendToClient(this);
-	}
-	// endregion
-
 	// region MODULES
-	@Override
-	public SecurityControlModule securityControl() {
-
-		return securityControl;
-	}
-
-	@Override
-	public RedstoneControlModule redstoneControl() {
-
-		return redstoneControl;
-	}
-
 	@Override
 	public TransferControlModule transferControl() {
 

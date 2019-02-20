@@ -1,4 +1,4 @@
-package cofh.thermal.core.block.dynamo;
+package cofh.thermal.core.block;
 
 import cofh.core.block.BlockTileCoFH;
 import net.minecraft.block.state.BlockStateContainer;
@@ -14,35 +14,36 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static cofh.lib.util.Constants.FACING_ALL;
+import static cofh.lib.util.Constants.ACTIVE;
+import static cofh.lib.util.Constants.FACING_HORIZONTAL;
 
-public class BlockDynamo extends BlockTileCoFH {
+public class BlockAbstractTile4Way extends BlockTileCoFH {
 
-	public final Dynamo dynamo;
+	public final AbstractTileType type;
 
-	public BlockDynamo(Dynamo dynamo) {
+	public BlockAbstractTile4Way(AbstractTileType type) {
 
-		this.dynamo = dynamo;
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING_ALL, EnumFacing.UP));
+		this.type = type;
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING_HORIZONTAL, EnumFacing.NORTH).withProperty(ACTIVE, false));
 	}
 
-	@Override
 	protected void addBlockStateProperties(BlockStateContainer.Builder builder) {
 
 		super.addBlockStateProperties(builder);
-		builder.add(FACING_ALL);
+		builder.add(FACING_HORIZONTAL);
+		builder.add(ACTIVE);
 	}
 
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
 
-		return dynamo.createTileEntity(world, state);
+		return type.createTileEntity(world, state);
 	}
 
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 
-		return getDefaultState().withProperty(FACING_ALL, EnumFacing.getDirectionFromEntityLiving(pos, placer));
+		return getDefaultState().withProperty(FACING_HORIZONTAL, placer.getHorizontalFacing().getOpposite()).withProperty(ACTIVE, false);
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class BlockDynamo extends BlockTileCoFH {
 	@Override
 	public int getMetaFromState(IBlockState state) {
 
-		return state.getValue(FACING_ALL).getIndex();
+		return state.getValue(FACING_HORIZONTAL).getIndex() + (state.getValue(ACTIVE) ? 4 : 0);
 	}
 
 	@Override
@@ -69,7 +70,12 @@ public class BlockDynamo extends BlockTileCoFH {
 	public IBlockState getStateFromMeta(int meta) {
 
 		EnumFacing facing = EnumFacing.getFront(meta);
-		return getDefaultState().withProperty(FACING_ALL, facing);
+		boolean active = meta >= 4;
+
+		if (facing.getAxis() == EnumFacing.Axis.Y) {
+			facing = EnumFacing.NORTH;
+		}
+		return getDefaultState().withProperty(FACING_HORIZONTAL, facing).withProperty(ACTIVE, active);
 	}
 	// endregion
 }

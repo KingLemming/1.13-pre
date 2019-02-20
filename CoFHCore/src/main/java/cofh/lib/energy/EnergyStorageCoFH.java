@@ -191,6 +191,16 @@ public class EnergyStorageCoFH implements IEnergyStorage, IResourceStorage {
 	}
 
 	@Override
+	public boolean clear() {
+
+		if (isEmpty()) {
+			return false;
+		}
+		energy = 0;
+		return true;
+	}
+
+	@Override
 	public boolean isEmpty() {
 
 		return energy <= 0 && capacity > 0;

@@ -10,6 +10,7 @@ import static cofh.lib.util.Constants.*;
 public class RedstoneControlModule implements IRedstoneControllable {
 
 	protected IRedstoneControllableTile tile;
+	protected boolean enabled;
 
 	protected int power;
 	protected int threshold;
@@ -17,7 +18,13 @@ public class RedstoneControlModule implements IRedstoneControllable {
 
 	public RedstoneControlModule(IRedstoneControllableTile tile) {
 
+		this(tile, true);
+	}
+
+	public RedstoneControlModule(IRedstoneControllableTile tile, boolean enabled) {
+
 		this.tile = tile;
+		this.enabled = enabled;
 	}
 
 	// region NETWORK
@@ -57,6 +64,12 @@ public class RedstoneControlModule implements IRedstoneControllable {
 	// endregion
 
 	// region IRedstoneControl
+	@Override
+	public boolean isControllable() {
+
+		return enabled;
+	}
+
 	@Override
 	public int getPower() {
 

@@ -3,6 +3,7 @@ package cofh.thermal.core.block.machine;
 import cofh.lib.fluid.IFluidStackHolder;
 import cofh.lib.inventory.IItemStackHolder;
 import cofh.lib.util.Utils;
+import cofh.thermal.core.block.AbstractTileType;
 import cofh.thermal.core.util.recipes.IMachineRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -21,9 +22,9 @@ public abstract class TileMachineProcess extends TileMachine {
 	protected List<Integer> itemInputCounts = new ArrayList<>();
 	protected List<Integer> fluidInputCounts = new ArrayList<>();
 
-	public TileMachineProcess(Machine machine) {
+	public TileMachineProcess(AbstractTileType type) {
 
-		super(machine);
+		super(type);
 	}
 
 	// region PROCESS

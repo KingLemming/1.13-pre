@@ -60,6 +60,8 @@ public abstract class AbstractContentParser implements IContentParser {
 	}
 	// endregion
 
+	// TODO: Fix
+
 	// region HELPERS
 	public boolean preCheck(JsonObject object) {
 
@@ -73,6 +75,14 @@ public abstract class AbstractContentParser implements IContentParser {
 			return parseDependencies(object.get(DEPENDENCY));
 		}
 		return true;
+	}
+
+	public static void parseInput(List<ItemStack> items, List<FluidStack> fluids, JsonElement element) {
+
+	}
+
+	public static void parseOutput(List<ItemStack> items, List<Float> chances, List<FluidStack> fluids, JsonElement element) {
+
 	}
 
 	public static ItemStack parseItemStack(JsonElement element) {
@@ -151,6 +161,30 @@ public abstract class AbstractContentParser implements IContentParser {
 		return stack;
 	}
 
+	public static void parseItemStacks(List<ItemStack> items, JsonElement element) {
+
+		if (element.isJsonArray()) {
+			for (JsonElement arrayElement : element.getAsJsonArray()) {
+				items.add(parseItemStack(arrayElement));
+			}
+		} else {
+			items.add(parseItemStack(element));
+		}
+	}
+
+	public static void parseItemStacks(List<ItemStack> items, List<Float> chances, JsonElement element) {
+
+		if (element.isJsonArray()) {
+			for (JsonElement arrayElement : element.getAsJsonArray()) {
+				items.add(parseItemStack(arrayElement));
+				chances.add(parseChance(arrayElement));
+			}
+		} else {
+			items.add(parseItemStack(element));
+			chances.add(parseChance(element));
+		}
+	}
+
 	public static FluidStack parseFluidStack(JsonElement element) {
 
 		if (element == null || element.isJsonNull()) {
@@ -192,6 +226,10 @@ public abstract class AbstractContentParser implements IContentParser {
 		return stack;
 	}
 
+	public static void parseFluidStacks(List<FluidStack> fluids, JsonElement element) {
+
+	}
+
 	public static float parseChance(JsonElement element) {
 
 		JsonObject object = element.getAsJsonObject();
@@ -212,30 +250,6 @@ public abstract class AbstractContentParser implements IContentParser {
 			return oreNameExists(depObject.get(ORE).getAsString());
 		}
 		return true;
-	}
-
-	public static void parseItemStacks(List<ItemStack> stacks, JsonElement element) {
-
-		if (element.isJsonArray()) {
-			for (JsonElement arrayElement : element.getAsJsonArray()) {
-				stacks.add(parseItemStack(arrayElement));
-			}
-		} else {
-			stacks.add(parseItemStack(element));
-		}
-	}
-
-	public static void parseItemStacks(List<ItemStack> stacks, List<Float> chances, JsonElement element) {
-
-		if (element.isJsonArray()) {
-			for (JsonElement arrayElement : element.getAsJsonArray()) {
-				stacks.add(parseItemStack(arrayElement));
-				chances.add(parseChance(arrayElement));
-			}
-		} else {
-			stacks.add(parseItemStack(element));
-			chances.add(parseChance(element));
-		}
 	}
 
 	public static boolean parseDependencies(JsonElement element) {

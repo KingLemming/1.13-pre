@@ -15,13 +15,20 @@ import static cofh.lib.util.Constants.*;
 public class SecurityControlModule implements ISecurable {
 
 	protected ISecurableTile tile;
+	protected boolean enabled;
 
 	protected GameProfile owner = SecurityHelper.DEFAULT_GAME_PROFILE;
 	protected AccessMode access = AccessMode.PUBLIC;
 
 	public SecurityControlModule(ISecurableTile tile) {
 
+		this(tile, true);
+	}
+
+	public SecurityControlModule(ISecurableTile tile, boolean enabled) {
+
 		this.tile = tile;
+		this.enabled = enabled;
 	}
 
 	// region NETWORK
@@ -66,6 +73,12 @@ public class SecurityControlModule implements ISecurable {
 	// endregion
 
 	// region ISecurable
+	@Override
+	public boolean isSecurable() {
+
+		return enabled;
+	}
+
 	@Override
 	public boolean canAccess(EntityPlayer player) {
 

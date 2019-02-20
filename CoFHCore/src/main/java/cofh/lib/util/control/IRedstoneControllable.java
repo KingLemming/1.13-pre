@@ -2,11 +2,6 @@ package cofh.lib.util.control;
 
 public interface IRedstoneControllable {
 
-	default boolean getState() {
-
-		return getMode().matches(getPower(), getThreshold());
-	}
-
 	int getPower();
 
 	int getThreshold();
@@ -16,6 +11,19 @@ public interface IRedstoneControllable {
 	void setPower(int power);
 
 	void setControl(int threshold, ControlMode mode);
+
+	default boolean getState() {
+
+		return getMode().matches(getPower(), getThreshold());
+	}
+
+	/**
+	 * This returns whether or not redstone control functionality is enabled at all.
+	 */
+	default boolean isControllable() {
+
+		return true;
+	}
 
 	// region CONTROL MODE
 	enum ControlMode {

@@ -20,6 +20,9 @@ public interface ISecurable {
 		return getOwner().getName();
 	}
 
+	/**
+	 * This returns whether or not security functionality is enabled at all.
+	 */
 	default boolean isSecurable() {
 
 		return true;

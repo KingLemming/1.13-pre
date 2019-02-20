@@ -40,7 +40,7 @@ public class TankArrayCoFH extends SimpleFluidHandler {
 	public void clear() {
 
 		for (FluidStorageCoFH tank : tanks) {
-			tank.drain(tank.getFluidAmount(), true);
+			tank.clear();
 		}
 	}
 

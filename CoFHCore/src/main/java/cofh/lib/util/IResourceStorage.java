@@ -4,6 +4,8 @@ public interface IResourceStorage {
 
 	void modifyAmount(int amount);
 
+	boolean clear();
+
 	boolean isEmpty();
 
 	int getSpace();
