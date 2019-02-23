@@ -26,13 +26,10 @@ public class CentrifugeRecipeParser extends AbstractContentParser {
 	@Override
 	protected void parseObject(JsonObject object) {
 
-		if (!preCheck(object)) {
-			return;
-		}
 		ItemStack input;
 		ArrayList<ItemStack> output = new ArrayList<>();
 		ArrayList<Float> chance = new ArrayList<>();
-		FluidStack fluid = null;
+		ArrayList<FluidStack> outputFluids = new ArrayList<>();
 		int energy = CentrifugeRecipeManager.instance().getDefaultEnergy();
 
 		/* INPUT */
@@ -45,21 +42,17 @@ public class CentrifugeRecipeParser extends AbstractContentParser {
 		}
 
 		/* OUTPUT */
-		parseItemStacks(output, chance, object.get(OUTPUT));
-
-		/* FLUID */
-		if (object.has(FLUID)) {
-			fluid = parseFluidStack(object.get(FLUID));
-		}
+		parseOutputs(output, chance, outputFluids, object.get(OUTPUT));
 
 		/* ENERGY */
 		if (object.has(ENERGY)) {
 			energy = object.get(ENERGY).getAsInt();
-		} else if (object.has(ENERGY_MOD)) {
+		}
+		if (object.has(ENERGY_MOD)) {
 			energy *= object.get(ENERGY_MOD).getAsFloat();
 		}
 
-		CentrifugeRecipeManager.instance().addRecipe(energy, input, output, chance, fluid);
+		CentrifugeRecipeManager.instance().addRecipe(energy, input, output, chance, outputFluids);
 	}
 
 	@Override

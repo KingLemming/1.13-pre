@@ -24,7 +24,7 @@ public class FluidHelper {
 
 	}
 
-	public static int getFluidHashcode(FluidStack stack) {
+	public static int fluidHashcode(FluidStack stack) {
 
 		return stack.tag != null ? stack.getFluid().getName().hashCode() + 31 * stack.tag.toString().hashCode() : stack.getFluid().getName().hashCode();
 	}
@@ -121,44 +121,44 @@ public class FluidHelper {
 	// endregion
 
 	// region PROPERTY HELPERS
-	public static int getFluidLuminosity(Fluid fluid) {
+	public static int luminosity(Fluid fluid) {
 
 		return fluid == null ? 0 : fluid.getLuminosity();
 	}
 
-	public static int getFluidLuminosity(FluidStack stack) {
+	public static int luminosity(FluidStack stack) {
 
-		return stack == null ? 0 : getFluidLuminosity(stack.getFluid());
+		return stack == null ? 0 : luminosity(stack.getFluid());
 	}
 
-	public static int getFluidDensity(Fluid fluid) {
+	public static int density(Fluid fluid) {
 
 		return fluid == null ? 0 : fluid.getDensity();
 	}
 
-	public static int getFluidDensity(FluidStack stack) {
+	public static int density(FluidStack stack) {
 
-		return stack == null ? 0 : getFluidDensity(stack.getFluid());
+		return stack == null ? 0 : density(stack.getFluid());
 	}
 
-	public static int getFluidTemperature(Fluid fluid) {
+	public static int temperature(Fluid fluid) {
 
 		return fluid == null ? 0 : fluid.getTemperature();
 	}
 
-	public static int getFluidTemperature(FluidStack stack) {
+	public static int temperature(FluidStack stack) {
 
-		return stack == null ? 0 : getFluidTemperature(stack.getFluid());
+		return stack == null ? 0 : temperature(stack.getFluid());
 	}
 
-	public static int getFluidViscosity(Fluid fluid) {
+	public static int viscosity(Fluid fluid) {
 
 		return fluid == null ? 0 : fluid.getViscosity();
 	}
 
-	public static int getFluidViscosity(FluidStack stack) {
+	public static int viscosity(FluidStack stack) {
 
-		return stack == null ? 0 : getFluidViscosity(stack.getFluid());
+		return stack == null ? 0 : viscosity(stack.getFluid());
 	}
 	// endregion
 

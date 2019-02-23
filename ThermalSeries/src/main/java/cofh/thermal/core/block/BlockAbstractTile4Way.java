@@ -9,7 +9,6 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -57,24 +56,14 @@ public class BlockAbstractTile4Way extends BlockTileCoFH {
 	@Override
 	public int getMetaFromState(IBlockState state) {
 
-		return state.getValue(FACING_HORIZONTAL).getIndex() + (state.getValue(ACTIVE) ? 4 : 0);
-	}
-
-	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-
-		return state;
+		return state.getValue(FACING_HORIZONTAL).getHorizontalIndex() + (state.getValue(ACTIVE) ? 4 : 0);
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 
-		EnumFacing facing = EnumFacing.getFront(meta);
+		EnumFacing facing = EnumFacing.getHorizontal(meta);
 		boolean active = meta >= 4;
-
-		if (facing.getAxis() == EnumFacing.Axis.Y) {
-			facing = EnumFacing.NORTH;
-		}
 		return getDefaultState().withProperty(FACING_HORIZONTAL, facing).withProperty(ACTIVE, active);
 	}
 	// endregion

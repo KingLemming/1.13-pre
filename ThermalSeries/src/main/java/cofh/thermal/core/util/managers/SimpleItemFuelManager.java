@@ -5,6 +5,7 @@ import cofh.lib.inventory.IItemStackHolder;
 import cofh.lib.inventory.SimpleItemStackHolder;
 import cofh.lib.util.comparison.ComparableItemStackValidated;
 import cofh.thermal.core.util.recipes.IDynamoFuel;
+import cofh.thermal.core.util.recipes.SimpleItemFuel;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Simple fuel manager - single item input.
+ * Basic fuel manager - single item key'd.
  */
 public abstract class SimpleItemFuelManager extends AbstractManager implements IFuelManager {
 
@@ -30,7 +31,6 @@ public abstract class SimpleItemFuelManager extends AbstractManager implements I
 		super(defaultEnergy);
 	}
 
-	// region HELPERS
 	public boolean validFuel(ItemStack stack) {
 
 		return validFuel(Collections.singletonList(new SimpleItemStackHolder(stack)), Collections.emptyList());
@@ -40,7 +40,27 @@ public abstract class SimpleItemFuelManager extends AbstractManager implements I
 
 		return hasCustomOreID(stack) ? customMap.remove(customInput(stack)) : defaultMap.remove(defaultInput(stack));
 	}
-	// endregion
+
+	public IDynamoFuel addFuel(ItemStack input) {
+
+		return addFuel(defaultEnergy, input);
+	}
+
+	public IDynamoFuel addFuel(int energy, ItemStack input) {
+
+		if (input.isEmpty() || energy < MIN_ENERGY || energy > MAX_ENERGY || validFuel(input)) {
+			return null;
+		}
+		energy = (energy * scaleFactor) / 100;
+
+		SimpleItemFuel fuel = new SimpleItemFuel(input, energy);
+		if (hasCustomOreID(input)) {
+			customMap.put(customInput(input), fuel);
+		} else {
+			defaultMap.put(defaultInput(input), fuel);
+		}
+		return fuel;
+	}
 
 	// region IFuelManager
 	@Override

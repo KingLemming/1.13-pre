@@ -30,7 +30,7 @@ public class Constants {
 
 	// region MOD IDS
 	public static final String ID_COFH_CORE = "cofh_core";
-	public static final String ID_COFH_LIB = "cofh_0o000lib";
+	public static final String ID_COFH_LIB = "cofh_lib";
 
 	public static final String ID_THERMAL_SERIES = "thermal";
 
@@ -60,6 +60,7 @@ public class Constants {
 	public static final int RF_PER_FURNACE_UNIT = 10;
 
 	public static final float BASE_CHANCE = 1.0F;
+	public static final float BASE_CHANCE_LOCKED = -1.0F;
 
 	public static final int TANK_SMALL = Fluid.BUCKET_VOLUME * 4;
 	public static final int TANK_MEDIUM = Fluid.BUCKET_VOLUME * 8;

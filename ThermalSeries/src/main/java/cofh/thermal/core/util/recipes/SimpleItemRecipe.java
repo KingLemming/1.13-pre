@@ -9,31 +9,24 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-import static cofh.lib.util.Constants.BASE_CHANCE;
+import static cofh.lib.util.Constants.BASE_CHANCE_LOCKED;
 
+/**
+ * Basic recipe class - single item key'd.
+ */
 public class SimpleItemRecipe extends AbstractRecipe {
 
 	// region SINGLE ITEM OUTPUT
-	public SimpleItemRecipe(ItemStack input, ItemStack output, int energy) {
-
-		this(input, output, -BASE_CHANCE, energy);
-	}
-
 	public SimpleItemRecipe(ItemStack input, ItemStack output, float chance, int energy) {
 
 		super(energy);
 		this.inputItems.add(input);
 		this.outputItems.add(output);
-		this.outputChances.add(chance);
+		this.outputItemChances.add(chance);
 	}
 	// endregion
 
 	// region MULTIPLE ITEM OUTPUT
-	public SimpleItemRecipe(ItemStack input, List<ItemStack> output, int energy) {
-
-		this(input, output, null, energy);
-	}
-
 	public SimpleItemRecipe(ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, int energy) {
 
 		super(energy);
@@ -41,11 +34,11 @@ public class SimpleItemRecipe extends AbstractRecipe {
 		this.outputItems.addAll(output);
 
 		if (chance != null) {
-			this.outputChances.addAll(chance);
+			this.outputItemChances.addAll(chance);
 		}
-		if (this.outputChances.size() < this.outputItems.size()) {
-			for (int i = this.outputChances.size(); i < this.outputItems.size(); i++) {
-				this.outputChances.add(-BASE_CHANCE);
+		if (this.outputItemChances.size() < this.outputItems.size()) {
+			for (int i = this.outputItemChances.size(); i < this.outputItems.size(); i++) {
+				this.outputItemChances.add(BASE_CHANCE_LOCKED);
 			}
 		}
 	}
@@ -61,30 +54,31 @@ public class SimpleItemRecipe extends AbstractRecipe {
 	// endregion
 
 	// region ITEM + FLUID OUTPUT
-	public SimpleItemRecipe(ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, FluidStack fluid, int energy) {
+	public SimpleItemRecipe(ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, @Nullable List<FluidStack> fluids, int energy) {
 
 		super(energy);
 		this.inputItems.add(input);
 		this.outputItems.addAll(output);
 
 		if (chance != null) {
-			this.outputChances.addAll(chance);
+			this.outputItemChances.addAll(chance);
 		}
-		if (this.outputChances.size() < this.outputItems.size()) {
-			for (int i = this.outputChances.size(); i < this.outputItems.size(); i++) {
-				this.outputChances.add(-BASE_CHANCE);
+		if (this.outputItemChances.size() < this.outputItems.size()) {
+			for (int i = this.outputItemChances.size(); i < this.outputItems.size(); i++) {
+				this.outputItemChances.add(BASE_CHANCE_LOCKED);
 			}
 		}
-		if (fluid != null) {
-			this.outputFluids.add(fluid);
+		if (fluids != null) {
+			this.outputFluids.addAll(fluids);
 		}
 	}
 	// endregion
 
+	// region IMachineRecipe
 	@Override
 	public List<Integer> getInputItemCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
 
 		return Collections.singletonList(this.inputItems.get(0).getCount());
 	}
-
+	// endregion
 }

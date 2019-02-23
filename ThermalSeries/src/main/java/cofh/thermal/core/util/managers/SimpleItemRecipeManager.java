@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static cofh.lib.util.Constants.BASE_CHANCE;
+import static cofh.lib.util.Constants.BASE_CHANCE_LOCKED;
 
 /**
  * Basic recipe manager - single item key'd.
@@ -65,17 +65,7 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 
 	public IMachineRecipe addRecipe(int energy, ItemStack input, ItemStack output) {
 
-		return addRecipe(energy, input, output, BASE_CHANCE);
-	}
-
-	public IMachineRecipe addRecipe(ItemStack input, ItemStack output, float chance) {
-
-		return addRecipe(defaultEnergy, input, output, chance);
-	}
-
-	public IMachineRecipe addRecipe(ItemStack input, ItemStack output) {
-
-		return addRecipe(defaultEnergy, input, output, BASE_CHANCE);
+		return addRecipe(energy, input, output, BASE_CHANCE_LOCKED);
 	}
 	// endregion
 
@@ -100,21 +90,6 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 		}
 		return recipe;
 	}
-
-	public IMachineRecipe addRecipe(int energy, ItemStack input, List<ItemStack> output) {
-
-		return addRecipe(energy, input, output, null);
-	}
-
-	public IMachineRecipe addRecipe(ItemStack input, List<ItemStack> output) {
-
-		return addRecipe(defaultEnergy, input, output, null);
-	}
-
-	public IMachineRecipe addRecipe(ItemStack input, List<ItemStack> output, List<Float> chance) {
-
-		return addRecipe(defaultEnergy, input, output, chance);
-	}
 	// endregion
 
 	// region SINGLE FLUID OUTPUT
@@ -136,9 +111,9 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 	// endregion
 
 	// region MULTIPLE ITEM + SINGLE FLUID OUTPUT
-	public IMachineRecipe addRecipe(int energy, ItemStack input, List<ItemStack> output, List<Float> chance, FluidStack fluid) {
+	public IMachineRecipe addRecipe(int energy, ItemStack input, List<ItemStack> output, List<Float> chance, List<FluidStack> outputFluids) {
 
-		if (input.isEmpty() || output.isEmpty() && fluid == null || output.size() > maxOutputItems || energy <= 0 || validRecipe(input)) {
+		if (input.isEmpty() || output.isEmpty() && outputFluids.isEmpty() || output.size() > maxOutputItems || outputFluids.size() > maxOutputFluids || energy <= 0 || validRecipe(input)) {
 			return null;
 		}
 		for (ItemStack stack : output) {
@@ -146,9 +121,14 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 				return null;
 			}
 		}
+		for (FluidStack stack : outputFluids) {
+			if (stack == null) {
+				return null;
+			}
+		}
 		energy = (energy * scaleFactor) / 100;
 
-		SimpleItemRecipe recipe = new SimpleItemRecipe(input, output, chance, fluid, energy);
+		SimpleItemRecipe recipe = new SimpleItemRecipe(input, output, chance, outputFluids, energy);
 		if (hasCustomOreID(input)) {
 			customMap.put(customInput(input), recipe);
 		} else {

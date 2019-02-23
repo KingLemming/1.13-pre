@@ -30,7 +30,7 @@ public interface IMachineRecipe {
 		return Collections.emptyList();
 	}
 
-	default List<Float> getOutputChances(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
+	default List<Float> getOutputItemChances(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
 
 		return Collections.emptyList();
 	}

@@ -32,6 +32,7 @@ public class PacketRedstoneControl extends PacketBase<PacketRedstoneControl> imp
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile instanceof IRedstoneControllableTile) {
 			((IRedstoneControllableTile) tile).setControl(threshold, ControlMode.VALUES[mode]);
+			System.out.println("woooo");
 		}
 	}
 

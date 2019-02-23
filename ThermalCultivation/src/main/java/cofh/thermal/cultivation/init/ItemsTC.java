@@ -24,9 +24,10 @@ public class ItemsTC {
 
 	public static void registerCrops() {
 
+		cropOnion = registerItem("crop_onion", "cropOnion", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
+
 		cropBellPepper = registerItem("crop_bell_pepper", "cropBellPepper", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 		cropGreenBean = registerItem("crop_green_bean", "cropGreenBean", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
-		cropOnion = registerItem("crop_onion", "cropOnion", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 		cropSpinach = registerItem("crop_spinach", "cropSpinach", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 		cropTomato = registerItem("crop_tomato", "cropTomato", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 	}
@@ -44,9 +45,10 @@ public class ItemsTC {
 	// endregion
 
 	// region CROPS
+	public static ItemStack cropOnion;
+
 	public static ItemStack cropBellPepper;
 	public static ItemStack cropGreenBean;
-	public static ItemStack cropOnion;
 	public static ItemStack cropSpinach;
 	public static ItemStack cropTomato;
 

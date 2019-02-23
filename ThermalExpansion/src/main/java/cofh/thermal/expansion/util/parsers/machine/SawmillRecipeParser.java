@@ -25,9 +25,6 @@ public class SawmillRecipeParser extends AbstractContentParser {
 	@Override
 	protected void parseObject(JsonObject object) {
 
-		if (!preCheck(object)) {
-			return;
-		}
 		ItemStack input;
 		ArrayList<ItemStack> output = new ArrayList<>();
 		ArrayList<Float> chance = new ArrayList<>();
@@ -48,7 +45,8 @@ public class SawmillRecipeParser extends AbstractContentParser {
 		/* ENERGY */
 		if (object.has(ENERGY)) {
 			energy = object.get(ENERGY).getAsInt();
-		} else if (object.has(ENERGY_MOD)) {
+		}
+		if (object.has(ENERGY_MOD)) {
 			energy *= object.get(ENERGY_MOD).getAsFloat();
 		}
 

@@ -111,6 +111,12 @@ public abstract class AbstractTileBase extends TileCoFH implements ISecurableTil
 	}
 
 	@Override
+	protected void onNeighborBlockChange() {
+
+		redstoneControl.setPower(world.isBlockIndirectlyGettingPowered(pos));
+	}
+
+	@Override
 	protected int getLightValue() {
 
 		return isActive ? type.getLight() : 0;
@@ -245,8 +251,8 @@ public abstract class AbstractTileBase extends TileCoFH implements ISecurableTil
 		tankInv.readFromNBT(nbt);
 		energyStorage.readFromNBT(nbt);
 
-		nbt.setTag(TAG_SECURITY, securityControl.writeToNBT(new NBTTagCompound()));
-		nbt.setTag(TAG_REDSTONE, redstoneControl.writeToNBT(new NBTTagCompound()));
+		securityControl.readFromNBT(nbt.getCompoundTag(TAG_SECURITY));
+		redstoneControl.readFromNBT(nbt.getCompoundTag(TAG_REDSTONE));
 	}
 
 	@Override
@@ -261,8 +267,8 @@ public abstract class AbstractTileBase extends TileCoFH implements ISecurableTil
 		tankInv.writeToNBT(nbt);
 		energyStorage.writeToNBT(nbt);
 
-		securityControl.readFromNBT(nbt.getCompoundTag(TAG_SECURITY));
-		redstoneControl.readFromNBT(nbt.getCompoundTag(TAG_REDSTONE));
+		nbt.setTag(TAG_SECURITY, securityControl.writeToNBT(new NBTTagCompound()));
+		nbt.setTag(TAG_REDSTONE, redstoneControl.writeToNBT(new NBTTagCompound()));
 
 		return nbt;
 	}

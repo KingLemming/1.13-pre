@@ -182,7 +182,7 @@ public abstract class TileMachineProcess extends TileMachine {
 
 		List<ItemStack> recipeOutputItems = curRecipe.getOutputItems(slotInputs, tankInputs);
 		List<FluidStack> recipeOutputFluids = curRecipe.getOutputFluids(slotInputs, tankInputs);
-		List<Float> recipeOutputChances = curRecipe.getOutputChances(slotInputs, tankInputs);
+		List<Float> recipeOutputChances = curRecipe.getOutputItemChances(slotInputs, tankInputs);
 
 		// Output Items
 		for (int i = 0; i < recipeOutputItems.size(); i++) {

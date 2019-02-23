@@ -1,32 +1,32 @@
-package cofh.thermal.expansion.util.parsers.machine;
+package cofh.thermal.expansion.util.parsers.dynamo;
 
 import cofh.thermal.core.util.parsers.AbstractContentParser;
-import cofh.thermal.expansion.util.managers.machine.FurnaceRecipeManager;
+import cofh.thermal.expansion.util.managers.dynamo.SteamFuelManager;
 import com.google.gson.JsonObject;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.item.ItemStack;
 
 import java.util.Set;
 
-public class FurnaceRecipeParser extends AbstractContentParser {
+public class SteamFuelParser extends AbstractContentParser {
 
-	private static final FurnaceRecipeParser INSTANCE = new FurnaceRecipeParser();
+	private static final SteamFuelParser INSTANCE = new SteamFuelParser();
 
-	public static FurnaceRecipeParser instance() {
+	public static SteamFuelParser instance() {
 
 		return INSTANCE;
 	}
 
-	private FurnaceRecipeParser() {
+	private SteamFuelParser() {
 
 	}
 
+	// TODO: Fix
 	@Override
 	protected void parseObject(JsonObject object) {
 
 		ItemStack input;
-		ItemStack output;
-		int energy = FurnaceRecipeManager.instance().getDefaultEnergy();
+		int energy = SteamFuelManager.instance().getDefaultEnergy();
 
 		/* INPUT */
 		input = parseItemStack(object.get(INPUT));
@@ -37,9 +37,6 @@ public class FurnaceRecipeParser extends AbstractContentParser {
 			return;
 		}
 
-		/* OUTPUT */
-		output = parseItemStack(object.get(OUTPUT));
-
 		/* ENERGY */
 		if (object.has(ENERGY)) {
 			energy = object.get(ENERGY).getAsInt();
@@ -48,17 +45,16 @@ public class FurnaceRecipeParser extends AbstractContentParser {
 			energy *= object.get(ENERGY_MOD).getAsFloat();
 		}
 
-		FurnaceRecipeManager.instance().addRecipe(energy, input, output);
+		SteamFuelManager.instance().addFuel(energy, input);
 	}
 
 	@Override
 	public void postProcess() {
 
 		for (ItemStack stack : removeQueue) {
-			FurnaceRecipeManager.instance().removeRecipe(stack);
+			SteamFuelManager.instance().removeFuel(stack);
 		}
 	}
 
 	Set<ItemStack> removeQueue = new ObjectOpenHashSet<>();
-
 }

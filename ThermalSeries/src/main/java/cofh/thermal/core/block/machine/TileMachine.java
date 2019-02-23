@@ -242,7 +242,7 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		processMax = nbt.getInteger(TAG_PROCESS_MAX);
 		process = nbt.getInteger(TAG_PROCESS);
 
-		nbt.setTag(TAG_TRANSFER, transferControl.writeToNBT(new NBTTagCompound()));
+		transferControl.readFromNBT(nbt.getCompoundTag(TAG_TRANSFER));
 	}
 
 	@Override
@@ -253,7 +253,7 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		nbt.setInteger(TAG_PROCESS_MAX, processMax);
 		nbt.setInteger(TAG_PROCESS, process);
 
-		transferControl.readFromNBT(nbt.getCompoundTag(TAG_TRANSFER));
+		nbt.setTag(TAG_TRANSFER, transferControl.writeToNBT(new NBTTagCompound()));
 
 		return nbt;
 	}

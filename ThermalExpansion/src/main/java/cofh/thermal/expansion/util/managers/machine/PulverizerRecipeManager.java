@@ -1,8 +1,12 @@
 package cofh.thermal.expansion.util.managers.machine;
 
 import cofh.thermal.core.util.managers.SimpleItemRecipeManager;
+import cofh.thermal.core.util.recipes.IMachineRecipe;
+import cofh.thermal.expansion.util.recipes.PulverizerOreRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.List;
 
 import static cofh.lib.util.Constants.*;
 import static cofh.lib.util.helpers.ItemHelper.cloneStack;
@@ -38,8 +42,52 @@ public class PulverizerRecipeManager extends SimpleItemRecipeManager {
 		defaultValidator.addExact("treeLeaves");
 	}
 
+	public float getOreMultiplier() {
+
+		return oreMultiplier;
+	}
+
+	// region ORE RECIPES
+	public IMachineRecipe addOreRecipe(int energy, ItemStack input, ItemStack output, float chance) {
+
+		if (maxOutputItems <= 0 || input.isEmpty() || output.isEmpty() || energy <= 0 || validRecipe(input)) {
+			return null;
+		}
+		energy = (energy * scaleFactor) / 100;
+
+		PulverizerOreRecipe recipe = new PulverizerOreRecipe(input, output, chance, energy);
+		if (hasCustomOreID(input)) {
+			customMap.put(customInput(input), recipe);
+		} else {
+			defaultMap.put(defaultInput(input), recipe);
+		}
+		return recipe;
+	}
+
+	public IMachineRecipe addOreRecipe(int energy, ItemStack input, List<ItemStack> output, List<Float> chance) {
+
+		if (input.isEmpty() || output.isEmpty() || output.size() > maxOutputItems || energy <= 0 || validRecipe(input)) {
+			return null;
+		}
+		for (ItemStack stack : output) {
+			if (stack.isEmpty()) {
+				return null;
+			}
+		}
+		energy = (energy * scaleFactor) / 100;
+
+		PulverizerOreRecipe recipe = new PulverizerOreRecipe(input, output, chance, energy);
+		if (hasCustomOreID(input)) {
+			customMap.put(customInput(input), recipe);
+		} else {
+			defaultMap.put(defaultInput(input), recipe);
+		}
+		return recipe;
+	}
+	// endregion
+
 	// region HELPERS
-	private void addDefaultRecipes(String oreType) {
+	private void addDefaultOreRecipes(String oreType) {
 
 		if (oreType == null || oreType.isEmpty()) {
 			return;
@@ -65,20 +113,21 @@ public class PulverizerRecipeManager extends SimpleItemRecipeManager {
 		if (!ingot.isEmpty() && !gem.isEmpty()) {
 			return; // This is a confusing Ore and makes no sense. Don't touch.
 		}
+		int energy = defaultEnergy;
 		int chance1 = (int) (BASE_CHANCE * oreMultiplier);
 		int chance2 = chance1 * 2;
 
 		if (!gem.isEmpty()) {
-			addRecipe(ore, cloneStack(gem, 1), chance1);
-			addRecipe(oreNether, cloneStack(gem, 1), chance2);
-			addRecipe(oreEnd, cloneStack(gem, 1), chance2);
-			addRecipe(defaultEnergy / 2, gem, cloneStack(dust, 1), -BASE_CHANCE);
+			addOreRecipe(energy, ore, cloneStack(gem, 1), chance1);
+			addOreRecipe(energy * 2, oreNether, cloneStack(gem, 1), chance2);
+			addOreRecipe(energy * 2, oreEnd, cloneStack(gem, 1), chance2);
+			addRecipe(energy / 2, gem, cloneStack(dust, 1));
 		} else {
-			addRecipe(ore, cloneStack(dust, 1), chance1);
-			addRecipe(oreNether, cloneStack(dust, 1), chance2);
-			addRecipe(oreEnd, cloneStack(dust, 1), chance2);
+			addOreRecipe(energy, ore, cloneStack(dust, 1), chance1);
+			addOreRecipe(energy * 2, oreNether, cloneStack(dust, 1), chance2);
+			addOreRecipe(energy * 2, oreEnd, cloneStack(dust, 1), chance2);
 			if (defaultIngotRecipes) {
-				addRecipe(defaultEnergy / 2, ingot, cloneStack(dust, 1), -BASE_CHANCE);
+				addRecipe(energy / 2, ingot, cloneStack(dust, 1));
 			}
 		}
 	}
@@ -116,9 +165,9 @@ public class PulverizerRecipeManager extends SimpleItemRecipeManager {
 		if (defaultOreRecipes) {
 			for (String oreName : OreDictionary.getOreNames()) {
 				if (oreName.startsWith(PREFIX_ORE) || oreName.startsWith(PREFIX_GEM)) {
-					addDefaultRecipes(oreName.substring(3));
+					addDefaultOreRecipes(oreName.substring(3));
 				} else if (oreName.startsWith(PREFIX_DUST)) {
-					addDefaultRecipes(oreName.substring(4));
+					addDefaultOreRecipes(oreName.substring(4));
 				}
 			}
 		}

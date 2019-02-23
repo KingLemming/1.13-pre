@@ -48,7 +48,7 @@ public class RedstoneControlModule implements IRedstoneControllable {
 
 		power = nbt.getByte(TAG_RS_POWER);
 		threshold = nbt.getByte(TAG_RS_THRESHOLD);
-		mode = ControlMode.VALUES[nbt.getByte(TAG_RS_MODE)];
+		mode = !isControllable() ? ControlMode.DISABLED : ControlMode.VALUES[nbt.getByte(TAG_RS_MODE)];
 
 		return this;
 	}

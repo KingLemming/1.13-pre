@@ -1,8 +1,6 @@
 package cofh.thermal.expansion.util.managers.dynamo;
 
 import cofh.thermal.core.util.managers.SimpleItemFuelManager;
-import cofh.thermal.core.util.recipes.IDynamoFuel;
-import cofh.thermal.core.util.recipes.SimpleItemFuel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 
@@ -12,7 +10,7 @@ import static cofh.thermal.core.ThermalSeries.config;
 public class SteamFuelManager extends SimpleItemFuelManager {
 
 	private static final SteamFuelManager INSTANCE = new SteamFuelManager();
-	public static int DEFAULT_ENERGY = 16000;
+	protected static int DEFAULT_ENERGY = 16000;
 
 	public static SteamFuelManager instance() {
 
@@ -22,27 +20,6 @@ public class SteamFuelManager extends SimpleItemFuelManager {
 	private SteamFuelManager() {
 
 		super(DEFAULT_ENERGY);
-	}
-
-	public IDynamoFuel addFuel(ItemStack input) {
-
-		return addFuel(defaultEnergy, input);
-	}
-
-	public IDynamoFuel addFuel(int energy, ItemStack input) {
-
-		if (input.isEmpty() || energy < MIN_ENERGY || energy > MAX_ENERGY || validFuel(input)) {
-			return null;
-		}
-		energy = (energy * scaleFactor) / 100;
-
-		SimpleItemFuel fuel = new SimpleItemFuel(input, energy);
-		if (hasCustomOreID(input)) {
-			customMap.put(customInput(input), fuel);
-		} else {
-			defaultMap.put(defaultInput(input), fuel);
-		}
-		return fuel;
 	}
 
 	// region HELPERS

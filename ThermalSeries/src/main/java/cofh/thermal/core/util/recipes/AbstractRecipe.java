@@ -14,7 +14,7 @@ public abstract class AbstractRecipe implements IMachineRecipe {
 	protected final List<FluidStack> inputFluids = new ArrayList<>();
 	protected final List<ItemStack> outputItems = new ArrayList<>();
 	protected final List<FluidStack> outputFluids = new ArrayList<>();
-	protected final List<Float> outputChances = new ArrayList<>();
+	protected final List<Float> outputItemChances = new ArrayList<>();
 	protected final int energy;
 
 	public AbstractRecipe(int energy) {
@@ -22,6 +22,7 @@ public abstract class AbstractRecipe implements IMachineRecipe {
 		this.energy = energy;
 	}
 
+	// region IMachineRecipe
 	@Override
 	public List<ItemStack> getInputItems() {
 
@@ -46,14 +47,14 @@ public abstract class AbstractRecipe implements IMachineRecipe {
 		return outputFluids;
 	}
 
-	/*
-	Okay so there's a bit of trickery happening here - internally "unmodifiable" chance is stored as a negative. Saves some memory and is kinda clever.
-	This shouldn't ever cause problems because you're relying on this method call and not hacking around in the recipe, right?
+	/**
+	 * Okay so there's a bit of trickery happening here - internally "unmodifiable" chance is stored as a negative. Saves some memory and is kinda clever.
+	 * This shouldn't ever cause problems because you're relying on this method call and not hacking around in the recipe, right? ;)
 	 */
 	@Override
-	public List<Float> getOutputChances(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
+	public List<Float> getOutputItemChances(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
 
-		ArrayList<Float> modifiedChances = new ArrayList<>(outputChances);
+		ArrayList<Float> modifiedChances = new ArrayList<>(outputItemChances);
 		for (int i = 0; i < modifiedChances.size(); i++) {
 			float chance = modifiedChances.get(i);
 			if (chance < 0) {
@@ -70,5 +71,5 @@ public abstract class AbstractRecipe implements IMachineRecipe {
 
 		return energy;
 	}
-
+	// endregion
 }

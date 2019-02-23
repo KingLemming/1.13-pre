@@ -66,6 +66,8 @@ public class SawmillRecipeManager extends SimpleItemRecipeManager {
 	@Override
 	public void initialize() {
 
+		int energy = (int) (defaultEnergy * 0.40F);
+
 		if (defaultLogRecipes) {
 			InventoryCraftingFalse tempCrafting = new InventoryCraftingFalse(2, 2);
 			for (ItemStack logWood : OreDictionary.getOres("logWood", false)) {
@@ -78,7 +80,7 @@ public class SawmillRecipeManager extends SimpleItemRecipeManager {
 						ItemStack resultEntry = getCraftingResult(tempCrafting, null);
 						if (!resultEntry.isEmpty()) {
 							ItemStack result = cloneStack(resultEntry, (int) (resultEntry.getCount() * logMultiplier));
-							addRecipe(log, asList(result, ItemsTSeries.dustWood), asList(-BASE_CHANCE, BASE_CHANCE));
+							addRecipe(energy, log, asList(result, ItemsTSeries.dustWood), asList(BASE_CHANCE_LOCKED, BASE_CHANCE));
 						}
 					}
 				} else {
@@ -87,7 +89,7 @@ public class SawmillRecipeManager extends SimpleItemRecipeManager {
 					ItemStack resultEntry = getCraftingResult(tempCrafting, null);
 					if (!resultEntry.isEmpty()) {
 						ItemStack result = cloneStack(resultEntry, (int) (resultEntry.getCount() * logMultiplier));
-						addRecipe(log, asList(result, ItemsTSeries.dustWood), asList(-BASE_CHANCE, BASE_CHANCE));
+						addRecipe(energy, log, asList(result, ItemsTSeries.dustWood), asList(BASE_CHANCE_LOCKED, BASE_CHANCE));
 					}
 				}
 			}

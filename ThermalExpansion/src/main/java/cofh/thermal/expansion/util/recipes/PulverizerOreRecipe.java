@@ -1,69 +1,51 @@
 package cofh.thermal.expansion.util.recipes;
 
-import cofh.lib.fluid.IFluidStackHolder;
-import cofh.lib.inventory.IItemStackHolder;
-import cofh.thermal.core.util.recipes.AbstractRecipe;
-import net.minecraft.item.Item;
+import cofh.lib.util.comparison.ComparableItemStackValidated;
+import cofh.lib.util.comparison.OreValidator;
+import cofh.thermal.core.util.recipes.IRecipeCatalyst;
+import cofh.thermal.core.util.recipes.SimpleItemCatalystRecipe;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Map;
 
-import static cofh.lib.util.Constants.BASE_CHANCE;
+public class PulverizerOreRecipe extends SimpleItemCatalystRecipe {
 
-public class PulverizerOreRecipe extends AbstractRecipe {
-
-	// TODO: Fix
-	// protected static Map<ComparableItemStackValidated, IRecipeCatalyst>
+	protected static Map<ComparableItemStackValidated, IRecipeCatalyst> catalystMap = new Object2ObjectOpenHashMap<>();
+	protected static OreValidator validator = new OreValidator();
 
 	// region SINGLE ITEM OUTPUT
-	public PulverizerOreRecipe(ItemStack input, ItemStack output, int energy) {
-
-		this(input, output, BASE_CHANCE, energy);
-	}
-
 	public PulverizerOreRecipe(ItemStack input, ItemStack output, float chance, int energy) {
 
-		super(energy);
-		this.inputItems.add(input);
-		this.outputItems.add(output);
-		this.outputChances.add(chance);
+		super(input, output, chance, energy);
 	}
 	// endregion
 
 	// region MULTIPLE ITEM OUTPUT
-	public PulverizerOreRecipe(ItemStack input, List<ItemStack> output, int energy) {
-
-		this(input, output, null, energy);
-	}
-
 	public PulverizerOreRecipe(ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, int energy) {
 
-		super(energy);
-		this.inputItems.add(input);
-		this.outputItems.addAll(output);
-
-		if (chance != null) {
-			this.outputChances.addAll(chance);
-		}
-		if (this.outputChances.size() < this.outputItems.size()) {
-			for (int i = this.outputChances.size(); i < this.outputItems.size(); i++) {
-				this.outputChances.add(BASE_CHANCE);
-			}
-		}
+		super(input, output, chance, energy);
 	}
 	// endregion
 
-	// TODO: Rethink - needs a validator
-	public int getSubtype(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
+	// HELPERS
+	public IRecipeCatalyst getCatalyst(ItemStack input) {
 
-		if (inputItems.size() > 1) {
-			ItemStack catalyst = this.inputItems.get(1);
-			if (!catalyst.isEmpty()) {
-				return Item.getIdFromItem(catalyst.getItem());
-			}
+		ComparableItemStackValidated query = validateInput(input);
+		IRecipeCatalyst catalyst = catalystMap.get(query);
+		if (catalyst == null) {
+			query.metadata = OreDictionary.WILDCARD_VALUE;
+			catalyst = catalystMap.get(query);
 		}
-		return 0;
+		return catalyst;
 	}
 
+	public ComparableItemStackValidated validateInput(ItemStack stack) {
+
+		return new ComparableItemStackValidated(stack, validator);
+	}
+	// endregion
 }

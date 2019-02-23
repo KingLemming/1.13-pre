@@ -1,13 +1,13 @@
 {
 	"pulverizer": [
 		{
+			"type": "default-ore",
 			"input": {
 				"ore": "oreCopper"
 			},
 			"output": [
 				{
-					"ore": "dustCopper",
-					"count": 2
+					"ore": "dustCopper"
 				},
 				{
 					"ore": "dustGold",
@@ -16,13 +16,13 @@
 			]
 		},
 		{
+			"type": "default-ore",
 			"input": {
 				"ore": "oreTin"
 			},
 			"output": [
 				{
-					"ore": "dustTin",
-					"count": 2
+					"ore": "dustTin"
 				},
 				{
 					"ore": "dustIron",
@@ -31,13 +31,13 @@
 			]
 		},
 		{
+			"type": "default-ore",
 			"input": {
 				"ore": "oreLead"
 			},
 			"output": [
 				{
-					"ore": "dustLead",
-					"count": 2
+					"ore": "dustLead"
 				},
 				{
 					"ore": "dustSilver",
@@ -46,13 +46,13 @@
 			]
 		},
 		{
+			"type": "default-ore",
 			"input": {
 				"ore": "oreSilver"
 			},
 			"output": [
 				{
-					"ore": "dustSilver",
-					"count": 2
+					"ore": "dustSilver"
 				},
 				{
 					"ore": "dustLead",

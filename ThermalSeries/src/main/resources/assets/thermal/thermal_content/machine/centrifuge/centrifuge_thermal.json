@@ -13,12 +13,12 @@
 				{
 					"ore": "dustSilver",
 					"count": 1
+				},
+				{
+					"fluid": "redstone",
+					"amount": 1000
 				}
-			],
-			"fluid": {
-				"fluid": "redstone",
-				"amount": 1000
-			}
+			]
 		},
 		{
 			"input": {
@@ -33,12 +33,12 @@
 				{
 					"ore": "dustSilver",
 					"count": 1
+				},
+				{
+					"fluid": "glowstone",
+					"amount": 1000
 				}
-			],
-			"fluid": {
-				"fluid": "glowstone",
-				"amount": 1000
-			}
+			]
 		},
 		{
 			"input": {
@@ -53,12 +53,12 @@
 				{
 					"ore": "dustPlatinum",
 					"count": 1
+				},
+				{
+					"fluid": "ender",
+					"amount": 1000
 				}
-			],
-			"fluid": {
-				"fluid": "ender",
-				"amount": 1000
-			}
+			]
 		}
 	]
 }

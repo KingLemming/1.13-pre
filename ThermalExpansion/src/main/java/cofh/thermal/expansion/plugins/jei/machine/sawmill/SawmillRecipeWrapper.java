@@ -46,7 +46,7 @@ public class SawmillRecipeWrapper extends BaseRecipeWrapper {
 		inputs = singletonList(recipeInputs);
 		outputs = new ArrayList<>(recipe.getOutputItems(Collections.emptyList(), Collections.emptyList()));
 		energy = recipe.getEnergy(Collections.emptyList(), Collections.emptyList());
-		chances = recipe.getOutputChances(Collections.emptyList(), Collections.emptyList());
+		chances = recipe.getOutputItemChances(Collections.emptyList(), Collections.emptyList());
 
 		for (int i = 0; i < outputs.size(); i++) {
 			float chance = chances.get(i);

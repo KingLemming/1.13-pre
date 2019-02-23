@@ -26,9 +26,6 @@ public class CrucibleRecipeParser extends AbstractContentParser {
 	@Override
 	protected void parseObject(JsonObject object) {
 
-		if (!preCheck(object)) {
-			return;
-		}
 		ItemStack input;
 		FluidStack output;
 		int energy = FurnaceRecipeManager.instance().getDefaultEnergy();
@@ -48,7 +45,8 @@ public class CrucibleRecipeParser extends AbstractContentParser {
 		/* ENERGY */
 		if (object.has(ENERGY)) {
 			energy = object.get(ENERGY).getAsInt();
-		} else if (object.has(ENERGY_MOD)) {
+		}
+		if (object.has(ENERGY_MOD)) {
 			energy *= object.get(ENERGY_MOD).getAsFloat();
 		}
 

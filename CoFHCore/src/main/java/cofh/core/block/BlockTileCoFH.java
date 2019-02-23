@@ -144,6 +144,9 @@ public abstract class BlockTileCoFH extends Block implements IDismantleable {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 
+		if (Utils.isClientWorld(world)) {
+			return true;
+		}
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile instanceof TileCoFH && !tile.isInvalid()) {
 			return ((TileCoFH) tile).openGui(player);
