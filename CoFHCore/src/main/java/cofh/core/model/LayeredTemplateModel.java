@@ -12,6 +12,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.BlockRenderLayer;
@@ -145,13 +146,33 @@ public class LayeredTemplateModel implements IModel {
 	@Override
 	public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> texFunc) {
 
-		IModelProperties modelProps = ModelProperties.builder(modelProperties).withState(state).build();
+		Optional<ResourceLocation> particle = Optional.empty();
+		IModel template = getTemplate();
+		if (template instanceof ModelBlockWrapper) {
+			ImmutableMap.Builder<String, String> replaceTextures = ImmutableMap.builder();
+			textures.stream()//
+					.filter(TextureEntry.IS_TEXTURE)//
+					.filter(e -> e.equals("layer0", BlockRenderLayer.SOLID))//
+					.forEach(e -> {
+						replaceTextures.put(colonJoiner.join("layer0", e.name), e.texture.toString());
+						replaceTextures.put(colonJoiner.join("layer0", "solid", e.name), e.texture.toString());
+					});
+			ModelBlockWrapper wrapper = (ModelBlockWrapper) template.retexture(replaceTextures.build());
+			String tryResolve = wrapper.model.textures.getOrDefault("particle", "particle");
+			particle = ModelBlockWrapper.tryResolve(wrapper.model, tryResolve).map(ResourceLocation::new);
+		}
+
+		IModelProperties modelProps = ModelProperties.builder(modelProperties)//
+				.withState(state)//
+				.withParticleTexture(particle.orElse(TextureMap.LOCATION_MISSING_TEXTURE))//
+				.build();
 		//If the model has any properties for this variant, add a simple model for dynamic baking.
 		if (textures.stream().anyMatch(TextureEntry.IS_PROPERTY)) {
 			List<String> validProps = textures.stream().filter(TextureEntry.IS_PROPERTY).map(e -> e.property).collect(Collectors.toList());//Add all texture props.
 			validProps.addAll(tintList.stream().map(e -> e.tintSourceProp).collect(Collectors.toList()));//Add all tint props.
 			//Anon model class for dynamically baking.
 			return new BakedPropertiesModel(modelProps) {
+
 				//This is thrown away when models are reloaded.
 				private Map<String, IBakedModel> bakedPropertyCache = new HashMap<>();
 				//Errors are a hard lock on the model.
@@ -730,7 +751,7 @@ public class LayeredTemplateModel implements IModel {
 
 			if (name.charAt(0) == '#') {
 				if (model == bookkeep.modelExt) {
-					logger.warn("Unable to resolved texture due to upward reference: {} in {}", name, model.name);
+					logger.warn("Unable to resolve texture due to upward reference: {} in {}", name, model.name);
 					return Optional.empty();
 				}
 				Optional<String> s = Optional.ofNullable(model.textures.get(name.substring(1)));
