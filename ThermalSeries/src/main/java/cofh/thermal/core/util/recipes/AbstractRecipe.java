@@ -8,6 +8,8 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.ArrayList;
 import java.util.List;
 
+import static cofh.lib.util.Constants.BASE_CHANCE_LOCKED;
+
 public abstract class AbstractRecipe implements IMachineRecipe {
 
 	protected final List<ItemStack> inputItems = new ArrayList<>();
@@ -56,11 +58,8 @@ public abstract class AbstractRecipe implements IMachineRecipe {
 
 		ArrayList<Float> modifiedChances = new ArrayList<>(outputItemChances);
 		for (int i = 0; i < modifiedChances.size(); i++) {
-			float chance = modifiedChances.get(i);
-			if (chance < 0) {
-				modifiedChances.set(i, chance * -1);
-			} else {
-				modifiedChances.set(i, chance);
+			if (modifiedChances.get(i) < 0.0F) {
+				modifiedChances.set(i, modifiedChances.get(i) * -BASE_CHANCE_LOCKED);
 			}
 		}
 		return modifiedChances;

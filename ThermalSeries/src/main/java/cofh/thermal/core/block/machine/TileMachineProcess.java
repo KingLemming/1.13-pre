@@ -252,8 +252,7 @@ public abstract class TileMachineProcess extends TileMachine {
 		if (Utils.isServerWorld(world) && slot < inventory.getInputSlots().size()) {
 			if (isActive) {
 				IMachineRecipe tempRecipe = curRecipe;
-				int tempSubtype = curRecipe.getSubtype(getInputSlots(), getInputTanks());
-				if (!validateInputs() || tempRecipe != curRecipe || tempSubtype != curRecipe.getSubtype(getInputSlots(), getInputTanks())) {
+				if (!validateInputs() || tempRecipe != curRecipe) {
 					processOff();
 				}
 			}

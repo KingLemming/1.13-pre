@@ -21,7 +21,6 @@ public class SteamFuelParser extends AbstractContentParser {
 
 	}
 
-	// TODO: Fix
 	@Override
 	protected void parseObject(JsonObject object) {
 

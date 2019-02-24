@@ -1,8 +1,9 @@
 package cofh.thermal.expansion.util.managers.machine;
 
-import cofh.thermal.core.util.managers.SimpleItemRecipeManager;
+import cofh.thermal.core.util.managers.SimpleCatalystRecipeManager;
 import cofh.thermal.core.util.recipes.IMachineRecipe;
 import cofh.thermal.expansion.util.recipes.PulverizerOreRecipe;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -14,7 +15,7 @@ import static cofh.lib.util.helpers.StringHelper.titleCase;
 import static cofh.thermal.core.ThermalSeries.config;
 import static cofh.thermal.core.init.ParsersTSeries.getPreferredOre;
 
-public class PulverizerRecipeManager extends SimpleItemRecipeManager {
+public class PulverizerRecipeManager extends SimpleCatalystRecipeManager {
 
 	private static final PulverizerRecipeManager INSTANCE = new PulverizerRecipeManager();
 	protected static final int DEFAULT_ENERGY = 4000;
@@ -171,6 +172,9 @@ public class PulverizerRecipeManager extends SimpleItemRecipeManager {
 				}
 			}
 		}
+		// TODO: Remove
+		addCatalyst(new ItemStack(Items.FLINT), 1.25F, 2.0F, 0.75F, 0.25F, 0.10F);
+		addCatalyst(new ItemStack(Items.REDSTONE), 1.50F, 4.0F, 0.50F, 0.50F, 0.30F);
 	}
 	// endregion
 }

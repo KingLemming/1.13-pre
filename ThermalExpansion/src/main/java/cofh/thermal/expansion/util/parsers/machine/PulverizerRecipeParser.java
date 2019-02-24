@@ -9,8 +9,6 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Set;
 
-import static cofh.lib.util.Constants.BASE_CHANCE_LOCKED;
-
 public class PulverizerRecipeParser extends AbstractContentParser {
 
 	private static final PulverizerRecipeParser INSTANCE = new PulverizerRecipeParser();
@@ -61,6 +59,8 @@ public class PulverizerRecipeParser extends AbstractContentParser {
 							chance.set(i, chance.get(i) * output.get(i).getCount());
 							output.get(i).setCount(1);
 						}
+						// If ore recipe, no chances are locked.
+						chance.set(i, Math.abs(chance.get(i)));
 					}
 					PulverizerRecipeManager.instance().addOreRecipe(energy, input, output, chance);
 					return;
@@ -70,16 +70,17 @@ public class PulverizerRecipeParser extends AbstractContentParser {
 							chance.set(i, chance.get(i) * output.get(i).getCount());
 							output.get(i).setCount(1);
 						}
-						chance.set(0, PulverizerRecipeManager.instance().getOreMultiplier());
+						// If ore recipe, no chances are locked.
+						chance.set(i, Math.abs(chance.get(i)));
 					}
+					// If default-ore recipe, use the configured ore multiplier.
+					chance.set(0, PulverizerRecipeManager.instance().getOreMultiplier());
 					PulverizerRecipeManager.instance().addOreRecipe(energy, input, output, chance);
 					return;
 				case RECIPE_TYPE_RECYCLE:
 					// If the recipe is explicitly a recycle recipe, then all chance results should be locked.
 					for (int i = 0; i < output.size(); i++) {
-						if (chance.get(i) > 0.0F) {
-							chance.set(i, chance.get(i) * BASE_CHANCE_LOCKED);
-						}
+						chance.set(i, -Math.abs(chance.get(i)));
 					}
 				default:
 			}

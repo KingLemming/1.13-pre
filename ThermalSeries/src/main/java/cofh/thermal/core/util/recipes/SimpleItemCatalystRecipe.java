@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static cofh.lib.util.Constants.BASE_CHANCE;
+import static cofh.lib.util.Constants.BASE_CHANCE_LOCKED;
 
 /**
  * Abstract catalyst-supporting recipe class - single item key'd, catalyst as 2nd input.
@@ -47,7 +48,7 @@ public abstract class SimpleItemCatalystRecipe extends AbstractRecipe {
 
 	public abstract IRecipeCatalyst getCatalyst(ItemStack input);
 
-	public abstract ComparableItemStackValidated validateInput(ItemStack input);
+	public abstract ComparableItemStackValidated catalystInput(ItemStack input);
 
 	// region IMachineRecipe
 	@Override
@@ -59,10 +60,15 @@ public abstract class SimpleItemCatalystRecipe extends AbstractRecipe {
 			ItemStack catalystStack = inputSlots.get(1).getItemStack();
 			IRecipeCatalyst catalyst = getCatalyst(catalystStack);
 			if (catalyst != null) {
-				modifiedChances.set(0, Math.min(modifiedChances.get(0) * catalyst.getPrimaryMod(), catalyst.getMinChance()));
+				modifiedChances.set(0, Math.max(modifiedChances.get(0) * catalyst.getPrimaryMod(), catalyst.getMinChance()));
 				for (int i = 1; i < modifiedChances.size(); i++) {
-					modifiedChances.set(i, Math.min(modifiedChances.get(1) * catalyst.getSecondaryMod(), catalyst.getMinChance()));
+					modifiedChances.set(i, Math.max(modifiedChances.get(1) * catalyst.getSecondaryMod(), catalyst.getMinChance()));
 				}
+			}
+		}
+		for (int i = 0; i < modifiedChances.size(); i++) {
+			if (modifiedChances.get(i) < 0.0F) {
+				modifiedChances.set(i, modifiedChances.get(i) * -BASE_CHANCE_LOCKED);
 			}
 		}
 		return modifiedChances;
@@ -78,6 +84,7 @@ public abstract class SimpleItemCatalystRecipe extends AbstractRecipe {
 			ItemStack catalystStack = inputSlots.get(1).getItemStack();
 			IRecipeCatalyst catalyst = getCatalyst(catalystStack);
 			if (catalyst != null && MathHelper.RANDOM.nextFloat() < catalyst.getUseChance()) {
+				System.out.println(catalyst.getUseChance());
 				ret.add(1);
 			}
 		}
@@ -93,17 +100,6 @@ public abstract class SimpleItemCatalystRecipe extends AbstractRecipe {
 			return catalyst == null ? energy : (int) (energy * catalyst.getEnergyMod());
 		}
 		return energy;
-	}
-
-	@Override
-	public int getSubtype(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
-
-		if (inputSlots.size() > 1) {
-			ItemStack catalystStack = inputSlots.get(1).getItemStack();
-			IRecipeCatalyst catalyst = getCatalyst(catalystStack);
-			return catalyst == null ? 0 : validateInput(catalystStack).hashCode();
-		}
-		return 0;
 	}
 	// endregion
 }

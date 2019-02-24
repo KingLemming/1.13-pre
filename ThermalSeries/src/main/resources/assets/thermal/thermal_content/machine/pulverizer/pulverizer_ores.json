@@ -1,22 +1,6 @@
 {
 	"pulverizer": [
 		{
-			"type": "ore",
-			"input": {
-				"ore": "oreCoal"
-			},
-			"output": [
-				{
-					"item": "minecraft:coal",
-					"count": 3
-				},
-				{
-					"ore": "dustCoal",
-					"chance": 0.25
-				}
-			]
-		},
-		{
 			"type": "default-ore",
 			"input": {
 				"ore": "oreGold"
@@ -43,6 +27,22 @@
 				{
 					"ore": "dustNickel",
 					"chance": 0.10
+				}
+			]
+		},
+		{
+			"type": "ore",
+			"input": {
+				"ore": "oreCoal"
+			},
+			"output": [
+				{
+					"item": "minecraft:coal",
+					"count": 3
+				},
+				{
+					"ore": "dustCoal",
+					"chance": 0.25
 				}
 			]
 		},

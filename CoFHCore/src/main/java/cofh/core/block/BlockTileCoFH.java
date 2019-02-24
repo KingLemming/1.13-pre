@@ -213,30 +213,6 @@ public abstract class BlockTileCoFH extends Block implements IDismantleable {
 
 		TileEntity tile = world.getTileEntity(pos);
 		return tile instanceof TileCoFH ? ((TileCoFH) tile).getItemStackTag() : null;
-
-		// TODO: Fix
-		//		if (tile instanceof TileNameable && (!((TileNameable) tile).customName.isEmpty())) {
-		//			retTag = ItemHelper.setItemStackTagName(retTag, ((TileNameable) tile).customName);
-		//		}
-		//		if (tile instanceof TileAugmentableSecure) {
-		//			retTag.setBoolean(CoreProps.CREATIVE, ((TileAugmentableSecure) tile).isCreative);
-		//			retTag.setByte(CoreProps.LEVEL, (byte) ((TileAugmentableSecure) tile).getLevel());
-		//			if (((TileAugmentableSecure) tile).isSecured()) {
-		//				retTag = SecurityHelper.setItemStackTagSecure(retTag, (ISecurable) tile);
-		//			}
-		//		}
-		//		if (tile instanceof IAugmentable) {
-		//			retTag = AugmentHelper.setItemStackTagAugments(retTag, (IAugmentable) tile);
-		//		}
-		//		if (tile instanceof IRedstoneControl) {
-		//			retTag = RedstoneControlHelper.setItemStackTagRS(retTag, (IRedstoneControl) tile);
-		//		}
-		//		if (tile instanceof TileReconfigurable) {
-		//			retTag = ReconfigurableHelper.setItemStackTagReconfig(retTag, (TileReconfigurable) tile);
-		//		}
-		//		if (tile instanceof IEnergyHandler) {
-		//			retTag.setInteger(CoreProps.ENERGY, ((IEnergyHandler) tile).getEnergyStored(null));
-		//		}
 	}
 
 	protected ArrayList<ItemStack> dropDelegate(NBTTagCompound nbt, IBlockAccess world, BlockPos pos, int fortune) {

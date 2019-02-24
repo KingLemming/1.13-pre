@@ -51,27 +51,27 @@ public abstract class AbstractManager implements IManager {
 	}
 
 	// region HELPERS
-	public ComparableItemStackValidated defaultInput(ItemStack stack) {
+	public ComparableItemStackValidated defaultInput(ItemStack input) {
 
-		return new ComparableItemStackValidated(stack, defaultValidator);
+		return new ComparableItemStackValidated(input, defaultValidator);
 	}
 
-	public ComparableItemStackValidated customInput(ItemStack stack) {
+	public ComparableItemStackValidated customInput(ItemStack input) {
 
-		return new ComparableItemStackValidated(stack, customValidator);
+		return new ComparableItemStackValidated(input, customValidator);
 	}
 
-	public ComparableItemStackValidated convertInput(ItemStack stack) {
+	public ComparableItemStackValidated convertInput(ItemStack input) {
 
-		if (hasCustomOreID(stack)) {
-			return customInput(stack);
+		if (hasCustomOreID(input)) {
+			return customInput(input);
 		}
-		return defaultInput(stack);
+		return defaultInput(input);
 	}
 
-	public boolean hasCustomOreID(ItemStack stack) {
+	public boolean hasCustomOreID(ItemStack input) {
 
-		return customInput(stack).hasOreID();
+		return customInput(input).hasOreID();
 	}
 	// endregion
 

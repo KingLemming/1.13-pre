@@ -18,7 +18,7 @@ public class TileMachinePulverizer extends TileMachineProcess {
 		super(MachinesTE.PULVERIZER);
 
 		inventory.addSlot(PulverizerRecipeManager.instance()::validRecipe, INPUT);
-		inventory.addSlot(CATALYST);
+		inventory.addSlot(PulverizerRecipeManager.instance()::validCatalyst, CATALYST);
 		inventory.addSlot(OUTPUT, 4);
 	}
 

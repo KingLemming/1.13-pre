@@ -36,14 +36,14 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 		this.maxOutputFluids = maxOutputFluids;
 	}
 
-	public boolean validRecipe(ItemStack stack) {
+	public boolean validRecipe(ItemStack input) {
 
-		return validRecipe(Collections.singletonList(new SimpleItemStackHolder(stack)), Collections.emptyList());
+		return validRecipe(Collections.singletonList(new SimpleItemStackHolder(input)), Collections.emptyList());
 	}
 
-	public IMachineRecipe removeRecipe(ItemStack stack) {
+	public IMachineRecipe removeRecipe(ItemStack input) {
 
-		return hasCustomOreID(stack) ? customMap.remove(customInput(stack)) : defaultMap.remove(defaultInput(stack));
+		return hasCustomOreID(input) ? customMap.remove(customInput(input)) : defaultMap.remove(defaultInput(input));
 	}
 
 	// region SINGLE ITEM OUTPUT
@@ -184,12 +184,12 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 	public void refresh() {
 
 		Map<ComparableItemStackValidated, IMachineRecipe> tempRecipes = new Object2ObjectOpenHashMap<>(defaultMap.size());
-		defaultMap.forEach((key, value) -> tempRecipes.put(defaultInput(value.getInputItems().get(0)), value));
+		defaultMap.forEach((key, value) -> tempRecipes.put(defaultInput(key.toItemStack()), value));
 		defaultMap.clear();
 		defaultMap.putAll(tempRecipes);
 
 		Map<ComparableItemStackValidated, IMachineRecipe> tempCustom = new Object2ObjectOpenHashMap<>(customMap.size());
-		customMap.forEach((key, value) -> tempCustom.put(customInput(value.getInputItems().get(0)), value));
+		customMap.forEach((key, value) -> tempCustom.put(customInput(key.toItemStack()), value));
 		customMap.clear();
 		customMap.putAll(tempCustom);
 	}

@@ -45,11 +45,6 @@ public interface IMachineRecipe {
 		return Collections.emptyList();
 	}
 
-	default int getSubtype(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
-
-		return 0;
-	}
-
 	int getEnergy(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks);
 
 }
