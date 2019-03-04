@@ -1,17 +1,20 @@
 package cofh.thermal.core.block.machine;
 
+import cofh.core.network.PacketBufferCoFH;
+import cofh.lib.energy.EnergyStorageCoFH;
 import cofh.lib.fluid.IFluidStackHolder;
 import cofh.lib.inventory.IItemStackHolder;
 import cofh.lib.util.Utils;
 import cofh.thermal.core.block.AbstractTileType;
 import cofh.thermal.core.util.recipes.IMachineRecipe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static cofh.lib.util.Constants.BASE_CHANCE;
+import static cofh.lib.util.Constants.*;
 import static cofh.lib.util.helpers.FluidHelper.fluidsEqual;
 import static cofh.lib.util.helpers.ItemHelper.cloneStack;
 import static cofh.lib.util.helpers.ItemHelper.itemsIdentical;
@@ -22,13 +25,58 @@ public abstract class TileMachineProcess extends TileMachine {
 	protected List<Integer> itemInputCounts = new ArrayList<>();
 	protected List<Integer> fluidInputCounts = new ArrayList<>();
 
+	protected int process;
+	protected int processMax;
+
+	protected float outputMod = 1.0F;
+	protected float energyMod = 1.0F;
+
 	public TileMachineProcess(AbstractTileType type) {
 
 		super(type);
+		energyStorage = new EnergyStorageCoFH(20000);
+	}
+
+	@Override
+	public void update() {
+
+		boolean curActive = isActive;
+
+		// TODO: Remove
+		energyStorage.receiveEnergy(200, false);
+
+		if (isActive) {
+			processTick();
+			if (canProcessFinish()) {
+				processFinish();
+				transferOutput();
+				transferInput();
+				energyStorage.modifyAmount(-process);
+
+				if (!redstoneControl.getState() || !canProcessStart()) {
+					processOff();
+				} else {
+					processStart();
+				}
+			} else if (energyStorage.isEmpty()) {
+				processOff();
+			}
+		} else if (redstoneControl.getState()) {
+			if (timeCheck()) {
+				transferOutput();
+				transferInput();
+			}
+			if (timeCheck4() && canProcessStart()) {
+				processStart();
+				processTick();
+				isActive = true;
+			}
+		}
+		updateActiveState(curActive);
+		// chargeEnergy();
 	}
 
 	// region PROCESS
-	@Override
 	protected boolean canProcessStart() {
 
 		if (energyStorage.isEmpty()) {
@@ -43,7 +91,11 @@ public abstract class TileMachineProcess extends TileMachine {
 		return validateOutputs();
 	}
 
-	@Override
+	protected boolean canProcessFinish() {
+
+		return process <= 0 && validateInputs();
+	}
+
 	protected void processStart() {
 
 		processMax = curRecipe.getEnergy(getInputSlots(), getInputTanks());
@@ -55,7 +107,6 @@ public abstract class TileMachineProcess extends TileMachine {
 		}
 	}
 
-	@Override
 	protected void processFinish() {
 
 		if (!cacheRecipe()) {
@@ -65,10 +116,36 @@ public abstract class TileMachineProcess extends TileMachine {
 		resolveRecipe();
 		markDirty();
 	}
+
+	protected void processOff() {
+
+		process = 0;
+		isActive = false;
+		wasActive = true;
+		clearRecipe();
+		if (world != null) {
+			timeTracker.markTime(world);
+		}
+	}
+
+	protected int processTick() {
+
+		if (process <= 0) {
+			return 0;
+		}
+		int energy = calcEnergy();
+		energyStorage.modifyAmount(-energy);
+		process -= energy;
+		return energy;
+	}
 	// endregion
 
 	// region HELPERS
-	@Override
+	protected boolean cacheRecipe() {
+
+		return true;
+	}
+
 	protected void clearRecipe() {
 
 		curRecipe = null;
@@ -84,14 +161,16 @@ public abstract class TileMachineProcess extends TileMachine {
 		}
 		List<? extends IItemStackHolder> slotInputs = getInputSlots();
 		for (int i = 0; i < slotInputs.size(); i++) {
-			if (slotInputs.get(i).getItemStack().getCount() < itemInputCounts.get(i)) {
+			int inputCount = itemInputCounts.get(i);
+			if (inputCount > 0 && slotInputs.get(i).getItemStack().getCount() < inputCount) {
 				return false;
 			}
 		}
 		List<? extends IFluidStackHolder> tankInputs = getInputTanks();
 		for (int i = 0; i < tankInputs.size(); i++) {
+			int inputCount = fluidInputCounts.get(i);
 			FluidStack input = tankInputs.get(i).getFluidStack();
-			if (input == null || input.amount < fluidInputCounts.get(i)) {
+			if (inputCount > 0 && (input == null || input.amount < inputCount)) {
 				return false;
 			}
 		}
@@ -242,6 +321,72 @@ public abstract class TileMachineProcess extends TileMachine {
 		for (int i = 0; i < fluidInputCounts.size(); i++) {
 			tankInputs.get(i).modify(-fluidInputCounts.get(i));
 		}
+	}
+	// endregion
+
+	// region GUI
+	public int getScaledProgress(int scale) {
+
+		if (!isActive || processMax <= 0 || process <= 0) {
+			return 0;
+		}
+		return scale * (processMax - process) / processMax;
+	}
+
+	public int getScaledSpeed(int scale) {
+
+		// TODO: Fix
+		if (!isActive) {
+			return 0;
+		}
+		return scale;
+		//		double power = energyStorage.getEnergyStored() / energyConfig.energyRamp;
+		//		power = MathHelper.clip(power, energyConfig.minPower, energyConfig.maxPower);
+		//		return MathHelper.round(scale * power / energyConfig.maxPower);
+	}
+	// endregion
+
+	// region NETWORK
+	@Override
+	public PacketBufferCoFH getGuiPacket(PacketBufferCoFH buffer) {
+
+		super.getGuiPacket(buffer);
+
+		buffer.writeInt(processMax);
+		buffer.writeInt(process);
+
+		return buffer;
+	}
+
+	@Override
+	public void handleGuiPacket(PacketBufferCoFH buffer) {
+
+		super.handleGuiPacket(buffer);
+
+		processMax = buffer.readInt();
+		process = buffer.readInt();
+	}
+	// endregion
+
+	// region NBT
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+
+		super.readFromNBT(nbt);
+
+		processMax = nbt.getInteger(TAG_PROCESS_MAX);
+		process = nbt.getInteger(TAG_PROCESS);
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+
+		super.writeToNBT(nbt);
+
+		nbt.setInteger(TAG_PROCESS_MAX, processMax);
+		nbt.setInteger(TAG_PROCESS, process);
+
+		return nbt;
 	}
 	// endregion
 

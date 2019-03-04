@@ -5,45 +5,23 @@ import cofh.lib.inventory.IItemStackHolder;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.Collections;
 import java.util.List;
 
 public interface IMachineRecipe {
 
-	default List<ItemStack> getInputItems() {
+	List<ItemStack> getInputItems();
 
-		return Collections.emptyList();
-	}
+	List<FluidStack> getInputFluids();
 
-	default List<FluidStack> getInputFluids() {
+	List<ItemStack> getOutputItems(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks);
 
-		return Collections.emptyList();
-	}
+	List<FluidStack> getOutputFluids(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks);
 
-	default List<ItemStack> getOutputItems(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
+	List<Float> getOutputItemChances(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks);
 
-		return Collections.emptyList();
-	}
+	List<Integer> getInputItemCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks);
 
-	default List<FluidStack> getOutputFluids(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
-
-		return Collections.emptyList();
-	}
-
-	default List<Float> getOutputItemChances(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
-
-		return Collections.emptyList();
-	}
-
-	default List<Integer> getInputItemCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
-
-		return Collections.emptyList();
-	}
-
-	default List<Integer> getInputFluidCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
-
-		return Collections.emptyList();
-	}
+	List<Integer> getInputFluidCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks);
 
 	int getEnergy(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks);
 

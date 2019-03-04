@@ -2,6 +2,7 @@ package cofh.lib.util;
 
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.Fluid;
 
@@ -21,6 +22,8 @@ public class Constants {
 
 	// region BLOCK PROPERTIES
 	public static final PropertyBool ACTIVE = PropertyBool.create("active");
+	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 7);
+	public static final PropertyInteger AGE_PERENNIAL = PropertyInteger.create("age", 0, 10);
 	public static final PropertyDirection FACING_ALL = PropertyDirection.create("facing");
 	public static final PropertyDirection FACING_HORIZONTAL = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
@@ -164,6 +167,7 @@ public class Constants {
 	public static final String GROUP_PLATES = "plates";
 	public static final String GROUP_RESOURCES = "resources";
 	public static final String GROUP_RODS = "rods";
+	public static final String GROUP_SEEDS = "seeds";
 	public static final String GROUP_STORAGE = "storage";
 	public static final String GROUP_TOOLS = "tools";
 	public static final String GROUP_UTILS = "utils";

@@ -1,0 +1,67 @@
+{
+	"insolator": [
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:cactus"
+			},
+			"output": [
+				{
+					"item": "minecraft:cactus",
+					"count": 2
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:reeds"
+			},
+			"output": [
+				{
+					"item": "minecraft:reeds",
+					"count": 2
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:vine"
+			},
+			"output": [
+				{
+					"item": "minecraft:vine",
+					"count": 2
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:waterlily"
+			},
+			"output": [
+				{
+					"item": "minecraft:waterlily",
+					"count": 2
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:chorus_fruit"
+			},
+			"output": [
+				{
+					"item": "minecraft:chorus_flower",
+					"count": 2
+				},
+				{
+					"item": "minecraft:chorus_fruit"
+				}
+			]
+		}
+	]
+}

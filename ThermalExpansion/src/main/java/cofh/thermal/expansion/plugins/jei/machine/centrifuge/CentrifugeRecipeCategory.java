@@ -17,6 +17,7 @@ import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -60,8 +61,8 @@ public class CentrifugeRecipeCategory extends BaseRecipeCategory<CentrifugeRecip
 
 		progress = Drawables.getDrawables(guiHelper).getProgress(Drawables.PROGRESS_ARROW);
 		speed = Drawables.getDrawables(guiHelper).getScale(Drawables.SCALE_SPIN);
-		tank = Drawables.getDrawables(guiHelper).getTank(Drawables.TANK);
-		tankOverlay = Drawables.getDrawables(guiHelper).getTankSmallOverlay(Drawables.TANK);
+		tank = Drawables.getDrawables(guiHelper).getTank(Drawables.TANK_LARGE);
+		tankOverlay = Drawables.getDrawables(guiHelper).getTankOverlay(Drawables.TANK_LARGE);
 
 		registry.addRecipeCategories(this);
 	}
@@ -102,9 +103,9 @@ public class CentrifugeRecipeCategory extends BaseRecipeCategory<CentrifugeRecip
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, CentrifugeRecipeWrapper recipeWrapper, IIngredients ingredients) {
 
-		List<List<ItemStack>> inputs = ingredients.getInputs(ItemStack.class);
-		List<List<ItemStack>> outputs = ingredients.getOutputs(ItemStack.class);
-		List<List<FluidStack>> outputFluids = ingredients.getOutputs(FluidStack.class);
+		List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);
+		List<List<ItemStack>> outputs = ingredients.getOutputs(VanillaTypes.ITEM);
+		List<List<FluidStack>> outputFluids = ingredients.getOutputs(VanillaTypes.FLUID);
 
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 		IGuiFluidStackGroup guiFluidStacks = recipeLayout.getFluidStacks();

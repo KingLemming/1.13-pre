@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static cofh.lib.util.Constants.BASE_CHANCE;
@@ -84,11 +85,16 @@ public abstract class SimpleItemCatalystRecipe extends AbstractRecipe {
 			ItemStack catalystStack = inputSlots.get(1).getItemStack();
 			IRecipeCatalyst catalyst = getCatalyst(catalystStack);
 			if (catalyst != null && MathHelper.RANDOM.nextFloat() < catalyst.getUseChance()) {
-				System.out.println(catalyst.getUseChance());
 				ret.add(1);
 			}
 		}
 		return ret;
+	}
+
+	@Override
+	public List<Integer> getInputFluidCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
+
+		return inputFluids.isEmpty() ? Collections.emptyList() : Collections.singletonList(this.inputFluids.get(0).amount);
 	}
 
 	@Override

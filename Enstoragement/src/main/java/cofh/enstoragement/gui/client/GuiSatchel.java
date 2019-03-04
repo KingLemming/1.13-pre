@@ -46,7 +46,7 @@ public class GuiSatchel extends GuiContainerCoFH {
 		} else {
 			info = generateTabInfo("tab.enstoragement.satchel");
 			if (satchelStack.isItemEnchantable() && EnchantmentHelper.getEnchantmentLevel(HOLDING, satchelStack) <= 0) {
-				info += "\n\n" + localize("tab.cofh.storage.enchant");
+				info += "\n\n" + localize("tab.cofh.storage_enchant");
 			}
 		}
 	}

@@ -6,9 +6,7 @@ import cofh.core.network.packet.client.PacketTileControl;
 import cofh.core.network.packet.client.PacketTileState;
 import cofh.lib.energy.EnergyStorageCoFH;
 import cofh.lib.fluid.FluidStorageCoFH;
-import cofh.lib.fluid.IFluidStackHolder;
 import cofh.lib.fluid.TankArrayManaged;
-import cofh.lib.inventory.IItemStackHolder;
 import cofh.lib.inventory.InventoryCoFH;
 import cofh.lib.inventory.InventoryManaged;
 import cofh.lib.inventory.ItemStorageCoFH;
@@ -76,22 +74,22 @@ public abstract class AbstractTileBase extends TileCoFH implements ISecurableTil
 		}
 	}
 
-	protected List<? extends IItemStackHolder> getInputSlots() {
+	protected List<? extends ItemStorageCoFH> getInputSlots() {
 
 		return inventory.getInputSlots();
 	}
 
-	protected List<? extends IFluidStackHolder> getInputTanks() {
+	protected List<? extends FluidStorageCoFH> getInputTanks() {
 
 		return tankInv.getInputTanks();
 	}
 
-	protected List<? extends IItemStackHolder> getOutputSlots() {
+	protected List<? extends ItemStorageCoFH> getOutputSlots() {
 
 		return inventory.getOutputSlots();
 	}
 
-	protected List<? extends IFluidStackHolder> getOutputTanks() {
+	protected List<? extends FluidStorageCoFH> getOutputTanks() {
 
 		return tankInv.getOutputTanks();
 	}
@@ -159,7 +157,7 @@ public abstract class AbstractTileBase extends TileCoFH implements ISecurableTil
 			return true;
 		}
 		if (Utils.isServerWorld(world)) {
-			player.sendMessage(new TextComponentTranslation("chat.cofh.secure.warning", getOwnerName()));
+			player.sendMessage(new TextComponentTranslation("chat.cofh.secure_warning", getOwnerName()));
 		}
 		return false;
 	}

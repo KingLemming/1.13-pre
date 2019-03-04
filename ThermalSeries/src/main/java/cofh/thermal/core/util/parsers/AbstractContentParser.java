@@ -334,8 +334,10 @@ public abstract class AbstractContentParser implements IContentParser {
 	public static final String RECIPE_TYPE_CROP_DEFAULT = "default-crop";
 	public static final String RECIPE_TYPE_LOG_DEFAULT = "default-log";
 	public static final String RECIPE_TYPE_ORE_DEFAULT = "default-ore";
+	public static final String RECIPE_TYPE_PLANT_DEFAULT = "default-plant";
 
 	public static final String RECIPE_TYPE_ORE = "ore";
+	public static final String RECIPE_TYPE_PLANT = "plant";
 	public static final String RECIPE_TYPE_RECYCLE = "recycle";
 	// endregion
 }

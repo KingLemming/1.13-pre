@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "thermal:items/plates/plate_signalum"
-  }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "thermal:items/plates/plate_signalum"
+	}
 }

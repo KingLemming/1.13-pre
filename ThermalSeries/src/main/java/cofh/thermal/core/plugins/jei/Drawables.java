@@ -23,9 +23,9 @@ public class Drawables {
 	public static final int SLOT_OUTPUT = 1;
 	public static final int SLOT_DOUBLE = 2;
 
-	public static final int TANK = 0;
-	public static final int TANK_THIN = 1;
-	public static final int TANK_SHORT = 2;
+	public static final int TANK_LARGE = 0;
+	public static final int TANK_MEDIUM = 1;
+	public static final int TANK_SMALL = 2;
 
 	public static final int PROGRESS_ARROW = 0;
 	public static final int PROGRESS_ARROW_FLUID = 1;
@@ -49,7 +49,7 @@ public class Drawables {
 	private final IDrawableStatic[] slot = new IDrawableStatic[3];
 
 	private final IDrawableStatic[] tank = new IDrawableStatic[3];
-	private final IDrawableStatic[] tankOverlay = new IDrawableStatic[6];
+	private final IDrawableStatic[] tankOverlay = new IDrawableStatic[3];
 
 	private final IDrawableStatic[] progressRight = new IDrawableStatic[3];
 	private final IDrawableStatic[] progressRightFill = new IDrawableStatic[3];
@@ -74,8 +74,7 @@ public class Drawables {
 
 		for (int i = 0; i < 3; i++) {
 			tank[i] = guiHelper.createDrawable(JEI_TEXTURE, 64 * i, 192, 18, 62);
-			tankOverlay[2 * i] = guiHelper.createDrawable(JEI_TEXTURE, 32 + 64 * i, 193, 16, 60);
-			tankOverlay[2 * i + 1] = guiHelper.createDrawable(JEI_TEXTURE, 48 + 64 * i, 193, 16, 60);
+			tankOverlay[i] = guiHelper.createDrawable(JEI_TEXTURE, 32 + 64 * i, 193, 16, 60);
 
 			progressLeft[i] = guiHelper.createDrawable(JEI_TEXTURE, 176, 32 * i, 24, 16);
 			progressLeftFill[i] = guiHelper.createDrawable(JEI_TEXTURE, 200, 32 * i, 24, 16);
@@ -104,14 +103,9 @@ public class Drawables {
 		return tank[type];
 	}
 
-	public IDrawableStatic getTankSmallOverlay(int type) {
+	public IDrawableStatic getTankOverlay(int type) {
 
-		return tankOverlay[type * 2];
-	}
-
-	public IDrawableStatic getTankLargeOverlay(int type) {
-
-		return tankOverlay[type * 2 + 1];
+		return tankOverlay[type];
 	}
 
 	public IDrawableStatic getProgress(int type) {

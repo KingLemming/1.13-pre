@@ -56,6 +56,9 @@ public class TileMachinePulverizer extends TileMachineProcess {
 					continue;
 				}
 				ItemStack output = slotOutputs.get(j).getItemStack();
+				if (output.getCount() >= output.getMaxStackSize()) {
+					continue;
+				}
 				if (itemsIdentical(output, recipeOutput)) {
 					used[j] = true;
 					matched = true;

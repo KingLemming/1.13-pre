@@ -19,7 +19,7 @@ public class PulverizerRecipeManager extends SimpleCatalystRecipeManager {
 
 	private static final PulverizerRecipeManager INSTANCE = new PulverizerRecipeManager();
 	protected static final int DEFAULT_ENERGY = 4000;
-	protected static float oreMultiplier = 2;
+	protected static float oreMultiplier = 2.0F;
 	protected static boolean defaultOreRecipes = true;
 	protected static boolean defaultIngotRecipes = true;
 
@@ -115,8 +115,8 @@ public class PulverizerRecipeManager extends SimpleCatalystRecipeManager {
 			return; // This is a confusing Ore and makes no sense. Don't touch.
 		}
 		int energy = defaultEnergy;
-		int chance1 = (int) (BASE_CHANCE * oreMultiplier);
-		int chance2 = chance1 * 2;
+		float chance1 = oreMultiplier;
+		float chance2 = chance1 * 2;
 
 		if (!gem.isEmpty()) {
 			addOreRecipe(energy, ore, cloneStack(gem, 1), chance1);

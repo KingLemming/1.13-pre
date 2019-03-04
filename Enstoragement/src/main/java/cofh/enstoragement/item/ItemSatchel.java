@@ -108,7 +108,7 @@ public class ItemSatchel extends ItemInventoryContainer implements IColorableIte
 		if (Utils.isServerWorld(world)) {
 			if (SecurityHelper.hasSecurity(stack) && SecurityHelper.isDefaultProfile(SecurityHelper.getOwner(stack))) {
 				SecurityHelper.setOwner(stack, player.getGameProfile());
-				ChatHelper.sendIndexedChatMessageToPlayer(player, new TextComponentTranslation("chat.cofh.secure.item.success"));
+				ChatHelper.sendIndexedChatMessageToPlayer(player, new TextComponentTranslation("chat.cofh.secure_item"));
 				return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 			}
 			if (SecurityHelper.canPlayerAccess(stack, player)) {
@@ -118,7 +118,7 @@ public class ItemSatchel extends ItemInventoryContainer implements IColorableIte
 					player.openGui(Enstoragement.instance, GUI_SATCHEL, world, 0, 0, 0);
 				}
 			} else if (SecurityHelper.hasSecurity(stack)) {
-				ChatHelper.sendIndexedChatMessageToPlayer(player, new TextComponentTranslation("chat.cofh.secure.warning", SecurityHelper.getOwnerName(stack)));
+				ChatHelper.sendIndexedChatMessageToPlayer(player, new TextComponentTranslation("chat.cofh.secure_warning", SecurityHelper.getOwnerName(stack)));
 				return new ActionResult<>(EnumActionResult.FAIL, stack);
 			}
 		}

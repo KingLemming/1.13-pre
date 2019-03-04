@@ -1,6 +1,0 @@
-{
-	"parent": "block/cube_all",
-	"textures": {
-		"all": "redstonearsenal:blocks/storage/block_flux_infused"
-	}
-}

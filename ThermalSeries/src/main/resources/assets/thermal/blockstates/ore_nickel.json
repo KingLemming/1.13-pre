@@ -1,7 +1,18 @@
 {
-	"variants": {
-		"normal": {
-			"model": "thermal:ores/ore_nickel"
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:cube_all",
+		"transform": "forge:default-block",
+		"textures": {
+			"all": "thermal:blocks/ores/ore_nickel"
 		}
+	},
+	"variants": {
+		"normal": [
+			{}
+		],
+		"inventory": [
+			{}
+		]
 	}
 }

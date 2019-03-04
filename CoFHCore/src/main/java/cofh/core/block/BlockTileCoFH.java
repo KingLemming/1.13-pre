@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 import static cofh.lib.util.Constants.MODEL_PROPERTIES;
 
-public abstract class BlockTileCoFH extends Block implements IDismantleable {
+public abstract class BlockTileCoFH extends BlockCoFH implements IDismantleable {
 
 	public BlockTileCoFH() {
 

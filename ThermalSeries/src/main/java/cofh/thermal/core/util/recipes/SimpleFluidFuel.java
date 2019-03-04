@@ -15,10 +15,11 @@ public class SimpleFluidFuel extends AbstractFuel {
 		this.inputFluids.add(input);
 	}
 
+	// region OPTIMIZATION
 	@Override
 	public List<Integer> getInputFluidCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
 
 		return Collections.singletonList(this.inputFluids.get(0).amount);
 	}
-
+	// endregion
 }

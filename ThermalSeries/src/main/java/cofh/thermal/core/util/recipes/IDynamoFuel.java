@@ -5,30 +5,18 @@ import cofh.lib.inventory.IItemStackHolder;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.Collections;
 import java.util.List;
 
 public interface IDynamoFuel {
 
-	default List<ItemStack> getInputItems() {
+	List<ItemStack> getInputItems();
 
-		return Collections.emptyList();
-	}
+	List<FluidStack> getInputFluids();
 
-	default List<FluidStack> getInputFluids() {
+	List<Integer> getInputItemCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks);
 
-		return Collections.emptyList();
-	}
-
-	default List<Integer> getInputItemCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
-
-		return Collections.emptyList();
-	}
-
-	default List<Integer> getInputFluidCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
-
-		return Collections.emptyList();
-	}
+	List<Integer> getInputFluidCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks);
 
 	int getEnergy(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks);
+
 }

@@ -1,0 +1,40 @@
+{
+	"insolator": [
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:brown_mushroom"
+			},
+			"output": [
+				{
+					"item": "minecraft:brown_mushroom",
+					"count": 2
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:red_mushroom"
+			},
+			"output": [
+				{
+					"item": "minecraft:red_mushroom",
+					"count": 2
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:nether_wart"
+			},
+			"output": [
+				{
+					"item": "minecraft:nether_wart",
+					"count": 2
+				}
+			]
+		}
+	]
+}

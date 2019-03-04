@@ -1,7 +1,18 @@
 {
-	"variants": {
-		"normal": {
-			"model": "thermal:storage/block_coal_coke"
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:cube_all",
+		"transform": "forge:default-block",
+		"textures": {
+			"all": "thermal:blocks/storage/block_coal_coke"
 		}
+	},
+	"variants": {
+		"normal": [
+			{}
+		],
+		"inventory": [
+			{}
+		]
 	}
 }

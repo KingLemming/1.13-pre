@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockOreFluid extends BlockOre {
+public class BlockOreFluid extends BlockCoFH {
 
 	protected BlockFluidCoFH fluid;
 

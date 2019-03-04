@@ -115,7 +115,7 @@ public class ItemShieldFlux extends ItemShieldCoFH implements IEnergyContainerIt
 
 		if (getEnergyStored(stack) >= getEnergyPerUse(stack)) {
 			tooltip.add("");
-			tooltip.add(StringHelper.BRIGHT_GREEN + (isEmpowered(stack) ? damageEmpowered : 1) + " " + StringHelper.localize("info.cofh.damageFlux") + StringHelper.END);
+			tooltip.add(StringHelper.BRIGHT_GREEN + (isEmpowered(stack) ? damageEmpowered : 1) + " " + StringHelper.localize("info.cofh.damage_flux") + StringHelper.END);
 		}
 	}
 

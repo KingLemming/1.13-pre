@@ -15,10 +15,11 @@ public class SimpleItemFuel extends AbstractFuel {
 		this.inputItems.add(input);
 	}
 
+	// region OPTIMIZATION
 	@Override
 	public List<Integer> getInputItemCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
 
 		return Collections.singletonList(this.inputItems.get(0).getCount());
 	}
-
+	// endregion
 }

@@ -15,103 +15,16 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-import static cofh.lib.util.Constants.*;
+import static cofh.lib.util.Constants.TAG_TRANSFER;
 
 public abstract class TileMachine extends AbstractTileBase implements ITickable, ITransferControllableTile {
 
 	protected TransferControlModule transferControl = new TransferControlModule(this);
 
-	protected int process;
-	protected int processMax;
-
-	protected float outputMod = 1.0F;
-	protected float energyMod = 1.0F;
-
 	public TileMachine(AbstractTileType type) {
 
 		super(type);
 	}
-
-	@Override
-	public void update() {
-
-		boolean curActive = isActive;
-
-		// TODO: Remove
-		energyStorage.receiveEnergy(200, false);
-
-		if (isActive) {
-			processTick();
-			if (canProcessFinish()) {
-				processFinish();
-				transferOutput();
-				transferInput();
-				energyStorage.modifyAmount(-process);
-
-				if (!redstoneControl.getState() || !canProcessStart()) {
-					processOff();
-				} else {
-					processStart();
-				}
-			} else if (energyStorage.isEmpty()) {
-				processOff();
-			}
-		} else if (redstoneControl.getState()) {
-			if (timeCheck()) {
-				transferOutput();
-				transferInput();
-			}
-			if (timeCheck4() && canProcessStart()) {
-				processStart();
-				processTick();
-				isActive = true;
-			}
-		}
-		updateActiveState(curActive);
-		// chargeEnergy();
-	}
-
-	// region PROCESS
-	protected boolean canProcessStart() {
-
-		return false;
-	}
-
-	protected boolean canProcessFinish() {
-
-		return process <= 0 && validateInputs();
-	}
-
-	protected void processStart() {
-
-	}
-
-	protected void processFinish() {
-
-	}
-
-	protected void processOff() {
-
-		process = 0;
-		isActive = false;
-		wasActive = true;
-		clearRecipe();
-		if (world != null) {
-			timeTracker.markTime(world);
-		}
-	}
-
-	protected int processTick() {
-
-		if (process <= 0) {
-			return 0;
-		}
-		int energy = calcEnergy();
-		energyStorage.modifyAmount(-energy);
-		process -= energy;
-		return energy;
-	}
-	// endregion
 
 	// region HELPERS
 	protected boolean cacheRenderFluid() {
@@ -119,13 +32,9 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		return false;
 	}
 
-	protected boolean cacheRecipe() {
+	public FluidStack getRenderFluid() {
 
-		return true;
-	}
-
-	protected void clearRecipe() {
-
+		return null;
 	}
 
 	protected void transferInput() {
@@ -167,29 +76,14 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 	// endregion
 
 	// region GUI
-	public FluidStack getRenderFluid() {
-
-		return null;
-	}
-
 	public int getScaledProgress(int scale) {
 
-		if (!isActive || processMax <= 0 || process <= 0) {
-			return 0;
-		}
-		return scale * (processMax - process) / processMax;
+		return isActive ? scale : 0;
 	}
 
 	public int getScaledSpeed(int scale) {
 
-		// TODO: Fix
-		if (!isActive) {
-			return 0;
-		}
-		return scale;
-		//		double power = energyStorage.getEnergyStored() / energyConfig.energyRamp;
-		//		power = MathHelper.clip(power, energyConfig.minPower, energyConfig.maxPower);
-		//		return MathHelper.round(scale * power / energyConfig.maxPower);
+		return isActive ? scale : 0;
 	}
 	// endregion
 
@@ -205,31 +99,11 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 	}
 
 	@Override
-	public PacketBufferCoFH getGuiPacket(PacketBufferCoFH buffer) {
-
-		super.getGuiPacket(buffer);
-
-		buffer.writeInt(processMax);
-		buffer.writeInt(process);
-
-		return buffer;
-	}
-
-	@Override
 	public void handleControlPacket(PacketBufferCoFH buffer) {
 
 		super.handleControlPacket(buffer);
 
 		transferControl.readFromBuffer(buffer);
-	}
-
-	@Override
-	public void handleGuiPacket(PacketBufferCoFH buffer) {
-
-		super.handleGuiPacket(buffer);
-
-		processMax = buffer.readInt();
-		process = buffer.readInt();
 	}
 	// endregion
 
@@ -239,9 +113,6 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 
 		super.readFromNBT(nbt);
 
-		processMax = nbt.getInteger(TAG_PROCESS_MAX);
-		process = nbt.getInteger(TAG_PROCESS);
-
 		transferControl.readFromNBT(nbt.getCompoundTag(TAG_TRANSFER));
 	}
 
@@ -249,9 +120,6 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 
 		super.writeToNBT(nbt);
-
-		nbt.setInteger(TAG_PROCESS_MAX, processMax);
-		nbt.setInteger(TAG_PROCESS, process);
 
 		nbt.setTag(TAG_TRANSFER, transferControl.writeToNBT(new NBTTagCompound()));
 

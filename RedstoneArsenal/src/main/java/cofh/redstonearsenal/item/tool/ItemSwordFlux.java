@@ -170,8 +170,8 @@ public class ItemSwordFlux extends ItemSwordCoFH implements IEnergyContainerItem
 		if (getEnergyStored(stack) >= getEnergyPerUse(stack) && worldIn != null) {
 			int adjustedDamage = (int) (damage + Minecraft.getMinecraft().player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue());
 			tooltip.add("");
-			tooltip.add(LIGHT_BLUE + adjustedDamage + " " + localize("info.cofh.damageAttack") + StringHelper.END);
-			tooltip.add(BRIGHT_GREEN + (isEmpowered(stack) ? damageEmpowered : 1) + " " + localize("info.cofh.damageFlux") + END);
+			tooltip.add(LIGHT_BLUE + adjustedDamage + " " + localize("info.cofh.damage_attack") + StringHelper.END);
+			tooltip.add(BRIGHT_GREEN + (isEmpowered(stack) ? damageEmpowered : 1) + " " + localize("info.cofh.damage_flux") + END);
 		}
 	}
 

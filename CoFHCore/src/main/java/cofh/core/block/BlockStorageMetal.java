@@ -1,6 +1,5 @@
 package cofh.core.block;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -10,7 +9,7 @@ import net.minecraft.world.IBlockAccess;
 
 import static cofh.lib.util.Constants.TOOL_PICKAXE;
 
-public class BlockStorageMetal extends Block {
+public class BlockStorageMetal extends BlockCoFH {
 
 	public BlockStorageMetal() {
 
@@ -26,12 +25,6 @@ public class BlockStorageMetal extends Block {
 		setSoundType(SoundType.METAL);
 
 		setHarvestParams(TOOL_PICKAXE, 2);
-	}
-
-	public BlockStorageMetal setHarvestParams(String toolClass, int level) {
-
-		setHarvestLevel(toolClass, level);
-		return this;
 	}
 
 	@Override

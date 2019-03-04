@@ -1,0 +1,142 @@
+{
+	"insolator": [
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:red_flower",
+				"data": 0
+			},
+			"output": [
+				{
+					"item": "minecraft:red_flower",
+					"data": 0,
+					"count": 3
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:red_flower",
+				"data": 1
+			},
+			"output": [
+				{
+					"item": "minecraft:red_flower",
+					"data": 1,
+					"count": 3
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:red_flower",
+				"data": 2
+			},
+			"output": [
+				{
+					"item": "minecraft:red_flower",
+					"data": 2,
+					"count": 3
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:red_flower",
+				"data": 3
+			},
+			"output": [
+				{
+					"item": "minecraft:red_flower",
+					"data": 3,
+					"count": 3
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:red_flower",
+				"data": 4
+			},
+			"output": [
+				{
+					"item": "minecraft:red_flower",
+					"data": 4,
+					"count": 3
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:red_flower",
+				"data": 5
+			},
+			"output": [
+				{
+					"item": "minecraft:red_flower",
+					"data": 5,
+					"count": 3
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:red_flower",
+				"data": 6
+			},
+			"output": [
+				{
+					"item": "minecraft:red_flower",
+					"data": 6,
+					"count": 3
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:red_flower",
+				"data": 7
+			},
+			"output": [
+				{
+					"item": "minecraft:red_flower",
+					"data": 7,
+					"count": 3
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:red_flower",
+				"data": 8
+			},
+			"output": [
+				{
+					"item": "minecraft:red_flower",
+					"data": 8,
+					"count": 3
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "minecraft:yellow_flower"
+			},
+			"output": [
+				{
+					"item": "minecraft:yellow_flower",
+					"count": 3
+				}
+			]
+		}
+	]
+}

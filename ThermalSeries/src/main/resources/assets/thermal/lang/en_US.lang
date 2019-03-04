@@ -405,7 +405,15 @@ item.thermal.crop_bell_pepper.name=Bell Pepper
 item.thermal.crop_green_bean.name=Green Bean
 item.thermal.crop_onion.name=Onion
 item.thermal.crop_spinach.name=Spinach
+item.thermal.crop_strawberry.name=Strawberry
 item.thermal.crop_tomato.name=Tomato
+
+item.thermal.seed_bell_pepper.name=Bell Pepper Seeds
+item.thermal.seed_green_bean.name=Green Bean Seeds
+item.thermal.seed_onion.name=Onion Seeds
+item.thermal.seed_spinach.name=Spinach Seeds
+item.thermal.seed_strawberry.name=Strawberry Seeds
+item.thermal.seed_tomato.name=Tomato Seeds
 
 item.thermal.watering_can_basic.name=Watering Can
 

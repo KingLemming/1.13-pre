@@ -15,6 +15,7 @@ import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -93,8 +94,8 @@ public class PulverizerRecipeCategory extends BaseRecipeCategory<PulverizerRecip
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, PulverizerRecipeWrapper recipeWrapper, IIngredients ingredients) {
 
-		List<List<ItemStack>> inputs = ingredients.getInputs(ItemStack.class);
-		List<List<ItemStack>> outputs = ingredients.getOutputs(ItemStack.class);
+		List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);
+		List<List<ItemStack>> outputs = ingredients.getOutputs(VanillaTypes.ITEM);
 
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 

@@ -80,11 +80,7 @@ public class ItemBlockCoFH extends ItemBlock implements IModelRegister {
 	@SideOnly (Side.CLIENT)
 	public void registerModel() {
 
-		if (group.isEmpty()) {
-			ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.block.getRegistryName(), "inventory"));
-		} else {
-			ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.block.getRegistryName().getResourceDomain() + ":" + group + "/" + this.block.getRegistryName().getResourcePath(), "normal"));
-		}
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.block.getRegistryName(), "inventory"));
 	}
 
 	@Override
@@ -97,12 +93,6 @@ public class ItemBlockCoFH extends ItemBlock implements IModelRegister {
 		try {
 			File blockState = new File(configDir, "/dev/" + domain + "/blockstates/" + path + ".json");
 			FileUtils.writeStringToFile(blockState, Utils.createPrettyJSON(getBlockstateString()), Charset.forName("UTF-8"));
-
-			File blockModel = new File(configDir, "/dev/" + domain + "/models/block/" + getGroup() + "/" + path + ".json");
-			FileUtils.writeStringToFile(blockModel, Utils.createPrettyJSON(getBlockModelString()), Charset.forName("UTF-8"));
-
-			File itemModel = new File(configDir, "/dev/" + domain + "/models/item/" + getGroup() + "/" + path + ".json");
-			FileUtils.writeStringToFile(itemModel, Utils.createPrettyJSON(getItemModelString()), Charset.forName("UTF-8"));
 		} catch (Throwable t) {
 			// pokemon!
 		}
@@ -112,21 +102,7 @@ public class ItemBlockCoFH extends ItemBlock implements IModelRegister {
 	public String getBlockstateString() {
 
 		String group = getGroup().isEmpty() ? "" : getGroup() + "/";
-		return "{\"variants\":{\"normal\":{\"model\":\"" + getRegistryName().getResourceDomain() + ":" + group + getRegistryName().getResourcePath() + "\"}}}";
-	}
-
-	@SideOnly (Side.CLIENT)
-	public String getBlockModelString() {
-
-		String group = getGroup().isEmpty() ? "" : getGroup() + "/";
-		return "{\"parent\":\"block/cube_all\",\"textures\":{\"all\":\"" + getRegistryName().getResourceDomain() + ":blocks/" + group + getRegistryName().getResourcePath() + "\"}}";
-	}
-
-	@SideOnly (Side.CLIENT)
-	public String getItemModelString() {
-
-		String group = getGroup().isEmpty() ? "" : getGroup() + "/";
-		return "{\"parent\":\"" + getRegistryName().getResourceDomain() + ":block/" + group + getRegistryName().getResourcePath() + "\"}";
+		return "{\"forge_marker\":1,\"defaults\":{\"model\":\"minecraft:cube_all\",\"transform\":\"forge:default-block\",\"textures\":{\"all\":\"" + getRegistryName().getResourceDomain() + ":blocks/" + group + getRegistryName().getResourcePath() + "\"}},\"variants\":{\"normal\":[{}],\"inventory\":[{}]}}";
 	}
 	// endregion
 }

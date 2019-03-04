@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static cofh.lib.util.Constants.BASE_CHANCE_LOCKED;
@@ -23,6 +24,8 @@ public abstract class AbstractRecipe implements IMachineRecipe {
 
 		this.energy = energy;
 	}
+
+	//public AbstractRecipe(int energy, List<ItemStack> inputItems, List<FluidStack> inputFluids, List<ItemStack> outputItems, List<FluidStack> outputFluids)
 
 	// region IMachineRecipe
 	@Override
@@ -63,6 +66,32 @@ public abstract class AbstractRecipe implements IMachineRecipe {
 			}
 		}
 		return modifiedChances;
+	}
+
+	@Override
+	public List<Integer> getInputItemCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
+
+		if (inputItems.isEmpty()) {
+			return Collections.emptyList();
+		}
+		ArrayList<Integer> ret = new ArrayList<>();
+		for (ItemStack input : inputItems) {
+			ret.add(input.getCount());
+		}
+		return ret;
+	}
+
+	@Override
+	public List<Integer> getInputFluidCounts(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
+
+		if (inputFluids.isEmpty()) {
+			return Collections.emptyList();
+		}
+		ArrayList<Integer> ret = new ArrayList<>();
+		for (FluidStack input : inputFluids) {
+			ret.add(input.amount);
+		}
+		return ret;
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package cofh.thermal.core.init;
 
+import cofh.core.block.BlockCoFH;
 import cofh.core.block.BlockOre;
 import cofh.core.block.BlockStorageMetal;
 import cofh.core.block.BlockStorageResource;
@@ -116,9 +117,9 @@ public class BlocksTSeries {
 	// endregion
 
 	// region BLOCKS
-	public static BlockOre blockOreSulfur;
-	public static BlockOre blockOreNiter;
-	public static BlockOre blockOreCinnabar;
+	public static BlockCoFH blockOreSulfur;
+	public static BlockCoFH blockOreNiter;
+	public static BlockCoFH blockOreCinnabar;
 
 	//  public static BlockOre blockOreFluidExperience;
 	//	public static BlockOre blockOreFluidRedstone;

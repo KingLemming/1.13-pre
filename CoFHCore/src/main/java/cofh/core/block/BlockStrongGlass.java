@@ -2,7 +2,6 @@ package cofh.core.block;
 
 import cofh.lib.block.IDismantleable;
 import cofh.lib.util.Utils;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -20,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockStrongGlass extends Block implements IDismantleable {
+public class BlockStrongGlass extends BlockCoFH implements IDismantleable {
 
 	float[] beaconColor = null;
 

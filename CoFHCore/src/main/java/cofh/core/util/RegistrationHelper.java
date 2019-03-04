@@ -28,6 +28,23 @@ public class RegistrationHelper {
 	}
 
 	// region BLOCKS
+	public Block registerBlock(String blockName, Block block, CreativeTabs tab) {
+
+		if (!(block instanceof BlockFluidCoFH)) {
+			block.setCreativeTab(tab);
+		}
+		block.setRegistryName(blockName);
+		block.setUnlocalizedName(modId + "." + blockName);
+		ForgeRegistries.BLOCKS.register(block);
+
+		return block;
+	}
+
+	public Block registerBlock(String blockName, Block block) {
+
+		return registerBlock(blockName, block, defaultBlockTab);
+	}
+
 	public ItemStack registerBlock(String blockName, ItemBlock itemBlock, CreativeTabs tab) {
 
 		Block block = itemBlock.getBlock();
