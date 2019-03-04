@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import static cofh.lib.util.Constants.GROUP_CROPS;
 import static cofh.lib.util.Constants.GROUP_SEEDS;
 import static cofh.thermal.core.ThermalSeries.registerItem;
+import static cofh.thermal.cultivation.init.BlocksTC.plantOnion;
 
 public class ItemsTC {
 
@@ -38,7 +39,7 @@ public class ItemsTC {
 
 	public static void registerSeeds() {
 
-		seedOnion = registerItem("seed_onion", "seedOnion", new ItemSeedCoFH(Blocks.WHEAT, GROUP_SEEDS));
+		seedOnion = registerItem("seed_onion", "seedOnion", new ItemSeedCoFH(plantOnion, GROUP_SEEDS));
 
 		seedBellPepper = registerItem("seed_bell_pepper", "seedBellPepper", new ItemSeedCoFH(Blocks.WHEAT, GROUP_SEEDS));
 		seedGreenBean = registerItem("seed_green_bean", "seedGreenBean", new ItemSeedCoFH(Blocks.WHEAT, GROUP_SEEDS));

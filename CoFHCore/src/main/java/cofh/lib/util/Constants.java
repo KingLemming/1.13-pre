@@ -4,6 +4,7 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fluids.Fluid;
 
 import java.util.UUID;
@@ -29,6 +30,20 @@ public class Constants {
 
 	@Deprecated // Remove in 1.13, UnlistedProperties have been changed up.
 	public static final UnlistedMapProperty<String, String> MODEL_PROPERTIES = new UnlistedMapProperty<>("model_properties");
+	// endregion
+
+	// region AABBs
+	// @formatter:off
+	public static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[] {
+			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D) };
+	// @formatter:on
 	// endregion
 
 	// region MOD IDS

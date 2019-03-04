@@ -1,12 +1,12 @@
 package cofh.thermal.core.init;
 
-import cofh.core.block.BlockCoFH;
 import cofh.core.block.BlockOre;
 import cofh.core.block.BlockStorageMetal;
 import cofh.core.block.BlockStorageResource;
 import cofh.core.item.ItemBlockCoFH;
 import cofh.core.item.ItemBlockFuel;
 import cofh.lib.util.RandomDrop;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -30,9 +30,9 @@ public class BlocksTSeries {
 	// region INITIALIZATION
 	public static void initialize() {
 
-		blockOreSulfur.addDrop(new RandomDrop(dustSulfur, 2, 4));
-		blockOreNiter.addDrop(new RandomDrop(dustNiter, 2, 4));
-		//  blockOreCinnabar.addDrop(new RandomDrop(itemCinnabar, 1, 3));
+		((BlockOre) blockOreSulfur).addDrop(new RandomDrop(dustSulfur, 2, 4));
+		((BlockOre) blockOreNiter).addDrop(new RandomDrop(dustNiter, 2, 4));
+		//  ((BlockOre)blockOreCinnabar).addDrop(new RandomDrop(itemCinnabar, 1, 3));
 
 		// TODO: Fix
 		//  blockOreFluidExperience.addDrop(new RandomDrop(new ItemStack(Items.DYE, 1, EnumDyeColor.BLUE.getDyeDamage()), 2, 4));
@@ -117,9 +117,9 @@ public class BlocksTSeries {
 	// endregion
 
 	// region BLOCKS
-	public static BlockCoFH blockOreSulfur;
-	public static BlockCoFH blockOreNiter;
-	public static BlockCoFH blockOreCinnabar;
+	public static Block blockOreSulfur;
+	public static Block blockOreNiter;
+	public static Block blockOreCinnabar;
 
 	//  public static BlockOre blockOreFluidExperience;
 	//	public static BlockOre blockOreFluidRedstone;

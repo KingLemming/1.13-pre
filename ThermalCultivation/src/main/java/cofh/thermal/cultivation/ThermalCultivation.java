@@ -46,6 +46,8 @@ public class ThermalCultivation implements IModule {
 	@EventHandler
 	public void initialize(FMLInitializationEvent event) {
 
+		BlocksTC.initialize();
+
 		proxy.initialize(event);
 	}
 

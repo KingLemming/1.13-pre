@@ -30,13 +30,14 @@ public class RegistrationHelper {
 	// region BLOCKS
 	public Block registerBlock(String blockName, Block block, CreativeTabs tab) {
 
-		if (!(block instanceof BlockFluidCoFH)) {
-			block.setCreativeTab(tab);
-		}
+		block.setCreativeTab(tab);
 		block.setRegistryName(blockName);
 		block.setUnlocalizedName(modId + "." + blockName);
 		ForgeRegistries.BLOCKS.register(block);
 
+		if (block instanceof BlockFluidCoFH) {
+			fluidList.add((BlockFluidCoFH) block);
+		}
 		return block;
 	}
 
@@ -49,9 +50,7 @@ public class RegistrationHelper {
 
 		Block block = itemBlock.getBlock();
 
-		if (!(block instanceof BlockFluidCoFH)) {
-			block.setCreativeTab(tab);
-		}
+		block.setCreativeTab(tab);
 		block.setRegistryName(blockName);
 		block.setUnlocalizedName(modId + "." + blockName);
 		ForgeRegistries.BLOCKS.register(block);
@@ -59,9 +58,7 @@ public class RegistrationHelper {
 		itemBlock.setRegistryName(blockName);
 		ForgeRegistries.ITEMS.register(itemBlock);
 
-		if (block instanceof BlockFluidCoFH) {
-			fluidList.add((BlockFluidCoFH) block);
-		} else if (itemBlock instanceof IModelRegister) {
+		if (itemBlock instanceof IModelRegister) {
 			blockList.add((IModelRegister) itemBlock);
 		}
 		return new ItemStack(block);

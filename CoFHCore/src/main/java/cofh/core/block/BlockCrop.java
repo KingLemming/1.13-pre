@@ -27,11 +27,16 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 import static cofh.lib.util.Constants.AGE;
+import static cofh.lib.util.Constants.CROPS_AABB;
+import static cofh.lib.util.helpers.ItemHelper.cloneStack;
 
 public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 
 	protected final EnumPlantType type;
 	protected int reqLight = 9;
+
+	protected ItemStack crop = ItemStack.EMPTY;
+	protected ItemStack seed = ItemStack.EMPTY;
 
 	public BlockCrop() {
 
@@ -52,6 +57,18 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 	public BlockCrop setRequiredLight(int reqLight) {
 
 		this.reqLight = reqLight;
+		return this;
+	}
+
+	public BlockCrop setCrop(ItemStack crop) {
+
+		this.crop = crop;
+		return this;
+	}
+
+	public BlockCrop setSeed(ItemStack seed) {
+
+		this.seed = seed;
 		return this;
 	}
 
@@ -77,7 +94,17 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 
 	protected boolean isHarvestable(IBlockState state) {
 
-		return false;
+		return getAge(state) == getHarvestAge();
+	}
+
+	protected ItemStack getCrop() {
+
+		return crop;
+	}
+
+	protected ItemStack getSeed() {
+
+		return seed;
 	}
 
 	public IBlockState withAge(int age) {
@@ -127,6 +154,12 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 	}
 
 	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+
+		return CROPS_AABB[state.getValue(this.getAgeProperty())];
+	}
+
+	@Override
 	@Nullable
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 
@@ -149,22 +182,23 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 
 		if (isHarvestable(state)) {
-
+			if (getCrop().isEmpty()) {
+				super.getDrops(drops, world, pos, state, fortune);
+			} else {
+				drops.add(cloneStack(getCrop()));
+			}
 		}
-		//
-		//		//super.getDrops(drops, world, pos, state, 0);
-		//		int age = getAge(state);
-		//		Random rand = world instanceof World ? ((World) world).rand : new Random();
-		//
-		//		if (age >= getMaxAge()) {
-		//			int k = 3 + fortune;
-		//
-		//			for (int i = 0; i < 3 + fortune; ++i) {
-		//				if (rand.nextInt(2 * getMaxAge()) <= age) {
-		//					drops.add(new ItemStack(this.getSeed(), 1, 0));
-		//				}
-		//			}
-		//		}
+		Random rand = world instanceof World ? ((World) world).rand : RANDOM;
+		int age = getAge(state);
+		int seedCount = 1;
+		if (age >= getHarvestAge()) {
+			for (int i = 0; i < 3 + fortune; i++) {
+				if (rand.nextFloat() < 0.5F) {
+					seedCount++;
+				}
+			}
+		}
+		drops.add(cloneStack(getSeed(), seedCount));
 	}
 
 	// region HELPERS

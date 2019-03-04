@@ -1,6 +1,5 @@
 package cofh.thermal.core;
 
-import cofh.core.item.ItemBlockCoFH;
 import cofh.core.network.PacketHandler;
 import cofh.core.util.RegistrationHelper;
 import cofh.lib.capabilities.CapabilityEnchantable;
@@ -255,14 +254,19 @@ public class ThermalSeries {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.INSTANCE);
 	}
 
+	public static Block registerBlock(String blockName, Block block) {
+
+		return registrar.registerBlock(blockName, block);
+	}
+
+	public static Block registerBlock(String blockName, Block block, CreativeTabs tab) {
+
+		return registrar.registerBlock(blockName, block, tab);
+	}
+
 	public static ItemStack registerBlock(String blockName, ItemBlock itemBlock, CreativeTabs tab) {
 
 		return registrar.registerBlock(blockName, itemBlock, tab);
-	}
-
-	public static ItemStack registerBlock(String blockName, Block block) {
-
-		return registrar.registerBlock(blockName, new ItemBlockCoFH(block));
 	}
 
 	public static ItemStack registerBlock(String blockName, ItemBlock itemBlock) {
