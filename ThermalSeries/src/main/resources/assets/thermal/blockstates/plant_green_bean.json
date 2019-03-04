@@ -1,0 +1,75 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:cross",
+		"transform": "forge:default-block",
+		"textures": {
+			"cross": "thermal:blocks/crops/plant_green_bean_0"
+		}
+	},
+	"variants": {
+		"age": {
+			"0": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_green_bean_0"
+				}
+			},
+			"1": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_green_bean_1"
+				}
+			},
+			"2": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_green_bean_2"
+				}
+			},
+			"3": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_green_bean_3"
+				}
+			},
+			"4": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_green_bean_4"
+				}
+			},
+			"5": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_green_bean_5"
+				}
+			},
+			"6": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_green_bean_6"
+				}
+			},
+			"7": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_green_bean_7"
+				}
+			},
+			"8": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_green_bean_8"
+				}
+			},
+			"9": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_green_bean_9"
+				}
+			},
+			"10": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_green_bean_10"
+				}
+			}
+		},
+		"normal": [
+			{}
+		],
+		"inventory": [
+			{}
+		]
+	}
+}

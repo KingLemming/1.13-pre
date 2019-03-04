@@ -1,0 +1,60 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:cross",
+		"transform": "forge:default-block",
+		"textures": {
+			"cross": "thermal:blocks/crops/plant_sadiroot_0"
+		}
+	},
+	"variants": {
+		"age": {
+			"0": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_sadiroot_0"
+				}
+			},
+			"1": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_sadiroot_1"
+				}
+			},
+			"2": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_sadiroot_2"
+				}
+			},
+			"3": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_sadiroot_3"
+				}
+			},
+			"4": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_sadiroot_4"
+				}
+			},
+			"5": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_sadiroot_5"
+				}
+			},
+			"6": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_sadiroot_6"
+				}
+			},
+			"7": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_sadiroot_7"
+				}
+			}
+		},
+		"normal": [
+			{}
+		],
+		"inventory": [
+			{}
+		]
+	}
+}

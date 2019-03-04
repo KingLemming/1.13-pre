@@ -1,0 +1,52 @@
+{
+	"insolator": [
+		{
+			"type": "plant",
+			"input": {
+				"item": "thermal:seed_onion"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_onion",
+					"count": 2
+				},
+				{
+					"item": "thermal:seed_onion",
+					"chance": 1.1
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "thermal:seed_sadiroot"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_sadiroot",
+					"count": 2
+				},
+				{
+					"item": "thermal:seed_sadiroot",
+					"chance": 1.1
+				}
+			]
+		},
+		{
+			"type": "plant",
+			"input": {
+				"item": "thermal:seed_spinach"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_spinach",
+					"count": 2
+				},
+				{
+					"item": "thermal:seed_spinach",
+					"chance": 1.1
+				}
+			]
+		}
+	]
+}

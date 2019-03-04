@@ -59,7 +59,7 @@ public class PulverizerRecipeParser extends AbstractContentParser {
 							chance.set(i, chance.get(i) * output.get(i).getCount());
 							output.get(i).setCount(1);
 						}
-						// If ore recipe, no chances are locked.
+						// If catalyst recipe, no chances are locked.
 						chance.set(i, Math.abs(chance.get(i)));
 					}
 					PulverizerRecipeManager.instance().addOreRecipe(energy, input, output, chance);
@@ -70,7 +70,7 @@ public class PulverizerRecipeParser extends AbstractContentParser {
 							chance.set(i, chance.get(i) * output.get(i).getCount());
 							output.get(i).setCount(1);
 						}
-						// If ore recipe, no chances are locked.
+						// If catalyst recipe, no chances are locked.
 						chance.set(i, Math.abs(chance.get(i)));
 					}
 					// If default-ore recipe, use the configured ore multiplier.

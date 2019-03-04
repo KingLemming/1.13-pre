@@ -1,0 +1,75 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:cross",
+		"transform": "forge:default-block",
+		"textures": {
+			"cross": "thermal:blocks/crops/plant_tomato_0"
+		}
+	},
+	"variants": {
+		"age": {
+			"0": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_tomato_0"
+				}
+			},
+			"1": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_tomato_1"
+				}
+			},
+			"2": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_tomato_2"
+				}
+			},
+			"3": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_tomato_3"
+				}
+			},
+			"4": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_tomato_4"
+				}
+			},
+			"5": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_tomato_5"
+				}
+			},
+			"6": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_tomato_6"
+				}
+			},
+			"7": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_tomato_7"
+				}
+			},
+			"8": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_tomato_8"
+				}
+			},
+			"9": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_tomato_9"
+				}
+			},
+			"10": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_tomato_10"
+				}
+			}
+		},
+		"normal": [
+			{}
+		],
+		"inventory": [
+			{}
+		]
+	}
+}

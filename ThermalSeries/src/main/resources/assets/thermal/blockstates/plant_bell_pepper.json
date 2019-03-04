@@ -1,0 +1,75 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:cross",
+		"transform": "forge:default-block",
+		"textures": {
+			"cross": "thermal:blocks/crops/plant_bell_pepper_0"
+		}
+	},
+	"variants": {
+		"age": {
+			"0": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_bell_pepper_0"
+				}
+			},
+			"1": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_bell_pepper_1"
+				}
+			},
+			"2": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_bell_pepper_2"
+				}
+			},
+			"3": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_bell_pepper_3"
+				}
+			},
+			"4": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_bell_pepper_4"
+				}
+			},
+			"5": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_bell_pepper_5"
+				}
+			},
+			"6": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_bell_pepper_6"
+				}
+			},
+			"7": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_bell_pepper_7"
+				}
+			},
+			"8": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_bell_pepper_8"
+				}
+			},
+			"9": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_bell_pepper_9"
+				}
+			},
+			"10": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_bell_pepper_10"
+				}
+			}
+		},
+		"normal": [
+			{}
+		],
+		"inventory": [
+			{}
+		]
+	}
+}

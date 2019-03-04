@@ -1,0 +1,75 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:cross",
+		"transform": "forge:default-block",
+		"textures": {
+			"cross": "thermal:blocks/crops/plant_strawberry_0"
+		}
+	},
+	"variants": {
+		"age": {
+			"0": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_strawberry_0"
+				}
+			},
+			"1": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_strawberry_1"
+				}
+			},
+			"2": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_strawberry_2"
+				}
+			},
+			"3": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_strawberry_3"
+				}
+			},
+			"4": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_strawberry_4"
+				}
+			},
+			"5": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_strawberry_5"
+				}
+			},
+			"6": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_strawberry_6"
+				}
+			},
+			"7": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_strawberry_7"
+				}
+			},
+			"8": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_strawberry_8"
+				}
+			},
+			"9": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_strawberry_9"
+				}
+			},
+			"10": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_strawberry_10"
+				}
+			}
+		},
+		"normal": [
+			{}
+		],
+		"inventory": [
+			{}
+		]
+	}
+}
