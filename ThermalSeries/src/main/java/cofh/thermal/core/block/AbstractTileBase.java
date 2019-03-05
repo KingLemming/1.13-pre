@@ -93,6 +93,11 @@ public abstract class AbstractTileBase extends TileCoFH implements ISecurableTil
 
 		return tankInv.getOutputTanks();
 	}
+
+	protected List<? extends ItemStorageCoFH> getInternalSlots() {
+
+		return inventory.getInternalSlots();
+	}
 	// endregion
 
 	// region PASSTHROUGHS

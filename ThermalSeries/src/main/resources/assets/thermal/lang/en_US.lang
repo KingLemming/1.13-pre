@@ -226,6 +226,10 @@ item.thermal.nugget_enderium.name=Enderium Nugget
 item.thermal.nugget_diamond.name=Diamond Nugget
 item.thermal.nugget_emerald.name=Emerald Nugget
 
+item.thermal.phytogro.name=Phyto-Gro
+item.thermal.phytogro_rich.name=Rich Phyto-Gro
+item.thermal.phytogro_flux.name=Fluxed Phyto-Gro
+
 item.thermal.plate_iron.name=Iron Plate
 item.thermal.plate_gold.name=Gold Plate
 item.thermal.plate_steel.name=Steel Plate

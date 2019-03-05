@@ -2,7 +2,7 @@ package cofh.thermal.expansion.gui.container.dynamo;
 
 import cofh.core.gui.container.ContainerTileAugmentable;
 import cofh.lib.inventory.InvWrapper;
-import cofh.lib.inventory.SlotCoFH;
+import cofh.lib.gui.slot.SlotCoFH;
 import cofh.thermal.expansion.block.dynamo.TileDynamoSteam;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;

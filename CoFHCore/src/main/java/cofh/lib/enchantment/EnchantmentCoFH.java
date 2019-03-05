@@ -1,4 +1,4 @@
-package cofh.ensorcellment.enchantment;
+package cofh.lib.enchantment;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -7,25 +7,25 @@ import net.minecraft.item.ItemStack;
 
 import static cofh.lib.capabilities.CapabilityEnchantable.ENCHANTABLE_ITEM_CAPABILITY;
 
-public abstract class EnchantmentBase extends Enchantment {
+public abstract class EnchantmentCoFH extends Enchantment {
 
 	public boolean enable = true;
 	public int maxLevel = 1;
 
-	protected EnchantmentBase(String id, Rarity rarityIn, EnumEnchantmentType typeIn, EntityEquipmentSlot[] slots) {
+	protected EnchantmentCoFH(String id, Rarity rarityIn, EnumEnchantmentType typeIn, EntityEquipmentSlot[] slots) {
 
 		super(rarityIn, typeIn, slots);
 		setRegistryName(id);
 		config();
 	}
 
-	protected EnchantmentBase setEnable(boolean enable) {
+	protected EnchantmentCoFH setEnable(boolean enable) {
 
 		this.enable = enable;
 		return this;
 	}
 
-	protected EnchantmentBase setMaxLevel(int maxLevel) {
+	protected EnchantmentCoFH setMaxLevel(int maxLevel) {
 
 		this.maxLevel = maxLevel;
 		return this;
@@ -68,7 +68,4 @@ public abstract class EnchantmentBase extends Enchantment {
 		return enable;
 	}
 
-	// region HELPERS
-
-	// endregion
 }

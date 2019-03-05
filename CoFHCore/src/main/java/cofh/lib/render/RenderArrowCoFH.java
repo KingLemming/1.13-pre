@@ -1,4 +1,4 @@
-package cofh.core.render;
+package cofh.lib.render;
 
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderManager;

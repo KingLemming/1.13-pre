@@ -76,7 +76,7 @@ public class EntityBasalz extends EntityElemental {
 
 	public static void config() {
 
-		String category = "Mob.Basalz";
+		String category = "Mobs.Basalz";
 		String comment;
 
 		comment = "If TRUE, Basalzes will appear naturally.";

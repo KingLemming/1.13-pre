@@ -18,7 +18,7 @@ public class BlockFluidRedstone extends BlockFluidCoFH {
 
 	public static void config() {
 
-		String category = "Fluid.Redstone";
+		String category = "Fluids.Redstone";
 		String comment = "If TRUE, Destabilized Redstone will emit a redstone signal proportional to its quanta (level).";
 		effect = ThermalSeries.config.getBoolean("Effect", category, effect, comment);
 	}

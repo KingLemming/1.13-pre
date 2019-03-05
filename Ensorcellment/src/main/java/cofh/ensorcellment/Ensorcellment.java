@@ -4,6 +4,7 @@ import cofh.ensorcellment.enchantment.EnchantmentsEnsorc;
 import cofh.ensorcellment.proxy.ProxyCommon;
 import cofh.lib.capabilities.CapabilityEnchantable;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
@@ -80,6 +81,11 @@ public class Ensorcellment {
 	public void registerEnchantments(RegistryEvent.Register<Enchantment> event) {
 
 		EnchantmentsEnsorc.registerEnchantments(event);
+	}
+
+	@SubscribeEvent
+	public void registerPotions(RegistryEvent.Register<Potion> event) {
+
 	}
 	// endregion
 

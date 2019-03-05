@@ -30,7 +30,7 @@ public class BlockFluidGlowstone extends BlockFluidCoFH {
 
 	public static void config() {
 
-		String category = "Fluid.Glowstone";
+		String category = "Fluids.Glowstone";
 		String comment;
 
 		comment = "If TRUE, Energized Glowstone will provide buffs to entities on contact.";

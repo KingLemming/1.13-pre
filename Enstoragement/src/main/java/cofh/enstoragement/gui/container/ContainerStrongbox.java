@@ -3,7 +3,7 @@ package cofh.enstoragement.gui.container;
 import cofh.core.gui.container.ContainerCoFH;
 import cofh.enstoragement.block.InvWrapperStrongbox;
 import cofh.enstoragement.block.TileStrongbox;
-import cofh.lib.inventory.SlotCoFH;
+import cofh.lib.gui.slot.SlotCoFH;
 import cofh.lib.util.helpers.MathHelper;
 import invtweaks.api.container.ChestContainer;
 import invtweaks.api.container.ChestContainer.RowSizeCallback;

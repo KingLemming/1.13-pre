@@ -1,6 +1,6 @@
 package cofh.core.fluid;
 
-import cofh.core.render.particle.EntityDropParticleFX;
+import cofh.lib.render.particle.EntityDropParticleFX;
 import cofh.lib.util.StateMapper;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

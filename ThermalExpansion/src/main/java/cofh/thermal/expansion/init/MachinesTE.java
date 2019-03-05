@@ -22,6 +22,8 @@ public class MachinesTE {
 
 	public static final AbstractTileType CRUCIBLE = registerMachine("crucible", 14, TileMachineCrucible.class, ContainerMachineCrucible.class, GuiMachineCrucible.class);
 	public static final AbstractTileType CENTRIFUGE = registerMachine("centrifuge", 4, TileMachineCentrifuge.class, ContainerMachineCentrifuge.class, GuiMachineCentrifuge.class);
+	public static final AbstractTileType EXTRUDER = registerMachine("extruder", 14, TileMachineExtruder.class, ContainerMachineExtruder.class, GuiMachineExtruder.class);
+
 	// public static final TileStruct COMPACTOR = registerMachine("compactor", 4, TileMachineCompactor.class, ContainerMachineCompactor.class, GuiMachineCompactor.class);
 
 	// public static final TileStruct CRAFTER = registerMachine("crafter", 7, TileMachineCrafter.class, ContainerMachineCrafter.class, GuiMachineCrafter.class);

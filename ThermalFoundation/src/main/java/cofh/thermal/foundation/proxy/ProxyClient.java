@@ -1,6 +1,6 @@
 package cofh.thermal.foundation.proxy;
 
-import cofh.core.render.RenderEntityAsIcon;
+import cofh.lib.render.RenderEntityAsIcon;
 import cofh.thermal.foundation.entity.monster.EntityBasalz;
 import cofh.thermal.foundation.entity.monster.EntityBlitz;
 import cofh.thermal.foundation.entity.monster.EntityBlizz;

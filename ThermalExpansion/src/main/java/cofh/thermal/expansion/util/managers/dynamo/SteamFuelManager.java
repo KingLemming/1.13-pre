@@ -40,7 +40,7 @@ public class SteamFuelManager extends SimpleItemFuelManager {
 	@Override
 	public void config() {
 
-		String category = "Dynamo.Steam";
+		String category = "Dynamos.Steam";
 		String comment;
 
 		comment = "Adjust this value to change the default energy value for this dynamo's fuels.";

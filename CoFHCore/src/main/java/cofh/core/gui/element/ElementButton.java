@@ -18,7 +18,6 @@ public class ElementButton extends ElementButtonBase {
 	private int disabledY = 0;
 
 	private boolean managedClicks;
-	private boolean tooltipLocalized;
 	private String tooltip;
 
 	public ElementButton(IGuiAccess gui, int posX, int posY, int sizeX, int sizeY, int sheetX, int sheetY, int hoverX, int hoverY, String texture) {

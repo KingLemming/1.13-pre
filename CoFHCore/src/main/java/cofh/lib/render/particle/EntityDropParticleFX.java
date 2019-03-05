@@ -1,4 +1,4 @@
-package cofh.core.render.particle;
+package cofh.lib.render.particle;
 
 import cofh.lib.util.helpers.MathHelper;
 import net.minecraft.block.BlockLiquid;

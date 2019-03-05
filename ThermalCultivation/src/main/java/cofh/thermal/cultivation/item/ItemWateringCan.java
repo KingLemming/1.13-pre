@@ -176,7 +176,7 @@ public class ItemWateringCan extends ItemFluidContainer implements IMultiModeIte
 			}
 		}
 		if (Utils.isServerWorld(world)) {
-			if (world.rand.nextInt(100) < effectiveness - 5 * getMode(stack)) {
+			if (world.rand.nextInt(100) < Math.max(effectiveness - 5 * getMode(stack), 1)) {
 				for (BlockPos scan : area) {
 					Block plant = world.getBlockState(scan).getBlock();
 					if (plant instanceof IGrowable || plant instanceof IPlantable || plant == Blocks.MYCELIUM || plant == Blocks.CHORUS_FLOWER) {

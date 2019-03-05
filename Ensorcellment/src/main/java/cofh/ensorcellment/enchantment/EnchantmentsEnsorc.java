@@ -10,6 +10,8 @@ import cofh.ensorcellment.enchantment.digger.EnchantmentInsight;
 import cofh.ensorcellment.enchantment.digger.EnchantmentSmashing;
 import cofh.ensorcellment.enchantment.digger.EnchantmentSmelting;
 import cofh.ensorcellment.enchantment.looting.EnchantmentAngler;
+import cofh.ensorcellment.enchantment.looting.EnchantmentFarmer;
+import cofh.ensorcellment.enchantment.looting.EnchantmentHunter;
 import cofh.ensorcellment.enchantment.misc.EnchantmentHolding;
 import cofh.ensorcellment.enchantment.misc.EnchantmentSoulbound;
 import cofh.ensorcellment.enchantment.override.*;
@@ -17,6 +19,7 @@ import cofh.ensorcellment.enchantment.shield.EnchantmentBulwark;
 import cofh.ensorcellment.enchantment.shield.EnchantmentPhalanx;
 import cofh.ensorcellment.enchantment.weapon.EnchantmentLeech;
 import cofh.ensorcellment.enchantment.weapon.EnchantmentVorpal;
+import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -65,8 +68,8 @@ public class EnchantmentsEnsorc {
 		shieldPhalanx = new EnchantmentPhalanx(ID_PHALANX);
 
 		boostAngler = new EnchantmentAngler(ID_ANGLER);
-		boostFarmer = new EnchantmentAngler(ID_FARMER);
-		boostHunter = new EnchantmentAngler(ID_HUNTER);
+		boostFarmer = new EnchantmentFarmer(ID_FARMER);
+		boostHunter = new EnchantmentHunter(ID_HUNTER);
 
 		registerEnchantmentOverride(registry, overrideProtection);
 		registerEnchantmentOverride(registry, overrideThorns);
@@ -102,7 +105,7 @@ public class EnchantmentsEnsorc {
 		registerEnchantment(registry, boostHunter);
 	}
 
-	private static void registerEnchantment(IForgeRegistry<Enchantment> registry, EnchantmentBase enchantment) {
+	private static void registerEnchantment(IForgeRegistry<Enchantment> registry, EnchantmentCoFH enchantment) {
 
 		if (hardDisable && !enchantment.enable) {
 			return;
@@ -110,7 +113,7 @@ public class EnchantmentsEnsorc {
 		registry.register(enchantment);
 	}
 
-	private static void registerEnchantmentOverride(IForgeRegistry<Enchantment> registry, EnchantmentBase enchantment) {
+	private static void registerEnchantmentOverride(IForgeRegistry<Enchantment> registry, EnchantmentCoFH enchantment) {
 
 		if (!enchantment.enable) {
 			return;
@@ -120,37 +123,37 @@ public class EnchantmentsEnsorc {
 	// endregion
 
 	// region REFERENCES
-	public static EnchantmentBase overrideProtection;
-	public static EnchantmentBase overrideThorns;
-	public static EnchantmentBase overrideFrostWalker;
-	public static EnchantmentBase overrideKnockback;
-	public static EnchantmentBase overrideFireAspect;
-	public static EnchantmentBase overrideLooting;
-	public static EnchantmentBase overrideMending;
+	public static EnchantmentCoFH overrideProtection;
+	public static EnchantmentCoFH overrideThorns;
+	public static EnchantmentCoFH overrideFrostWalker;
+	public static EnchantmentCoFH overrideKnockback;
+	public static EnchantmentCoFH overrideFireAspect;
+	public static EnchantmentCoFH overrideLooting;
+	public static EnchantmentCoFH overrideMending;
 
-	public static EnchantmentBase miscHolding;
-	public static EnchantmentBase miscSoulbound;
+	public static EnchantmentCoFH miscHolding;
+	public static EnchantmentCoFH miscSoulbound;
 
-	public static EnchantmentBase armorAirWorker;
-	public static EnchantmentBase armorDisplacement;
-	public static EnchantmentBase armorGourmand;
+	public static EnchantmentCoFH armorAirWorker;
+	public static EnchantmentCoFH armorDisplacement;
+	public static EnchantmentCoFH armorGourmand;
 
-	public static EnchantmentBase weaponLeech;
-	public static EnchantmentBase weaponVorpal;
+	public static EnchantmentCoFH weaponLeech;
+	public static EnchantmentCoFH weaponVorpal;
 
-	public static EnchantmentBase diggerInsight;
-	public static EnchantmentBase diggerSmashing;
-	public static EnchantmentBase diggerSmelting;
+	public static EnchantmentCoFH diggerInsight;
+	public static EnchantmentCoFH diggerSmashing;
+	public static EnchantmentCoFH diggerSmelting;
 
-	public static EnchantmentBase bowVolley;
-	public static EnchantmentBase bowQuickdraw;
-	public static EnchantmentBase bowTrueshot;
+	public static EnchantmentCoFH bowVolley;
+	public static EnchantmentCoFH bowQuickdraw;
+	public static EnchantmentCoFH bowTrueshot;
 
-	public static EnchantmentBase shieldBulwark;
-	public static EnchantmentBase shieldPhalanx;
+	public static EnchantmentCoFH shieldBulwark;
+	public static EnchantmentCoFH shieldPhalanx;
 
-	public static EnchantmentBase boostAngler;
-	public static EnchantmentBase boostFarmer;
-	public static EnchantmentBase boostHunter;
+	public static EnchantmentCoFH boostAngler;
+	public static EnchantmentCoFH boostFarmer;
+	public static EnchantmentCoFH boostHunter;
 	// endregion
 }

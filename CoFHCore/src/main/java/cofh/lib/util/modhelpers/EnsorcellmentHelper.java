@@ -61,8 +61,10 @@ public class EnsorcellmentHelper {
 	 */
 	@ObjectHolder (ID_AIR_WORKER)
 	public static final Enchantment AIR_WORKER = null;
+
 	@ObjectHolder (ID_DISPLACEMENT)
 	public static final Enchantment DISPLACEMENT = null;
+
 	@ObjectHolder (ID_GOURMAND)
 	public static final Enchantment GOURMAND = null;
 

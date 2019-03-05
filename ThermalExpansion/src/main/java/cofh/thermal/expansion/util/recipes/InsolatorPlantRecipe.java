@@ -1,7 +1,5 @@
 package cofh.thermal.expansion.util.recipes;
 
-import cofh.lib.fluid.IFluidStackHolder;
-import cofh.lib.inventory.IItemStackHolder;
 import cofh.lib.util.comparison.ComparableItemStackValidated;
 import cofh.thermal.core.util.recipes.IRecipeCatalyst;
 import cofh.thermal.core.util.recipes.SimpleItemCatalystRecipe;
@@ -11,7 +9,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.List;
 
 public class InsolatorPlantRecipe extends SimpleItemCatalystRecipe {

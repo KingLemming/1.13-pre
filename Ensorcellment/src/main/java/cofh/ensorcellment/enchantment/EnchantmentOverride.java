@@ -1,12 +1,13 @@
 package cofh.ensorcellment.enchantment;
 
+import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraftforge.fml.common.FMLLog;
 
 import static cofh.lib.util.Constants.ID_ENSORCELLMENT;
 
-public abstract class EnchantmentOverride extends EnchantmentBase {
+public abstract class EnchantmentOverride extends EnchantmentCoFH {
 
 	protected EnchantmentOverride(String id, Rarity rarityIn, EnumEnchantmentType typeIn, EntityEquipmentSlot[] slots) {
 

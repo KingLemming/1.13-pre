@@ -1,14 +1,14 @@
 package cofh.ensorcellment.enchantment.shield;
 
 import cofh.ensorcellment.Ensorcellment;
-import cofh.ensorcellment.enchantment.EnchantmentBase;
+import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
 import static cofh.lib.util.Constants.MAX_ENCHANT_LEVEL;
 
-public class EnchantmentPhalanx extends EnchantmentBase {
+public class EnchantmentPhalanx extends EnchantmentCoFH {
 
 	public static final double SPEED = 1.2D;
 

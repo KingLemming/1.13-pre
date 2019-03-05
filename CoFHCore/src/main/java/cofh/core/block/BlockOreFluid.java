@@ -1,7 +1,7 @@
 package cofh.core.block;
 
 import cofh.core.fluid.BlockFluidCoFH;
-import cofh.core.render.particle.EntityDropParticleFX;
+import cofh.lib.render.particle.EntityDropParticleFX;
 import cofh.lib.util.Utils;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;

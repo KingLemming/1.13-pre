@@ -11,12 +11,12 @@ import java.util.List;
 import static cofh.lib.util.StorageGroup.*;
 import static cofh.lib.util.helpers.ItemHelper.itemsIdentical;
 
+// TODO: Finish
 public class TileMachineSmelter extends TileMachineProcess {
 
-	// TODO: Fix
 	public TileMachineSmelter() {
 
-		super(MachinesTE.PULVERIZER);
+		super(MachinesTE.SMELTER);
 
 		inventory.addSlot(SmelterRecipeManager.instance()::validRecipe, INPUT);
 		inventory.addSlot(CATALYST);

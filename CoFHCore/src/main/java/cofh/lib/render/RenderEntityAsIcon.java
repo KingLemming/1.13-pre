@@ -1,4 +1,4 @@
-package cofh.core.render;
+package cofh.lib.render;
 
 import cofh.lib.util.helpers.RenderHelper;
 import net.minecraft.client.renderer.BufferBuilder;

@@ -1,7 +1,7 @@
 package cofh.ensorcellment.enchantment.digger;
 
 import cofh.ensorcellment.Ensorcellment;
-import cofh.ensorcellment.enchantment.EnchantmentBase;
+import cofh.lib.enchantment.EnchantmentCoFH;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -17,7 +17,7 @@ import static cofh.lib.util.helpers.ItemHelper.cloneStack;
 import static cofh.lib.util.helpers.StringHelper.titleCase;
 import static cofh.lib.util.oredict.OreDictHelper.*;
 
-public class EnchantmentSmashing extends EnchantmentBase {
+public class EnchantmentSmashing extends EnchantmentCoFH {
 
 	public EnchantmentSmashing(String id) {
 

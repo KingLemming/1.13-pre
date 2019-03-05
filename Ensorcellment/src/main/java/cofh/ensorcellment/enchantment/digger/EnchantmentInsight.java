@@ -1,7 +1,7 @@
 package cofh.ensorcellment.enchantment.digger;
 
 import cofh.ensorcellment.Ensorcellment;
-import cofh.ensorcellment.enchantment.EnchantmentBase;
+import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.init.Enchantments;
@@ -10,7 +10,7 @@ import net.minecraft.item.*;
 
 import static cofh.lib.util.Constants.MAX_ENCHANT_LEVEL;
 
-public class EnchantmentInsight extends EnchantmentBase {
+public class EnchantmentInsight extends EnchantmentCoFH {
 
 	public static int experience = 4;
 

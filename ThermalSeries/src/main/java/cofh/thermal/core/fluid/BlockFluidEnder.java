@@ -24,7 +24,7 @@ public class BlockFluidEnder extends BlockFluidCoFH {
 
 	public static void config() {
 
-		String category = "Fluid.Ender";
+		String category = "Fluids.Ender";
 		String comment = "If TRUE, Resonant Ender will randomly teleport entities on contact.";
 		effect = ThermalSeries.config.getBoolean("Effect", category, effect, comment);
 	}

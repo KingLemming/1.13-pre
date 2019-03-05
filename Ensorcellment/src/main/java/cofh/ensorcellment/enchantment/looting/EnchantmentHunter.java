@@ -1,7 +1,7 @@
 package cofh.ensorcellment.enchantment.looting;
 
 import cofh.ensorcellment.Ensorcellment;
-import cofh.ensorcellment.enchantment.EnchantmentBase;
+import cofh.lib.enchantment.EnchantmentCoFH;
 import cofh.lib.item.IToolBow;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.init.Items;
@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 
 import static cofh.lib.util.Constants.MAX_ENCHANT_LEVEL;
 
-public class EnchantmentHunter extends EnchantmentBase {
+public class EnchantmentHunter extends EnchantmentCoFH {
 
 	public static int chance = 50;
 

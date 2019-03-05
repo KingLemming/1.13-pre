@@ -23,7 +23,7 @@ public class MagmaticFuelManager extends SimpleFluidFuelManager {
 	@Override
 	public void config() {
 
-		String category = "Dynamo.Magmatic";
+		String category = "Dynamos.Magmatic";
 		String comment;
 
 		comment = "Adjust this value to change the default energy value for this dynamo's fuels.";

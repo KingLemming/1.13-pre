@@ -6,7 +6,7 @@ public interface ITransferControllableTile extends ITransferControllable, ITileC
 
 	TransferControlModule transferControl();
 
-	// region ITransfercontrol
+	// region ITransferControl
 	@Override
 	default boolean hasTransferIn() {
 

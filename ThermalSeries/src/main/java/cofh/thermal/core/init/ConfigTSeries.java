@@ -47,7 +47,7 @@ public class ConfigTSeries {
 		// endregion
 
 		// region FUEL
-		category = "Fuel";
+		category = "Fuels";
 
 		comment = "Burn Time (in ticks) for Coal Coke in a Furnace.";
 		fuelCoalCoke = config.getInt("Coal Coke", category, fuelCoalCoke, 800, 32000, comment);

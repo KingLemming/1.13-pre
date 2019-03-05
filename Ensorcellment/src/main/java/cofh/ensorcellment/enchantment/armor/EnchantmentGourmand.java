@@ -1,14 +1,14 @@
 package cofh.ensorcellment.enchantment.armor;
 
 import cofh.ensorcellment.Ensorcellment;
-import cofh.ensorcellment.enchantment.EnchantmentBase;
+import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
 import static cofh.lib.util.Constants.MAX_ENCHANT_LEVEL;
 
-public class EnchantmentGourmand extends EnchantmentBase {
+public class EnchantmentGourmand extends EnchantmentCoFH {
 
 	public static int chance = 20;
 

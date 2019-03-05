@@ -76,7 +76,7 @@ public class EntityBlitz extends EntityElemental {
 
 	public static void config() {
 
-		String category = "Mob.Blitz";
+		String category = "Mobs.Blitz";
 		String comment;
 
 		comment = "If TRUE, Blitzes will appear naturally.";

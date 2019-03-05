@@ -8,7 +8,7 @@
 			"output": [
 				{
 					"item": "minecraft:brown_mushroom",
-					"count": 2
+					"count": 3
 				}
 			]
 		},
@@ -20,7 +20,7 @@
 			"output": [
 				{
 					"item": "minecraft:red_mushroom",
-					"count": 2
+					"count": 3
 				}
 			]
 		},
@@ -32,7 +32,7 @@
 			"output": [
 				{
 					"item": "minecraft:nether_wart",
-					"count": 2
+					"count": 3
 				}
 			]
 		}

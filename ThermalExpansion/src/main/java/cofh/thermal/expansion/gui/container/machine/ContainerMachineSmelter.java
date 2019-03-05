@@ -3,7 +3,7 @@ package cofh.thermal.expansion.gui.container.machine;
 import cofh.core.gui.container.ContainerTileAugmentable;
 import cofh.lib.gui.slot.SlotRemoveOnly;
 import cofh.lib.inventory.InvWrapper;
-import cofh.lib.inventory.SlotCoFH;
+import cofh.lib.gui.slot.SlotCoFH;
 import cofh.thermal.expansion.block.machine.TileMachineSmelter;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;

@@ -1,7 +1,7 @@
 package cofh.ensorcellment.enchantment.digger;
 
 import cofh.ensorcellment.Ensorcellment;
-import cofh.ensorcellment.enchantment.EnchantmentBase;
+import cofh.lib.enchantment.EnchantmentCoFH;
 import cofh.lib.util.helpers.ItemHelper;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
-public class EnchantmentSmelting extends EnchantmentBase {
+public class EnchantmentSmelting extends EnchantmentCoFH {
 
 	public EnchantmentSmelting(String id) {
 

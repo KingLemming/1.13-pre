@@ -1,7 +1,7 @@
 package cofh.ensorcellment.enchantment.bow;
 
 import cofh.ensorcellment.Ensorcellment;
-import cofh.ensorcellment.enchantment.EnchantmentBase;
+import cofh.lib.enchantment.EnchantmentCoFH;
 import cofh.lib.item.IToolBow;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.init.Items;
@@ -9,7 +9,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class EnchantmentQuickdraw extends EnchantmentBase {
+public class EnchantmentQuickdraw extends EnchantmentCoFH {
 
 	public EnchantmentQuickdraw(String id) {
 

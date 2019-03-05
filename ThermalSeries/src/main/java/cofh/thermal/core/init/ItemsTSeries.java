@@ -3,6 +3,7 @@ package cofh.thermal.core.init;
 import cofh.core.item.ItemCoFH;
 import cofh.core.item.ItemFuel;
 import cofh.thermal.core.item.ItemCoin;
+import cofh.thermal.core.item.ItemFertilizer;
 import cofh.thermal.core.item.ItemRedprint;
 import cofh.thermal.core.item.ItemWrench;
 import cofh.thermal.core.item.tome.ItemTomeExperience;
@@ -38,6 +39,10 @@ public class ItemsTSeries {
 		dustNiter = registerItem("dust_niter", "dustNiter", new ItemCoFH(GROUP_RESOURCES));
 		dustWood = registerItem("dust_wood", "dustWood", new ItemCoFH(GROUP_RESOURCES));
 		//		dustWoodCompressed = registerItem("dust_wood_compressed", "dustWoodCompressed", new ItemCore());
+
+		itemPhytoGro = registerItem("phytogro", new ItemFertilizer(1));
+		itemPhytoGroRich = registerItem("phytogro_rich", new ItemFertilizer(2));
+		itemPhytoGroFlux = registerItem("phytogro_flux", new ItemFertilizer(3));
 
 		ingotIron = new ItemStack(Items.IRON_INGOT);
 		ingotGold = new ItemStack(Items.GOLD_INGOT);
@@ -123,6 +128,10 @@ public class ItemsTSeries {
 
 	public static ItemStack dustWood;
 	public static ItemStack dustWoodCompressed;
+
+	public static ItemStack itemPhytoGro;
+	public static ItemStack itemPhytoGroRich;
+	public static ItemStack itemPhytoGroFlux;
 	// endregion
 
 	// region INGOTS

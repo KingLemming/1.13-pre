@@ -18,7 +18,8 @@ import cofh.ensorcellment.enchantment.weapon.EnchantmentVorpal;
 import cofh.lib.util.helpers.MathHelper;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.block.BlockCrops;
+import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentFrostWalker;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -91,18 +92,6 @@ public class EventHandler {
 	}
 
 	// region LIVING EVENTS
-	// TODO: Finish Ender Anchor
-	//	@SubscribeEvent
-	//	public void handleEnderTeleportEvent(EnderTeleportEvent event) {
-	//
-	//		if (event.isCanceled()) {
-	//			return;
-	//		}
-	//		EntityLivingBase entity = event.getEntityLiving();
-	//
-	//		NBTTagCompound tag = entity.getEntityData();
-	//	}
-
 	@SubscribeEvent
 	public void handleFarmlandTrampleEvent(FarmlandTrampleEvent event) {
 
@@ -443,14 +432,12 @@ public class EventHandler {
 		List<ItemStack> drops = event.getDrops();
 
 		// FARMER
-		if (encFarmer > 0 && event.getState().getBlock() instanceof BlockCrops) {
+		Block block = event.getState().getBlock();
+		if (encFarmer > 0 && block instanceof IGrowable && !((IGrowable) block).canGrow(event.getWorld(), event.getPos(), event.getState(), false)) {
 			for (int i = 0; i < encFarmer; i++) {
 				if (player.getRNG().nextInt(100) < EnchantmentFarmer.chance) {
 					for (ItemStack stack : drops) {
-						// TODO: Determine if check is necessary.
-						// if (!(stack.getItem() instanceof ItemBlock)) {
 						stack.grow(1);
-						// }
 					}
 				}
 			}

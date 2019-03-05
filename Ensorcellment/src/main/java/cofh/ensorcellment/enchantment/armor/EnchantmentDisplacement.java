@@ -1,7 +1,7 @@
 package cofh.ensorcellment.enchantment.armor;
 
 import cofh.ensorcellment.Ensorcellment;
-import cofh.ensorcellment.enchantment.EnchantmentBase;
+import cofh.lib.enchantment.EnchantmentCoFH;
 import cofh.lib.util.Utils;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.Entity;
@@ -18,7 +18,7 @@ import java.util.Random;
 
 import static cofh.lib.util.Constants.MAX_ENCHANT_LEVEL;
 
-public class EnchantmentDisplacement extends EnchantmentBase {
+public class EnchantmentDisplacement extends EnchantmentCoFH {
 
 	public static int chance = 20;
 

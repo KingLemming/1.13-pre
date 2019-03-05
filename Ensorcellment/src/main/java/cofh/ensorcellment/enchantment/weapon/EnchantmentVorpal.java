@@ -1,7 +1,7 @@
 package cofh.ensorcellment.enchantment.weapon;
 
 import cofh.ensorcellment.Ensorcellment;
-import cofh.ensorcellment.enchantment.EnchantmentBase;
+import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -11,7 +11,7 @@ import net.minecraft.item.ItemSword;
 
 import static cofh.lib.util.Constants.MAX_ENCHANT_LEVEL;
 
-public class EnchantmentVorpal extends EnchantmentBase {
+public class EnchantmentVorpal extends EnchantmentCoFH {
 
 	public static int critChanceBase = 5;
 	public static int critChance = 5;

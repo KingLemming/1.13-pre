@@ -73,7 +73,7 @@ public class EntityBlizz extends EntityElemental {
 
 	public static void config() {
 
-		String category = "Mob.Blizz";
+		String category = "Mobs.Blizz";
 		String comment;
 
 		comment = "If TRUE, Blizzes will appear naturally.";

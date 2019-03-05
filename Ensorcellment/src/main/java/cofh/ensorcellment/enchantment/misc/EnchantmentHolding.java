@@ -1,14 +1,14 @@
 package cofh.ensorcellment.enchantment.misc;
 
 import cofh.ensorcellment.Ensorcellment;
-import cofh.ensorcellment.enchantment.EnchantmentBase;
+import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
 import static cofh.lib.util.Constants.MAX_ENCHANT_LEVEL;
 
-public class EnchantmentHolding extends EnchantmentBase {
+public class EnchantmentHolding extends EnchantmentCoFH {
 
 	public EnchantmentHolding(String id) {
 

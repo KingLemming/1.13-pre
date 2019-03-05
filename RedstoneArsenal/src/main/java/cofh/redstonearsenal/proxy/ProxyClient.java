@@ -1,6 +1,6 @@
 package cofh.redstonearsenal.proxy;
 
-import cofh.core.render.RenderArrowCoFH;
+import cofh.lib.render.RenderArrowCoFH;
 import cofh.redstonearsenal.entity.projectile.EntityArrowFlux;
 import cofh.redstonearsenal.init.EquipmentRSA;
 import net.minecraft.util.ResourceLocation;

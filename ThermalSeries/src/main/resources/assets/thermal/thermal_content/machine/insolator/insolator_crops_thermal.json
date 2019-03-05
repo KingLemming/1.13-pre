@@ -1,14 +1,13 @@
 {
 	"insolator": [
 		{
-			"type": "plant",
+			"type": "default-plant",
 			"input": {
 				"item": "thermal:seed_onion"
 			},
 			"output": [
 				{
-					"item": "thermal:crop_onion",
-					"count": 2
+					"item": "thermal:crop_onion"
 				},
 				{
 					"item": "thermal:seed_onion",
@@ -17,14 +16,13 @@
 			]
 		},
 		{
-			"type": "plant",
+			"type": "default-plant",
 			"input": {
 				"item": "thermal:seed_sadiroot"
 			},
 			"output": [
 				{
-					"item": "thermal:crop_sadiroot",
-					"count": 2
+					"item": "thermal:crop_sadiroot"
 				},
 				{
 					"item": "thermal:seed_sadiroot",
@@ -33,14 +31,13 @@
 			]
 		},
 		{
-			"type": "plant",
+			"type": "default-plant",
 			"input": {
 				"item": "thermal:seed_spinach"
 			},
 			"output": [
 				{
-					"item": "thermal:crop_spinach",
-					"count": 2
+					"item": "thermal:crop_spinach"
 				},
 				{
 					"item": "thermal:seed_spinach",

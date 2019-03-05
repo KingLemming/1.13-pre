@@ -1,12 +1,12 @@
 package cofh.ensorcellment.enchantment.shield;
 
 import cofh.ensorcellment.Ensorcellment;
-import cofh.ensorcellment.enchantment.EnchantmentBase;
+import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
-public class EnchantmentBulwark extends EnchantmentBase {
+public class EnchantmentBulwark extends EnchantmentCoFH {
 
 	public EnchantmentBulwark(String id) {
 
