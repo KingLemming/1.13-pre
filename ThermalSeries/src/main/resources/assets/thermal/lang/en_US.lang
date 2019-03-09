@@ -430,16 +430,22 @@ item.thermal.watering_can_basic.name=Watering Can
 #=======================================================================================================================
 
 item.thermal.potion_injector_basic.name=Hypoinfuser
+item.thermal.potion_injector_creative.name=Hypoinfuser (Creative)
 
 item.thermal.potion_quiver_basic.name=Alchemical Quiver
+item.thermal.potion_quiver_creative.name=Alchemical Quiver (Creative)
 
 item.thermal.rf_capacitor_basic.name=Flux Capacitor
+item.thermal.rf_capacitor_creative.name=Flux Capacitor (Creative)
 
 item.thermal.rf_drill_basic.name=Fluxbore
+item.thermal.rf_drill_creative.name=Fluxbore (Creative)
 
 item.thermal.rf_magnet_basic.name=Fluxomagnet
+item.thermal.rf_magnet_creative.name=Fluxomagnet (Creative)
 
 item.thermal.rf_saw_basic.name=Fluxsaw
+item.thermal.rf_saw_creative.name=Fluxsaw (Creative)
 
 #=======================================================================================================================
 # BLOCKS - CORE

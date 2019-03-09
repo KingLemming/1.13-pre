@@ -72,11 +72,10 @@ public class ItemRFCapacitor extends ItemRFContainer implements IMultiModeItem, 
 		} else {
 			//			tooltip.add(getActivationText("info.thermal.rf_capacitor.1"));
 		}
-		tooltip.add(localizeFormat("info.thermal.rf_capacitor.a." + getMode(stack), getKeyName(KeyMultiModeItem.INSTANCE.getKey())));
+		tooltip.add(localizeFormat("info.thermal.rf_capacitor.a.0", getKeyName(KeyMultiModeItem.INSTANCE.getKey())));
 
-		if (isCreative(stack)) {
-			tooltip.add(localize("info.cofh.send") + ": " + formatNumber(maxSend) + " RF/t");
-		} else {
+		if (!isCreative(stack)) {
+			// tooltip.add(localize("info.cofh.send") + ": " + formatNumber(maxSend) + " RF/t");
 			tooltip.add(localize("info.cofh.send") + "/" + localize("info.cofh.receive") + ": " + formatNumber(maxSend) + "/" + formatNumber(maxReceive) + " RF/t");
 		}
 		super.addInformation(stack, worldIn, tooltip, flagIn);

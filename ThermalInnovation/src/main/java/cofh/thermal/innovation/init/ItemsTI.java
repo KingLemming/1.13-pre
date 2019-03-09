@@ -1,9 +1,15 @@
 package cofh.thermal.innovation.init;
 
 import cofh.thermal.core.init.CreativeTabsTSeries;
+import cofh.thermal.core.item.ItemRFContainer;
 import cofh.thermal.innovation.item.*;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 
+import static cofh.lib.util.helpers.StringHelper.titleCase;
+import static cofh.thermal.core.ThermalSeries.config;
 import static cofh.thermal.core.ThermalSeries.registerItem;
 
 public class ItemsTI {
@@ -15,35 +21,128 @@ public class ItemsTI {
 	// region REGISTRATION
 	public static void registerItems() {
 
-		itemDrillBasic = new ItemRFDrill(20000, 1000, 2, 6.0F);
-		itemSawBasic = new ItemRFSaw(20000, 1000, 2, 6.0F);
-		itemCapacitorBasic = new ItemRFCapacitor(40000, 2000, 1000);
-		itemMagnetBasic = new ItemRFMagnet(20000, 1000, 4, 3);
-		itemInjectorBasic = new ItemPotionInjector(2000);
-		itemQuiverBasic = new ItemPotionQuiver(2000, 40);
+		CreativeTabs tab = CreativeTabsTSeries.tabTools;
 
-		toolDrillBasic = registerItem("rf_drill_basic", itemDrillBasic, CreativeTabsTSeries.tabTools);
-		toolSawBasic = registerItem("rf_saw_basic", itemSawBasic, CreativeTabsTSeries.tabTools);
-		utilCapacitorBasic = registerItem("rf_capacitor_basic", itemCapacitorBasic, CreativeTabsTSeries.tabTools);
-		utilMagnetBasic = registerItem("rf_magnet_basic", itemMagnetBasic, CreativeTabsTSeries.tabTools);
-		utilInjectorBasic = registerItem("potion_injector_basic", itemInjectorBasic, CreativeTabsTSeries.tabTools);
-		utilQuiverBasic = registerItem("potion_quiver_basic", itemQuiverBasic, CreativeTabsTSeries.tabTools);
+		itemDrillBasic = new ItemRFDrill(20000, 1000, 2, 6.0F);
+
+		itemSawBasic = new ItemRFSaw(20000, 1000, 2, 6.0F);
+
+		itemCapacitorBasic = createCapacitor("basic", 40000, 1000);
+		itemCapacitorCreative = (ItemRFContainer) new ItemRFCapacitor(1000, 0, Integer.MAX_VALUE).setRarity(EnumRarity.EPIC).setCreative(true);
+
+		itemMagnetBasic = createMagnet("basic", 20000, 4, 3);
+		itemMagnetCreative = (ItemRFMagnet) new ItemRFMagnet(1000, 0, 8, 15).setRarity(EnumRarity.EPIC).setCreative(true);
+
+		itemInjectorBasic = createInjector("basic", 2000);
+		itemInjectorCreative = (ItemPotionInjector) new ItemPotionInjector(1000).setRarity(EnumRarity.EPIC).setCreative(true);
+
+		itemQuiverBasic = createQuiver("basic", 2000, 40);
+		itemQuiverCreative = (ItemPotionQuiver) new ItemPotionQuiver(1000, 64).setRarity(EnumRarity.EPIC).setCreative(true);
+
+		toolDrillBasic = registerItem("rf_drill_basic", itemDrillBasic, tab);
+
+		toolSawBasic = registerItem("rf_saw_basic", itemSawBasic, tab);
+
+		utilCapacitorBasic = registerItem("rf_capacitor_basic", itemCapacitorBasic, tab);
+		utilCapacitorCreative = registerItem("rf_capacitor_creative", itemCapacitorCreative, tab);
+
+		utilMagnetBasic = registerItem("rf_magnet_basic", itemMagnetBasic, tab);
+		utilMagnetCreative = registerItem("rf_magnet_creative", itemMagnetCreative, tab);
+
+		utilInjectorBasic = registerItem("potion_injector_basic", itemInjectorBasic, tab);
+		utilInjectorCreative = registerItem("potion_injector_creative", itemInjectorCreative, tab);
+
+		utilQuiverBasic = registerItem("potion_quiver_basic", itemQuiverBasic, tab);
+		utilQuiverCreative = registerItem("potion_quiver_creative", itemQuiverCreative, tab);
+	}
+	// endregion
+
+	// region HELPERS
+	private static ItemRFCapacitor createCapacitor(String id, int maxEnergy, int maxSend) {
+
+		String category = "Tools.Magnet." + titleCase(id);
+		String comment = "Adjust this value to set how much energy (RF) this Capacitor holds.";
+		maxEnergy = config.getInt("Energy", category, maxEnergy, 1000, 1000000000, comment);
+
+		int maxReceive = maxEnergy / 20;
+
+		comment = "Adjust this value to set how much Energy (RF/t) that can be sent by this Capacitor.";
+		maxSend = config.getInt("Radius", category, maxSend, 1000, 1000000000, comment);
+
+		return new ItemRFCapacitor(maxEnergy, maxReceive, maxSend);
+	}
+
+	private static ItemRFMagnet createMagnet(String id, int maxEnergy, int radius, int filterSize) {
+
+		String category = "Tools.Magnet." + titleCase(id);
+		String comment = "Adjust this value to set how much energy (RF) this Magnet holds.";
+		maxEnergy = config.getInt("Energy", category, maxEnergy, 1000, 1000000000, comment);
+
+		int maxReceive = maxEnergy / 20;
+
+		comment = "Adjust this value to set the maximum radius for this Magnet.";
+		radius = config.getInt("Radius", category, radius, 2, 16, comment);
+
+		return new ItemRFMagnet(maxEnergy, maxReceive, radius, filterSize);
+	}
+
+	private static ItemPotionInjector createInjector(String id, int fluidCapacity) {
+
+		String category = "Tools.PotionInjector." + titleCase(id);
+		String comment = "Adjust this value to set how much Potion (mB) this Injector holds.";
+		fluidCapacity = config.getInt("Potion", category, fluidCapacity, Fluid.BUCKET_VOLUME, Fluid.BUCKET_VOLUME * 1000, comment);
+
+		return new ItemPotionInjector(fluidCapacity);
+	}
+
+	private static ItemPotionQuiver createQuiver(String id, int fluidCapacity, int arrowCapacity) {
+
+		String category = "Tools.PotionQuiver." + titleCase(id);
+		String comment = "Adjust this value to set how much Potion (mB) this Quiver holds.";
+		fluidCapacity = config.getInt("Potion", category, fluidCapacity, Fluid.BUCKET_VOLUME, Fluid.BUCKET_VOLUME * 1000, comment);
+
+		comment = "Adjust this value to set how many arrows this quiver holds.";
+		arrowCapacity = config.getInt("Arrows", category, arrowCapacity, 16, 32000, comment);
+
+		return new ItemPotionQuiver(fluidCapacity, arrowCapacity);
 	}
 	// endregion
 
 	// region REFERENCES
 	public static ItemRFDrill itemDrillBasic;
+	public static ItemRFDrill itemDrillCreative;
+
 	public static ItemRFSaw itemSawBasic;
+	public static ItemRFSaw itemSawCreative;
+
 	public static ItemRFCapacitor itemCapacitorBasic;
+	public static ItemRFContainer itemCapacitorCreative;
+
 	public static ItemRFMagnet itemMagnetBasic;
+	public static ItemRFMagnet itemMagnetCreative;
+
 	public static ItemPotionInjector itemInjectorBasic;
+	public static ItemPotionInjector itemInjectorCreative;
+
 	public static ItemPotionQuiver itemQuiverBasic;
+	public static ItemPotionQuiver itemQuiverCreative;
 
 	public static ItemStack toolDrillBasic;
+	public static ItemStack toolDrillCreative;
+
 	public static ItemStack toolSawBasic;
+	public static ItemStack toolSawCreative;
+
 	public static ItemStack utilCapacitorBasic;
+	public static ItemStack utilCapacitorCreative;
+
 	public static ItemStack utilMagnetBasic;
+	public static ItemStack utilMagnetCreative;
+
 	public static ItemStack utilInjectorBasic;
+	public static ItemStack utilInjectorCreative;
+
 	public static ItemStack utilQuiverBasic;
+	public static ItemStack utilQuiverCreative;
 	// endregion
 }

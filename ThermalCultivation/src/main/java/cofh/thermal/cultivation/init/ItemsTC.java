@@ -5,6 +5,7 @@ import cofh.core.item.ItemSeedCoFH;
 import cofh.core.item.ItemSeedFoodCoFH;
 import cofh.thermal.core.init.CreativeTabsTSeries;
 import cofh.thermal.cultivation.item.ItemWateringCan;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 
@@ -62,12 +63,14 @@ public class ItemsTC {
 		//		itemWateringCanBasic = createWateringCan("basic", 24000, 3, 60);
 		//		itemWateringCanBasic = createWateringCan("basic", 40000, 4, 70);
 		//		itemWateringCanBasic = createWateringCan("basic", 60000, 5, 80);
+		itemWateringCanCreative = (ItemWateringCan) new ItemWateringCan(1000, 11, 200).setRarity(EnumRarity.EPIC).setCreative(true);
 
 		toolWateringCanBasic = registerItem("watering_can_basic", itemWateringCanBasic, CreativeTabsTSeries.tabTools);
 		//		toolWateringCanBasic = registerItem("watering_can_basic", itemWateringCanBasic, CreativeTabsTSeries.tabTools);
 		//		toolWateringCanBasic = registerItem("watering_can_basic", itemWateringCanBasic, CreativeTabsTSeries.tabTools);
 		//		toolWateringCanBasic = registerItem("watering_can_basic", itemWateringCanBasic, CreativeTabsTSeries.tabTools);
 		//		toolWateringCanBasic = registerItem("watering_can_basic", itemWateringCanBasic, CreativeTabsTSeries.tabTools);
+		toolWaterincCanCreative = registerItem("watering_can_creative", itemWateringCanCreative, CreativeTabsTSeries.tabTools);
 	}
 	// endregion
 
@@ -75,8 +78,8 @@ public class ItemsTC {
 	private static ItemWateringCan createWateringCan(String id, int fluidCapacity, int radius, int effectiveness) {
 
 		String category = "Tools.WateringCan." + titleCase(id);
-		String comment = "Adjust this value to set how much water this Watering Can holds.";
-		fluidCapacity = config.getInt("Capacity", category, fluidCapacity, Fluid.BUCKET_VOLUME * 2, Fluid.BUCKET_VOLUME * 1000, comment);
+		String comment = "Adjust this value to set how much Water (mB) this Watering Can holds.";
+		fluidCapacity = config.getInt("Water", category, fluidCapacity, Fluid.BUCKET_VOLUME * 2, Fluid.BUCKET_VOLUME * 1000, comment);
 
 		comment = "Adjust this value to set the maximum radius for this Watering Can.";
 		radius = config.getInt("Radius", category, radius, 0, 16, comment);
