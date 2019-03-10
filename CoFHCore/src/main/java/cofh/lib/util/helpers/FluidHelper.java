@@ -3,14 +3,24 @@ package cofh.lib.util.helpers;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +29,12 @@ import java.util.Map.Entry;
 import static cofh.lib.util.Constants.TAG_POTION;
 
 public class FluidHelper {
+
+	@CapabilityInject (IFluidHandler.class)
+	public static final Capability<IFluidHandler> FLUID_HANDLER = null;
+
+	@CapabilityInject (IFluidHandlerItem.class)
+	public static final Capability<IFluidHandler> FLUID_HANDLER_ITEM = null;
 
 	private FluidHelper() {
 
@@ -117,6 +133,74 @@ public class FluidHelper {
 				}
 			}
 		}
+	}
+	// endregion
+
+	// region CAPABILITY HELPERS
+	public static boolean isFluidHandler(ItemStack stack) {
+
+		return !stack.isEmpty() && stack.hasCapability(FLUID_HANDLER_ITEM, null);
+	}
+
+	/**
+	 * Attempts to drain the item to an IFluidHandler.
+	 *
+	 * @param stack   The stack to drain from.
+	 * @param handler The IFluidHandler to fill.
+	 * @param player  The player using the item.
+	 * @param hand    The hand the player is holding the item in.
+	 * @return If the interaction was successful.
+	 */
+	public static boolean drainItemToHandler(ItemStack stack, IFluidHandler handler, EntityPlayer player, EnumHand hand) {
+
+		if (stack.isEmpty() || handler == null || player == null) {
+			return false;
+		}
+		IItemHandler playerInv = new InvWrapper(player.inventory);
+		FluidActionResult result = FluidUtil.tryEmptyContainerAndStow(stack, handler, playerInv, Integer.MAX_VALUE, player, true);
+		if (result.isSuccess()) {
+			player.setHeldItem(hand, result.getResult());
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Attempts to fill the item from an IFluidHandler.
+	 *
+	 * @param stack   The stack to fill.
+	 * @param handler The IFluidHandler to drain from.
+	 * @param player  The player using the item.
+	 * @param hand    The hand the player is holding the item in.
+	 * @return If the interaction was successful.
+	 */
+	public static boolean fillItemFromHandler(ItemStack stack, IFluidHandler handler, EntityPlayer player, EnumHand hand) {
+
+		if (stack.isEmpty() || handler == null || player == null) {
+			return false;
+		}
+		IItemHandler playerInv = new InvWrapper(player.inventory);
+		FluidActionResult result = FluidUtil.tryFillContainerAndStow(stack, handler, playerInv, Integer.MAX_VALUE, player, true);
+		if (result.isSuccess()) {
+			player.setHeldItem(hand, result.getResult());
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Attempts to interact the item with an IFluidHandler.
+	 * Interaction will always try and fill the item first, if this fails it will attempt to drain the item.
+	 *
+	 * @param stack   The stack to interact with.
+	 * @param handler The Handler to fill / drain.
+	 * @param player  The player using the item.
+	 * @param hand    The hand the player is holding the item in.
+	 * @return If any interaction with the handler was successful.
+	 */
+	public static boolean interactWithHandler(ItemStack stack, IFluidHandler handler, EntityPlayer player, EnumHand hand) {
+
+		return fillItemFromHandler(stack, handler, player, hand) || drainItemToHandler(stack, handler, player, hand);
 	}
 	// endregion
 

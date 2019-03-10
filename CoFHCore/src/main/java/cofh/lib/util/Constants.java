@@ -126,9 +126,11 @@ public class Constants {
 	public static final String TAG_ARROWS = "Arrows";
 	public static final String TAG_AUGMENTS = "Augments";
 	public static final String TAG_COLORS = "Colors";
+	public static final String TAG_COOLANT = "Coolant";
 	public static final String TAG_CREATIVE = "Creative";
 	public static final String TAG_ENERGY = "Energy";
 	public static final String TAG_EXP = "Experience";
+	public static final String TAG_FUEL = "Fuel";
 	public static final String TAG_FILTER = "Filter";
 	public static final String TAG_FLUID = "Fluid";
 	public static final String TAG_INDEX = "Index";

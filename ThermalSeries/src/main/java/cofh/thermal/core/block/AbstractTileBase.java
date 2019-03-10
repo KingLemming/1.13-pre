@@ -10,6 +10,7 @@ import cofh.lib.fluid.TankArrayManaged;
 import cofh.lib.inventory.InventoryCoFH;
 import cofh.lib.inventory.InventoryManaged;
 import cofh.lib.inventory.ItemStorageCoFH;
+import cofh.lib.util.StorageGroup;
 import cofh.lib.util.TimeTracker;
 import cofh.lib.util.Utils;
 import cofh.lib.util.control.IRedstoneControllableTile;
@@ -23,9 +24,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
 
 import java.util.List;
 
@@ -296,6 +302,38 @@ public abstract class AbstractTileBase extends TileCoFH implements ISecurableTil
 	public RedstoneControlModule redstoneControl() {
 
 		return redstoneControl;
+	}
+	// endregion
+
+	// region CAPABILITIES
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+
+		if (capability == CapabilityEnergy.ENERGY) {
+			return energyStorage.getMaxEnergyStored() > 0;
+		}
+		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+			return inventory.hasSlots();
+		}
+		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+			return tankInv.hasTanks();
+		}
+		return super.hasCapability(capability, facing);
+	}
+
+	@Override
+	public <T> T getCapability(Capability<T> capability, final EnumFacing facing) {
+
+		if (capability == CapabilityEnergy.ENERGY) {
+			return CapabilityEnergy.ENERGY.cast(energyStorage);
+		}
+		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.ACCESSIBLE));
+		}
+		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.ACCESSIBLE));
+		}
+		return super.getCapability(capability, facing);
 	}
 	// endregion
 }

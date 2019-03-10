@@ -1,5 +1,6 @@
 package cofh.lib.inventory;
 
+import cofh.lib.util.helpers.ItemHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.IItemHandler;
@@ -29,6 +30,11 @@ public class ItemStorageCoFH implements IItemHandler, IItemStackHolder {
 	public boolean isItemValid(@Nonnull ItemStack stack) {
 
 		return validator.test(stack);
+	}
+
+	public void consume() {
+
+		this.item = ItemHelper.consumeItem(item);
 	}
 
 	// region NBT

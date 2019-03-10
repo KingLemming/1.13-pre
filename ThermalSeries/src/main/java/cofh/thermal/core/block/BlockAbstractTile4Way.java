@@ -26,6 +26,7 @@ public class BlockAbstractTile4Way extends BlockTileCoFH {
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING_HORIZONTAL, EnumFacing.NORTH).withProperty(ACTIVE, false));
 	}
 
+	@Override
 	protected void addBlockStateProperties(BlockStateContainer.Builder builder) {
 
 		super.addBlockStateProperties(builder);

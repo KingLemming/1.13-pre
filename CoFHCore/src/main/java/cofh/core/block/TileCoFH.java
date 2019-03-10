@@ -65,7 +65,11 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
 
-		return oldState.getBlock() != newState.getBlock();
+		if (oldState.getBlock() != newState.getBlock()) {
+			return true;
+		}
+		this.blockState = newState;
+		return false;
 	}
 
 	@Override
@@ -75,12 +79,17 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 		this.blockState = getBlockState();
 	}
 
-	public IBlockState getBlockState() {
+	protected IBlockState getBlockState() {
 
 		if (this.blockState == null && this.world != null) {
-			this.blockState = this.world.getBlockState(this.pos);
+			updateBlockState();
 		}
 		return this.blockState;
+	}
+
+	protected void updateBlockState() {
+
+		this.blockState = this.world.getBlockState(this.pos);
 	}
 
 	// region PASSTHROUGHS

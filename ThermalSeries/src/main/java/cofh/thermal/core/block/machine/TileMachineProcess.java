@@ -31,6 +31,8 @@ public abstract class TileMachineProcess extends TileMachine {
 	protected float outputMod = 1.0F;
 	protected float energyMod = 1.0F;
 
+	protected int energyUse = 20;
+
 	public TileMachineProcess(AbstractTileType type) {
 
 		super(type);
@@ -42,17 +44,12 @@ public abstract class TileMachineProcess extends TileMachine {
 
 		boolean curActive = isActive;
 
-		// TODO: Remove
-		energyStorage.receiveEnergy(200, false);
-
 		if (isActive) {
 			processTick();
 			if (canProcessFinish()) {
 				processFinish();
 				transferOutput();
 				transferInput();
-				energyStorage.modifyAmount(-process);
-
 				if (!redstoneControl.getState() || !canProcessStart()) {
 					processOff();
 				} else {
@@ -80,9 +77,6 @@ public abstract class TileMachineProcess extends TileMachine {
 	protected boolean canProcessStart() {
 
 		if (energyStorage.isEmpty()) {
-			return false;
-		}
-		if (!cacheRecipe()) {
 			return false;
 		}
 		if (!validateInputs()) {
@@ -115,6 +109,7 @@ public abstract class TileMachineProcess extends TileMachine {
 		}
 		resolveRecipe();
 		markDirty();
+		energyStorage.modifyAmount(-process);
 	}
 
 	protected void processOff() {
@@ -133,7 +128,7 @@ public abstract class TileMachineProcess extends TileMachine {
 		if (process <= 0) {
 			return 0;
 		}
-		int energy = calcEnergy();
+		int energy = Math.min(energyStorage.getEnergyStored(), energyUse);
 		energyStorage.modifyAmount(-energy);
 		process -= energy;
 		return energy;

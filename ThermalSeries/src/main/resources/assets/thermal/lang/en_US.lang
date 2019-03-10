@@ -54,10 +54,11 @@ info.thermal.watering_can.a.0=§ePress (%s) to adjust the area.§r
 # INFO - EXPANSION
 #=======================================================================================================================
 
+tab.thermal.dynamo_compression.0=Generates Redstone Flux using combustible fluids.
+
 tab.thermal.dynamo_magmatic.0=Generates Redstone Flux using extremely hot fluids.
 
-tab.thermal.dynamo_steam.0=Generates Redstone Flux using Steam.
-tab.thermal.dynamo_steam.1=Solid Fuels and Water can be used to generate Steam.
+tab.thermal.dynamo_stirling.0=Generates Redstone Flux using solid fuels.
 
 tab.thermal.machine_brewer.0=Brews potions and imbues fluids.
 tab.thermal.machine_brewer.1=You might want a few of these in a row.
@@ -516,7 +517,7 @@ tile.thermal.block_constantan.name=Block of Constantan
 # DYNAMOS
 #-----------------------------------------------------------------------------------------------------------------------
 
-tile.thermal.dynamo_steam.name=Steam Dynamo
+tile.thermal.dynamo_stirling.name=Stirling Dynamo
 tile.thermal.dynamo_magmatic.name=Magmatic Dynamo
 tile.thermal.dynamo_compression.name=Compression Dynamo
 

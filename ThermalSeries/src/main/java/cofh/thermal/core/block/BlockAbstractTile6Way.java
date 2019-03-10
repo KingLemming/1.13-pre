@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import static cofh.lib.util.Constants.ACTIVE;
 import static cofh.lib.util.Constants.FACING_ALL;
 
 public class BlockAbstractTile6Way extends BlockTileCoFH {
@@ -22,7 +23,7 @@ public class BlockAbstractTile6Way extends BlockTileCoFH {
 	public BlockAbstractTile6Way(AbstractTileType type) {
 
 		this.type = type;
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING_ALL, EnumFacing.UP));//.withProperty(ACTIVE, false));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING_ALL, EnumFacing.UP).withProperty(ACTIVE, false));
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class BlockAbstractTile6Way extends BlockTileCoFH {
 
 		super.addBlockStateProperties(builder);
 		builder.add(FACING_ALL);
-		// builder.add(ACTIVE);
+		builder.add(ACTIVE);
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class BlockAbstractTile6Way extends BlockTileCoFH {
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 
-		return getDefaultState().withProperty(FACING_ALL, EnumFacing.getDirectionFromEntityLiving(pos, placer));
+		return getDefaultState().withProperty(FACING_ALL, EnumFacing.getDirectionFromEntityLiving(pos, placer)).withProperty(ACTIVE, false);
 	}
 
 	@Override
@@ -52,20 +53,32 @@ public class BlockAbstractTile6Way extends BlockTileCoFH {
 		return layer == BlockRenderLayer.SOLID || layer == BlockRenderLayer.CUTOUT;
 	}
 
+	@Override
+	public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
+
+		IBlockState state = world.getBlockState(pos);
+		int facing = state.getValue(FACING_ALL).getIndex();
+
+		int newFacing = (facing + 1) % 6;
+		IBlockState newState = state.withProperty(FACING_ALL, EnumFacing.VALUES[newFacing]);
+
+		world.setBlockState(pos, newState);
+		return true;
+	}
+
 	// region 1.12
 	@Override
 	public int getMetaFromState(IBlockState state) {
 
-		return state.getValue(FACING_ALL).getIndex();
+		return state.getValue(FACING_ALL).getIndex() + (state.getValue(ACTIVE) ? 6 : 0);
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 
 		EnumFacing facing = EnumFacing.getFront(meta);
-		//		boolean active = meta >= 6;
-		//		return getDefaultState().withProperty(FACING_ALL, facing).withProperty(ACTIVE, active);
-		return getDefaultState().withProperty(FACING_ALL, facing);
+		boolean active = meta >= 6;
+		return getDefaultState().withProperty(FACING_ALL, facing).withProperty(ACTIVE, active);
 	}
 	// endregion
 }

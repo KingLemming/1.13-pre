@@ -1,23 +1,23 @@
 package cofh.thermal.expansion.util.parsers.dynamo;
 
 import cofh.thermal.core.util.parsers.AbstractContentParser;
-import cofh.thermal.expansion.util.managers.dynamo.SteamFuelManager;
+import cofh.thermal.expansion.util.managers.dynamo.StirlingFuelManager;
 import com.google.gson.JsonObject;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.item.ItemStack;
 
 import java.util.Set;
 
-public class SteamFuelParser extends AbstractContentParser {
+public class StirlingFuelParser extends AbstractContentParser {
 
-	private static final SteamFuelParser INSTANCE = new SteamFuelParser();
+	private static final StirlingFuelParser INSTANCE = new StirlingFuelParser();
 
-	public static SteamFuelParser instance() {
+	public static StirlingFuelParser instance() {
 
 		return INSTANCE;
 	}
 
-	private SteamFuelParser() {
+	private StirlingFuelParser() {
 
 	}
 
@@ -25,7 +25,7 @@ public class SteamFuelParser extends AbstractContentParser {
 	protected void parseObject(JsonObject object) {
 
 		ItemStack input;
-		int energy = SteamFuelManager.instance().getDefaultEnergy();
+		int energy = StirlingFuelManager.instance().getDefaultEnergy();
 
 		/* INPUT */
 		input = parseItemStack(object.get(INPUT));
@@ -44,14 +44,14 @@ public class SteamFuelParser extends AbstractContentParser {
 			energy *= object.get(ENERGY_MOD).getAsFloat();
 		}
 
-		SteamFuelManager.instance().addFuel(energy, input);
+		StirlingFuelManager.instance().addFuel(energy, input);
 	}
 
 	@Override
 	public void postProcess() {
 
 		for (ItemStack stack : removeQueue) {
-			SteamFuelManager.instance().removeFuel(stack);
+			StirlingFuelManager.instance().removeFuel(stack);
 		}
 	}
 

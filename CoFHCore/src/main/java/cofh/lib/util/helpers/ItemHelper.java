@@ -25,6 +25,32 @@ public class ItemHelper {
 		return Items.DIAMOND.getDamage(stack);
 	}
 
+	public static ItemStack consumeItem(ItemStack stack) {
+
+		if (stack.isEmpty()) {
+			return ItemStack.EMPTY;
+		}
+		Item item = stack.getItem();
+		boolean largerStack = stack.getCount() > 1;
+		// vanilla only alters the stack passed to hasContainerItem/etc. when the size is >1
+
+		if (largerStack) {
+			stack.shrink(1);
+		}
+		if (item.hasContainerItem(stack)) {
+			ItemStack ret = item.getContainerItem(stack);
+
+			if (ret.isEmpty()) {
+				return ItemStack.EMPTY;
+			}
+			if (ret.isItemStackDamageable() && ret.getItemDamage() > ret.getMaxDamage()) {
+				ret = ItemStack.EMPTY;
+			}
+			return ret;
+		}
+		return largerStack ? stack : ItemStack.EMPTY;
+	}
+
 	// region CLONESTACK
 	public static ItemStack cloneStack(Item item) {
 

@@ -7,6 +7,7 @@ import cofh.lib.util.helpers.FluidHelper;
 import cofh.thermal.core.util.recipes.IDynamoFuel;
 import cofh.thermal.core.util.recipes.SimpleFluidFuel;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -20,8 +21,11 @@ import java.util.Map;
  */
 public abstract class SimpleFluidFuelManager extends AbstractManager implements IFuelManager {
 
-	public static int MIN_ENERGY = 10000;
-	public static int MAX_ENERGY = 200000000;
+	public static final int MIN_ENERGY = 10000;
+	public static final int MAX_ENERGY = 200000000;
+
+	public static final int FLUID_FUEL_AMOUNT = 100;
+	public static final int ENERGY_FACTOR = Fluid.BUCKET_VOLUME / FLUID_FUEL_AMOUNT;
 
 	protected Map<Integer, IDynamoFuel> defaultMap = new Object2ObjectOpenHashMap<>();
 
@@ -50,7 +54,18 @@ public abstract class SimpleFluidFuelManager extends AbstractManager implements 
 
 	public IDynamoFuel addFuel(int energy, FluidStack input) {
 
-		if (input == null || !FluidRegistry.isFluidRegistered(input.getFluid()) || energy < MIN_ENERGY || energy > MAX_ENERGY || defaultMap.containsKey(FluidHelper.fluidHashcode(input))) {
+		if (input == null || !FluidRegistry.isFluidRegistered(input.getFluid()) || defaultMap.containsKey(FluidHelper.fluidHashcode(input))) {
+			return null;
+		}
+		if (input.amount != FLUID_FUEL_AMOUNT) {
+			if (input.amount != Fluid.BUCKET_VOLUME) {
+				long normEnergy = energy * Fluid.BUCKET_VOLUME / input.amount;
+				input.amount = FLUID_FUEL_AMOUNT;
+				energy = (int) normEnergy;
+			}
+			energy /= ENERGY_FACTOR;
+		}
+		if (energy < MIN_ENERGY || energy > MAX_ENERGY) {
 			return null;
 		}
 		SimpleFluidFuel fuel = new SimpleFluidFuel(input, energy);

@@ -1,28 +1,38 @@
 package cofh.thermal.expansion.util.managers.dynamo;
 
 import cofh.thermal.core.util.managers.SimpleItemFuelManager;
+import cofh.thermal.core.util.recipes.IDynamoFuel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 
 import static cofh.lib.util.Constants.RF_PER_FURNACE_UNIT;
 import static cofh.thermal.core.ThermalSeries.config;
 
-public class SteamFuelManager extends SimpleItemFuelManager {
+public class StirlingFuelManager extends SimpleItemFuelManager {
 
-	private static final SteamFuelManager INSTANCE = new SteamFuelManager();
+	private static final StirlingFuelManager INSTANCE = new StirlingFuelManager();
 	protected static int DEFAULT_ENERGY = 16000;
 
-	public static SteamFuelManager instance() {
+	public static StirlingFuelManager instance() {
 
 		return INSTANCE;
 	}
 
-	private SteamFuelManager() {
+	private StirlingFuelManager() {
 
 		super(DEFAULT_ENERGY);
+
+		defaultValidator.addExact("charcoal");
+		defaultValidator.addExact("coal");
 	}
 
 	// region HELPERS
+	public int getEnergy(ItemStack stack) {
+
+		IDynamoFuel fuel = getFuel(stack);
+		return fuel != null ? fuel.getEnergy() : getEnergyFurnaceFuel(stack);
+	}
+
 	public static int getEnergyFurnaceFuel(ItemStack stack) {
 
 		if (stack.isEmpty()) {

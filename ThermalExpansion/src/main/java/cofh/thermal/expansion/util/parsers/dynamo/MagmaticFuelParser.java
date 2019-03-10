@@ -28,7 +28,11 @@ public class MagmaticFuelParser extends AbstractContentParser {
 		int energy = MagmaticFuelManager.instance().getDefaultEnergy();
 
 		/* INPUT */
-		input = parseFluidStack(object.get(INPUT));
+		if (object.has(FLUID)) {
+			input = parseFluidStack(object.get(FLUID));
+		} else {
+			input = parseFluidStack(object.get(INPUT));
+		}
 
 		/* REMOVAL */
 		if (object.has(REMOVE) && object.get(REMOVE).getAsBoolean()) {

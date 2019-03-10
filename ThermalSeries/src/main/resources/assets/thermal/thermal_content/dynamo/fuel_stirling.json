@@ -1,5 +1,5 @@
 {
-	"fuel_steam": [
+	"fuel_stirling": [
 		{
 			"input": {
 				"item": "minecraft:coal"
@@ -10,7 +10,8 @@
 			"input": {
 				"item": "minecraft:coal",
 				"data": 1
-			}
+			},
+			"energy": 16000
 		},
 		{
 			"input": {
@@ -21,7 +22,8 @@
 		{
 			"input": {
 				"ore": "dustCharcoal"
-			}
+			},
+			"energy": 16000
 		},
 		{
 			"input": {

@@ -31,13 +31,6 @@ public class TileMachineInsolator extends TileMachineProcess {
 	}
 
 	@Override
-	public void update() {
-
-		super.update();
-		waterTank.modifyAmount(10);
-	}
-
-	@Override
 	public FluidStack getRenderFluid() {
 
 		return InsolatorRecipeManager.defaultPlantFluid;

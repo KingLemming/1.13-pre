@@ -1,10 +1,13 @@
 package cofh.thermal.expansion.init;
 
 import cofh.core.item.ItemBlockCoFH;
-import cofh.thermal.core.block.BlockAbstractTile4Way;
+import cofh.thermal.core.block.BlockDynamo;
+import cofh.thermal.core.block.BlockMachine;
 import net.minecraft.item.ItemStack;
 
 import static cofh.thermal.core.ThermalSeries.registerBlock;
+import static cofh.thermal.expansion.init.DynamosTE.MAGMATIC;
+import static cofh.thermal.expansion.init.DynamosTE.STIRLING;
 import static cofh.thermal.expansion.init.MachinesTE.*;
 
 public class BlocksTE {
@@ -16,15 +19,15 @@ public class BlocksTE {
 	// region REGISTRATION
 	public static void registerBlocks() {
 
-		machineFurnace = registerBlock("machine_furnace", new ItemBlockCoFH(new BlockAbstractTile4Way(FURNACE)));
-		machinePulverizer = registerBlock("machine_pulverizer", new ItemBlockCoFH(new BlockAbstractTile4Way(PULVERIZER)));
-		machineSawmill = registerBlock("machine_sawmill", new ItemBlockCoFH(new BlockAbstractTile4Way(SAWMILL)));
-		machineInsolator = registerBlock("machine_insolator", new ItemBlockCoFH(new BlockAbstractTile4Way(INSOLATOR)));
-		machineCrucible = registerBlock("machine_crucible", new ItemBlockCoFH(new BlockAbstractTile4Way(CRUCIBLE)));
-		machineCentrifuge = registerBlock("machine_centrifuge", new ItemBlockCoFH(new BlockAbstractTile4Way(CENTRIFUGE)));
+		machineFurnace = registerBlock("machine_furnace", new ItemBlockCoFH(new BlockMachine(FURNACE)));
+		machinePulverizer = registerBlock("machine_pulverizer", new ItemBlockCoFH(new BlockMachine(PULVERIZER)));
+		machineSawmill = registerBlock("machine_sawmill", new ItemBlockCoFH(new BlockMachine(SAWMILL)));
+		machineInsolator = registerBlock("machine_insolator", new ItemBlockCoFH(new BlockMachine(INSOLATOR)));
+		machineCrucible = registerBlock("machine_crucible", new ItemBlockCoFH(new BlockMachine(CRUCIBLE)));
+		machineCentrifuge = registerBlock("machine_centrifuge", new ItemBlockCoFH(new BlockMachine(CENTRIFUGE)));
 
-		//		dynamoSteam = registerBlock("dynamo_steam", new ItemBlockCoFH(new BlockAbstractTile6Way(STEAM), GROUP_DYNAMOS));
-		//		dynamoMagmatic = registerBlock("dynamo_magmatic", new ItemBlockCoFH(new BlockAbstractTile6Way(MAGMATIC), GROUP_DYNAMOS));
+		dynamoStirling = registerBlock("dynamo_stirling", new ItemBlockCoFH(new BlockDynamo(STIRLING)));
+		dynamoMagmatic = registerBlock("dynamo_magmatic", new ItemBlockCoFH(new BlockDynamo(MAGMATIC)));
 	}
 	// endregion
 
@@ -38,7 +41,7 @@ public class BlocksTE {
 	// endregion
 
 	// region DYNAMOS
-	public static ItemStack dynamoSteam;
+	public static ItemStack dynamoStirling;
 	public static ItemStack dynamoMagmatic;
 	// endregion
 }

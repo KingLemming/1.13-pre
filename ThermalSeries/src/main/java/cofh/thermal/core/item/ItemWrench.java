@@ -75,9 +75,12 @@ public class ItemWrench extends ItemCoFH implements IToolHammer {
 		if (MinecraftForge.EVENT_BUS.post(event) || event.getResult() == Result.DENY || event.getUseBlock() == Result.DENY || event.getUseItem() == Result.DENY) {
 			return EnumActionResult.PASS;
 		}
-		if (Utils.isServerWorld(world) && player.isSneaking() && block instanceof IDismantleable && ((IDismantleable) block).canDismantle(world, pos, state, player)) {
-			((IDismantleable) block).dismantleBlock(world, pos, state, player, false);
-			return EnumActionResult.SUCCESS;
+		if (player.isSneaking() && block instanceof IDismantleable && ((IDismantleable) block).canDismantle(world, pos, state, player)) {
+			if (Utils.isServerWorld(world)) {
+				((IDismantleable) block).dismantleBlock(world, pos, state, player, false);
+			}
+			player.swingArm(hand);
+			return Utils.isServerWorld(world) ? EnumActionResult.SUCCESS : EnumActionResult.PASS;
 		}
 		if (!player.isSneaking() && block.rotateBlock(world, pos, side)) {
 			player.swingArm(hand);

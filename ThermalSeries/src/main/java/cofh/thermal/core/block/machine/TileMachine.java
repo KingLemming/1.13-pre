@@ -15,15 +15,38 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 
+import static cofh.lib.util.Constants.FACING_HORIZONTAL;
 import static cofh.lib.util.Constants.TAG_TRANSFER;
 
 public abstract class TileMachine extends AbstractTileBase implements ITickable, ITransferControllableTile {
+
+	protected EnumFacing facing;
 
 	protected TransferControlModule transferControl = new TransferControlModule(this);
 
 	public TileMachine(AbstractTileType type) {
 
 		super(type);
+	}
+
+	@Override
+	public void updateContainingBlockInfo() {
+
+		super.updateContainingBlockInfo();
+		updateFacing();
+	}
+
+	protected EnumFacing getFacing() {
+
+		if (facing == null) {
+			updateFacing();
+		}
+		return facing;
+	}
+
+	protected void updateFacing() {
+
+		facing = getBlockState().getValue(FACING_HORIZONTAL);
 	}
 
 	// region HELPERS
@@ -59,19 +82,6 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 	protected boolean validateOutputs() {
 
 		return true;
-	}
-
-	protected int calcEnergy() {
-
-		// TODO: Fix
-		//		if (energyStorage.getEnergyStored() >= energyConfig.maxPowerLevel) {
-		//			return energyConfig.maxPower;
-		//		}
-		//		if (energyStorage.getEnergyStored() < energyConfig.minPowerLevel) {
-		//			return Math.min(energyConfig.minPower, energyStorage.getEnergyStored());
-		//		}
-		//		return energyStorage.getEnergyStored() / energyConfig.energyRamp;
-		return 20;
 	}
 	// endregion
 
@@ -137,21 +147,6 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 
 	// region CAPABILITIES
 	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-
-		if (capability == CapabilityEnergy.ENERGY) {
-			return true;
-		}
-		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return inventory.hasSlots();
-		}
-		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-			return tankInv.hasTanks();
-		}
-		return super.hasCapability(capability, facing);
-	}
-
-	@Override
 	public <T> T getCapability(Capability<T> capability, final EnumFacing facing) {
 
 		// TODO: Add Sidedness
@@ -159,10 +154,10 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 			return CapabilityEnergy.ENERGY.cast(energyStorage);
 		}
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.ALL));
+			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.ACCESSIBLE));
 		}
 		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.ALL));
+			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.ACCESSIBLE));
 		}
 		return super.getCapability(capability, facing);
 	}

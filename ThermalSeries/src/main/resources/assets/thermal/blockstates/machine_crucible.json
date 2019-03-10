@@ -39,11 +39,7 @@
 			}
 		},
 		"inventory": [
-			{
-				"textures": {
-					"front": "thermal:blocks/machines/machine_front_crucible"
-				}
-			}
+			{}
 		]
 	}
 }

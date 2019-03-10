@@ -1,0 +1,57 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "cofh:layered_template",
+		"transform": "forge:default-block",
+		"textures": {
+			"top": "thermal:blocks/dynamos/dynamo_compression",
+			"side": "thermal:blocks/dynamos/dynamo_side_compression",
+			"bottom": "thermal:blocks/dynamos/dynamo_compression",
+			"coil": "thermal:blocks/dynamos/dynamo_coil_rf"
+		},
+		"custom": {
+			"template": "thermal:block/dynamo"
+		}
+	},
+	"variants": {
+		"active": {
+			"true": {
+				"textures": {
+					"top": "thermal:blocks/dynamos/dynamo_compression_active",
+					"side": "thermal:blocks/dynamos/dynamo_side_compression_active",
+					"bottom": "thermal:blocks/dynamos/dynamo_compression_active"
+				},
+				"submodel": "thermal:dynamo_coil_active"
+			},
+			"false": {
+				"submodel": "thermal:dynamo_coil"
+			}
+		},
+		"facing": {
+			"north": {
+				"x": 90
+			},
+			"south": {
+				"x": 270
+			},
+			"west": {
+				"x": 90,
+				"y": 270
+			},
+			"east": {
+				"x": 90,
+				"y": 90
+			},
+			"up": {
+			},
+			"down": {
+				"x": 180
+			}
+		},
+		"inventory": [
+			{
+				"submodel": "thermal:dynamo_coil"
+			}
+		]
+	}
+}

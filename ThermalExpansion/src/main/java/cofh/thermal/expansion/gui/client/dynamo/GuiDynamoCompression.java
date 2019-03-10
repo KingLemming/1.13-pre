@@ -1,6 +1,8 @@
 package cofh.thermal.expansion.gui.client.dynamo;
 
+import cofh.core.gui.GuiHelper;
 import cofh.lib.util.helpers.StringHelper;
+import cofh.thermal.core.block.dynamo.TileDynamo;
 import cofh.thermal.expansion.gui.container.dynamo.ContainerDynamoCompression;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -16,9 +18,17 @@ public class GuiDynamoCompression extends GuiDynamo {
 
 	public GuiDynamoCompression(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerDynamoCompression(inventory, tile), generateTabInfo("tab.thermal.dynamo_compression"));
+		super(new ContainerDynamoCompression(inventory, tile), (TileDynamo) tile, generateTabInfo("tab.thermal.dynamo_compression"));
 		name = StringHelper.localize("tile.thermal.dynamo_compression.name");
 		texture = TEXTURE;
+	}
+
+	@Override
+	public void initGui() {
+
+		super.initGui();
+
+		addElement(GuiHelper.createMediumFluidStorage(this, 34, 22, tile.getTank(0)));
 	}
 
 }

@@ -20,8 +20,8 @@ import java.util.Map;
  */
 public abstract class SimpleItemFuelManager extends AbstractManager implements IFuelManager {
 
-	public static int MIN_ENERGY = 3000;
-	public static int MAX_ENERGY = 200000000;
+	public static final int MIN_ENERGY = 3000;
+	public static final int MAX_ENERGY = 200000000;
 
 	protected Map<ComparableItemStackValidated, IDynamoFuel> defaultMap = new Object2ObjectOpenHashMap<>();
 	protected Map<ComparableItemStackValidated, IDynamoFuel> customMap = new Object2ObjectOpenHashMap<>();
@@ -34,6 +34,11 @@ public abstract class SimpleItemFuelManager extends AbstractManager implements I
 	public boolean validFuel(ItemStack stack) {
 
 		return validFuel(Collections.singletonList(new SimpleItemStackHolder(stack)), Collections.emptyList());
+	}
+
+	public IDynamoFuel getFuel(ItemStack stack) {
+
+		return getFuel(Collections.singletonList(new SimpleItemStackHolder(stack)), Collections.emptyList());
 	}
 
 	public IDynamoFuel removeFuel(ItemStack stack) {

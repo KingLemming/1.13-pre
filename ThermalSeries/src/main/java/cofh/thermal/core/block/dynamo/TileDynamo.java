@@ -1,23 +1,24 @@
 package cofh.thermal.core.block.dynamo;
 
-import cofh.lib.util.StorageGroup;
+import cofh.lib.util.helpers.EnergyHelper;
 import cofh.thermal.core.block.AbstractTileBase;
 import cofh.thermal.core.block.AbstractTileType;
+import cofh.thermal.core.util.recipes.IDynamoFuel;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
 
-import static cofh.lib.util.Constants.TAG_PROCESS;
-import static cofh.lib.util.Constants.TAG_PROCESS_MAX;
+import static cofh.lib.util.Constants.*;
 
 public class TileDynamo extends AbstractTileBase implements ITickable {
 
-	protected int process;
-	protected int processMax;
+	protected IDynamoFuel curFuel;
+	protected EnumFacing facing;
+
+	protected int fuel;
+	protected int coolant;
+
+	protected int energyGen = 40;
 
 	public TileDynamo(AbstractTileType type) {
 
@@ -32,6 +33,7 @@ public class TileDynamo extends AbstractTileBase implements ITickable {
 		if (isActive) {
 			processTick();
 			if (canProcessFinish()) {
+				processFinish();
 				if (!redstoneControl.getState() || !canProcessStart()) {
 					processOff();
 				} else {
@@ -47,28 +49,32 @@ public class TileDynamo extends AbstractTileBase implements ITickable {
 				}
 			}
 		}
-		if (timeCheck()) {
-
-			if (!isActive) {
-				processIdle();
-			}
-		}
 		updateActiveState(curActive);
+	}
 
-		// TODO: Fix
-		//		if (timeCheck()) {
-		//			int curScale = energyStorage.getEnergyStored() > 0 ? 1 + getScaledEnergyStored(14) : 0;
-		//			if (curScale != compareTracker) {
-		//				compareTracker = curScale;
-		//				callNeighborTileChange();
-		//			}
-		//			if (!cached) {
-		//				updateAdjacentHandlers();
-		//			}
-		//			if (!isActive) {
-		//				processIdle();
-		//			}
-		//		}
+	@Override
+	public void updateContainingBlockInfo() {
+
+		super.updateContainingBlockInfo();
+		updateFacing();
+	}
+
+	protected EnumFacing getFacing() {
+
+		if (facing == null) {
+			updateFacing();
+		}
+		return facing;
+	}
+
+	protected void updateFacing() {
+
+		facing = getBlockState().getValue(FACING_ALL);
+	}
+
+	protected void transferEnergy(int energy) {
+
+		EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(this, getFacing(), energy, false);
 	}
 
 	// region PROCESS
@@ -79,8 +85,7 @@ public class TileDynamo extends AbstractTileBase implements ITickable {
 
 	protected boolean canProcessFinish() {
 
-		return process <= 0;
-		//return processRem <= 0 && hasValidInput();
+		return fuel <= 0;
 	}
 
 	protected void processStart() {
@@ -88,10 +93,6 @@ public class TileDynamo extends AbstractTileBase implements ITickable {
 	}
 
 	protected void processFinish() {
-
-	}
-
-	protected void processIdle() {
 
 	}
 
@@ -106,42 +107,13 @@ public class TileDynamo extends AbstractTileBase implements ITickable {
 
 	protected int processTick() {
 
-		if (process <= 0) {
+		if (fuel <= 0) {
 			return 0;
 		}
-		int energy = calcEnergy();
-		energyStorage.modifyAmount(-energy);
-		process -= energy;
-		transferEnergy();
-
+		int energy = Math.min(fuel, energyGen);
+		fuel -= energy;
+		transferEnergy(energy);
 		return energy;
-
-		// TODO: Fix
-		//		lastEnergy = calcEnergy();
-		//		energyStorage.modifyEnergyStored(lastEnergy);
-		//		fuelRF -= lastEnergy;
-		//		transferEnergy();
-		//
-		//		return lastEnergy;
-	}
-	// endregion
-
-	// region HELPERS
-	protected int calcEnergy() {
-
-		// TODO: Fix
-		//		if (energyStorage.getEnergyStored() >= energyConfig.maxPowerLevel) {
-		//			return energyConfig.maxPower;
-		//		}
-		//		if (energyStorage.getEnergyStored() < energyConfig.minPowerLevel) {
-		//			return Math.min(energyConfig.minPower, energyStorage.getEnergyStored());
-		//		}
-		//		return energyStorage.getEnergyStored() / energyConfig.energyRamp;
-		return 20;
-	}
-
-	protected void transferEnergy() {
-
 	}
 	// endregion
 
@@ -151,8 +123,8 @@ public class TileDynamo extends AbstractTileBase implements ITickable {
 
 		super.readFromNBT(nbt);
 
-		processMax = nbt.getInteger(TAG_PROCESS_MAX);
-		process = nbt.getInteger(TAG_PROCESS);
+		fuel = nbt.getInteger(TAG_FUEL);
+		coolant = nbt.getInteger(TAG_COOLANT);
 	}
 
 	@Override
@@ -160,43 +132,10 @@ public class TileDynamo extends AbstractTileBase implements ITickable {
 
 		super.writeToNBT(nbt);
 
-		nbt.setInteger(TAG_PROCESS_MAX, processMax);
-		nbt.setInteger(TAG_PROCESS, process);
+		nbt.setInteger(TAG_FUEL, fuel);
+		nbt.setInteger(TAG_COOLANT, coolant);
 
 		return nbt;
-	}
-	// endregion
-
-	// region CAPABILITIES
-	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-
-		if (capability == CapabilityEnergy.ENERGY) {
-			return true;
-		}
-		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return inventory.hasSlots();
-		}
-		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-			return tankInv.hasTanks();
-		}
-		return super.hasCapability(capability, facing);
-	}
-
-	@Override
-	public <T> T getCapability(Capability<T> capability, final EnumFacing facing) {
-
-		// TODO: Add Sidedness
-		if (capability == CapabilityEnergy.ENERGY) {
-			return CapabilityEnergy.ENERGY.cast(energyStorage);
-		}
-		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.ALL));
-		}
-		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.ALL));
-		}
-		return super.getCapability(capability, facing);
 	}
 	// endregion
 }

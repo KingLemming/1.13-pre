@@ -8,10 +8,10 @@ import cofh.thermal.expansion.init.BlocksTE;
 import cofh.thermal.expansion.init.ItemsTE;
 import cofh.thermal.expansion.proxy.ProxyCommon;
 import cofh.thermal.expansion.util.managers.dynamo.MagmaticFuelManager;
-import cofh.thermal.expansion.util.managers.dynamo.SteamFuelManager;
+import cofh.thermal.expansion.util.managers.dynamo.StirlingFuelManager;
 import cofh.thermal.expansion.util.managers.machine.*;
 import cofh.thermal.expansion.util.parsers.dynamo.MagmaticFuelParser;
-import cofh.thermal.expansion.util.parsers.dynamo.SteamFuelParser;
+import cofh.thermal.expansion.util.parsers.dynamo.StirlingFuelParser;
 import cofh.thermal.expansion.util.parsers.machine.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -92,7 +92,7 @@ public class ThermalExpansion implements IModule {
 		RecipesTSeries.registerManager(CrucibleRecipeManager.instance());
 		RecipesTSeries.registerManager(CentrifugeRecipeManager.instance());
 
-		RecipesTSeries.registerManager(SteamFuelManager.instance());
+		RecipesTSeries.registerManager(StirlingFuelManager.instance());
 		RecipesTSeries.registerManager(MagmaticFuelManager.instance());
 
 		ParsersTSeries.registerParser("furnace", FurnaceRecipeParser.instance());
@@ -102,7 +102,7 @@ public class ThermalExpansion implements IModule {
 		ParsersTSeries.registerParser("crucible", CrucibleRecipeParser.instance());
 		ParsersTSeries.registerParser("centrifuge", CentrifugeRecipeParser.instance());
 
-		ParsersTSeries.registerParser("fuel_steam", SteamFuelParser.instance());
+		ParsersTSeries.registerParser("fuel_stirling", StirlingFuelParser.instance());
 		ParsersTSeries.registerParser("fuel_magmatic", MagmaticFuelParser.instance());
 	}
 
