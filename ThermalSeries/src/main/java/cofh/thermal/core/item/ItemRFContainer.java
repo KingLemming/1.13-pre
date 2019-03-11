@@ -46,8 +46,8 @@ public abstract class ItemRFContainer extends ItemCoFH implements IEnergyContain
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 
-		if (isCreative(stack)) {
-			tooltip.add(localize("info.cofh.charge") + ": 1.21G RF");
+		if (isCreative()) {
+			tooltip.add(localize("info.cofh.infinite_energy"));
 		} else {
 			tooltip.add(localize("info.cofh.charge") + ": " + getScaledNumber(getEnergyStored(stack)) + " / " + getScaledNumber(getMaxEnergyStored(stack)) + " RF");
 		}

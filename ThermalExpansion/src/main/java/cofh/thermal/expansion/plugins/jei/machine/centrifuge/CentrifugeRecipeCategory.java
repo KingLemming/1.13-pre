@@ -67,6 +67,7 @@ public class CentrifugeRecipeCategory extends BaseRecipeCategory<CentrifugeRecip
 		registry.addRecipeCategories(this);
 	}
 
+	@Override
 	public void registerRecipes(IModRegistry registry) {
 
 		if (!enable) {
@@ -80,7 +81,7 @@ public class CentrifugeRecipeCategory extends BaseRecipeCategory<CentrifugeRecip
 		registry.addRecipeCatalyst(BlocksTE.machineCentrifuge, uId);
 	}
 
-	public static List<CentrifugeRecipeWrapper> getRecipes(IGuiHelper guiHelper) {
+	private static List<CentrifugeRecipeWrapper> getRecipes(IGuiHelper guiHelper) {
 
 		List<CentrifugeRecipeWrapper> recipes = new ArrayList<>();
 

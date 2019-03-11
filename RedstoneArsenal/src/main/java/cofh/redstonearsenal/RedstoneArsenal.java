@@ -15,7 +15,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -33,7 +32,8 @@ import java.io.File;
 import static cofh.lib.util.Constants.*;
 import static cofh.redstonearsenal.init.ConfigRSA.disableAllRecipes;
 
-@Mod (modid = RedstoneArsenal.MOD_ID, name = RedstoneArsenal.MOD_NAME, version = RedstoneArsenal.VERSION, dependencies = RedstoneArsenal.DEPENDENCIES, certificateFingerprint = "8a6abf2cb9e141b866580d369ba6548732eff25f")
+// TODO: DEACTIVATED
+// @Mod (modid = RedstoneArsenal.MOD_ID, name = RedstoneArsenal.MOD_NAME, version = RedstoneArsenal.VERSION, dependencies = RedstoneArsenal.DEPENDENCIES, certificateFingerprint = "8a6abf2cb9e141b866580d369ba6548732eff25f")
 public class RedstoneArsenal {
 
 	public static final String MOD_ID = ID_REDSTONE_ARSENAL;

@@ -67,6 +67,7 @@ public class InsolatorRecipeCategory extends BaseRecipeCategory<InsolatorRecipeW
 		registry.addRecipeCategories(this);
 	}
 
+	@Override
 	public void registerRecipes(IModRegistry registry) {
 
 		if (!enable) {
@@ -80,7 +81,7 @@ public class InsolatorRecipeCategory extends BaseRecipeCategory<InsolatorRecipeW
 		registry.addRecipeCatalyst(BlocksTE.machineInsolator, uId);
 	}
 
-	public static List<InsolatorRecipeWrapper> getRecipes(IGuiHelper guiHelper) {
+	private static List<InsolatorRecipeWrapper> getRecipes(IGuiHelper guiHelper) {
 
 		List<InsolatorRecipeWrapper> recipes = new ArrayList<>();
 

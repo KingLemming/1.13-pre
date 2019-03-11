@@ -47,9 +47,9 @@ import static cofh.thermal.innovation.gui.GuiHandler.GUI_MAGNET_FILTER;
 @Optional.Interface (iface = "baubles.api.IBauble", modid = "baubles")
 public class ItemRFMagnet extends ItemRFContainer implements IFilterContainerItem, IMultiModeItem, IBauble {
 
-	private static final int ENERGY_PER_ITEM = 25;
-	private static final int ENERGY_PER_USE = 250;
-	private static final int TIME_CONSTANT = 8;
+	protected static final int ENERGY_PER_ITEM = 25;
+	protected static final int ENERGY_PER_USE = 250;
+	protected static final int TIME_CONSTANT = 8;
 
 	protected static boolean enableEnchantEffect = true;
 

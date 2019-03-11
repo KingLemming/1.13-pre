@@ -44,9 +44,9 @@ import static cofh.lib.util.helpers.StringHelper.*;
 @Optional.Interface (iface = "baubles.api.IBauble", modid = "baubles")
 public class ItemPotionInjector extends ItemPotionContainer implements IMultiModeItem, IBauble {
 
-	public static final int MB_PER_CYCLE = 50;
-	public static final int MB_PER_USE = 250;
-	public static final int TIME_CONSTANT = 32;
+	protected static final int MB_PER_CYCLE = 50;
+	protected static final int MB_PER_USE = 250;
+	protected static final int TIME_CONSTANT = 32;
 
 	protected static boolean enableEnchantEffect = true;
 

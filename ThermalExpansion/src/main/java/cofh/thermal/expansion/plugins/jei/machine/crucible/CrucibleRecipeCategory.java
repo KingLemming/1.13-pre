@@ -66,6 +66,7 @@ public class CrucibleRecipeCategory extends BaseRecipeCategory<CrucibleRecipeWra
 		registry.addRecipeCategories(this);
 	}
 
+	@Override
 	public void registerRecipes(IModRegistry registry) {
 
 		if (!enable) {
@@ -79,7 +80,7 @@ public class CrucibleRecipeCategory extends BaseRecipeCategory<CrucibleRecipeWra
 		registry.addRecipeCatalyst(BlocksTE.machineCrucible, uId);
 	}
 
-	public static List<CrucibleRecipeWrapper> getRecipes(IGuiHelper guiHelper) {
+	private static List<CrucibleRecipeWrapper> getRecipes(IGuiHelper guiHelper) {
 
 		List<CrucibleRecipeWrapper> recipes = new ArrayList<>();
 

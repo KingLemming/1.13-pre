@@ -60,12 +60,6 @@ public class ItemShieldCoFH extends ItemCoFH implements IToolShield, IModelRegis
 		return this;
 	}
 
-	public ItemShieldCoFH showInCreativeTab(boolean showInCreativeTab) {
-
-		this.showInCreativeTab = showInCreativeTab;
-		return this;
-	}
-
 	@Override
 	public boolean getIsRepairable(ItemStack itemToRepair, ItemStack stack) {
 

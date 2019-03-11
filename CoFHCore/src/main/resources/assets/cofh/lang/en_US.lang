@@ -98,6 +98,9 @@ tab.cofh.storage_enchant=Can be enchanted to increase storage capacity.
 # VANILLA ADDITIONS
 #=======================================================================================================================
 
+fluid.tile.lava=Lava
+fluid.tile.water=Water
+
 lingering_potion.effect.absorption=Lingering Potion of Absorption
 lingering_potion.effect.haste=Lingering Potion of Haste
 lingering_potion.effect.resistance=Lingering Potion of Resistance

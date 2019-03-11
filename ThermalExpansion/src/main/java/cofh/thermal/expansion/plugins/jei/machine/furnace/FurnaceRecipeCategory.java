@@ -57,6 +57,7 @@ public class FurnaceRecipeCategory extends BaseRecipeCategory<FurnaceRecipeWrapp
 		registry.addRecipeCategories(this);
 	}
 
+	@Override
 	public void registerRecipes(IModRegistry registry) {
 
 		if (!enable) {
@@ -70,7 +71,7 @@ public class FurnaceRecipeCategory extends BaseRecipeCategory<FurnaceRecipeWrapp
 		registry.addRecipeCatalyst(BlocksTE.machineFurnace, uId);
 	}
 
-	public static List<FurnaceRecipeWrapper> getRecipes(IGuiHelper guiHelper) {
+	private static List<FurnaceRecipeWrapper> getRecipes(IGuiHelper guiHelper) {
 
 		List<FurnaceRecipeWrapper> recipes = new ArrayList<>();
 

@@ -45,11 +45,11 @@ import static cofh.lib.util.helpers.StringHelper.*;
 
 public class ItemRFDrill extends ItemRFTool implements IAreaEffectItem, IMultiModeItem {
 
-	public static final int SINGLE = 0;
-	public static final int TUNNEL_2 = 1;
-	public static final int AREA_3 = 2;
-	public static final int CUBE_3 = 3;
-	public static final int AREA_5 = 4;
+	protected static final int SINGLE = 0;
+	protected static final int TUNNEL_2 = 1;
+	protected static final int AREA_3 = 2;
+	protected static final int CUBE_3 = 3;
+	protected static final int AREA_5 = 4;
 
 	protected static boolean enableEnchantEffect = true;
 

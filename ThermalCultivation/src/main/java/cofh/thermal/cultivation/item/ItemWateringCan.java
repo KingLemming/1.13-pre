@@ -15,6 +15,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -47,7 +48,7 @@ import static cofh.lib.util.helpers.StringHelper.*;
 
 public class ItemWateringCan extends ItemFluidContainer implements IMultiModeItem {
 
-	public static final int MB_PER_USE = 50;
+	protected static final int MB_PER_USE = 50;
 
 	protected static boolean enableEnchantEffect = true;
 	protected static boolean allowFakePlayers = false;
@@ -85,6 +86,14 @@ public class ItemWateringCan extends ItemFluidContainer implements IMultiModeIte
 		} else {
 			tooltip.add(localize(localize(FluidRegistry.WATER.getUnlocalizedName()) + ": " + formatNumber(getFluidAmount(stack)) + " / " + formatNumber(getCapacity(stack)) + " mB"));
 			tooltip.add(getNoticeText("info.thermal.watering_can.1"));
+		}
+	}
+
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+
+		if (isInCreativeTab(tab) && showInCreativeTab) {
+			items.add(setDefaultTag(new ItemStack(this, 1, 0)));
 		}
 	}
 
@@ -205,6 +214,10 @@ public class ItemWateringCan extends ItemFluidContainer implements IMultiModeIte
 			stack.setTagCompound(new NBTTagCompound());
 		}
 		stack.getTagCompound().setInteger(TAG_MODE, getNumModes(stack) - 1);
+
+		if (isCreative()) {
+			fill(stack, new FluidStack(FluidRegistry.WATER, getCapacity(stack)), true);
+		}
 		return stack;
 	}
 

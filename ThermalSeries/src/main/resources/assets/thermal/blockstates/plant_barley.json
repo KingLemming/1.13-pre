@@ -1,0 +1,60 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:crop",
+		"transform": "forge:default-block",
+		"textures": {
+			"crop": "thermal:blocks/crops/plant_barley_0"
+		}
+	},
+	"variants": {
+		"age": {
+			"0": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_barley_0"
+				}
+			},
+			"1": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_barley_1"
+				}
+			},
+			"2": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_barley_2"
+				}
+			},
+			"3": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_barley_3"
+				}
+			},
+			"4": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_barley_4"
+				}
+			},
+			"5": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_barley_5"
+				}
+			},
+			"6": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_barley_6"
+				}
+			},
+			"7": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_barley_7"
+				}
+			}
+		},
+		"normal": [
+			{}
+		],
+		"inventory": [
+			{}
+		]
+	}
+}

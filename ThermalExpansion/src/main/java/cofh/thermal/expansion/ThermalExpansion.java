@@ -7,9 +7,11 @@ import cofh.thermal.core.init.RecipesTSeries;
 import cofh.thermal.expansion.init.BlocksTE;
 import cofh.thermal.expansion.init.ItemsTE;
 import cofh.thermal.expansion.proxy.ProxyCommon;
+import cofh.thermal.expansion.util.managers.dynamo.CompressionFuelManager;
 import cofh.thermal.expansion.util.managers.dynamo.MagmaticFuelManager;
 import cofh.thermal.expansion.util.managers.dynamo.StirlingFuelManager;
 import cofh.thermal.expansion.util.managers.machine.*;
+import cofh.thermal.expansion.util.parsers.dynamo.CompressionFuelParser;
 import cofh.thermal.expansion.util.parsers.dynamo.MagmaticFuelParser;
 import cofh.thermal.expansion.util.parsers.dynamo.StirlingFuelParser;
 import cofh.thermal.expansion.util.parsers.machine.*;
@@ -94,6 +96,7 @@ public class ThermalExpansion implements IModule {
 
 		RecipesTSeries.registerManager(StirlingFuelManager.instance());
 		RecipesTSeries.registerManager(MagmaticFuelManager.instance());
+		RecipesTSeries.registerManager(CompressionFuelManager.instance());
 
 		ParsersTSeries.registerParser("furnace", FurnaceRecipeParser.instance());
 		ParsersTSeries.registerParser("pulverizer", PulverizerRecipeParser.instance());
@@ -104,6 +107,7 @@ public class ThermalExpansion implements IModule {
 
 		ParsersTSeries.registerParser("fuel_stirling", StirlingFuelParser.instance());
 		ParsersTSeries.registerParser("fuel_magmatic", MagmaticFuelParser.instance());
+		ParsersTSeries.registerParser("fuel_compression", CompressionFuelParser.instance());
 	}
 
 	@Override

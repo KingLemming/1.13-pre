@@ -47,7 +47,8 @@ import static cofh.lib.util.helpers.StringHelper.*;
 
 public class ItemPotionQuiver extends ItemPotionContainer implements IMultiModeItem, IToolQuiver {
 
-	public static final int MB_PER_ARROW = 50;
+	protected static final int MB_PER_ARROW = 50;
+
 	protected static boolean enableEnchantEffect = true;
 
 	protected int arrowCapacity;

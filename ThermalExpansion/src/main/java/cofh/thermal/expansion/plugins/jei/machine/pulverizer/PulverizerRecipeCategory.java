@@ -59,6 +59,7 @@ public class PulverizerRecipeCategory extends BaseRecipeCategory<PulverizerRecip
 		registry.addRecipeCategories(this);
 	}
 
+	@Override
 	public void registerRecipes(IModRegistry registry) {
 
 		if (!enable) {
@@ -72,7 +73,7 @@ public class PulverizerRecipeCategory extends BaseRecipeCategory<PulverizerRecip
 		registry.addRecipeCatalyst(BlocksTE.machinePulverizer, uId);
 	}
 
-	public static List<PulverizerRecipeWrapper> getRecipes(IGuiHelper guiHelper) {
+	private static List<PulverizerRecipeWrapper> getRecipes(IGuiHelper guiHelper) {
 
 		List<PulverizerRecipeWrapper> recipes = new ArrayList<>();
 

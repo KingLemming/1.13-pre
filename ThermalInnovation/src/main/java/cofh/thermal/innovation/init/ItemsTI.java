@@ -5,7 +5,6 @@ import cofh.thermal.core.item.ItemRFContainer;
 import cofh.thermal.innovation.item.*;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 
 import static cofh.lib.util.helpers.StringHelper.titleCase;
@@ -28,32 +27,32 @@ public class ItemsTI {
 		itemSawBasic = new ItemRFSaw(20000, 1000, 2, 6.0F);
 
 		itemCapacitorBasic = createCapacitor("basic", 40000, 1000);
-		itemCapacitorCreative = (ItemRFContainer) new ItemRFCapacitor(1000, 0, Integer.MAX_VALUE).setRarity(EnumRarity.EPIC).setCreative(true);
+		itemCapacitorCreative = (ItemRFContainer) createCapacitor("creative", 1000, 1000000000).setRarity(EnumRarity.EPIC).setCreative(true);
 
 		itemMagnetBasic = createMagnet("basic", 20000, 4, 3);
-		itemMagnetCreative = (ItemRFMagnet) new ItemRFMagnet(1000, 0, 8, 15).setRarity(EnumRarity.EPIC).setCreative(true);
+		itemMagnetCreative = (ItemRFMagnet) createMagnet("creative", 1000, 8, 15).setRarity(EnumRarity.EPIC).setCreative(true);
 
 		itemInjectorBasic = createInjector("basic", 2000);
-		itemInjectorCreative = (ItemPotionInjector) new ItemPotionInjector(1000).setRarity(EnumRarity.EPIC).setCreative(true);
+		itemInjectorCreative = (ItemPotionInjector) createInjector("creative", 2000).setRarity(EnumRarity.EPIC).setCreative(true);
 
 		itemQuiverBasic = createQuiver("basic", 2000, 40);
-		itemQuiverCreative = (ItemPotionQuiver) new ItemPotionQuiver(1000, 64).setRarity(EnumRarity.EPIC).setCreative(true);
+		itemQuiverCreative = (ItemPotionQuiver) createQuiver("creative", 2000, 64).setRarity(EnumRarity.EPIC).setCreative(true);
 
-		toolDrillBasic = registerItem("rf_drill_basic", itemDrillBasic, tab);
+		registerItem("rf_drill_basic", itemDrillBasic, tab);
 
-		toolSawBasic = registerItem("rf_saw_basic", itemSawBasic, tab);
+		registerItem("rf_saw_basic", itemSawBasic, tab);
 
-		utilCapacitorBasic = registerItem("rf_capacitor_basic", itemCapacitorBasic, tab);
-		utilCapacitorCreative = registerItem("rf_capacitor_creative", itemCapacitorCreative, tab);
+		registerItem("rf_capacitor_basic", itemCapacitorBasic, tab);
+		registerItem("rf_capacitor_creative", itemCapacitorCreative, tab);
 
-		utilMagnetBasic = registerItem("rf_magnet_basic", itemMagnetBasic, tab);
-		utilMagnetCreative = registerItem("rf_magnet_creative", itemMagnetCreative, tab);
+		registerItem("rf_magnet_basic", itemMagnetBasic, tab);
+		registerItem("rf_magnet_creative", itemMagnetCreative, tab);
 
-		utilInjectorBasic = registerItem("potion_injector_basic", itemInjectorBasic, tab);
-		utilInjectorCreative = registerItem("potion_injector_creative", itemInjectorCreative, tab);
+		registerItem("potion_injector_basic", itemInjectorBasic, tab);
+		registerItem("potion_injector_creative", itemInjectorCreative, tab);
 
-		utilQuiverBasic = registerItem("potion_quiver_basic", itemQuiverBasic, tab);
-		utilQuiverCreative = registerItem("potion_quiver_creative", itemQuiverCreative, tab);
+		registerItem("potion_quiver_basic", itemQuiverBasic, tab);
+		registerItem("potion_quiver_creative", itemQuiverCreative, tab);
 	}
 	// endregion
 
@@ -67,7 +66,7 @@ public class ItemsTI {
 		int maxReceive = maxEnergy / 20;
 
 		comment = "Adjust this value to set how much Energy (RF/t) that can be sent by this Capacitor.";
-		maxSend = config.getInt("Radius", category, maxSend, 1000, 1000000000, comment);
+		maxSend = config.getInt("Send", category, maxSend, 1000, 1000000000, comment);
 
 		return new ItemRFCapacitor(maxEnergy, maxReceive, maxSend);
 	}
@@ -90,7 +89,7 @@ public class ItemsTI {
 
 		String category = "Tools.PotionInjector." + titleCase(id);
 		String comment = "Adjust this value to set how much Potion (mB) this Injector holds.";
-		fluidCapacity = config.getInt("Potion", category, fluidCapacity, Fluid.BUCKET_VOLUME, Fluid.BUCKET_VOLUME * 1000, comment);
+		fluidCapacity = config.getInt("Potion", category, fluidCapacity, Fluid.BUCKET_VOLUME * 2, Fluid.BUCKET_VOLUME * 1000, comment);
 
 		return new ItemPotionInjector(fluidCapacity);
 	}
@@ -99,7 +98,7 @@ public class ItemsTI {
 
 		String category = "Tools.PotionQuiver." + titleCase(id);
 		String comment = "Adjust this value to set how much Potion (mB) this Quiver holds.";
-		fluidCapacity = config.getInt("Potion", category, fluidCapacity, Fluid.BUCKET_VOLUME, Fluid.BUCKET_VOLUME * 1000, comment);
+		fluidCapacity = config.getInt("Potion", category, fluidCapacity, Fluid.BUCKET_VOLUME * 2, Fluid.BUCKET_VOLUME * 1000, comment);
 
 		comment = "Adjust this value to set how many arrows this quiver holds.";
 		arrowCapacity = config.getInt("Arrows", category, arrowCapacity, 16, 32000, comment);
@@ -126,23 +125,5 @@ public class ItemsTI {
 
 	public static ItemPotionQuiver itemQuiverBasic;
 	public static ItemPotionQuiver itemQuiverCreative;
-
-	public static ItemStack toolDrillBasic;
-	public static ItemStack toolDrillCreative;
-
-	public static ItemStack toolSawBasic;
-	public static ItemStack toolSawCreative;
-
-	public static ItemStack utilCapacitorBasic;
-	public static ItemStack utilCapacitorCreative;
-
-	public static ItemStack utilMagnetBasic;
-	public static ItemStack utilMagnetCreative;
-
-	public static ItemStack utilInjectorBasic;
-	public static ItemStack utilInjectorCreative;
-
-	public static ItemStack utilQuiverBasic;
-	public static ItemStack utilQuiverCreative;
 	// endregion
 }

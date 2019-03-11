@@ -3,6 +3,7 @@ package cofh.thermal.expansion.block.dynamo;
 import cofh.lib.fluid.FluidStorageCoFH;
 import cofh.thermal.core.block.dynamo.TileDynamo;
 import cofh.thermal.expansion.init.DynamosTE;
+import cofh.thermal.expansion.util.managers.dynamo.CompressionFuelManager;
 import cofh.thermal.expansion.util.managers.dynamo.MagmaticFuelManager;
 
 import static cofh.lib.util.Constants.TANK_SMALL;
@@ -11,7 +12,7 @@ import static cofh.thermal.core.util.managers.SimpleFluidFuelManager.FLUID_FUEL_
 
 public class TileDynamoCompression extends TileDynamo {
 
-	protected FluidStorageCoFH fuelTank = new FluidStorageCoFH(TANK_SMALL, MagmaticFuelManager.instance()::validFuel);
+	protected FluidStorageCoFH fuelTank = new FluidStorageCoFH(TANK_SMALL, CompressionFuelManager.instance()::validFuel);
 
 	public TileDynamoCompression() {
 

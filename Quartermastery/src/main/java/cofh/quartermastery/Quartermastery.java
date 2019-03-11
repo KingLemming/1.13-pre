@@ -9,7 +9,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -26,7 +25,8 @@ import java.io.File;
 import static cofh.lib.util.Constants.ID_COFH_CORE;
 import static cofh.lib.util.Constants.ID_QUARTERMASTERY;
 
-@Mod (modid = Quartermastery.MOD_ID, name = Quartermastery.MOD_NAME, version = Quartermastery.VERSION, dependencies = Quartermastery.DEPENDENCIES)
+// TODO: DEACTIVATED
+// @Mod (modid = Quartermastery.MOD_ID, name = Quartermastery.MOD_NAME, version = Quartermastery.VERSION, dependencies = Quartermastery.DEPENDENCIES)
 public class Quartermastery {
 
 	public static final String MOD_ID = ID_QUARTERMASTERY;

@@ -14,7 +14,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -32,7 +31,8 @@ import java.io.File;
 import static cofh.lib.util.Constants.ID_COFH_CORE;
 import static cofh.lib.util.Constants.ID_ENSTORAGEMENT;
 
-@Mod (modid = Enstoragement.MOD_ID, name = Enstoragement.MOD_NAME, version = Enstoragement.VERSION, dependencies = Enstoragement.DEPENDENCIES, certificateFingerprint = "8a6abf2cb9e141b866580d369ba6548732eff25f")
+// TODO: DEACTIVATED
+// @Mod (modid = Enstoragement.MOD_ID, name = Enstoragement.MOD_NAME, version = Enstoragement.VERSION, dependencies = Enstoragement.DEPENDENCIES, certificateFingerprint = "8a6abf2cb9e141b866580d369ba6548732eff25f")
 public class Enstoragement {
 
 	public static final String MOD_ID = ID_ENSTORAGEMENT;

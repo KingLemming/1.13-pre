@@ -20,7 +20,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -41,7 +40,8 @@ import static cofh.lib.util.Constants.ID_ORBULATION;
 import static cofh.lib.util.helpers.ItemHelper.cloneStack;
 import static cofh.lib.util.helpers.RecipeHelper.addShapelessRecipe;
 
-@Mod (modid = Orbulation.MOD_ID, name = Orbulation.MOD_NAME, version = Orbulation.VERSION, dependencies = Orbulation.DEPENDENCIES)
+// TODO: DEACTIVATED
+// @Mod (modid = Orbulation.MOD_ID, name = Orbulation.MOD_NAME, version = Orbulation.VERSION, dependencies = Orbulation.DEPENDENCIES)
 public class Orbulation {
 
 	public static final String MOD_ID = ID_ORBULATION;

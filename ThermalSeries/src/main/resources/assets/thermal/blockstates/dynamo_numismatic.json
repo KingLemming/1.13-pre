@@ -5,7 +5,7 @@
 		"transform": "forge:default-block",
 		"textures": {
 			"top": "thermal:blocks/dynamos/dynamo_numismatic",
-			"side": "thermal:blocks/dynamos/dynamo_side_numismatic",
+			"side": "thermal:blocks/dynamos/dynamo_numismatic_side",
 			"bottom": "thermal:blocks/dynamos/dynamo_numismatic",
 			"coil": "thermal:blocks/dynamos/dynamo_coil_rf"
 		},
@@ -17,14 +17,22 @@
 		"active": {
 			"true": {
 				"textures": {
-					"top": "thermal:blocks/dynamos/dynamo_numismatic_active",
-					"side": "thermal:blocks/dynamos/dynamo_side_numismatic_active",
-					"bottom": "thermal:blocks/dynamos/dynamo_numismatic_active"
+					"top": "thermal:blocks/dynamos/dynamo_active_numismatic",
+					"side": "thermal:blocks/dynamos/dynamo_active_numismatic_side",
+					"bottom": "thermal:blocks/dynamos/dynamo_active_numismatic"
 				},
-				"submodel": "thermal:dynamo_coil_active"
+				"submodel": {
+					"coil": {
+						"model": "thermal:dynamo_coil_active"
+					}
+				}
 			},
 			"false": {
-				"submodel": "thermal:dynamo_coil"
+				"submodel": {
+					"coil": {
+						"model": "thermal:dynamo_coil"
+					}
+				}
 			}
 		},
 		"facing": {
@@ -50,7 +58,11 @@
 		},
 		"inventory": [
 			{
-				"submodel": "thermal:dynamo_coil"
+				"submodel": {
+					"coil": {
+						"model": "thermal:dynamo_coil"
+					}
+				}
 			}
 		]
 	}

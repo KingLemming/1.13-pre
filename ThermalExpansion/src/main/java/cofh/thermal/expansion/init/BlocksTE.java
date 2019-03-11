@@ -6,8 +6,7 @@ import cofh.thermal.core.block.BlockMachine;
 import net.minecraft.item.ItemStack;
 
 import static cofh.thermal.core.ThermalSeries.registerBlock;
-import static cofh.thermal.expansion.init.DynamosTE.MAGMATIC;
-import static cofh.thermal.expansion.init.DynamosTE.STIRLING;
+import static cofh.thermal.expansion.init.DynamosTE.*;
 import static cofh.thermal.expansion.init.MachinesTE.*;
 
 public class BlocksTE {
@@ -28,6 +27,7 @@ public class BlocksTE {
 
 		dynamoStirling = registerBlock("dynamo_stirling", new ItemBlockCoFH(new BlockDynamo(STIRLING)));
 		dynamoMagmatic = registerBlock("dynamo_magmatic", new ItemBlockCoFH(new BlockDynamo(MAGMATIC)));
+		dynamoCompression = registerBlock("dynamo_compression", new ItemBlockCoFH(new BlockDynamo(COMPRESSION)));
 	}
 	// endregion
 
@@ -43,5 +43,6 @@ public class BlocksTE {
 	// region DYNAMOS
 	public static ItemStack dynamoStirling;
 	public static ItemStack dynamoMagmatic;
+	public static ItemStack dynamoCompression;
 	// endregion
 }

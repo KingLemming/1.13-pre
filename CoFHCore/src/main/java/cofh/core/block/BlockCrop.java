@@ -137,10 +137,13 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
+		if (!isHarvestable(state)) {
+			return false;
+		}
 		if (Utils.isClientWorld(worldIn)) {
 			return true;
 		}
-		if (isHarvestable(state) && getPostHarvestAge() >= 0) {
+		if (getPostHarvestAge() >= 0) {
 			Utils.dropItemStackIntoWorldWithVelocity(getCrop(), worldIn, pos);
 			worldIn.setBlockState(pos, this.withAge(getPostHarvestAge()), 2);
 			return true;

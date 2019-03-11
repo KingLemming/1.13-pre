@@ -18,7 +18,7 @@ public class Constants {
 	// region DEV VARIABLES
 	public static final boolean FEATURE_DEBUG = true;
 	public static final boolean NETWORK_DEBUG = false;
-	public static final boolean GEN_JSON_FILES = true;
+	public static final boolean GEN_JSON_FILES = false;
 	// endregion
 
 	// region BLOCK PROPERTIES
