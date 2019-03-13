@@ -8,7 +8,12 @@ public class ItemCoin extends ItemCoFH {
 
 	public ItemCoin() {
 
-		super(GROUP_COINS);
+		this(GROUP_COINS);
+	}
+
+	public ItemCoin(String group) {
+
+		super(group);
 	}
 
 }

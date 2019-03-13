@@ -67,21 +67,22 @@ public class EquipmentArmor {
 	public static final ArmorMaterial armorMaterialEmerald = EnumHelper.addArmorMaterial("QM:EMERALD", "emerald_armor", 10, new int[] { 2, 4, 4, 2 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0F);
 
 	public static final ArmorMaterial armorMaterialCopper = EnumHelper.addArmorMaterial("QM:COPPER", "copper_armor", 10, new int[] { 1, 3, 3, 1 }, 8, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0F);
-	public static final ArmorMaterial armorMaterialTin = EnumHelper.addArmorMaterial("QM:TIN", "tin_armor", 8, new int[] { 1, 3, 4, 1 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0F);
-	public static final ArmorMaterial armorMaterialLead = EnumHelper.addArmorMaterial("QM:LEAD", "lead_armor", 12, new int[] { 2, 4, 5, 3 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0F);
 	public static final ArmorMaterial armorMaterialSilver = EnumHelper.addArmorMaterial("QM:SILVER", "silver_armor", 8, new int[] { 2, 4, 4, 1 }, 25, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0F);
 	public static final ArmorMaterial armorMaterialNickel = EnumHelper.addArmorMaterial("QM:NICKEL", "nickel_armor", 15, new int[] { 2, 5, 5, 2 }, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0F);
+
+	public static final ArmorMaterial armorMaterialTin = EnumHelper.addArmorMaterial("QM:TIN", "tin_armor", 8, new int[] { 1, 3, 4, 1 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0F);
+	public static final ArmorMaterial armorMaterialAluminum = EnumHelper.addArmorMaterial("QM:ALUMINUM", "aluminum_armor", 9, new int[] { 1, 3, 4, 2 }, 14, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0F);
+	public static final ArmorMaterial armorMaterialLead = EnumHelper.addArmorMaterial("QM:LEAD", "lead_armor", 12, new int[] { 2, 4, 5, 3 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0F);
 	public static final ArmorMaterial armorMaterialPlatinum = EnumHelper.addArmorMaterial("QM:PLATINUM", "platinum_armor", 35, new int[] { 3, 6, 8, 3 }, 16, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F);
 
-	public static final ArmorMaterial armorMaterialAluminum = EnumHelper.addArmorMaterial("QM:ALUMINUM", "aluminum_armor", 9, new int[] { 1, 3, 4, 2 }, 14, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0F);
+	public static final ArmorMaterial armorMaterialInvar = EnumHelper.addArmorMaterial("QM:INVAR", "invar_armor", 21, new int[] { 2, 5, 7, 2 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F);
+	public static final ArmorMaterial armorMaterialConstantan = EnumHelper.addArmorMaterial("QM:CONSTANTAN", "constantan_armor", 13, new int[] { 2, 4, 4, 2 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0F);
+	public static final ArmorMaterial armorMaterialElectrum = EnumHelper.addArmorMaterial("QM:ELECTRUM", "electrum_armor", 8, new int[] { 2, 4, 4, 2 }, 30, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0F);
 
 	public static final ArmorMaterial armorMaterialSteel = EnumHelper.addArmorMaterial("QM:STEEL", "steel_armor", 22, new int[] { 2, 5, 7, 2 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F);
 	public static final ArmorMaterial armorMaterialBronze = EnumHelper.addArmorMaterial("QM:BRONZE", "bronze_armor", 18, new int[] { 2, 6, 6, 2 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F);
-	public static final ArmorMaterial armorMaterialInvar = EnumHelper.addArmorMaterial("QM:INVAR", "invar_armor", 21, new int[] { 2, 5, 7, 2 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F);
-	public static final ArmorMaterial armorMaterialElectrum = EnumHelper.addArmorMaterial("QM:ELECTRUM", "electrum_armor", 8, new int[] { 2, 4, 4, 2 }, 30, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0F);
-	public static final ArmorMaterial armorMaterialConstantan = EnumHelper.addArmorMaterial("QM:CONSTANTAN", "constantan_armor", 13, new int[] { 2, 4, 4, 2 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0F);
 
-	public static boolean disableAll[] = new boolean[4];
+	public static boolean[] disableAll = new boolean[4];
 
 	// region ARMOR SET
 	public enum ArmorSet {
@@ -90,19 +91,20 @@ public class EquipmentArmor {
 		EMERALD("emerald", "gemEmerald", armorMaterialEmerald),
 
 		COPPER("copper", "ingotCopper", armorMaterialCopper),
-		TIN("tin", "ingotTin", armorMaterialTin),
-		LEAD("lead", "ingotLead", armorMaterialLead),
 		SILVER("silver", "ingotSilver", armorMaterialSilver),
 		NICKEL("nickel", "ingotNickel", armorMaterialNickel),
+
+		TIN("tin", "ingotTin", armorMaterialTin),
+		ALUMINUM("aluminum", "ingotAluminum", armorMaterialAluminum),
+		LEAD("lead", "ingotLead", armorMaterialLead),
 		PLATINUM("platinum", "ingotPlatinum", armorMaterialPlatinum),
 
-		ALUMINUM("aluminum", "ingotAluminum", armorMaterialAluminum),
+		INVAR("invar", "ingotInvar", armorMaterialInvar),
+		CONSTANTAN("constantan", "ingotConstantan", armorMaterialConstantan),
+		ELECTRUM("electrum", "ingotElectrum", armorMaterialElectrum),
 
 		STEEL("steel", "ingotSteel", armorMaterialSteel),
-		BRONZE("bronze", "ingotBronze", armorMaterialBronze),
-		INVAR("invar", "ingotInvar", armorMaterialInvar),
-		ELECTRUM("electrum", "ingotElectrum", armorMaterialElectrum),
-		CONSTANTAN("constantan", "ingotConstantan", armorMaterialConstantan);
+		BRONZE("bronze", "ingotBronze", armorMaterialBronze);
 		// @formatter:on
 
 		private final String name;

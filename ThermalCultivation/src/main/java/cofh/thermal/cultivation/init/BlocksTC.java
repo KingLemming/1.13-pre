@@ -2,8 +2,10 @@ package cofh.thermal.cultivation.init;
 
 import cofh.core.block.BlockCrop;
 import cofh.core.block.BlockCropPerennial;
+import cofh.core.block.BlockCropTall;
 import net.minecraft.block.Block;
 
+import static cofh.lib.util.helpers.ItemHelper.cloneStack;
 import static cofh.thermal.core.ThermalSeries.registerBlock;
 import static cofh.thermal.cultivation.init.ItemsTC.*;
 
@@ -16,11 +18,12 @@ public class BlocksTC {
 	public static void initialize() {
 
 		((BlockCrop) plantBarley).setCrop(cropBarley).setSeed(seedBarley);
-		// ((BlockCrop) plantCorn).setCrop(cropCorn); //.setSeed(seedCorn);
 		((BlockCrop) plantOnion).setCrop(cropOnion).setSeed(seedOnion);
 		((BlockCrop) plantSadiroot).setCrop(cropSadiroot).setSeed(seedSadiroot);
 		((BlockCrop) plantSpinach).setCrop(cropSpinach).setSeed(seedSpinach);
 		((BlockCrop) plantRice).setCrop(cropRice).setSeed(seedRice);
+
+		((BlockCrop) plantCorn).setCrop(cloneStack(cropCorn, 2)); //.setSeed(seedCorn);
 
 		((BlockCrop) plantBellPepper).setCrop(cropBellPepper); //.setSeed(seedBellPepper);
 		((BlockCrop) plantCoffee).setCrop(cropCoffee); //.setSeed(seedCoffee);
@@ -35,11 +38,12 @@ public class BlocksTC {
 	public static void registerBlocks() {
 
 		plantBarley = registerBlock("plant_barley", new BlockCrop());
-		// plantCorn = registerBlock("plant_corn", new BlockCrop());
 		plantOnion = registerBlock("plant_onion", new BlockCrop());
 		plantSadiroot = registerBlock("plant_sadiroot", new BlockCrop());
 		plantSpinach = registerBlock("plant_spinach", new BlockCrop());
 		plantRice = registerBlock("plant_rice", new BlockCrop());
+
+		plantCorn = registerBlock("plant_corn", new BlockCropTall());
 
 		plantBellPepper = registerBlock("plant_bell_pepper", new BlockCropPerennial());
 		plantCoffee = registerBlock("plant_coffee", new BlockCropPerennial());

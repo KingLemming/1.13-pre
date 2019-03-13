@@ -18,13 +18,14 @@ public class Constants {
 	// region DEV VARIABLES
 	public static final boolean FEATURE_DEBUG = true;
 	public static final boolean NETWORK_DEBUG = false;
-	public static final boolean GEN_JSON_FILES = false;
+	public static final boolean GEN_JSON_FILES = true;
 	// endregion
 
 	// region BLOCK PROPERTIES
 	public static final PropertyBool ACTIVE = PropertyBool.create("active");
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 7);
 	public static final PropertyInteger AGE_PERENNIAL = PropertyInteger.create("age", 0, 10);
+	public static final PropertyInteger AGE_TALL = PropertyInteger.create("age", 0, 11);
 	public static final PropertyDirection FACING_ALL = PropertyDirection.create("facing");
 	public static final PropertyDirection FACING_HORIZONTAL = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
@@ -104,6 +105,7 @@ public class Constants {
 
 	// region PREFIXES
 	public static final String PREFIX_BLOCK = "block";
+	public static final String PREFIX_COIN = "coin";
 	public static final String PREFIX_CROP = "crop";
 	public static final String PREFIX_DUST = "dust";
 	public static final String PREFIX_GEAR = "gear";

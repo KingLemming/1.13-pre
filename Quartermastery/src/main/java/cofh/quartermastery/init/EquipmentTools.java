@@ -80,21 +80,22 @@ public class EquipmentTools {
 	public static ToolMaterial toolMaterialEmerald = EnumHelper.addToolMaterial("QM:EMERALD", 2, 150, 10.0F, 1.5F, 18);
 
 	public static ToolMaterial toolMaterialCopper = EnumHelper.addToolMaterial("QM:COPPER", 1, 175, 4.0F, 1.0F, 7);
-	public static ToolMaterial toolMaterialTin = EnumHelper.addToolMaterial("QM:TIN", 1, 150, 4.5F, 1.0F, 7);
-	public static ToolMaterial toolMaterialLead = EnumHelper.addToolMaterial("QM:LEAD", 1, 100, 5.0F, 1.0F, 9);
 	public static ToolMaterial toolMaterialSilver = EnumHelper.addToolMaterial("QM:SILVER", 1, 75, 6.0F, 1.0F, 25);
 	public static ToolMaterial toolMaterialNickel = EnumHelper.addToolMaterial("QM:NICKEL", 2, 300, 6.5F, 2.5F, 18);
+
+	public static ToolMaterial toolMaterialTin = EnumHelper.addToolMaterial("QM:TIN", 1, 150, 4.5F, 1.0F, 7);
+	public static ToolMaterial toolMaterialAluminum = EnumHelper.addToolMaterial("QM:ALUMINUM", 1, 225, 6.0F, 1.0F, 12);
+	public static ToolMaterial toolMaterialLead = EnumHelper.addToolMaterial("QM:LEAD", 1, 100, 5.0F, 1.0F, 9);
 	public static ToolMaterial toolMaterialPlatinum = EnumHelper.addToolMaterial("QM:PLATINUM", 4, 1400, 9.0F, 3.5F, 16);
 
-	public static ToolMaterial toolMaterialAluminum = EnumHelper.addToolMaterial("QM:ALUMINUM", 1, 225, 6.0F, 1.0F, 12);
+	public static ToolMaterial toolMaterialInvar = EnumHelper.addToolMaterial("QM:INVAR", 2, 425, 6.5F, 2.5F, 12);
+	public static ToolMaterial toolMaterialConstantan = EnumHelper.addToolMaterial("QM:CONSTANTAN", 2, 275, 6.0F, 1.5F, 12);
+	public static ToolMaterial toolMaterialElectrum = EnumHelper.addToolMaterial("QM:ELECTRUM", 0, 100, 14.0F, 0.5F, 30);
 
 	public static ToolMaterial toolMaterialSteel = EnumHelper.addToolMaterial("QM:STEEL", 2, 400, 6.5F, 2.5F, 10);
 	public static ToolMaterial toolMaterialBronze = EnumHelper.addToolMaterial("QM:BRONZE", 2, 325, 6.0F, 2.0F, 10);
-	public static ToolMaterial toolMaterialInvar = EnumHelper.addToolMaterial("QM:INVAR", 2, 425, 6.5F, 2.5F, 12);
-	public static ToolMaterial toolMaterialElectrum = EnumHelper.addToolMaterial("QM:ELECTRUM", 0, 100, 14.0F, 0.5F, 30);
-	public static ToolMaterial toolMaterialConstantan = EnumHelper.addToolMaterial("QM:CONSTANTAN", 2, 275, 6.0F, 1.5F, 12);
 
-	public static boolean disableAll[] = new boolean[12];
+	public static boolean[] disableAll = new boolean[12];
 
 	// TODO: Finish - Art
 	// region TOOL SET
@@ -111,19 +112,20 @@ public class EquipmentTools {
 //		EMERALD("emerald", "gemEmerald", toolMaterialEmerald),
 
 		COPPER("copper", "ingotCopper", toolMaterialCopper),
-		TIN("tin", "ingotTin", toolMaterialTin),
-		LEAD("lead", "ingotLead", toolMaterialLead),
 		SILVER("silver", "ingotSilver", toolMaterialSilver),
 		NICKEL("nickel", "ingotNickel", toolMaterialNickel),
+
+		TIN("tin", "ingotTin", toolMaterialTin),
+		LEAD("lead", "ingotLead", toolMaterialLead),
+		//		ALUMINUM("aluminum", "ingotAluminum", toolMaterialAluminum),
 		PLATINUM("platinum", "ingotPlatinum", toolMaterialPlatinum),
 
-//		ALUMINUM("aluminum", "ingotAluminum", toolMaterialAluminum),
+		INVAR("invar", "ingotInvar", toolMaterialInvar),
+		CONSTANTAN("constantan", "ingotConstantan", toolMaterialConstantan),
+		ELECTRUM("electrum", "ingotElectrum", toolMaterialElectrum),
 
 		STEEL("steel", "ingotSteel", toolMaterialSteel),
-		BRONZE("bronze", "ingotBronze", toolMaterialBronze),
-		INVAR("invar", "ingotInvar", toolMaterialInvar),
-		ELECTRUM("electrum", "ingotElectrum", toolMaterialElectrum),
-		CONSTANTAN("constantan", "ingotConstantan", toolMaterialConstantan);
+		BRONZE("bronze", "ingotBronze", toolMaterialBronze);
 		// @formatter:on
 
 		private final String name;

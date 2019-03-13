@@ -1,0 +1,80 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:cross",
+		"transform": "forge:default-block",
+		"textures": {
+			"cross": "thermal:blocks/crops/plant_corn_0"
+		}
+	},
+	"variants": {
+		"age": {
+			"0": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_corn_0"
+				}
+			},
+			"1": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_corn_1"
+				}
+			},
+			"2": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_corn_2"
+				}
+			},
+			"3": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_corn_3"
+				}
+			},
+			"4": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_corn_4"
+				}
+			},
+			"5": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_corn_5"
+				}
+			},
+			"6": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_corn_6"
+				}
+			},
+			"7": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_corn_7"
+				}
+			},
+			"8": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_corn_4_top"
+				}
+			},
+			"9": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_corn_5_top"
+				}
+			},
+			"10": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_corn_6_top"
+				}
+			},
+			"11": {
+				"textures": {
+					"cross": "thermal:blocks/crops/plant_corn_7_top"
+				}
+			}
+		},
+		"normal": [
+			{}
+		],
+		"inventory": [
+			{}
+		]
+	}
+}

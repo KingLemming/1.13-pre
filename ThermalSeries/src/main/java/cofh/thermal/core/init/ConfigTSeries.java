@@ -36,8 +36,8 @@ public class ConfigTSeries {
 		comment = "If TRUE, Basic (Wood and Stone) Gears will be craftable.";
 		enableBasicGears = config.getBoolean("Enable Basic Gears", category, enableBasicGears, comment);
 
-		comment = "If TRUE, Steel will have simple recipes and can be smelted in a Furnace.";
-		enableBasicSteel = config.getBoolean("Enable Basic Steel", category, enableBasicSteel, comment);
+		//		comment = "If TRUE, Steel will have simple recipes and can be smelted in a Furnace.";
+		//		enableBasicSteel = config.getBoolean("Enable Basic Steel", category, enableBasicSteel, comment);
 
 		comment = "If TRUE, Horse Armors will be craftable.";
 		enableHorseArmorCrafting = config.getBoolean("Enable Horse Armor Crafting", category, enableHorseArmorCrafting, comment);
@@ -69,7 +69,7 @@ public class ConfigTSeries {
 	// region CRAFTING
 	public static boolean enableAlternateGears = false;
 	public static boolean enableBasicGears = false;
-	public static boolean enableBasicSteel = false;
+	// public static boolean enableBasicSteel = false;
 	public static boolean enableHorseArmorCrafting = true;
 	public static boolean enableSaddleCrafting = true;
 	// endregion
