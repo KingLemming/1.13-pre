@@ -4,6 +4,7 @@ import cofh.lib.util.IModule;
 import cofh.thermal.core.ThermalSeries;
 import cofh.thermal.cultivation.init.BlocksTC;
 import cofh.thermal.cultivation.init.ItemsTC;
+import cofh.thermal.cultivation.init.RecipesTC;
 import cofh.thermal.cultivation.proxy.ProxyCommon;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -85,6 +86,7 @@ public class ThermalCultivation implements IModule {
 	@Override
 	public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 
+		RecipesTC.registerRecipes();
 	}
 
 	@Override

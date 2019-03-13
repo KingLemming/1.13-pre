@@ -22,10 +22,10 @@ public class EnchantmentGourmand extends EnchantmentCoFH {
 
 		String category = "Enchantment.Gourmand";
 		String comment = "If TRUE, the Gourmand Enchantment is available for Helmets.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
+		enable = Ensorcellment.config.get("Enable", category, enable, comment);
 
 		comment = "This option adjusts the maximum allowable level for the Enchantment.";
-		maxLevel = Ensorcellment.config.getInt("Max Level", category, 3, 1, MAX_ENCHANT_LEVEL, comment);
+		maxLevel = Ensorcellment.config.get("Max Level", category, 3, 1, MAX_ENCHANT_LEVEL, comment);
 	}
 
 	@Override

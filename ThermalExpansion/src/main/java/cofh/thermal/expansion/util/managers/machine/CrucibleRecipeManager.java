@@ -27,7 +27,7 @@ public class CrucibleRecipeManager extends SimpleItemRecipeManager {
 		defaultValidator.addPrefix(PREFIX_PLATE);
 	}
 
-	// region IRecipeManager
+	// region IManager
 	@Override
 	public void config() {
 

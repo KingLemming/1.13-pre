@@ -4,19 +4,19 @@ import cofh.core.gui.container.ContainerTileAugmentable;
 import cofh.lib.gui.slot.SlotCoFH;
 import cofh.lib.gui.slot.SlotRemoveOnly;
 import cofh.lib.inventory.InvWrapper;
-import cofh.thermal.expansion.block.machine.TileMachineInsolator;
+import cofh.thermal.core.block.machine.TileMachine;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 
 public class ContainerMachineInsolator extends ContainerTileAugmentable {
 
-	public TileMachineInsolator tile;
+	public TileMachine tile;
 
 	public ContainerMachineInsolator(InventoryPlayer inventory, TileEntity tile) {
 
 		super(inventory, tile);
-		this.tile = (TileMachineInsolator) tile;
+		this.tile = (TileMachine) tile;
 		IInventory tileInv = new InvWrapper(this.tile.getInventory());
 
 		addSlotToContainer(new SlotCoFH(tileInv, 0, 62, 17));

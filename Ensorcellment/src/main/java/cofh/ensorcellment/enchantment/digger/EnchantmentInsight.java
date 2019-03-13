@@ -24,13 +24,13 @@ public class EnchantmentInsight extends EnchantmentCoFH {
 
 		String category = "Enchantment.Insight";
 		String comment = "If TRUE, the Insight Enchantment is available for various Tools and Weapons.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
+		enable = Ensorcellment.config.get("Enable", category, enable, comment);
 
 		comment = "This option adjusts the maximum allowable level for the Enchantment.";
-		maxLevel = Ensorcellment.config.getInt("Max Level", category, 3, 1, MAX_ENCHANT_LEVEL, comment);
+		maxLevel = Ensorcellment.config.get("Max Level", category, 3, 1, MAX_ENCHANT_LEVEL, comment);
 
 		comment = "Adjust this to change the base experience awarded per level of the Enchantment.";
-		experience = Ensorcellment.config.getInt("Experience", category, experience, 1, 1000, comment);
+		experience = Ensorcellment.config.get("Experience", category, experience, 1, 1000, comment);
 	}
 
 	@Override

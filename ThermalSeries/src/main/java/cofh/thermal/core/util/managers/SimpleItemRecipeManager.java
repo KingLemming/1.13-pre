@@ -140,12 +140,6 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 
 	// region IRecipeManager
 	@Override
-	public boolean validRecipe(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
-
-		return getRecipe(inputSlots, inputTanks) != null;
-	}
-
-	@Override
 	public IMachineRecipe getRecipe(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
 
 		if (inputSlots.isEmpty() || inputSlots.get(0).isEmpty()) {

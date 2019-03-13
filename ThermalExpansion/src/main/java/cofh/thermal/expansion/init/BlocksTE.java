@@ -24,6 +24,7 @@ public class BlocksTE {
 		machineInsolator = registerBlock("machine_insolator", new ItemBlockCoFH(new BlockMachine(INSOLATOR)));
 		machineCrucible = registerBlock("machine_crucible", new ItemBlockCoFH(new BlockMachine(CRUCIBLE)));
 		machineCentrifuge = registerBlock("machine_centrifuge", new ItemBlockCoFH(new BlockMachine(CENTRIFUGE)));
+		machineBrewer = registerBlock("machine_brewer", new ItemBlockCoFH(new BlockMachine(BREWER)));
 
 		dynamoStirling = registerBlock("dynamo_stirling", new ItemBlockCoFH(new BlockDynamo(STIRLING)));
 		dynamoMagmatic = registerBlock("dynamo_magmatic", new ItemBlockCoFH(new BlockDynamo(MAGMATIC)));
@@ -38,6 +39,7 @@ public class BlocksTE {
 	public static ItemStack machineInsolator;
 	public static ItemStack machineCrucible;
 	public static ItemStack machineCentrifuge;
+	public static ItemStack machineBrewer;
 	// endregion
 
 	// region DYNAMOS

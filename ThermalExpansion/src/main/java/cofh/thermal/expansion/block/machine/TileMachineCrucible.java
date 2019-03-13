@@ -6,9 +6,11 @@ import cofh.lib.util.helpers.FluidHelper;
 import cofh.thermal.core.block.machine.TileMachineProcess;
 import cofh.thermal.expansion.init.MachinesTE;
 import cofh.thermal.expansion.util.managers.machine.CrucibleRecipeManager;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+import static cofh.lib.util.Constants.TAG_RENDER_FLUID;
 import static cofh.lib.util.Constants.TANK_MEDIUM;
 import static cofh.lib.util.StorageGroup.INPUT;
 import static cofh.lib.util.StorageGroup.OUTPUT;
@@ -32,7 +34,7 @@ public class TileMachineCrucible extends TileMachineProcess {
 			return false;
 		}
 		FluidStack prevFluid = renderFluid;
-		renderFluid = curRecipe.getOutputFluids(getInputSlots(), getInputTanks()).get(0);
+		renderFluid = new FluidStack(curRecipe.getOutputFluids(getInputSlots(), getInputTanks()).get(0), 0);
 		return FluidHelper.fluidsEqual(renderFluid, prevFluid);
 	}
 
@@ -77,6 +79,27 @@ public class TileMachineCrucible extends TileMachineProcess {
 		super.handleGuiPacket(buffer);
 
 		renderFluid = buffer.readFluidStack();
+	}
+	// endregion
+
+	// region NBT
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+
+		super.readFromNBT(nbt);
+
+		renderFluid = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag(TAG_RENDER_FLUID));
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+
+		super.writeToNBT(nbt);
+
+		if (renderFluid != null) {
+			nbt.setTag(TAG_RENDER_FLUID, renderFluid.writeToNBT(new NBTTagCompound()));
+		}
+		return nbt;
 	}
 	// endregion
 

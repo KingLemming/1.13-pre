@@ -1,5 +1,6 @@
 package cofh.thermal.cultivation.init;
 
+import cofh.core.item.ItemCoFH;
 import cofh.core.item.ItemFoodCoFH;
 import cofh.core.item.ItemSeedCoFH;
 import cofh.core.item.ItemSeedFoodCoFH;
@@ -9,8 +10,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 
-import static cofh.lib.util.Constants.GROUP_CROPS;
-import static cofh.lib.util.Constants.GROUP_SEEDS;
+import static cofh.lib.util.Constants.*;
 import static cofh.lib.util.helpers.StringHelper.titleCase;
 import static cofh.thermal.core.ThermalSeries.config;
 import static cofh.thermal.core.ThermalSeries.registerItem;
@@ -28,6 +28,7 @@ public class ItemsTC {
 		registerTools();
 		registerCrops();
 		registerSeeds();
+		registerFoods();
 	}
 
 	public static void registerCrops() {
@@ -68,6 +69,12 @@ public class ItemsTC {
 		seedTomato = registerItem("seed_tomato", "seedTomato", new ItemSeedCoFH(plantTomato, GROUP_SEEDS));
 	}
 
+	public static void registerFoods() {
+
+		foodDough = registerItem("food_dough", new ItemFoodCoFH(2, 0.2F, GROUP_FOODS));
+		foodFlour = registerItem("food_flour", "dustWheat", new ItemCoFH(GROUP_FOODS));
+	}
+
 	public static void registerTools() {
 
 		itemWateringCanBasic = createWateringCan("basic", 4000, 1, 40);
@@ -97,6 +104,11 @@ public class ItemsTC {
 
 		return new ItemWateringCan(fluidCapacity, radius, effectiveness);
 	}
+	// endregion
+
+	// region FOODS
+	public static ItemStack foodDough;
+	public static ItemStack foodFlour;
 	// endregion
 
 	// region CROPS

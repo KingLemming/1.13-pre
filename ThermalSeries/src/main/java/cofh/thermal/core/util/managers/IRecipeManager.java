@@ -8,7 +8,10 @@ import java.util.List;
 
 public interface IRecipeManager extends IManager {
 
-	boolean validRecipe(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks);
+	default boolean validRecipe(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
+
+		return getRecipe(inputSlots, inputTanks) != null;
+	}
 
 	IMachineRecipe getRecipe(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks);
 

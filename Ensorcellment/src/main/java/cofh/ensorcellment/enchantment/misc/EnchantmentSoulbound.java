@@ -23,13 +23,13 @@ public class EnchantmentSoulbound extends EnchantmentCoFH {
 
 		String category = "Enchantment.Soulbound";
 		String comment = "If TRUE, the Soulbound Enchantment is available.";
-		enable = Ensorcellment.config.getBoolean("EnableSoulbound", category, enable, comment);
+		enable = Ensorcellment.config.get("EnableSoulbound", category, enable, comment);
 
 		comment = "This option adjusts the maximum allowable level for the Enchantment.";
-		maxLevel = Ensorcellment.config.getInt("Max Level", category, 3, 1, MAX_ENCHANT_LEVEL, comment);
+		maxLevel = Ensorcellment.config.get("Max Level", category, 3, 1, MAX_ENCHANT_LEVEL, comment);
 
 		comment = "If TRUE, the Soulbound Enchantment is permanent (and will remove excess levels when triggered).";
-		permanent = Ensorcellment.config.getBoolean("PermanentSoulbound", category, permanent, comment);
+		permanent = Ensorcellment.config.get("PermanentSoulbound", category, permanent, comment);
 	}
 
 	@Override

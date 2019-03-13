@@ -2,7 +2,6 @@ package cofh.thermal.expansion.util.parsers.machine;
 
 import cofh.thermal.core.util.parsers.AbstractContentParser;
 import cofh.thermal.expansion.util.managers.machine.CrucibleRecipeManager;
-import cofh.thermal.expansion.util.managers.machine.FurnaceRecipeManager;
 import com.google.gson.JsonObject;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.item.ItemStack;
@@ -28,7 +27,7 @@ public class CrucibleRecipeParser extends AbstractContentParser {
 
 		ItemStack input;
 		FluidStack output;
-		int energy = FurnaceRecipeManager.instance().getDefaultEnergy();
+		int energy = CrucibleRecipeManager.instance().getDefaultEnergy();
 
 		/* INPUT */
 		input = parseItemStack(object.get(INPUT));

@@ -1,6 +1,7 @@
 package cofh.thermal.expansion.plugins.jei;
 
 import cofh.thermal.core.plugins.jei.JEIPluginTSeries;
+import cofh.thermal.expansion.plugins.jei.machine.brewer.BrewerRecipeCategory;
 import cofh.thermal.expansion.plugins.jei.machine.centrifuge.CentrifugeRecipeCategory;
 import cofh.thermal.expansion.plugins.jei.machine.crucible.CrucibleRecipeCategory;
 import cofh.thermal.expansion.plugins.jei.machine.furnace.FurnaceRecipeCategory;
@@ -21,6 +22,7 @@ public class JEIPluginTE implements IModPlugin {
 		JEIPluginTSeries.addCategory(new InsolatorRecipeCategory(INSOLATOR));
 		JEIPluginTSeries.addCategory(new CrucibleRecipeCategory(CRUCIBLE));
 		JEIPluginTSeries.addCategory(new CentrifugeRecipeCategory(CENTRIFUGE));
+		JEIPluginTSeries.addCategory(new BrewerRecipeCategory(BREWER));
 	}
 
 	public static final String FURNACE = "thermal:machine_furnace";
@@ -29,5 +31,6 @@ public class JEIPluginTE implements IModPlugin {
 	public static final String INSOLATOR = "thermal:machine_insolator";
 	public static final String CRUCIBLE = "thermal:machine_crucible";
 	public static final String CENTRIFUGE = "thermal:machine_centrifuge";
+	public static final String BREWER = "thermal:machine_brewer";
 
 }

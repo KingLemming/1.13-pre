@@ -7,7 +7,6 @@ import cofh.ensorcellment.enchantment.digger.EnchantmentInsight;
 import cofh.ensorcellment.enchantment.digger.EnchantmentSmashing;
 import cofh.ensorcellment.enchantment.digger.EnchantmentSmelting;
 import cofh.ensorcellment.enchantment.looting.EnchantmentAngler;
-import cofh.ensorcellment.enchantment.looting.EnchantmentFarmer;
 import cofh.ensorcellment.enchantment.looting.EnchantmentHunter;
 import cofh.ensorcellment.enchantment.misc.EnchantmentSoulbound;
 import cofh.ensorcellment.enchantment.override.EnchantmentMendingAlt;
@@ -18,8 +17,6 @@ import cofh.ensorcellment.enchantment.weapon.EnchantmentVorpal;
 import cofh.lib.util.helpers.MathHelper;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.block.Block;
-import net.minecraft.block.IGrowable;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentFrostWalker;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -425,23 +422,23 @@ public class EventHandler {
 			return;
 		}
 		final ItemStack tool = player.getHeldItemMainhand();
-		final int encFarmer = EnchantmentHelper.getEnchantmentLevel(FARMER, tool);
+		// final int encFarmer = EnchantmentHelper.getEnchantmentLevel(FARMER, tool);
 		final int encSmashing = EnchantmentHelper.getEnchantmentLevel(SMASHING, tool);
 		final int encSmelting = EnchantmentHelper.getEnchantmentLevel(SMELTING, tool);
 
 		List<ItemStack> drops = event.getDrops();
 
 		// FARMER
-		Block block = event.getState().getBlock();
-		if (encFarmer > 0 && block instanceof IGrowable && !((IGrowable) block).canGrow(event.getWorld(), event.getPos(), event.getState(), false)) {
-			for (int i = 0; i < encFarmer; i++) {
-				if (player.getRNG().nextInt(100) < EnchantmentFarmer.chance) {
-					for (ItemStack stack : drops) {
-						stack.grow(1);
-					}
-				}
-			}
-		}
+		//		Block block = event.getState().getBlock();
+		//		if (encFarmer > 0 && block instanceof IGrowable && !((IGrowable) block).canGrow(event.getWorld(), event.getPos(), event.getState(), false)) {
+		//			for (int i = 0; i < encFarmer; i++) {
+		//				if (player.getRNG().nextInt(100) < EnchantmentFarmer.chance) {
+		//					for (ItemStack stack : drops) {
+		//						stack.grow(1);
+		//					}
+		//				}
+		//			}
+		//		}
 
 		// SMASHING / SMELTING
 		drops.replaceAll(stack -> {

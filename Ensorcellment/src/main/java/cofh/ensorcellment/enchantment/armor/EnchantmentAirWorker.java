@@ -18,7 +18,7 @@ public class EnchantmentAirWorker extends EnchantmentCoFH {
 
 		String category = "Enchantment.AirWorker";
 		String comment = "If TRUE, the Air Affinity Enchantment is available for Helmets.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
+		enable = Ensorcellment.config.get("Enable", category, enable, comment);
 	}
 
 	@Override

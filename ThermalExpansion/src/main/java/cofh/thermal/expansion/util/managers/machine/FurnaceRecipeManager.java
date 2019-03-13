@@ -38,7 +38,7 @@ public class FurnaceRecipeManager extends SimpleItemRecipeManager {
 		defaultValidator.addPrefix(PREFIX_LOG);
 	}
 
-	// region IRecipeManager
+	// region IManager
 	@Override
 	public void config() {
 

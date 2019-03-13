@@ -20,10 +20,10 @@ public class EnchantmentHolding extends EnchantmentCoFH {
 
 		String category = "Enchantment.Holding";
 		String comment = "If TRUE, the Holding Enchantment is available for various Storage Items.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
+		enable = Ensorcellment.config.get("Enable", category, enable, comment);
 
 		comment = "This option adjusts the maximum allowable level for the Enchantment.";
-		maxLevel = Ensorcellment.config.getInt("Max Level", category, 4, 1, MAX_ENCHANT_LEVEL, comment);
+		maxLevel = Ensorcellment.config.get("Max Level", category, 4, 1, MAX_ENCHANT_LEVEL, comment);
 	}
 
 	@Override

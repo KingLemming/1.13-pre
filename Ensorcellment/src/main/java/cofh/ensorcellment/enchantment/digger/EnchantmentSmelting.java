@@ -24,7 +24,7 @@ public class EnchantmentSmelting extends EnchantmentCoFH {
 
 		String category = "Enchantment.Smelting";
 		String comment = "If TRUE, the Smelting Enchantment is available for various Tools.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
+		enable = Ensorcellment.config.get("Enable", category, enable, comment);
 	}
 
 	@Override

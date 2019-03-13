@@ -93,6 +93,7 @@ public class ThermalExpansion implements IModule {
 		RecipesTSeries.registerManager(InsolatorRecipeManager.instance());
 		RecipesTSeries.registerManager(CrucibleRecipeManager.instance());
 		RecipesTSeries.registerManager(CentrifugeRecipeManager.instance());
+		RecipesTSeries.registerManager(BrewerRecipeManager.instance());
 
 		RecipesTSeries.registerManager(StirlingFuelManager.instance());
 		RecipesTSeries.registerManager(MagmaticFuelManager.instance());
@@ -104,6 +105,7 @@ public class ThermalExpansion implements IModule {
 		ParsersTSeries.registerParser("insolator", InsolatorRecipeParser.instance());
 		ParsersTSeries.registerParser("crucible", CrucibleRecipeParser.instance());
 		ParsersTSeries.registerParser("centrifuge", CentrifugeRecipeParser.instance());
+		ParsersTSeries.registerParser("brewer", BrewerRecipeParser.instance());
 
 		ParsersTSeries.registerParser("fuel_stirling", StirlingFuelParser.instance());
 		ParsersTSeries.registerParser("fuel_magmatic", MagmaticFuelParser.instance());

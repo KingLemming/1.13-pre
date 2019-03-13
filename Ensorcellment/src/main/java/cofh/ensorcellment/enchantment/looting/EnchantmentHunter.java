@@ -25,13 +25,13 @@ public class EnchantmentHunter extends EnchantmentCoFH {
 
 		String category = "Enchantment.Hunter";
 		String comment = "If TRUE, the Hunter's Bounty Enchantment is available for Bows.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
+		enable = Ensorcellment.config.get("Enable", category, enable, comment);
 
 		comment = "This option adjusts the maximum allowable level for the Enchantment.";
-		maxLevel = Ensorcellment.config.getInt("Max Level", category, 2, 1, MAX_ENCHANT_LEVEL, comment);
+		maxLevel = Ensorcellment.config.get("Max Level", category, 2, 1, MAX_ENCHANT_LEVEL, comment);
 
 		comment = "Adjust this value to set the chance of an additional drop per level of the Enchantment (in percentage).";
-		chance = Ensorcellment.config.getInt("Effect Chance", category, chance, 1, 100, comment);
+		chance = Ensorcellment.config.get("Effect Chance", category, chance, 1, 100, comment);
 	}
 
 	@Override

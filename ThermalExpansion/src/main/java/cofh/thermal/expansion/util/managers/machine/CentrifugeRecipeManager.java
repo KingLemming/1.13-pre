@@ -22,7 +22,7 @@ public class CentrifugeRecipeManager extends SimpleItemRecipeManager {
 		defaultValidator.addPrefix(PREFIX_DUST);
 	}
 
-	// region IRecipeManager
+	// region IManager
 	@Override
 	public void config() {
 

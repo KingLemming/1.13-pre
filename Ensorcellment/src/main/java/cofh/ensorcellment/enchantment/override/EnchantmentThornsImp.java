@@ -34,13 +34,13 @@ public class EnchantmentThornsImp extends EnchantmentOverride {
 
 		String category = "Override.Thorns";
 		String comment = "If TRUE, the Thorns Enchantment is replaced with a more configurable version which works on more items, such as Shields and Horse Armor.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
+		enable = Ensorcellment.config.get("Enable", category, enable, comment);
 
 		comment = "This option adjusts the maximum allowable level for the Enchantment.";
-		maxLevel = Ensorcellment.config.getInt("Max Level", category, 3, 1, MAX_ENCHANT_LEVEL, comment);
+		maxLevel = Ensorcellment.config.get("Max Level", category, 3, 1, MAX_ENCHANT_LEVEL, comment);
 
 		comment = "Adjust this value to set the chance per level of the Enchantment firing (in percentage).";
-		chance = Ensorcellment.config.getInt("Effect Chance", category, chance, 1, 100, comment);
+		chance = Ensorcellment.config.get("Effect Chance", category, chance, 1, 100, comment);
 	}
 
 	@Override

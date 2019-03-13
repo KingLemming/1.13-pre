@@ -117,7 +117,7 @@ public class SawmillRecipeCategory extends BaseRecipeCategory<SawmillRecipeWrapp
 				} else {
 					chance -= (int) chance;
 					if (chance > 0) {
-						tooltip.add(StringHelper.localize("info.cofh.chanceAdditional") + ": " + (int) (100 * chance) + "%");
+						tooltip.add(StringHelper.localize("info.cofh.chance_additional") + ": " + (int) (100 * chance) + "%");
 					}
 				}
 			}

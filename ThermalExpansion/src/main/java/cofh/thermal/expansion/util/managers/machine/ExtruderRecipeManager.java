@@ -36,7 +36,7 @@ public class ExtruderRecipeManager extends SimpleItemRecipeManager {
 		return recipe;
 	}
 
-	// region IRecipeManager
+	// region IManager
 	@Override
 	public void config() {
 

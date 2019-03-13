@@ -22,10 +22,10 @@ public class EnchantmentPhalanx extends EnchantmentCoFH {
 
 		String category = "Enchantment.Shield.Phalanx";
 		String comment = "If TRUE, the Phalanx Enchantment is available for Shields.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
+		enable = Ensorcellment.config.get("Enable", category, enable, comment);
 
 		comment = "This option adjusts the maximum allowable level for the Enchantment.";
-		maxLevel = Ensorcellment.config.getInt("Max Level", category, 2, 1, MAX_ENCHANT_LEVEL, comment);
+		maxLevel = Ensorcellment.config.get("Max Level", category, 2, 1, MAX_ENCHANT_LEVEL, comment);
 	}
 
 	@Override

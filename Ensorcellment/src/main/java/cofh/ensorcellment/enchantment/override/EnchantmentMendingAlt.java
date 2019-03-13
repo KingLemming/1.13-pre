@@ -22,10 +22,10 @@ public class EnchantmentMendingAlt extends EnchantmentOverride {
 
 		String category = "Override.Mending";
 		String comment = "If TRUE, the Mending Enchantment is replaced with a new Enchantment - Preservation. This enchantment allows you to repair items at an Anvil without paying an increasing XP cost for every time you repair it. Additionally, these repairs have a much lower chance of damaging the anvil.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, false, comment);
+		enable = Ensorcellment.config.get("Enable", category, false, comment);
 
 		comment = "Adjust this value to set the chance of an Anvil being damaged when used to repair an item with Preservation (in percentage).";
-		anvilDamage = Ensorcellment.config.getInt("Anvil Damage Chance", category, 3, 0, 12, comment) / 100F;
+		anvilDamage = Ensorcellment.config.get("Anvil Damage Chance", category, 3, 0, 12, comment) / 100F;
 	}
 
 	@Override

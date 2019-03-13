@@ -3,6 +3,7 @@ package cofh.ensorcellment;
 import cofh.ensorcellment.enchantment.EnchantmentsEnsorc;
 import cofh.ensorcellment.proxy.ProxyCommon;
 import cofh.lib.capabilities.CapabilityEnchantable;
+import cofh.lib.util.ConfigHandler;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
@@ -40,7 +41,7 @@ public class Ensorcellment {
 	public static ProxyCommon proxy;
 
 	public static Logger log = LogManager.getLogger(MOD_ID);
-	public static Configuration config;
+	public static ConfigHandler config;
 
 	// region INITIALIZATION
 	@EventHandler
@@ -48,7 +49,7 @@ public class Ensorcellment {
 
 		File configDir = event.getModConfigurationDirectory();
 
-		config = new Configuration(new File(configDir, "/cofh/" + MOD_ID + "/config.cfg"), VERSION, true);
+		config = new ConfigHandler(new Configuration(new File(configDir, "/cofh/" + MOD_ID + "/config.cfg"), VERSION, true));
 		config.load();
 
 		config();
@@ -98,12 +99,12 @@ public class Ensorcellment {
 		String category = "Enchantment.FeatherFalling";
 		String comment = "If TRUE, Feather Falling will prevent Farmland from being trampled.";
 
-		preventFarmlandTrampling = config.getBoolean("Prevent Farmland Trampling", category, true, comment);
+		preventFarmlandTrampling = config.get("Prevent Farmland Trampling", category, true, comment);
 
 		category = "~MODPACK OPTIONS~";
 		comment = "If TRUE, then disabled Enchantments WILL NOT BE REGISTERED. Only do this if you fully understand the consequences. World backup is recommended.";
 
-		hardDisable = config.getBoolean("Disable Prevents Registration", category, true, comment);
+		hardDisable = config.get("Disable Prevents Registration", category, true, comment);
 	}
 
 	private static void registerHandlers() {

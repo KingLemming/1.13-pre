@@ -21,7 +21,7 @@ public class EnchantmentTrueshot extends EnchantmentCoFH {
 
 		String category = "Enchantment.Trueshot";
 		String comment = "If TRUE, the Trueshot Enchantment is available for various Bows.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
+		enable = Ensorcellment.config.get("Enable", category, enable, comment);
 	}
 
 	@Override

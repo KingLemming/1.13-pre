@@ -40,7 +40,7 @@ public class SawmillRecipeManager extends SimpleItemRecipeManager {
 		defaultValidator.addExact("treeLeaves");
 	}
 
-	// region IRecipeManager
+	// region IManager
 	@Override
 	public void config() {
 
@@ -56,7 +56,7 @@ public class SawmillRecipeManager extends SimpleItemRecipeManager {
 		comment = "Adjust this value to change the default Log -> Plank Multiplier for this machine.";
 		logMultiplier = config.getFloat("Log -> Plank Multiplier", category, logMultiplier, 1.0F, 8.0F, comment);
 
-		comment = "If TRUE, default Log processing recipes will be created.";
+		comment = "If TRUE, default Log processing recipes will be created based on registered Logs and Planks.";
 		defaultLogRecipes = config.getBoolean("Default Log Recipes", category, defaultLogRecipes, comment);
 
 		setDefaultEnergy(defaultEnergy);

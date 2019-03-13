@@ -29,7 +29,7 @@ public class EnchantmentSmashing extends EnchantmentCoFH {
 
 		String category = "Enchantment.Smashing";
 		String comment = "If TRUE, the Smashing Enchantment is available for various Tools.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
+		enable = Ensorcellment.config.get("Enable", category, enable, comment);
 	}
 
 	@Override

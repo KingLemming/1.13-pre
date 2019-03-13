@@ -144,6 +144,7 @@ public class Constants {
 	public static final String TAG_PROCESS = "Proc";
 	public static final String TAG_PROCESS_MAX = "ProcMax";
 	public static final String TAG_REDSTONE = "Redstone";
+	public static final String TAG_RENDER_FLUID = "RenderFluid";
 	public static final String TAG_RS_MODE = "RSMode";
 	public static final String TAG_RS_POWER = "RSPower";
 	public static final String TAG_RS_THRESHOLD = "RSThreshold";
@@ -177,6 +178,7 @@ public class Constants {
 	public static final String GROUP_COINS = "coins";
 	public static final String GROUP_CROPS = "crops";
 	public static final String GROUP_DUSTS = "dusts";
+	public static final String GROUP_FOODS = "foods";
 	public static final String GROUP_GEARS = "gears";
 	public static final String GROUP_GEMS = "gems";
 	public static final String GROUP_INGOTS = "ingots";

@@ -74,7 +74,7 @@ public class SmelterRecipeManager extends SimpleItemRecipeManager {
 	}
 	// endregion
 
-	// region IRecipeManager
+	// region IManager
 	@Override
 	public void config() {
 

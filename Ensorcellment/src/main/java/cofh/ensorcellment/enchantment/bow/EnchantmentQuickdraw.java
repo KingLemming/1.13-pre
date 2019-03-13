@@ -21,7 +21,7 @@ public class EnchantmentQuickdraw extends EnchantmentCoFH {
 
 		String category = "Enchantment.Quickdraw";
 		String comment = "If TRUE, the Quickdraw Enchantment is available for various Bows.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
+		enable = Ensorcellment.config.get("Enable", category, enable, comment);
 	}
 
 	@Override

@@ -134,7 +134,7 @@ public class PulverizerRecipeManager extends SimpleCatalystRecipeManager {
 	}
 	// endregion
 
-	// region IRecipeManager
+	// region IManager
 	@Override
 	public void config() {
 
@@ -150,7 +150,7 @@ public class PulverizerRecipeManager extends SimpleCatalystRecipeManager {
 		comment = "Adjust this value to change the default Ore -> Dust Multiplier for this machine.";
 		oreMultiplier = config.getFloat("Ore -> Dust Multiplier", category, oreMultiplier, 1.0F, 8.0F, comment);
 
-		comment = "If TRUE, default Ore processing recipes will be created based on registered items.";
+		comment = "If TRUE, default Ore processing recipes will be created based on registered Ores and Items.";
 		defaultOreRecipes = config.getBoolean("Default Ore Recipes", category, defaultOreRecipes, comment);
 
 		comment = "If TRUE, default Ingot -> Dust recipes will be created as part of the default recipe set.";

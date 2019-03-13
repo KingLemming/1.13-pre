@@ -18,7 +18,7 @@ public class EnchantmentBulwark extends EnchantmentCoFH {
 
 		String category = "Enchantment.Shield.Bulwark";
 		String comment = "If TRUE, the Bulwark Enchantment is available for Shields.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
+		enable = Ensorcellment.config.get("Enable", category, enable, comment);
 	}
 
 	@Override

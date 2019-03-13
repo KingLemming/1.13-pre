@@ -24,10 +24,10 @@ public class EnchantmentFireAspectImp extends EnchantmentOverride {
 
 		String category = "Override.FireAspect";
 		String comment = "If TRUE, the Fire Aspect Enchantment is replaced with a more configurable version which works on more items, such as Axes.";
-		enable = Ensorcellment.config.getBoolean("Enable", category, enable, comment);
+		enable = Ensorcellment.config.get("Enable", category, enable, comment);
 
 		comment = "This option adjusts the maximum allowable level for the Enchantment.";
-		maxLevel = Ensorcellment.config.getInt("Max Level", category, 2, 1, MAX_ENCHANT_LEVEL, comment);
+		maxLevel = Ensorcellment.config.get("Max Level", category, 2, 1, MAX_ENCHANT_LEVEL, comment);
 	}
 
 	@Override

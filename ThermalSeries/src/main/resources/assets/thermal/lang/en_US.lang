@@ -389,6 +389,9 @@ item.thermal.rod_blizz.name=Blizz Rod
 # ITEMS - CULTIVATION
 #=======================================================================================================================
 
+item.thermal.food_dough.name=Dough
+item.thermal.food_flour.name=Flour
+
 item.thermal.crop_barley.name=Barley
 item.thermal.crop_bell_pepper.name=Bell Pepper
 item.thermal.crop_coffee.name=Coffee Cherry

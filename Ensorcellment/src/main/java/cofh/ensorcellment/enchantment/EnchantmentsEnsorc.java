@@ -10,7 +10,6 @@ import cofh.ensorcellment.enchantment.digger.EnchantmentInsight;
 import cofh.ensorcellment.enchantment.digger.EnchantmentSmashing;
 import cofh.ensorcellment.enchantment.digger.EnchantmentSmelting;
 import cofh.ensorcellment.enchantment.looting.EnchantmentAngler;
-import cofh.ensorcellment.enchantment.looting.EnchantmentFarmer;
 import cofh.ensorcellment.enchantment.looting.EnchantmentHunter;
 import cofh.ensorcellment.enchantment.misc.EnchantmentHolding;
 import cofh.ensorcellment.enchantment.misc.EnchantmentSoulbound;
@@ -68,7 +67,7 @@ public class EnchantmentsEnsorc {
 		shieldPhalanx = new EnchantmentPhalanx(ID_PHALANX);
 
 		boostAngler = new EnchantmentAngler(ID_ANGLER);
-		boostFarmer = new EnchantmentFarmer(ID_FARMER);
+		// boostFarmer = new EnchantmentFarmer(ID_FARMER);
 		boostHunter = new EnchantmentHunter(ID_HUNTER);
 
 		registerEnchantmentOverride(registry, overrideProtection);
@@ -101,7 +100,7 @@ public class EnchantmentsEnsorc {
 		registerEnchantment(registry, shieldPhalanx);
 
 		registerEnchantment(registry, boostAngler);
-		registerEnchantment(registry, boostFarmer);
+		// registerEnchantment(registry, boostFarmer);
 		registerEnchantment(registry, boostHunter);
 	}
 

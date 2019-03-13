@@ -115,7 +115,7 @@ public class InsolatorRecipeManager extends SimpleCatalystRecipeManager {
 	}
 	// endregion
 
-	// region IRecipeManager
+	// region IManager
 	@Override
 	public void config() {
 
@@ -128,7 +128,7 @@ public class InsolatorRecipeManager extends SimpleCatalystRecipeManager {
 		comment = "Adjust this value to change the relative energy cost of all of this machine's recipes. Scale is in percentage.";
 		int scaleFactor = config.getInt("Energy Factor", category, DEFAULT_SCALE, DEFAULT_SCALE_MIN, DEFAULT_SCALE_MAX, comment);
 
-		comment = "If TRUE, default Plant processing recipes will be created based on registered items.";
+		comment = "If TRUE, default Plant processing recipes will be created based on registered Crops and Seeds.";
 		defaultPlantRecipes = config.getBoolean("Default Seed Recipes", category, defaultPlantRecipes, comment);
 
 		setDefaultEnergy(defaultEnergy);
