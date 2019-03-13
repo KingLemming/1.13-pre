@@ -55,7 +55,6 @@ public class StirlingFuelCategory extends BaseRecipeCategory<StirlingFuelWrapper
 
 		guiItemStacks.set(0, inputs.get(0));
 
-
 	}
 
 }

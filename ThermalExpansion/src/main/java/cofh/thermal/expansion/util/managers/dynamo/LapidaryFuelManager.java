@@ -1,8 +1,6 @@
 package cofh.thermal.expansion.util.managers.dynamo;
 
 import cofh.thermal.core.util.managers.SimpleItemFuelManager;
-import cofh.thermal.core.util.recipes.IDynamoFuel;
-import net.minecraft.item.ItemStack;
 
 import static cofh.thermal.core.ThermalSeries.config;
 

@@ -212,12 +212,18 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 
+		boolean noSeed = getSeed().isEmpty();
+
 		if (isHarvestable(state)) {
 			if (getCrop().isEmpty()) {
 				super.getDrops(drops, world, pos, state, fortune);
 			} else {
-				drops.add(cloneStack(getCrop()));
+				ItemStack crop = getCrop();
+				drops.add(cloneStack(crop, noSeed ? crop.getCount() + 1 : crop.getCount()));
 			}
+		}
+		if (noSeed) {
+			return;
 		}
 		Random rand = world instanceof World ? ((World) world).rand : RANDOM;
 		int age = getAge(state);

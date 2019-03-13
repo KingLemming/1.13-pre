@@ -17,11 +17,8 @@ public class ItemsTF {
 	// region REGISTRATION
 	public static void registerItems() {
 
-		ingotCopper = registerItem("ingot_copper", "ingotCopper", new ItemCoFH(GROUP_INGOTS));
 		ingotTin = registerItem("ingot_tin", "ingotTin", new ItemCoFH(GROUP_INGOTS));
 		ingotLead = registerItem("ingot_lead", "ingotLead", new ItemCoFH(GROUP_INGOTS));
-		ingotSilver = registerItem("ingot_silver", "ingotSilver", new ItemCoFH(GROUP_INGOTS));
-		ingotNickel = registerItem("ingot_nickel", "ingotNickel", new ItemCoFH(GROUP_INGOTS));
 		ingotPlatinum = registerItem("ingot_platinum", "ingotPlatinum", new ItemCoFH(GROUP_INGOTS).setRarity(EnumRarity.UNCOMMON));
 
 		//		ingotZinc = registerItem("ingot_zinc", "ingotZinc", new ItemCore(GROUP_INGOTS));
@@ -32,15 +29,9 @@ public class ItemsTF {
 		//		ingotTungsten = registerItem("ingot_tungsten", "ingotTungsten", new ItemCore(GROUP_INGOTS).setRarity(EnumRarity.UNCOMMON));
 
 		ingotBronze = registerItem("ingot_bronze", "ingotBronze", new ItemCoFH(GROUP_INGOTS));
-		ingotInvar = registerItem("ingot_invar", "ingotInvar", new ItemCoFH(GROUP_INGOTS));
-		ingotElectrum = registerItem("ingot_electrum", "ingotElectrum", new ItemCoFH(GROUP_INGOTS));
-		ingotConstantan = registerItem("ingot_constantan", "ingotConstantan", new ItemCoFH(GROUP_INGOTS));
 
-		nuggetCopper = registerItem("nugget_copper", "nuggetCopper", new ItemCoFH(GROUP_NUGGETS));
 		nuggetTin = registerItem("nugget_tin", "nuggetTin", new ItemCoFH(GROUP_NUGGETS));
 		nuggetLead = registerItem("nugget_lead", "nuggetLead", new ItemCoFH(GROUP_NUGGETS));
-		nuggetSilver = registerItem("nugget_silver", "nuggetSilver", new ItemCoFH(GROUP_NUGGETS));
-		nuggetNickel = registerItem("nugget_nickel", "nuggetNickel", new ItemCoFH(GROUP_NUGGETS));
 		nuggetPlatinum = registerItem("nugget_platinum", "nuggetPlatinum", new ItemCoFH(GROUP_NUGGETS).setRarity(EnumRarity.UNCOMMON));
 
 		//		nuggetZinc = registerItem("nugget_zinc", "nuggetZinc", new ItemCore(GROUP_NUGGETS));
@@ -51,15 +42,9 @@ public class ItemsTF {
 		//		nuggetTungsten = registerItem("nugget_tungsten", "nuggetTungsten", new ItemCore(GROUP_NUGGETS).setRarity(EnumRarity.UNCOMMON));
 
 		nuggetBronze = registerItem("nugget_bronze", "nuggetBronze", new ItemCoFH(GROUP_NUGGETS));
-		nuggetInvar = registerItem("nugget_invar", "nuggetInvar", new ItemCoFH(GROUP_NUGGETS));
-		nuggetElectrum = registerItem("nugget_electrum", "nuggetElectrum", new ItemCoFH(GROUP_NUGGETS));
-		nuggetConstantan = registerItem("nugget_constantan", "nuggetConstantan", new ItemCoFH(GROUP_NUGGETS));
 
-		dustCopper = registerItem("dust_copper", "dustCopper", new ItemCoFH(GROUP_DUSTS));
 		dustTin = registerItem("dust_tin", "dustTin", new ItemCoFH(GROUP_DUSTS));
 		dustLead = registerItem("dust_lead", "dustLead", new ItemCoFH(GROUP_DUSTS));
-		dustSilver = registerItem("dust_silver", "dustSilver", new ItemCoFH(GROUP_DUSTS));
-		dustNickel = registerItem("dust_nickel", "dustNickel", new ItemCoFH(GROUP_DUSTS));
 		dustPlatinum = registerItem("dust_platinum", "dustPlatinum", new ItemCoFH(GROUP_DUSTS).setRarity(EnumRarity.UNCOMMON));
 
 		//		dustZinc = registerItem("dust_zinc", "dustZinc", new ItemCore(GROUP_DUSTS));
@@ -70,15 +55,9 @@ public class ItemsTF {
 		//		dustTungsten = registerItem("dust_tungsten", "dustTungsten", new ItemCore(GROUP_DUSTS).setRarity(EnumRarity.UNCOMMON));
 
 		dustBronze = registerItem("dust_bronze", "dustBronze", new ItemCoFH(GROUP_DUSTS));
-		dustInvar = registerItem("dust_invar", "dustInvar", new ItemCoFH(GROUP_DUSTS));
-		dustElectrum = registerItem("dust_electrum", "dustElectrum", new ItemCoFH(GROUP_DUSTS));
-		dustConstantan = registerItem("dust_constantan", "dustConstantan", new ItemCoFH(GROUP_DUSTS));
 
-		gearCopper = registerItem("gear_copper", "gearCopper", new ItemCoFH(GROUP_GEARS));
 		gearTin = registerItem("gear_tin", "gearTin", new ItemCoFH(GROUP_GEARS));
 		gearLead = registerItem("gear_lead", "gearLead", new ItemCoFH(GROUP_GEARS));
-		gearSilver = registerItem("gear_silver", "gearSilver", new ItemCoFH(GROUP_GEARS));
-		gearNickel = registerItem("gear_nickel", "gearNickel", new ItemCoFH(GROUP_GEARS));
 		gearPlatinum = registerItem("gear_platinum", "gearPlatinum", new ItemCoFH(GROUP_GEARS).setRarity(EnumRarity.UNCOMMON));
 
 		//		gearZinc = registerItem("gear_zinc", "gearZinc", new ItemCore(GROUP_GEARS));
@@ -89,15 +68,9 @@ public class ItemsTF {
 		//		gearTungsten = registerItem("gear_tungsten", "gearTungsten", new ItemCore(GROUP_GEARS).setRarity(EnumRarity.UNCOMMON));
 
 		gearBronze = registerItem("gear_bronze", "gearBronze", new ItemCoFH(GROUP_GEARS));
-		gearInvar = registerItem("gear_invar", "gearInvar", new ItemCoFH(GROUP_GEARS));
-		gearElectrum = registerItem("gear_electrum", "gearElectrum", new ItemCoFH(GROUP_GEARS));
-		gearConstantan = registerItem("gear_constantan", "gearConstantan", new ItemCoFH(GROUP_GEARS));
 
-		plateCopper = registerItem("plate_copper", "plateCopper", new ItemCoFH(GROUP_PLATES));
 		plateTin = registerItem("plate_tin", "plateTin", new ItemCoFH(GROUP_PLATES));
 		plateLead = registerItem("plate_lead", "plateLead", new ItemCoFH(GROUP_PLATES));
-		plateSilver = registerItem("plate_silver", "plateSilver", new ItemCoFH(GROUP_PLATES));
-		plateNickel = registerItem("plate_nickel", "plateNickel", new ItemCoFH(GROUP_PLATES));
 		platePlatinum = registerItem("plate_platinum", "platePlatinum", new ItemCoFH(GROUP_PLATES).setRarity(EnumRarity.UNCOMMON));
 
 		//		plateZinc = registerItem("plate_zinc", "plateZinc", new ItemCore(GROUP_PLATES));
@@ -108,15 +81,9 @@ public class ItemsTF {
 		//		plateTungsten = registerItem("plate_tungsten", "plateTungsten", new ItemCore(GROUP_PLATES).setRarity(EnumRarity.UNCOMMON));
 
 		plateBronze = registerItem("plate_bronze", "plateBronze", new ItemCoFH(GROUP_PLATES));
-		plateInvar = registerItem("plate_invar", "plateInvar", new ItemCoFH(GROUP_PLATES));
-		plateElectrum = registerItem("plate_electrum", "plateElectrum", new ItemCoFH(GROUP_PLATES));
-		plateConstantan = registerItem("plate_constantan", "plateConstantan", new ItemCoFH(GROUP_PLATES));
 
-		coinCopper = registerItem("coin_copper", "coinCopper", new ItemCoin());
 		coinTin = registerItem("coin_tin", "coinTin", new ItemCoin());
 		coinLead = registerItem("coin_lead", "coinLead", new ItemCoin());
-		coinSilver = registerItem("coin_silver", "coinSilver", new ItemCoin());
-		coinNickel = registerItem("coin_nickel", "coinNickel", new ItemCoin());
 		coinPlatinum = registerItem("coin_platinum", "coinPlatinum", new ItemCoin().setRarity(EnumRarity.UNCOMMON));
 
 		//		coinZinc = registerItem("coin_zinc", "coinZinc", new ItemCoin());
@@ -127,9 +94,6 @@ public class ItemsTF {
 		//		coinTungsten = registerItem("coin_tungsten", "coinTungsten", new ItemCoin().setRarity(EnumRarity.UNCOMMON));
 
 		coinBronze = registerItem("coin_bronze", "coinBronze", new ItemCoin());
-		coinInvar = registerItem("coin_invar", "coinInvar", new ItemCoin());
-		coinElectrum = registerItem("coin_electrum", "coinElectrum", new ItemCoin());
-		coinConstantan = registerItem("coin_constantan", "coinConstantan", new ItemCoin());
 
 		dustBlizz = registerItem("dust_blizz", "dustBlizz", new ItemCoFH(GROUP_DUSTS));
 		dustBlitz = registerItem("dust_blitz", "dustBlitz", new ItemCoFH(GROUP_DUSTS));
@@ -142,11 +106,8 @@ public class ItemsTF {
 	// endregion
 
 	// region INGOTS
-	public static ItemStack ingotCopper;
 	public static ItemStack ingotTin;
 	public static ItemStack ingotLead;
-	public static ItemStack ingotSilver;
-	public static ItemStack ingotNickel;
 	public static ItemStack ingotPlatinum;
 
 	public static ItemStack ingotZinc;
@@ -157,9 +118,6 @@ public class ItemsTF {
 	public static ItemStack ingotTungsten;
 
 	public static ItemStack ingotBronze;
-	public static ItemStack ingotInvar;
-	public static ItemStack ingotElectrum;
-	public static ItemStack ingotConstantan;
 	// endregion
 
 	// region GEMS
@@ -169,11 +127,8 @@ public class ItemsTF {
 	// endregion
 
 	// region NUGGETS
-	public static ItemStack nuggetCopper;
 	public static ItemStack nuggetTin;
 	public static ItemStack nuggetLead;
-	public static ItemStack nuggetSilver;
-	public static ItemStack nuggetNickel;
 	public static ItemStack nuggetPlatinum;
 
 	public static ItemStack nuggetZinc;
@@ -184,9 +139,6 @@ public class ItemsTF {
 	public static ItemStack nuggetTungsten;
 
 	public static ItemStack nuggetBronze;
-	public static ItemStack nuggetInvar;
-	public static ItemStack nuggetElectrum;
-	public static ItemStack nuggetConstantan;
 
 	public static ItemStack nuggetAmethyst;
 	public static ItemStack nuggetRuby;
@@ -194,11 +146,8 @@ public class ItemsTF {
 	// endregion
 
 	// region DUSTS
-	public static ItemStack dustCopper;
 	public static ItemStack dustTin;
 	public static ItemStack dustLead;
-	public static ItemStack dustSilver;
-	public static ItemStack dustNickel;
 	public static ItemStack dustPlatinum;
 
 	public static ItemStack dustZinc;
@@ -209,9 +158,6 @@ public class ItemsTF {
 	public static ItemStack dustTungsten;
 
 	public static ItemStack dustBronze;
-	public static ItemStack dustInvar;
-	public static ItemStack dustElectrum;
-	public static ItemStack dustConstantan;
 
 	public static ItemStack dustAmethyst;
 	public static ItemStack dustRuby;
@@ -219,11 +165,8 @@ public class ItemsTF {
 	// endregion
 
 	// region GEARS
-	public static ItemStack gearCopper;
 	public static ItemStack gearTin;
 	public static ItemStack gearLead;
-	public static ItemStack gearSilver;
-	public static ItemStack gearNickel;
 	public static ItemStack gearPlatinum;
 
 	public static ItemStack gearZinc;
@@ -234,9 +177,6 @@ public class ItemsTF {
 	public static ItemStack gearTungsten;
 
 	public static ItemStack gearBronze;
-	public static ItemStack gearInvar;
-	public static ItemStack gearElectrum;
-	public static ItemStack gearConstantan;
 
 	public static ItemStack gearAmethyst;
 	public static ItemStack gearRuby;
@@ -244,11 +184,8 @@ public class ItemsTF {
 	// endregion
 
 	// region PLATES
-	public static ItemStack plateCopper;
 	public static ItemStack plateTin;
 	public static ItemStack plateLead;
-	public static ItemStack plateSilver;
-	public static ItemStack plateNickel;
 	public static ItemStack platePlatinum;
 
 	public static ItemStack plateZinc;
@@ -259,9 +196,6 @@ public class ItemsTF {
 	public static ItemStack plateTungsten;
 
 	public static ItemStack plateBronze;
-	public static ItemStack plateInvar;
-	public static ItemStack plateElectrum;
-	public static ItemStack plateConstantan;
 
 	public static ItemStack plateAmethyst;
 	public static ItemStack plateRuby;
@@ -269,11 +203,8 @@ public class ItemsTF {
 	// endregion
 
 	// region COINS
-	public static ItemStack coinCopper;
 	public static ItemStack coinTin;
 	public static ItemStack coinLead;
-	public static ItemStack coinSilver;
-	public static ItemStack coinNickel;
 	public static ItemStack coinPlatinum;
 
 	public static ItemStack coinZinc;
@@ -284,9 +215,6 @@ public class ItemsTF {
 	public static ItemStack coinTungsten;
 
 	public static ItemStack coinBronze;
-	public static ItemStack coinInvar;
-	public static ItemStack coinElectrum;
-	public static ItemStack coinConstantan;
 	// endregion
 
 	// region MOB DROPS

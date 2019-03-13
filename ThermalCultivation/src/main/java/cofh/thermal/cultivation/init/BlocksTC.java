@@ -15,26 +15,26 @@ public class BlocksTC {
 
 	public static void initialize() {
 
-		// ((BlockCrop) plantBarley).setCrop(cropBarley).setSeed(seedBarley);
-		// ((BlockCrop) plantCorn).setCrop(cropCorn).setSeed(seedCorn);
+		((BlockCrop) plantBarley).setCrop(cropBarley).setSeed(seedBarley);
+		// ((BlockCrop) plantCorn).setCrop(cropCorn); //.setSeed(seedCorn);
 		((BlockCrop) plantOnion).setCrop(cropOnion).setSeed(seedOnion);
 		((BlockCrop) plantSadiroot).setCrop(cropSadiroot).setSeed(seedSadiroot);
 		((BlockCrop) plantSpinach).setCrop(cropSpinach).setSeed(seedSpinach);
 		((BlockCrop) plantRice).setCrop(cropRice).setSeed(seedRice);
 
-		((BlockCrop) plantBellPepper).setCrop(cropBellPepper).setSeed(seedBellPepper);
-		// ((BlockCrop) plantCoffee).setCrop(cropCoffee).setSeed(seedCoffee);
-		((BlockCrop) plantGreenBean).setCrop(cropGreenBean).setSeed(seedGreenBean);
-		((BlockCrop) plantPeanut).setCrop(cropPeanut).setSeed(seedPeanut);
-		((BlockCrop) plantStrawberry).setCrop(cropStrawberry).setSeed(seedStrawberry);
+		((BlockCrop) plantBellPepper).setCrop(cropBellPepper); //.setSeed(seedBellPepper);
+		((BlockCrop) plantCoffee).setCrop(cropCoffee); //.setSeed(seedCoffee);
+		((BlockCrop) plantGreenBean).setCrop(cropGreenBean); //.setSeed(seedGreenBean);
+		((BlockCrop) plantPeanut).setCrop(cropPeanut); //.setSeed(seedPeanut);
+		((BlockCrop) plantStrawberry).setCrop(cropStrawberry); //.setSeed(seedStrawberry);
 		// ((BlockCrop) plantTea).setCrop(cropTea).setSeed(seedTea);
-		((BlockCrop) plantTomato).setCrop(cropTomato).setSeed(seedTomato);
+		((BlockCrop) plantTomato).setCrop(cropTomato); //.setSeed(seedTomato);
 	}
 
 	// region REGISTRATION
 	public static void registerBlocks() {
 
-		// plantBarley = registerBlock("plant_barley", new BlockCrop());
+		plantBarley = registerBlock("plant_barley", new BlockCrop());
 		// plantCorn = registerBlock("plant_corn", new BlockCrop());
 		plantOnion = registerBlock("plant_onion", new BlockCrop());
 		plantSadiroot = registerBlock("plant_sadiroot", new BlockCrop());
@@ -42,7 +42,7 @@ public class BlocksTC {
 		plantRice = registerBlock("plant_rice", new BlockCrop());
 
 		plantBellPepper = registerBlock("plant_bell_pepper", new BlockCropPerennial());
-		// plantCoffee = registerBlock("plant_coffee", new BlockCropPerennial());
+		plantCoffee = registerBlock("plant_coffee", new BlockCropPerennial());
 		plantGreenBean = registerBlock("plant_green_bean", new BlockCropPerennial());
 		plantPeanut = registerBlock("plant_peanut", new BlockCropPerennial());
 		plantStrawberry = registerBlock("plant_strawberry", new BlockCropPerennial());

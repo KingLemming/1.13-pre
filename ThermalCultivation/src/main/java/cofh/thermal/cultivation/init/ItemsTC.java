@@ -32,15 +32,15 @@ public class ItemsTC {
 
 	public static void registerCrops() {
 
-		// cropBarley = registerItem("crop_barley", "cropBarley", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
-		// cropCorn = registerItem("crop_corn", "cropCorn", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
+		cropBarley = registerItem("crop_barley", "cropBarley", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
+		cropCorn = registerItem("crop_corn", "cropCorn", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 		cropOnion = registerItem("crop_onion", "cropOnion", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 		cropSadiroot = registerItem("crop_sadiroot", "cropSadiroot", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 		cropSpinach = registerItem("crop_spinach", "cropSpinach", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 		cropRice = registerItem("crop_rice", "cropRice", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 
 		cropBellPepper = registerItem("crop_bell_pepper", "cropBellPepper", new ItemSeedFoodCoFH(2, 0.2F, plantBellPepper, GROUP_CROPS));
-		// cropCoffee = registerItem("crop_coffee", "cropCoffee", new ItemSeedFoodCoFH(2, 0.2F, plantCoffee, GROUP_CROPS));
+		cropCoffee = registerItem("crop_coffee", "cropCoffee", new ItemSeedFoodCoFH(2, 0.2F, plantCoffee, GROUP_CROPS));
 		cropGreenBean = registerItem("crop_green_bean", "cropGreenBean", new ItemSeedFoodCoFH(2, 0.2F, plantGreenBean, GROUP_CROPS));
 		cropPeanut = registerItem("crop_peanut", "cropPeanut", new ItemSeedFoodCoFH(2, 0.2F, plantPeanut, GROUP_CROPS));
 		cropStrawberry = registerItem("crop_strawberry", "cropStrawberry", new ItemSeedFoodCoFH(2, 0.2F, plantStrawberry, GROUP_CROPS));
@@ -50,15 +50,15 @@ public class ItemsTC {
 
 	public static void registerSeeds() {
 
-		// seedBarley = registerItem("seed_barley", "seedBarley", new ItemSeedCoFH(plantBarley, GROUP_SEEDS));
-		// seedCorn = registerItem("seed_corn", "seedCorn", new ItemSeedCoFH(plantCorn, GROUP_SEEDS));
+		seedBarley = registerItem("seed_barley", "seedBarley", new ItemSeedCoFH(plantBarley, GROUP_SEEDS));
+		seedCorn = registerItem("seed_corn", "seedCorn", new ItemSeedCoFH(plantCorn, GROUP_SEEDS));
 		seedOnion = registerItem("seed_onion", "seedOnion", new ItemSeedCoFH(plantOnion, GROUP_SEEDS));
 		seedSadiroot = registerItem("seed_sadiroot", "seedSadiroot", new ItemSeedCoFH(plantSadiroot, GROUP_SEEDS));
 		seedSpinach = registerItem("seed_spinach", "seedSpinach", new ItemSeedCoFH(plantSpinach, GROUP_SEEDS));
 		seedRice = registerItem("seed_rice", "seedRice", new ItemSeedCoFH(plantRice, GROUP_SEEDS));
 
 		seedBellPepper = registerItem("seed_bell_pepper", "seedBellPepper", new ItemSeedCoFH(plantBellPepper, GROUP_SEEDS));
-		// seedCoffee = registerItem("seed_coffee", "seedCoffee", new ItemSeedCoFH(plantCoffee, GROUP_SEEDS));
+		seedCoffee = registerItem("seed_coffee", "seedCoffee", new ItemSeedCoFH(plantCoffee, GROUP_SEEDS));
 		seedGreenBean = registerItem("seed_green_bean", "seedGreenBean", new ItemSeedCoFH(plantGreenBean, GROUP_SEEDS));
 		seedPeanut = registerItem("seed_peanut", "seedPeanut", new ItemSeedCoFH(plantPeanut, GROUP_SEEDS));
 		seedStrawberry = registerItem("seed_strawberry", "seedStrawberry", new ItemSeedCoFH(plantStrawberry, GROUP_SEEDS));
