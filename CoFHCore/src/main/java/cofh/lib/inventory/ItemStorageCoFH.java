@@ -75,6 +75,12 @@ public class ItemStorageCoFH implements IItemHandler, IItemStackHolder {
 	}
 
 	@Override
+	public int getCount() {
+
+		return item.getCount();
+	}
+
+	@Override
 	public boolean isEmpty() {
 
 		return item.isEmpty();

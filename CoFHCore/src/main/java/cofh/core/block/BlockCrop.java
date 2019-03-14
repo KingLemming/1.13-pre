@@ -86,9 +86,24 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 		return AGE;
 	}
 
+	protected boolean isHarvestable(IBlockState state) {
+
+		return getAge(state) == getHarvestAge();
+	}
+
 	protected int getAge(IBlockState state) {
 
 		return state.getValue(this.getAgeProperty());
+	}
+
+	protected ItemStack getCrop() {
+
+		return crop;
+	}
+
+	protected ItemStack getSeed() {
+
+		return seed;
 	}
 
 	public int getHarvestAge() {
@@ -104,21 +119,6 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 	public int getPostHarvestAge() {
 
 		return -1;
-	}
-
-	protected boolean isHarvestable(IBlockState state) {
-
-		return getAge(state) == getHarvestAge();
-	}
-
-	protected ItemStack getCrop() {
-
-		return crop;
-	}
-
-	protected ItemStack getSeed() {
-
-		return seed;
 	}
 
 	public IBlockState withAge(int age) {
@@ -161,7 +161,6 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 			if (!isHarvestable(state)) {
 				int age = getAge(state);
 				float growthChance = getGrowthChance(this, worldIn, pos);
-
 				if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int) (25.0F / growthChance) + 1) == 0)) {
 					int newAge = age + 1 > getMaximumAge() ? getHarvestAge() : age + 1;
 					worldIn.setBlockState(pos, this.withAge(newAge), 2);
@@ -260,7 +259,6 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 			for (int j = -1; j <= 1; ++j) {
 				float f1 = 0.0F;
 				IBlockState iblockstate = worldIn.getBlockState(blockpos.add(i, 0, j));
-
 				if (iblockstate.getBlock().canSustainPlant(iblockstate, worldIn, blockpos.add(i, 0, j), net.minecraft.util.EnumFacing.UP, (net.minecraftforge.common.IPlantable) blockIn)) {
 					f1 = 1.0F;
 					if (iblockstate.getBlock().isFertile(worldIn, blockpos.add(i, 0, j))) {

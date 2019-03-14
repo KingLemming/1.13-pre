@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static cofh.lib.util.Constants.BASE_CHANCE;
-import static cofh.lib.util.Constants.TANK_MEDIUM;
+import static cofh.lib.util.Constants.TANK_SMALL;
 
 public class InsolatorRecipeCategory extends BaseRecipeCategory<InsolatorRecipeWrapper> {
 
@@ -117,7 +117,7 @@ public class InsolatorRecipeCategory extends BaseRecipeCategory<InsolatorRecipeW
 		guiItemStacks.init(3, false, 105, 23);
 		guiItemStacks.init(4, false, 123, 23);
 
-		guiFluidStacks.init(0, false, 28, 12, 16, 40, TANK_MEDIUM, false, tankOverlay);
+		guiFluidStacks.init(0, false, 28, 12, 16, 40, TANK_SMALL, false, tankOverlay);
 
 		guiItemStacks.set(0, inputs.get(0));
 		guiFluidStacks.set(0, inputFluids.get(0));

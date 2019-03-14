@@ -1,6 +1,7 @@
 package cofh.thermal.expansion.block.machine;
 
 import cofh.lib.inventory.IItemStackHolder;
+import cofh.lib.inventory.ItemStorageCoFH;
 import cofh.thermal.core.block.machine.TileMachineProcess;
 import cofh.thermal.expansion.init.MachinesTE;
 import cofh.thermal.expansion.util.managers.machine.SawmillRecipeManager;
@@ -14,11 +15,13 @@ import static cofh.lib.util.helpers.ItemHelper.itemsIdentical;
 
 public class TileMachineSawmill extends TileMachineProcess {
 
+	protected ItemStorageCoFH inputSlot = new ItemStorageCoFH(SawmillRecipeManager.instance()::validRecipe);
+
 	public TileMachineSawmill() {
 
 		super(MachinesTE.SAWMILL);
 
-		inventory.addSlot(SawmillRecipeManager.instance()::validRecipe, INPUT);
+		inventory.addSlot(inputSlot, INPUT);
 		inventory.addSlot(OUTPUT, 4);
 	}
 
@@ -39,7 +42,7 @@ public class TileMachineSawmill extends TileMachineProcess {
 		if (!cacheRecipe()) {
 			return false;
 		}
-		return getInputSlots().get(0).getItemStack().getCount() >= itemInputCounts.get(0);
+		return inputSlot.getCount() >= itemInputCounts.get(0);
 	}
 
 	@Override

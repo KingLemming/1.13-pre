@@ -8,7 +8,7 @@ import static cofh.lib.util.Constants.BASE_CHANCE_LOCKED;
 
 public class ExtruderRecipe extends AbstractRecipe {
 
-	public ExtruderRecipe(ItemStack stone, FluidStack lava, FluidStack water, int energy) {
+	public ExtruderRecipe(int energy, ItemStack stone, FluidStack lava, FluidStack water) {
 
 		super(energy);
 		this.inputFluids.add(lava);

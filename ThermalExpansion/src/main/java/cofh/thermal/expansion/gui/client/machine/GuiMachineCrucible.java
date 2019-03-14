@@ -36,7 +36,7 @@ public class GuiMachineCrucible extends GuiMachine {
 
 		super.initGui();
 
-		addElement(GuiHelper.createLargeFluidStorage(this, 152, 9, tile.getTank(0)));
+		addElement(GuiHelper.createLargeFluidStorage(this, 151, 8, tile.getTank(0)));
 
 		progress = (ElementScaledFluid) addElement(new ElementScaledFluid(this, 103, 34).setFluid(tile.getRenderFluid()).setDirection(StartDirection.LEFT).setSize(PROGRESS, 16).setTexture(PROG_DROP_RIGHT, 64, 16));
 		speed = (ElementScaled) addElement(new ElementScaled(this, 53, 44).setSize(16, SPEED).setTexture(SCALE_FLAME, 32, 16));

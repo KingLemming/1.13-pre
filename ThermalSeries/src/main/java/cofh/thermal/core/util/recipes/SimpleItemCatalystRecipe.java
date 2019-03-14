@@ -20,7 +20,7 @@ import static cofh.lib.util.Constants.BASE_CHANCE_LOCKED;
 public abstract class SimpleItemCatalystRecipe extends AbstractRecipe {
 
 	// region SINGLE ITEM OUTPUT
-	public SimpleItemCatalystRecipe(ItemStack input, ItemStack output, float chance, int energy) {
+	public SimpleItemCatalystRecipe(int energy, ItemStack input, ItemStack output, float chance) {
 
 		super(energy);
 		this.inputItems.add(input);
@@ -30,7 +30,7 @@ public abstract class SimpleItemCatalystRecipe extends AbstractRecipe {
 	// endregion
 
 	// region MULTIPLE ITEM OUTPUT
-	public SimpleItemCatalystRecipe(ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, int energy) {
+	public SimpleItemCatalystRecipe(int energy, ItemStack input, List<ItemStack> output, @Nullable List<Float> chance) {
 
 		super(energy);
 		this.inputItems.add(input);

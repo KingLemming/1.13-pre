@@ -33,6 +33,12 @@ public class SimpleItemStackHolder implements IItemStackHolder {
 	}
 
 	@Override
+	public int getCount() {
+
+		return stack.getCount();
+	}
+
+	@Override
 	public boolean isEmpty() {
 
 		return stack.isEmpty();

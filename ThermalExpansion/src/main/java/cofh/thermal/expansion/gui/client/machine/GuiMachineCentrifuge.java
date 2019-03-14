@@ -36,7 +36,7 @@ public class GuiMachineCentrifuge extends GuiMachine {
 
 		super.initGui();
 
-		addElement(GuiHelper.createLargeFluidStorage(this, 152, 9, tile.getTank(0)));
+		addElement(GuiHelper.createLargeFluidStorage(this, 151, 8, tile.getTank(0)));
 
 		progressFluid = (ElementScaledFluid) addElement(new ElementScaledFluid(this, 72, 34).setFluid(tile.getRenderFluid()).setDirection(StartDirection.LEFT).setSize(PROGRESS, 16).setTexture(PROG_ARROW_FLUID_RIGHT, 64, 16));
 		progress = (ElementScaled) addElement(new ElementScaled(this, 72, 34).setDirection(StartDirection.LEFT).setSize(PROGRESS, 16).setTexture(PROG_ARROW_RIGHT, 64, 16));

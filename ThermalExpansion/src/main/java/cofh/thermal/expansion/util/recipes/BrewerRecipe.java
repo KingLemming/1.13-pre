@@ -6,13 +6,13 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BrewerRecipe extends AbstractRecipe {
 
-	public BrewerRecipe(ItemStack inputItem, FluidStack inputFluid, FluidStack outputFluid, int energy) {
+	public BrewerRecipe(int energy, ItemStack inputItem, FluidStack inputFluid, FluidStack outputFluid) {
 
 		super(energy);
 
-		inputItems.add(inputItem);
-		inputFluids.add(inputFluid);
-		outputFluids.add(outputFluid);
+		this.inputItems.add(inputItem);
+		this.inputFluids.add(inputFluid);
+		this.outputFluids.add(outputFluid);
 	}
 
 }

@@ -13,6 +13,8 @@ public interface IItemStackHolder {
 	@Nonnull
 	ItemStack getItemStack();
 
+	int getCount();
+
 	boolean isEmpty();
 
 }

@@ -12,16 +12,16 @@ import java.util.List;
 public class PulverizerOreRecipe extends SimpleItemCatalystRecipe {
 
 	// region SINGLE ITEM OUTPUT
-	public PulverizerOreRecipe(ItemStack input, ItemStack output, float chance, int energy) {
+	public PulverizerOreRecipe(int energy, ItemStack input, ItemStack output, float chance) {
 
-		super(input, output, chance, energy);
+		super(energy, input, output, chance);
 	}
 	// endregion
 
 	// region MULTIPLE ITEM OUTPUT
-	public PulverizerOreRecipe(ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, int energy) {
+	public PulverizerOreRecipe(int energy, ItemStack input, List<ItemStack> output, @Nullable List<Float> chance) {
 
-		super(input, output, chance, energy);
+		super(energy, input, output, chance);
 	}
 	// endregion
 

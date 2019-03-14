@@ -1,0 +1,100 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:crop",
+		"transform": "forge:default-block",
+		"textures": {
+			"crop": "thermal:blocks/crops/plant_hops_0"
+		}
+	},
+	"variants": {
+		"age": {
+			"0": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_0"
+				}
+			},
+			"1": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_1"
+				}
+			},
+			"2": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_2"
+				}
+			},
+			"3": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_3"
+				}
+			},
+			"4": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_4"
+				}
+			},
+			"5": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_5"
+				}
+			},
+			"6": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_6"
+				}
+			},
+			"7": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_7"
+				}
+			},
+			"8": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_8"
+				}
+			},
+			"9": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_9"
+				}
+			},
+			"10": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_4_top"
+				}
+			},
+			"11": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_5_top"
+				}
+			},
+			"12": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_6_top"
+				}
+			},
+			"13": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_7_top"
+				}
+			},
+			"14": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_8_top"
+				}
+			},
+			"15": {
+				"textures": {
+					"crop": "thermal:blocks/crops/plant_hops_9_top"
+				}
+			}
+		},
+		"normal": [
+			{}
+		],
+		"inventory": [
+			{}
+		]
+	}
+}

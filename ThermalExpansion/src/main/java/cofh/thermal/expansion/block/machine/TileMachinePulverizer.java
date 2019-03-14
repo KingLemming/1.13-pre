@@ -1,6 +1,7 @@
 package cofh.thermal.expansion.block.machine;
 
 import cofh.lib.inventory.IItemStackHolder;
+import cofh.lib.inventory.ItemStorageCoFH;
 import cofh.thermal.core.block.machine.TileMachineProcess;
 import cofh.thermal.expansion.init.MachinesTE;
 import cofh.thermal.expansion.util.managers.machine.PulverizerRecipeManager;
@@ -13,12 +14,15 @@ import static cofh.lib.util.helpers.ItemHelper.itemsIdentical;
 
 public class TileMachinePulverizer extends TileMachineProcess {
 
+	protected ItemStorageCoFH inputSlot = new ItemStorageCoFH(PulverizerRecipeManager.instance()::validRecipe);
+	protected ItemStorageCoFH catalystSlot = new ItemStorageCoFH(PulverizerRecipeManager.instance()::validCatalyst);
+
 	public TileMachinePulverizer() {
 
 		super(MachinesTE.PULVERIZER);
 
-		inventory.addSlot(PulverizerRecipeManager.instance()::validRecipe, INPUT);
-		inventory.addSlot(PulverizerRecipeManager.instance()::validCatalyst, CATALYST);
+		inventory.addSlot(inputSlot, INPUT);
+		inventory.addSlot(catalystSlot, CATALYST);
 		inventory.addSlot(OUTPUT, 4);
 	}
 
@@ -39,7 +43,7 @@ public class TileMachinePulverizer extends TileMachineProcess {
 		if (!cacheRecipe()) {
 			return false;
 		}
-		return getInputSlots().get(0).getItemStack().getCount() >= itemInputCounts.get(0);
+		return inputSlot.getCount() >= itemInputCounts.get(0);
 	}
 
 	@Override

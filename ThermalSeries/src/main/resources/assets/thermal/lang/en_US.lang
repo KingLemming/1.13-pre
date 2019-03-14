@@ -68,6 +68,10 @@ tab.thermal.machine_centrifuge.0=Separates items into their components.
 tab.thermal.machine_centrifuge.1=Some items will result in a fluid component.
 tab.thermal.machine_centrifuge.2=Spin to win!
 
+tab.thermal.machine_crafter.0=Insert items into the grid to set a crafting recipe.
+tab.thermal.machine_crafter.1=Simply press the confirm button and walk away!
+tab.thermal.machine_crafter.2=Not all recipes are valid.
+
 tab.thermal.machine_crucible.0=Turns solid materials into fluids!
 tab.thermal.machine_crucible.1=Very useful for building advanced blocks.
 tab.thermal.machine_crucible.2=Keep away from small children and pets.
@@ -80,7 +84,11 @@ tab.thermal.machine_pulverizer.0=Smashes things into other things.
 tab.thermal.machine_pulverizer.1=Useful for processing ores or converting items.
 tab.thermal.machine_pulverizer.2=This is typically not reversible.
 
-tab.thermal.machine_sawmill.0=Cuts logs into planks and reprocesses wooden things.
+tab.thermal.machine_refinery.0=Refines various fluids into other products.
+tab.thermal.machine_refinery.1=Some fluids will leave behind a solid component.
+tab.thermal.machine_refinery.2=Products may or may not be drinkable.
+
+tab.thermal.machine_sawmill.0=Cuts logs into planks and reprocesses wooden objects.
 tab.thermal.machine_sawmill.1=Very useful for making the most out of a tree.
 tab.thermal.machine_sawmill.2=Watch your hands.
 
@@ -389,6 +397,7 @@ item.thermal.rod_blizz.name=Blizz Rod
 # ITEMS - CULTIVATION
 #=======================================================================================================================
 
+item.thermal.food_coffee.name=Roasted Coffee Beans
 item.thermal.food_dough.name=Dough
 item.thermal.food_flour.name=Flour
 
@@ -397,25 +406,29 @@ item.thermal.crop_bell_pepper.name=Bell Pepper
 item.thermal.crop_coffee.name=Coffee Cherry
 item.thermal.crop_corn.name=Corn
 item.thermal.crop_green_bean.name=Green Bean
+item.thermal.crop_hops.name=Hops
 item.thermal.crop_onion.name=Onion
 item.thermal.crop_peanut.name=Peanut
 item.thermal.crop_rice.name=Rice
 item.thermal.crop_sadiroot.name=Sadiroot
 item.thermal.crop_spinach.name=Spinach
 item.thermal.crop_strawberry.name=Strawberry
+item.thermal.crop_tea.name=Tea Leaf
 item.thermal.crop_tomato.name=Tomato
 
 item.thermal.seed_barley.name=Barley Seeds
 item.thermal.seed_bell_pepper.name=Bell Pepper Seeds
-item.thermal.seed_coffee.name=Coffee Seeds
+item.thermal.seed_coffee.name=Coffee Beans
 item.thermal.seed_corn.name=Corn Seeds
 item.thermal.seed_green_bean.name=Green Bean Seeds
+item.thermal.seed_hops.name=Hop Rhizome
 item.thermal.seed_onion.name=Onion Seeds
 item.thermal.seed_peanut.name=Peanut Seeds
 item.thermal.seed_rice.name=Rice Seeds
 item.thermal.seed_sadiroot.name=Sadiroot Seeds
 item.thermal.seed_spinach.name=Spinach Seeds
 item.thermal.seed_strawberry.name=Strawberry Seeds
+item.thermal.seed_tea.name=Tea Seeds
 item.thermal.seed_tomato.name=Tomato Seeds
 
 item.thermal.watering_can_basic.name=Watering Can
@@ -494,6 +507,10 @@ tile.thermal.block_bronze.name=Block of Bronze
 tile.thermal.block_steel.name=Block of Steel
 
 #=======================================================================================================================
+# BLOCKS - CULTIVATION
+#=======================================================================================================================
+
+#=======================================================================================================================
 # BLOCKS - EXPANSION
 #=======================================================================================================================
 
@@ -515,4 +532,5 @@ tile.thermal.machine_sawmill.name=Sawmill
 tile.thermal.machine_insolator.name=Phytogenic Insolator
 tile.thermal.machine_crucible.name=Magma Crucible
 tile.thermal.machine_centrifuge.name=Centrifugal Separator
+tile.thermal.machine_refinery.name=Fractionating Still
 tile.thermal.machine_brewer.name=Alchemical Imbuer

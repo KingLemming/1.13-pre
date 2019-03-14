@@ -3,6 +3,7 @@ package cofh.thermal.expansion.block.machine;
 import cofh.core.network.PacketBufferCoFH;
 import cofh.lib.fluid.FluidStorageCoFH;
 import cofh.lib.inventory.IItemStackHolder;
+import cofh.lib.inventory.ItemStorageCoFH;
 import cofh.lib.util.helpers.FluidHelper;
 import cofh.thermal.core.block.machine.TileMachineProcess;
 import cofh.thermal.expansion.init.MachinesTE;
@@ -22,15 +23,17 @@ import static cofh.lib.util.helpers.ItemHelper.itemsIdentical;
 
 public class TileMachineCentrifuge extends TileMachineProcess {
 
-	private FluidStack renderFluid = new FluidStack(FluidRegistry.LAVA, 0);
+	protected FluidStack renderFluid = new FluidStack(FluidRegistry.WATER, 0);
+	protected ItemStorageCoFH inputSlot = new ItemStorageCoFH(CentrifugeRecipeManager.instance()::validRecipe);
+	protected FluidStorageCoFH outputTank = new FluidStorageCoFH(TANK_SMALL);
 
 	public TileMachineCentrifuge() {
 
 		super(MachinesTE.CENTRIFUGE);
 
-		inventory.addSlot(CentrifugeRecipeManager.instance()::validRecipe, INPUT);
+		inventory.addSlot(inputSlot, INPUT);
 		inventory.addSlot(OUTPUT, 4);
-		tankInv.addTank(new FluidStorageCoFH(TANK_SMALL), OUTPUT);
+		tankInv.addTank(outputTank, OUTPUT);
 	}
 
 	@Override
@@ -109,7 +112,7 @@ public class TileMachineCentrifuge extends TileMachineProcess {
 		if (!cacheRecipe()) {
 			return false;
 		}
-		return getInputSlots().get(0).getItemStack().getCount() >= itemInputCounts.get(0);
+		return inputSlot.getCount() >= itemInputCounts.get(0);
 	}
 
 	@Override
@@ -154,12 +157,12 @@ public class TileMachineCentrifuge extends TileMachineProcess {
 		if (recipeOutputFluids.isEmpty()) {
 			return true;
 		}
-		if (getOutputTanks().get(0).isEmpty()) {
+		if (outputTank.isEmpty()) {
 			return true;
 		}
-		FluidStack output = getOutputTanks().get(0).getFluidStack();
+		FluidStack output = outputTank.getFluidStack();
 		FluidStack recipeOutput = curRecipe.getOutputFluids(getInputSlots(), getInputTanks()).get(0);
-		if (getOutputTanks().get(0).getSpace() < recipeOutput.amount) {
+		if (outputTank.getSpace() < recipeOutput.amount) {
 			return false;
 		}
 		return FluidHelper.fluidsEqual(output, recipeOutput);

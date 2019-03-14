@@ -67,9 +67,9 @@ public class BrewerRecipeManager extends AbstractManager implements IRecipeManag
 		return validRecipe(Collections.singletonList(new SimpleItemStackHolder(item)), Collections.singletonList(new SimpleFluidStackHolder(fluid)));
 	}
 
-	public IMachineRecipe removeRecipe(ItemStack input, FluidStack fluid) {
+	public IMachineRecipe removeRecipe(ItemStack item, FluidStack fluid) {
 
-		return recipeMap.remove(asList(convertInput(input).hashCode(), FluidHelper.fluidHashcode(fluid)));
+		return recipeMap.remove(asList(convertInput(item).hashCode(), FluidHelper.fluidHashcode(fluid)));
 	}
 
 	public IMachineRecipe addRecipe(int energy, ItemStack inputItem, FluidStack inputFluid, FluidStack outputFluid) {
@@ -77,7 +77,7 @@ public class BrewerRecipeManager extends AbstractManager implements IRecipeManag
 		if (inputItem.isEmpty() || inputFluid == null || outputFluid == null || energy <= 0 || validRecipe(inputItem, inputFluid)) {
 			return null;
 		}
-		IMachineRecipe recipe = new BrewerRecipe(inputItem, inputFluid, outputFluid, energy);
+		IMachineRecipe recipe = new BrewerRecipe(energy, inputItem, inputFluid, outputFluid);
 		recipeMap.put(asList(convertInput(inputItem).hashCode(), FluidHelper.fluidHashcode(inputFluid)), recipe);
 		validItems.add(convertInput(inputItem));
 		validFluids.add(inputFluid.getFluid().getName());
@@ -97,12 +97,6 @@ public class BrewerRecipeManager extends AbstractManager implements IRecipeManag
 	// endregion
 
 	// region IRecipeManager
-	@Override
-	public boolean validRecipe(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
-
-		return getRecipe(inputSlots, inputTanks) != null;
-	}
-
 	@Override
 	public IMachineRecipe getRecipe(List<? extends IItemStackHolder> inputSlots, List<? extends IFluidStackHolder> inputTanks) {
 

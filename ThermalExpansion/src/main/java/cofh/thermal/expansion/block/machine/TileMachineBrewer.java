@@ -2,6 +2,7 @@ package cofh.thermal.expansion.block.machine;
 
 import cofh.core.network.PacketBufferCoFH;
 import cofh.lib.fluid.FluidStorageCoFH;
+import cofh.lib.inventory.ItemStorageCoFH;
 import cofh.lib.util.helpers.FluidHelper;
 import cofh.thermal.core.block.machine.TileMachineProcess;
 import cofh.thermal.core.init.FluidsTSeries;
@@ -16,17 +17,18 @@ import static cofh.lib.util.StorageGroup.OUTPUT;
 
 public class TileMachineBrewer extends TileMachineProcess {
 
-	private FluidStack renderFluid = new FluidStack(FluidsTSeries.fluidPotion, 0);
-
+	protected FluidStack renderFluid = new FluidStack(FluidsTSeries.fluidPotion, 0);
+	protected ItemStorageCoFH inputSlot = new ItemStorageCoFH(BrewerRecipeManager.instance()::validItem);
 	protected FluidStorageCoFH inputTank = new FluidStorageCoFH(TANK_SMALL, BrewerRecipeManager.instance()::validFluid);
+	protected FluidStorageCoFH outputTank = new FluidStorageCoFH(TANK_MEDIUM);
 
 	public TileMachineBrewer() {
 
 		super(MachinesTE.BREWER);
 
-		inventory.addSlot(BrewerRecipeManager.instance()::validItem, INPUT);
+		inventory.addSlot(inputSlot, INPUT);
 		tankInv.addTank(inputTank, INPUT);
-		tankInv.addTank(new FluidStorageCoFH(TANK_MEDIUM), OUTPUT);
+		tankInv.addTank(outputTank, OUTPUT);
 	}
 
 	@Override
@@ -123,18 +125,18 @@ public class TileMachineBrewer extends TileMachineProcess {
 		if (!cacheRecipe()) {
 			return false;
 		}
-		return getInputSlots().get(0).getItemStack().getCount() >= itemInputCounts.get(0) && inputTank.getFluidAmount() >= fluidInputCounts.get(0);
+		return inputSlot.getCount() >= itemInputCounts.get(0) && inputTank.getFluidAmount() >= fluidInputCounts.get(0);
 	}
 
 	@Override
 	protected boolean validateOutputs() {
 
-		if (getOutputTanks().get(0).isEmpty()) {
+		if (outputTank.isEmpty()) {
 			return true;
 		}
-		FluidStack output = getOutputTanks().get(0).getFluidStack();
+		FluidStack output = outputTank.getFluidStack();
 		FluidStack recipeOutput = curRecipe.getOutputFluids(getInputSlots(), getInputTanks()).get(0);
-		if (getOutputTanks().get(0).getSpace() < recipeOutput.amount) {
+		if (outputTank.getSpace() < recipeOutput.amount) {
 			return false;
 		}
 		return FluidHelper.fluidsEqual(output, recipeOutput);

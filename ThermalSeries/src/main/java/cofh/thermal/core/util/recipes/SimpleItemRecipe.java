@@ -17,7 +17,7 @@ import static cofh.lib.util.Constants.BASE_CHANCE_LOCKED;
 public class SimpleItemRecipe extends AbstractRecipe {
 
 	// region SINGLE ITEM OUTPUT
-	public SimpleItemRecipe(ItemStack input, ItemStack output, float chance, int energy) {
+	public SimpleItemRecipe(int energy, ItemStack input, ItemStack output, float chance) {
 
 		super(energy);
 		this.inputItems.add(input);
@@ -27,7 +27,7 @@ public class SimpleItemRecipe extends AbstractRecipe {
 	// endregion
 
 	// region MULTIPLE ITEM OUTPUT
-	public SimpleItemRecipe(ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, int energy) {
+	public SimpleItemRecipe(int energy, ItemStack input, List<ItemStack> output, @Nullable List<Float> chance) {
 
 		super(energy);
 		this.inputItems.add(input);
@@ -45,7 +45,7 @@ public class SimpleItemRecipe extends AbstractRecipe {
 	// endregion
 
 	// region SINGLE FLUID OUTPUT
-	public SimpleItemRecipe(ItemStack input, FluidStack output, int energy) {
+	public SimpleItemRecipe(int energy, ItemStack input, FluidStack output) {
 
 		super(energy);
 		this.inputItems.add(input);
@@ -54,7 +54,7 @@ public class SimpleItemRecipe extends AbstractRecipe {
 	// endregion
 
 	// region ITEM + FLUID OUTPUT
-	public SimpleItemRecipe(ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, @Nullable List<FluidStack> fluids, int energy) {
+	public SimpleItemRecipe(int energy, ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, @Nullable List<FluidStack> fluids) {
 
 		super(energy);
 		this.inputItems.add(input);

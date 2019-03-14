@@ -100,10 +100,10 @@ public class BrewerRecipeCategory extends BaseRecipeCategory<BrewerRecipeWrapper
 	@Override
 	public void drawExtras(@Nonnull Minecraft minecraft) {
 
-		progress.draw(minecraft, 94, 23);
+		progress.draw(minecraft, 98, 23);
 		speed.draw(minecraft, 46, 23);
-		tankInput.draw(minecraft, 20, 15);
-		tankOutput.draw(minecraft, 125, 0);
+		tankInput.draw(minecraft, 21, 14);
+		tankOutput.draw(minecraft, 133, 0);
 		energyMeter.draw(minecraft, 2, 8);
 	}
 
@@ -118,8 +118,8 @@ public class BrewerRecipeCategory extends BaseRecipeCategory<BrewerRecipeWrapper
 		IGuiFluidStackGroup guiFluidStacks = recipeLayout.getFluidStacks();
 
 		guiItemStacks.init(0, true, 69, 22);
-		guiFluidStacks.init(0, true, 21, 16, 16, 32, TANK_SMALL, false, inputOverlay);
-		guiFluidStacks.init(1, false, 126, 1, 16, 60, TANK_MEDIUM, false, outputOverlay);
+		guiFluidStacks.init(0, true, 22, 15, 16, 32, TANK_SMALL, false, inputOverlay);
+		guiFluidStacks.init(1, false, 134, 1, 16, 60, TANK_MEDIUM, false, outputOverlay);
 
 		guiItemStacks.set(0, inputItems.get(0));
 		guiFluidStacks.set(0, inputFluids.get(0));

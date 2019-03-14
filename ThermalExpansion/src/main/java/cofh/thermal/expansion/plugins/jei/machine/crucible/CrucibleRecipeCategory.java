@@ -27,7 +27,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static cofh.lib.util.Constants.TANK_LARGE;
+import static cofh.lib.util.Constants.TANK_MEDIUM;
 
 public class CrucibleRecipeCategory extends BaseRecipeCategory<CrucibleRecipeWrapper> {
 
@@ -110,7 +110,7 @@ public class CrucibleRecipeCategory extends BaseRecipeCategory<CrucibleRecipeWra
 		IGuiFluidStackGroup guiFluidStacks = recipeLayout.getFluidStacks();
 
 		guiItemStacks.init(0, true, 42, 14);
-		guiFluidStacks.init(0, false, 106, 1, 16, 60, TANK_LARGE, false, tankOverlay);
+		guiFluidStacks.init(0, false, 106, 1, 16, 60, TANK_MEDIUM, false, tankOverlay);
 
 		guiItemStacks.set(0, inputs.get(0));
 		guiFluidStacks.set(0, outputs.get(0));

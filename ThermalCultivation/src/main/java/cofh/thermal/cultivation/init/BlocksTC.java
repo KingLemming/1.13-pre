@@ -3,9 +3,9 @@ package cofh.thermal.cultivation.init;
 import cofh.core.block.BlockCrop;
 import cofh.core.block.BlockCropPerennial;
 import cofh.core.block.BlockCropTall;
+import cofh.core.block.BlockCropTallPerennial;
 import net.minecraft.block.Block;
 
-import static cofh.lib.util.helpers.ItemHelper.cloneStack;
 import static cofh.thermal.core.ThermalSeries.registerBlock;
 import static cofh.thermal.cultivation.init.ItemsTC.*;
 
@@ -23,15 +23,17 @@ public class BlocksTC {
 		((BlockCrop) plantSpinach).setCrop(cropSpinach).setSeed(seedSpinach);
 		((BlockCrop) plantRice).setCrop(cropRice).setSeed(seedRice);
 
-		((BlockCrop) plantCorn).setCrop(cloneStack(cropCorn, 2)); //.setSeed(seedCorn);
+		((BlockCrop) plantCorn).setCrop(cropCorn); //.setSeed(seedCorn);
 
 		((BlockCrop) plantBellPepper).setCrop(cropBellPepper); //.setSeed(seedBellPepper);
-		((BlockCrop) plantCoffee).setCrop(cropCoffee); //.setSeed(seedCoffee);
 		((BlockCrop) plantGreenBean).setCrop(cropGreenBean); //.setSeed(seedGreenBean);
 		((BlockCrop) plantPeanut).setCrop(cropPeanut); //.setSeed(seedPeanut);
 		((BlockCrop) plantStrawberry).setCrop(cropStrawberry); //.setSeed(seedStrawberry);
-		// ((BlockCrop) plantTea).setCrop(cropTea).setSeed(seedTea);
 		((BlockCrop) plantTomato).setCrop(cropTomato); //.setSeed(seedTomato);
+
+		((BlockCrop) plantCoffee).setCrop(cropCoffee); //.setSeed(seedCoffee);
+		((BlockCrop) plantTea).setCrop(cropTea); //.setSeed(seedTea);
+		((BlockCrop) plantHops).setCrop(cropHops); //.setSeed(seedHops);
 	}
 
 	// region REGISTRATION
@@ -46,12 +48,14 @@ public class BlocksTC {
 		plantCorn = registerBlock("plant_corn", new BlockCropTall());
 
 		plantBellPepper = registerBlock("plant_bell_pepper", new BlockCropPerennial());
-		plantCoffee = registerBlock("plant_coffee", new BlockCropPerennial());
 		plantGreenBean = registerBlock("plant_green_bean", new BlockCropPerennial());
 		plantPeanut = registerBlock("plant_peanut", new BlockCropPerennial());
 		plantStrawberry = registerBlock("plant_strawberry", new BlockCropPerennial());
-		// plantTea = registerBlock("plant_tea", new BlockCropPerennial());
 		plantTomato = registerBlock("plant_tomato", new BlockCropPerennial());
+
+		plantCoffee = registerBlock("plant_coffee", new BlockCropPerennial());
+		plantTea = registerBlock("plant_tea", new BlockCropPerennial());
+		plantHops = registerBlock("plant_hops", new BlockCropTallPerennial());
 	}
 	// endregion
 
@@ -64,11 +68,13 @@ public class BlocksTC {
 	public static Block plantRice;
 
 	public static Block plantBellPepper;
-	public static Block plantCoffee;
 	public static Block plantGreenBean;
 	public static Block plantPeanut;
 	public static Block plantStrawberry;
-	public static Block plantTea;
 	public static Block plantTomato;
+
+	public static Block plantCoffee;
+	public static Block plantTea;
+	public static Block plantHops;
 	// endregion
 }

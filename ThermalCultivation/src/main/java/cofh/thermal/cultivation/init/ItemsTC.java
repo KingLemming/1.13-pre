@@ -42,12 +42,14 @@ public class ItemsTC {
 		cropCorn = registerItem("crop_corn", "cropCorn", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 
 		cropBellPepper = registerItem("crop_bell_pepper", "cropBellPepper", new ItemSeedFoodCoFH(2, 0.2F, plantBellPepper, GROUP_CROPS));
-		cropCoffee = registerItem("crop_coffee", "cropCoffee", new ItemSeedFoodCoFH(2, 0.2F, plantCoffee, GROUP_CROPS));
 		cropGreenBean = registerItem("crop_green_bean", "cropGreenBean", new ItemSeedFoodCoFH(2, 0.2F, plantGreenBean, GROUP_CROPS));
 		cropPeanut = registerItem("crop_peanut", "cropPeanut", new ItemSeedFoodCoFH(2, 0.2F, plantPeanut, GROUP_CROPS));
 		cropStrawberry = registerItem("crop_strawberry", "cropStrawberry", new ItemSeedFoodCoFH(2, 0.2F, plantStrawberry, GROUP_CROPS));
-		// cropTea = registerItem("crop_tea", "cropTea", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 		cropTomato = registerItem("crop_tomato", "cropTomato", new ItemSeedFoodCoFH(2, 0.2F, plantTomato, GROUP_CROPS));
+
+		cropCoffee = registerItem("crop_coffee", "cropCoffee", new ItemSeedFoodCoFH(2, 0.2F, plantCoffee, GROUP_CROPS));
+		cropTea = registerItem("crop_tea", "cropTea", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
+		cropHops = registerItem("crop_hops", "cropHops", new ItemCoFH(GROUP_CROPS));
 	}
 
 	public static void registerSeeds() {
@@ -61,16 +63,19 @@ public class ItemsTC {
 		seedCorn = registerItem("seed_corn", "seedCorn", new ItemSeedCoFH(plantCorn, GROUP_SEEDS));
 
 		seedBellPepper = registerItem("seed_bell_pepper", "seedBellPepper", new ItemSeedCoFH(plantBellPepper, GROUP_SEEDS));
-		seedCoffee = registerItem("seed_coffee", "seedCoffee", new ItemSeedCoFH(plantCoffee, GROUP_SEEDS));
 		seedGreenBean = registerItem("seed_green_bean", "seedGreenBean", new ItemSeedCoFH(plantGreenBean, GROUP_SEEDS));
 		seedPeanut = registerItem("seed_peanut", "seedPeanut", new ItemSeedCoFH(plantPeanut, GROUP_SEEDS));
 		seedStrawberry = registerItem("seed_strawberry", "seedStrawberry", new ItemSeedCoFH(plantStrawberry, GROUP_SEEDS));
-		// seedTea = registerItem("seed_tea", "seedTea", new ItemSeedCoFH(plantTea, GROUP_SEEDS));
 		seedTomato = registerItem("seed_tomato", "seedTomato", new ItemSeedCoFH(plantTomato, GROUP_SEEDS));
+
+		seedCoffee = registerItem("seed_coffee", "seedCoffee", new ItemSeedCoFH(plantCoffee, GROUP_SEEDS));
+		seedTea = registerItem("seed_tea", "seedTea", new ItemSeedCoFH(plantTea, GROUP_SEEDS));
+		seedHops = registerItem("seed_hops", "seedHops", new ItemSeedCoFH(plantHops, GROUP_SEEDS));
 	}
 
 	public static void registerFoods() {
 
+		foodCoffee = registerItem("food_coffee", new ItemFoodCoFH(2, 0.2F, GROUP_FOODS));
 		foodDough = registerItem("food_dough", new ItemFoodCoFH(2, 0.2F, GROUP_FOODS));
 		foodFlour = registerItem("food_flour", "dustWheat", new ItemCoFH(GROUP_FOODS));
 	}
@@ -107,6 +112,7 @@ public class ItemsTC {
 	// endregion
 
 	// region FOODS
+	public static ItemStack foodCoffee;
 	public static ItemStack foodDough;
 	public static ItemStack foodFlour;
 	// endregion
@@ -122,8 +128,10 @@ public class ItemsTC {
 	public static ItemStack cropBellPepper;
 	public static ItemStack cropCoffee;
 	public static ItemStack cropGreenBean;
+	public static ItemStack cropHops;
 	public static ItemStack cropPeanut;
 	public static ItemStack cropStrawberry;
+	public static ItemStack cropTea;
 	public static ItemStack cropTomato;
 	// endregion
 
@@ -138,8 +146,10 @@ public class ItemsTC {
 	public static ItemStack seedBellPepper;
 	public static ItemStack seedCoffee;
 	public static ItemStack seedGreenBean;
+	public static ItemStack seedHops;
 	public static ItemStack seedPeanut;
 	public static ItemStack seedStrawberry;
+	public static ItemStack seedTea;
 	public static ItemStack seedTomato;
 	// endregion
 

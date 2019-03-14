@@ -14,29 +14,29 @@ import java.util.List;
 public class InsolatorPlantRecipe extends SimpleItemCatalystRecipe {
 
 	// region SINGLE ITEM OUTPUT
-	public InsolatorPlantRecipe(ItemStack input, ItemStack output, float chance, int energy) {
+	public InsolatorPlantRecipe(int energy, ItemStack input, ItemStack output, float chance) {
 
-		super(input, output, chance, energy);
+		super(energy, input, output, chance);
 		this.inputFluids.add(InsolatorRecipeManager.defaultPlantFluid);
 	}
 
-	public InsolatorPlantRecipe(ItemStack input, FluidStack inputFluid, ItemStack output, float chance, int energy, int water) {
+	public InsolatorPlantRecipe(int energy, ItemStack input, FluidStack inputFluid, ItemStack output, float chance, int water) {
 
-		super(input, output, chance, energy);
+		super(energy, input, output, chance);
 		this.inputFluids.add(water > 0 ? new FluidStack(FluidRegistry.WATER, water) : InsolatorRecipeManager.defaultPlantFluid);
 	}
 	// endregion
 
 	// region MULTIPLE ITEM OUTPUT
-	public InsolatorPlantRecipe(ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, int energy) {
+	public InsolatorPlantRecipe(int energy, ItemStack input, List<ItemStack> output, @Nullable List<Float> chance) {
 
-		super(input, output, chance, energy);
+		super(energy, input, output, chance);
 		this.inputFluids.add(InsolatorRecipeManager.defaultPlantFluid);
 	}
 
-	public InsolatorPlantRecipe(ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, int energy, int water) {
+	public InsolatorPlantRecipe(int energy, ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, int water) {
 
-		super(input, output, chance, energy);
+		super(energy, input, output, chance);
 		this.inputFluids.add(water > 0 ? new FluidStack(FluidRegistry.WATER, water) : InsolatorRecipeManager.defaultPlantFluid);
 	}
 	// endregion

@@ -1,5 +1,6 @@
 package cofh.thermal.expansion.block.machine;
 
+import cofh.lib.inventory.ItemStorageCoFH;
 import cofh.thermal.core.block.machine.TileMachineProcess;
 import cofh.thermal.expansion.init.MachinesTE;
 import cofh.thermal.expansion.util.managers.machine.FurnaceRecipeManager;
@@ -11,12 +12,15 @@ import static cofh.lib.util.helpers.ItemHelper.itemsIdentical;
 
 public class TileMachineFurnace extends TileMachineProcess {
 
+	protected ItemStorageCoFH inputSlot = new ItemStorageCoFH(FurnaceRecipeManager.instance()::validRecipe);
+	protected ItemStorageCoFH outputSlot = new ItemStorageCoFH();
+
 	public TileMachineFurnace() {
 
 		super(MachinesTE.FURNACE);
 
-		inventory.addSlot(FurnaceRecipeManager.instance()::validRecipe, INPUT);
-		inventory.addSlot(OUTPUT);
+		inventory.addSlot(inputSlot, INPUT);
+		inventory.addSlot(outputSlot, OUTPUT);
 	}
 
 	@Override
@@ -36,13 +40,13 @@ public class TileMachineFurnace extends TileMachineProcess {
 		if (!cacheRecipe()) {
 			return false;
 		}
-		return getInputSlots().get(0).getItemStack().getCount() >= itemInputCounts.get(0);
+		return inputSlot.getCount() >= itemInputCounts.get(0);
 	}
 
 	@Override
 	protected boolean validateOutputs() {
 
-		ItemStack output = getOutputSlots().get(0).getItemStack();
+		ItemStack output = outputSlot.getItemStack();
 		if (output.isEmpty()) {
 			return true;
 		}

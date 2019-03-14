@@ -26,6 +26,7 @@ public class Constants {
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 7);
 	public static final PropertyInteger AGE_PERENNIAL = PropertyInteger.create("age", 0, 10);
 	public static final PropertyInteger AGE_TALL = PropertyInteger.create("age", 0, 11);
+	public static final PropertyInteger AGE_TALL_PERENNIAL = PropertyInteger.create("age", 0, 15);
 	public static final PropertyDirection FACING_ALL = PropertyDirection.create("facing");
 	public static final PropertyDirection FACING_HORIZONTAL = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 

@@ -54,7 +54,7 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 		}
 		energy = (energy * scaleFactor) / 100;
 
-		SimpleItemRecipe recipe = new SimpleItemRecipe(input, output, chance, energy);
+		SimpleItemRecipe recipe = new SimpleItemRecipe(energy, input, output, chance);
 		if (hasCustomOreID(input)) {
 			customMap.put(customInput(input), recipe);
 		} else {
@@ -82,7 +82,7 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 		}
 		energy = (energy * scaleFactor) / 100;
 
-		SimpleItemRecipe recipe = new SimpleItemRecipe(input, output, chance, energy);
+		SimpleItemRecipe recipe = new SimpleItemRecipe(energy, input, output, chance);
 		if (hasCustomOreID(input)) {
 			customMap.put(customInput(input), recipe);
 		} else {
@@ -100,7 +100,7 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 		}
 		energy = (energy * scaleFactor) / 100;
 
-		SimpleItemRecipe recipe = new SimpleItemRecipe(input, output, energy);
+		SimpleItemRecipe recipe = new SimpleItemRecipe(energy, input, output);
 		if (hasCustomOreID(input)) {
 			customMap.put(customInput(input), recipe);
 		} else {
@@ -128,7 +128,7 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 		}
 		energy = (energy * scaleFactor) / 100;
 
-		SimpleItemRecipe recipe = new SimpleItemRecipe(input, output, chance, outputFluids, energy);
+		SimpleItemRecipe recipe = new SimpleItemRecipe(energy, input, output, chance, outputFluids);
 		if (hasCustomOreID(input)) {
 			customMap.put(customInput(input), recipe);
 		} else {

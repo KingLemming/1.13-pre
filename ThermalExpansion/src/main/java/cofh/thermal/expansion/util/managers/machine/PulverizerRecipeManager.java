@@ -56,7 +56,7 @@ public class PulverizerRecipeManager extends SimpleCatalystRecipeManager {
 		}
 		energy = (energy * scaleFactor) / 100;
 
-		PulverizerOreRecipe recipe = new PulverizerOreRecipe(input, output, chance, energy);
+		PulverizerOreRecipe recipe = new PulverizerOreRecipe(energy, input, output, chance);
 		if (hasCustomOreID(input)) {
 			customMap.put(customInput(input), recipe);
 		} else {
@@ -77,7 +77,7 @@ public class PulverizerRecipeManager extends SimpleCatalystRecipeManager {
 		}
 		energy = (energy * scaleFactor) / 100;
 
-		PulverizerOreRecipe recipe = new PulverizerOreRecipe(input, output, chance, energy);
+		PulverizerOreRecipe recipe = new PulverizerOreRecipe(energy, input, output, chance);
 		if (hasCustomOreID(input)) {
 			customMap.put(customInput(input), recipe);
 		} else {

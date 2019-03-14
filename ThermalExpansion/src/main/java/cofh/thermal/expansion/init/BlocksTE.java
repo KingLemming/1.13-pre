@@ -22,8 +22,9 @@ public class BlocksTE {
 		machinePulverizer = registerBlock("machine_pulverizer", new ItemBlockCoFH(new BlockMachine(PULVERIZER)));
 		machineSawmill = registerBlock("machine_sawmill", new ItemBlockCoFH(new BlockMachine(SAWMILL)));
 		machineInsolator = registerBlock("machine_insolator", new ItemBlockCoFH(new BlockMachine(INSOLATOR)));
-		machineCrucible = registerBlock("machine_crucible", new ItemBlockCoFH(new BlockMachine(CRUCIBLE)));
 		machineCentrifuge = registerBlock("machine_centrifuge", new ItemBlockCoFH(new BlockMachine(CENTRIFUGE)));
+		machineCrucible = registerBlock("machine_crucible", new ItemBlockCoFH(new BlockMachine(CRUCIBLE)));
+		machineRefinery = registerBlock("machine_refinery", new ItemBlockCoFH(new BlockMachine(REFINERY)));
 		machineBrewer = registerBlock("machine_brewer", new ItemBlockCoFH(new BlockMachine(BREWER)));
 
 		dynamoStirling = registerBlock("dynamo_stirling", new ItemBlockCoFH(new BlockDynamo(STIRLING)));
@@ -37,8 +38,9 @@ public class BlocksTE {
 	public static ItemStack machinePulverizer;
 	public static ItemStack machineSawmill;
 	public static ItemStack machineInsolator;
-	public static ItemStack machineCrucible;
 	public static ItemStack machineCentrifuge;
+	public static ItemStack machineCrucible;
+	public static ItemStack machineRefinery;
 	public static ItemStack machineBrewer;
 	// endregion
 

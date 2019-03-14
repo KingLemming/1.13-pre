@@ -31,7 +31,7 @@ public class ExtruderRecipeManager extends SimpleItemRecipeManager {
 		}
 		energy = (energy * scaleFactor) / 100;
 
-		ExtruderRecipe recipe = new ExtruderRecipe(stone, new FluidStack(FluidRegistry.LAVA, lava), new FluidStack(FluidRegistry.WATER, water), energy);
+		ExtruderRecipe recipe = new ExtruderRecipe(energy, stone, new FluidStack(FluidRegistry.LAVA, lava), new FluidStack(FluidRegistry.WATER, water));
 		defaultMap.put(defaultInput(stone), recipe);
 		return recipe;
 	}

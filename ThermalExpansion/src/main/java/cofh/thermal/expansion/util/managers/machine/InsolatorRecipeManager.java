@@ -59,7 +59,7 @@ public class InsolatorRecipeManager extends SimpleCatalystRecipeManager {
 		}
 		energy = (energy * scaleFactor) / 100;
 
-		InsolatorPlantRecipe recipe = new InsolatorPlantRecipe(input, output, chance, energy);
+		InsolatorPlantRecipe recipe = new InsolatorPlantRecipe(energy, input, output, chance);
 		if (hasCustomOreID(input)) {
 			customMap.put(customInput(input), recipe);
 		} else {
@@ -80,7 +80,7 @@ public class InsolatorRecipeManager extends SimpleCatalystRecipeManager {
 		}
 		energy = (energy * scaleFactor) / 100;
 
-		InsolatorPlantRecipe recipe = new InsolatorPlantRecipe(input, output, chance, energy);
+		InsolatorPlantRecipe recipe = new InsolatorPlantRecipe(energy, input, output, chance);
 		if (hasCustomOreID(input)) {
 			customMap.put(customInput(input), recipe);
 		} else {

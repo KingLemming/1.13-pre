@@ -91,8 +91,9 @@ public class ThermalExpansion implements IModule {
 		RecipesTSeries.registerManager(PulverizerRecipeManager.instance());
 		RecipesTSeries.registerManager(SawmillRecipeManager.instance());
 		RecipesTSeries.registerManager(InsolatorRecipeManager.instance());
-		RecipesTSeries.registerManager(CrucibleRecipeManager.instance());
 		RecipesTSeries.registerManager(CentrifugeRecipeManager.instance());
+		RecipesTSeries.registerManager(CrucibleRecipeManager.instance());
+		RecipesTSeries.registerManager(RefineryRecipeManager.instance());
 		RecipesTSeries.registerManager(BrewerRecipeManager.instance());
 
 		RecipesTSeries.registerManager(StirlingFuelManager.instance());
@@ -103,8 +104,9 @@ public class ThermalExpansion implements IModule {
 		ParsersTSeries.registerParser("pulverizer", PulverizerRecipeParser.instance());
 		ParsersTSeries.registerParser("sawmill", SawmillRecipeParser.instance());
 		ParsersTSeries.registerParser("insolator", InsolatorRecipeParser.instance());
-		ParsersTSeries.registerParser("crucible", CrucibleRecipeParser.instance());
 		ParsersTSeries.registerParser("centrifuge", CentrifugeRecipeParser.instance());
+		ParsersTSeries.registerParser("crucible", CrucibleRecipeParser.instance());
+		ParsersTSeries.registerParser("refinery", RefineryRecipeParser.instance());
 		ParsersTSeries.registerParser("brewer", BrewerRecipeParser.instance());
 
 		ParsersTSeries.registerParser("fuel_stirling", StirlingFuelParser.instance());

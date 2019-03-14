@@ -73,10 +73,10 @@ public class BrewerRecipeWrapper extends BaseRecipeWrapper {
 	@Override
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 
-		RenderHelper.drawFluid(94, 23, outputs.get(0), 24, 16);
+		RenderHelper.drawFluid(98, 23, outputs.get(0), 24, 16);
 
-		progressMask.draw(minecraft, 94, 23);
-		progress.draw(minecraft, 94, 23);
+		progressMask.draw(minecraft, 98, 23);
+		progress.draw(minecraft, 98, 23);
 		speed.draw(minecraft, 46, 23);
 		energyMeter.draw(minecraft, 2, 8);
 	}
