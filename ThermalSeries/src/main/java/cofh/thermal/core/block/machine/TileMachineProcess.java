@@ -2,6 +2,7 @@ package cofh.thermal.core.block.machine;
 
 import cofh.core.network.PacketBufferCoFH;
 import cofh.lib.energy.EnergyStorageCoFH;
+import cofh.lib.fluid.FluidStorageCoFH;
 import cofh.lib.fluid.IFluidStackHolder;
 import cofh.lib.inventory.IItemStackHolder;
 import cofh.lib.util.Utils;
@@ -212,7 +213,7 @@ public abstract class TileMachineProcess extends TileMachine {
 			}
 		}
 		// FLUIDS
-		List<? extends IFluidStackHolder> tankOutputs = getOutputTanks();
+		List<? extends FluidStorageCoFH> tankOutputs = getOutputTanks();
 		List<FluidStack> recipeOutputFluids = curRecipe.getOutputFluids(getInputSlots(), getInputTanks());
 		used = new boolean[getOutputTanks().size()];
 		for (FluidStack recipeOutput : recipeOutputFluids) {

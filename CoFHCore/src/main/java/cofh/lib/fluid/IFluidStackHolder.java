@@ -13,9 +13,7 @@ public interface IFluidStackHolder {
 	@Nullable
 	FluidStack getFluidStack();
 
-	int getCapacity();
-
-	int getSpace();
+	int getFluidAmount();
 
 	boolean isEmpty();
 

@@ -1,11 +1,12 @@
 package cofh.lib.fluid;
 
+import cofh.lib.block.ITileCallback;
 import cofh.lib.util.StorageGroup;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.EmptyFluidHandler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TankArrayManaged extends TankArrayCoFH {
@@ -15,12 +16,12 @@ public class TankArrayManaged extends TankArrayCoFH {
 	protected List<FluidStorageCoFH> accessibleTanks = new ArrayList<>();
 	protected List<FluidStorageCoFH> internalTanks = new ArrayList<>();
 
-	public TankArrayManaged(TileEntity tile) {
+	public TankArrayManaged(ITileCallback tile) {
 
 		super(tile);
 	}
 
-	public TankArrayManaged(TileEntity tile, String tag) {
+	public TankArrayManaged(ITileCallback tile, String tag) {
 
 		super(tile, tag);
 	}
@@ -45,6 +46,7 @@ public class TankArrayManaged extends TankArrayCoFH {
 				break;
 			default:
 		}
+		cacheProperties();
 	}
 
 	public List<FluidStorageCoFH> getInputTanks() {
@@ -66,11 +68,11 @@ public class TankArrayManaged extends TankArrayCoFH {
 
 		switch (group) {
 			case INPUT:
-				return new SimpleFluidHandler(tile, inputTanks);
+				return new ManagedFluidHandler(tile, inputTanks, Collections.emptyList());
 			case OUTPUT:
-				return new SimpleFluidHandler(tile, outputTanks);
+				return new ManagedFluidHandler(tile, Collections.emptyList(), outputTanks);
 			case ACCESSIBLE:
-				return new SimpleFluidHandler(tile, accessibleTanks);
+				return new ManagedFluidHandler(tile, inputTanks, outputTanks);
 			case INTERNAL:
 				return new SimpleFluidHandler(tile, internalTanks);
 			case ALL:

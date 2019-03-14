@@ -173,10 +173,9 @@ public class ItemWateringCan extends ItemFluidContainer implements IMultiModeIte
 				world.spawnParticle(EnumParticleTypes.WATER_DROP, i + world.rand.nextFloat(), y, k + world.rand.nextFloat(), 0.0D, 0.0D, 0.0D);
 			}
 		}
-		Iterable<BlockPos.MutableBlockPos> area = BlockPos.getAllInBoxMutable(offsetPos.add(-radius, -1, -radius), offsetPos.add(radius, 1, radius));
+		Iterable<BlockPos.MutableBlockPos> area = BlockPos.getAllInBoxMutable(offsetPos.add(-radius, -2, -radius), offsetPos.add(radius, 1, radius));
 		for (BlockPos scan : area) {
 			IBlockState state = world.getBlockState(scan);
-
 			if (state.getBlock() instanceof BlockFarmland) {
 				int moisture = state.getValue(BlockFarmland.MOISTURE);
 				if (moisture < 7) {

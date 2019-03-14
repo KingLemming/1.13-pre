@@ -8,6 +8,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+/**
+ * Basic Item Handler implementation using CoFH Item Storage objects.
+ */
 public class SimpleItemHandler implements IItemHandler {
 
 	protected ITileCallback tile;

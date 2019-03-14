@@ -33,15 +33,12 @@ public class SimpleFluidStackHolder implements IFluidStackHolder {
 	}
 
 	@Override
-	public int getCapacity() {
+	public int getFluidAmount() {
 
+		if (isEmpty()) {
+			return 0;
+		}
 		return stack.amount;
-	}
-
-	@Override
-	public int getSpace() {
-
-		return 0;
 	}
 
 	@Override

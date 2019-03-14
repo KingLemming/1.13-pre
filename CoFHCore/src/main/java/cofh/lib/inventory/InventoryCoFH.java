@@ -13,6 +13,9 @@ import java.util.List;
 import static cofh.lib.util.Constants.TAG_INVENTORY;
 import static cofh.lib.util.Constants.TAG_SLOT;
 
+/**
+ * Inventory abstraction using CoFH Item Storage objects.
+ */
 public class InventoryCoFH extends SimpleItemHandler {
 
 	protected String tag;
@@ -25,6 +28,11 @@ public class InventoryCoFH extends SimpleItemHandler {
 	public InventoryCoFH(@Nullable ITileCallback tile, int size) {
 
 		this(tile, size, TAG_INVENTORY);
+	}
+
+	public InventoryCoFH(@Nullable ITileCallback tile, @Nonnull List<ItemStorageCoFH> slots) {
+
+		this(tile, slots, TAG_INVENTORY);
 	}
 
 	public InventoryCoFH(@Nullable ITileCallback tile, @Nonnull String tag) {

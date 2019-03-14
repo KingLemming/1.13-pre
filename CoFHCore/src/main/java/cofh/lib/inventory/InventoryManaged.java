@@ -7,6 +7,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.EmptyHandler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -95,11 +96,11 @@ public class InventoryManaged extends InventoryCoFH {
 
 		switch (group) {
 			case INPUT:
-				return new SimpleItemHandler(tile, inputSlots);
+				return new ManagedItemHandler(tile, inputSlots, Collections.emptyList());
 			case OUTPUT:
-				return new SimpleItemHandler(tile, outputSlots);
+				return new ManagedItemHandler(tile, Collections.emptyList(), outputSlots);
 			case ACCESSIBLE:
-				return new SimpleItemHandler(tile, accessibleSlots);
+				return new ManagedItemHandler(tile, inputSlots, outputSlots);
 			case INTERNAL:
 				return new SimpleItemHandler(tile, internalSlots);
 			case ALL:

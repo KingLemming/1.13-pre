@@ -1,7 +1,8 @@
 package cofh.lib.fluid;
 
+import cofh.lib.block.ITileCallback;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
@@ -12,29 +13,48 @@ import java.util.List;
 import static cofh.lib.util.Constants.TAG_TANK;
 import static cofh.lib.util.Constants.TAG_TANK_ARRAY;
 
+/**
+ * Fluid "inventory" abstraction using CoFH Fluid Storage objects.
+ */
 public class TankArrayCoFH extends SimpleFluidHandler {
 
 	protected String tag;
 
-	public TankArrayCoFH(@Nullable TileEntity tile) {
+	public TankArrayCoFH(@Nullable ITileCallback tile) {
 
-		this(tile, new ArrayList<>(), TAG_TANK_ARRAY);
+		this(tile, 0, TAG_TANK_ARRAY);
 	}
 
-	public TankArrayCoFH(@Nullable TileEntity tile, @Nonnull List<FluidStorageCoFH> tanks) {
+	public TankArrayCoFH(@Nullable ITileCallback tile, int size) {
 
-		this(tile, tanks, TAG_TANK);
+		this(tile, size, TAG_TANK_ARRAY);
 	}
 
-	public TankArrayCoFH(@Nullable TileEntity tile, @Nonnull String tag) {
+	public TankArrayCoFH(@Nullable ITileCallback tile, @Nonnull List<FluidStorageCoFH> tanks) {
 
-		this(tile, new ArrayList<>(), tag);
+		this(tile, tanks, TAG_TANK_ARRAY);
 	}
 
-	public TankArrayCoFH(@Nullable TileEntity tile, @Nonnull List<FluidStorageCoFH> tanks, @Nonnull String tag) {
+	public TankArrayCoFH(@Nullable ITileCallback tile, @Nonnull String tag) {
+
+		this(tile, 0, tag);
+	}
+
+	public TankArrayCoFH(@Nullable ITileCallback tile, @Nonnull List<FluidStorageCoFH> tanks, @Nonnull String tag) {
 
 		super(tile, tanks);
 		this.tag = tag;
+	}
+
+	public TankArrayCoFH(@Nullable ITileCallback tile, int size, @Nonnull String tag) {
+
+		super(tile, new ArrayList<>(size));
+		this.tile = tile;
+		this.tag = tag;
+		for (int i = 0; i < size; i++) {
+			tanks.add(new FluidStorageCoFH(Fluid.BUCKET_VOLUME));
+		}
+		cacheProperties();
 	}
 
 	public void clear() {
@@ -66,6 +86,7 @@ public class TankArrayCoFH extends SimpleFluidHandler {
 		for (int i = 0; i < tanks.size(); i++) {
 			tanks.get(i).readFromNBT(array.getCompoundTag(TAG_TANK + i));
 		}
+		cacheProperties();
 		return this;
 	}
 
