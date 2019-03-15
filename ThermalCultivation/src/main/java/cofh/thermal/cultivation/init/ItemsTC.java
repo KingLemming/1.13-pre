@@ -5,6 +5,7 @@ import cofh.core.item.ItemFoodCoFH;
 import cofh.core.item.ItemSeedCoFH;
 import cofh.core.item.ItemSeedFoodCoFH;
 import cofh.thermal.core.init.CreativeTabsTSeries;
+import cofh.thermal.cultivation.item.ItemRFScythe;
 import cofh.thermal.cultivation.item.ItemWateringCan;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -35,9 +36,9 @@ public class ItemsTC {
 
 		cropBarley = registerItem("crop_barley", "cropBarley", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 		cropOnion = registerItem("crop_onion", "cropOnion", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
+		cropRice = registerItem("crop_rice", "cropRice", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 		cropSadiroot = registerItem("crop_sadiroot", "cropSadiroot", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 		cropSpinach = registerItem("crop_spinach", "cropSpinach", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
-		cropRice = registerItem("crop_rice", "cropRice", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 
 		cropCorn = registerItem("crop_corn", "cropCorn", new ItemFoodCoFH(2, 0.2F, GROUP_CROPS));
 
@@ -56,9 +57,9 @@ public class ItemsTC {
 
 		seedBarley = registerItem("seed_barley", "seedBarley", new ItemSeedCoFH(plantBarley, GROUP_SEEDS));
 		seedOnion = registerItem("seed_onion", "seedOnion", new ItemSeedCoFH(plantOnion, GROUP_SEEDS));
+		seedRice = registerItem("seed_rice", "seedRice", new ItemSeedCoFH(plantRice, GROUP_SEEDS));
 		seedSadiroot = registerItem("seed_sadiroot", "seedSadiroot", new ItemSeedCoFH(plantSadiroot, GROUP_SEEDS));
 		seedSpinach = registerItem("seed_spinach", "seedSpinach", new ItemSeedCoFH(plantSpinach, GROUP_SEEDS));
-		seedRice = registerItem("seed_rice", "seedRice", new ItemSeedCoFH(plantRice, GROUP_SEEDS));
 
 		seedCorn = registerItem("seed_corn", "seedCorn", new ItemSeedCoFH(plantCorn, GROUP_SEEDS));
 
@@ -83,18 +84,34 @@ public class ItemsTC {
 	public static void registerTools() {
 
 		itemWateringCanBasic = createWateringCan("basic", 4000, 1, 40);
-		//		itemWateringCanBasic = createWateringCan("basic", 12000, 2, 50);
-		//		itemWateringCanBasic = createWateringCan("basic", 18000, 3, 60);
-		//		itemWateringCanBasic = createWateringCan("basic", 40000, 4, 70);
-		//		itemWateringCanBasic = createWateringCan("basic", 60000, 5, 80);
 		itemWateringCanCreative = (ItemWateringCan) createWateringCan("creative", 2000, 5, 200).setRarity(EnumRarity.EPIC).setCreative(true);
+
+		itemScytheBasic = createScythe("basic", 20000, 2);
+		itemScytheCreative = (ItemRFScythe) createScythe("creative", 1000, 5).setRarity(EnumRarity.EPIC).setCreative(true);
 
 		registerItem("watering_can_basic", itemWateringCanBasic, CreativeTabsTSeries.tabTools);
 		registerItem("watering_can_creative", itemWateringCanCreative, CreativeTabsTSeries.tabTools);
+
+		registerItem("rf_scythe_basic", itemScytheBasic, CreativeTabsTSeries.tabTools);
+		registerItem("rf_scythe_creative", itemScytheCreative, CreativeTabsTSeries.tabTools);
 	}
 	// endregion
 
 	// region HELPERS
+	private static ItemRFScythe createScythe(String id, int maxEnergy, int radius) {
+
+		String category = "Tools.Scythe." + titleCase(id);
+		String comment = "Adjust this value to set how much energy (RF) this Scythe holds.";
+		maxEnergy = config.getInt("Energy", category, maxEnergy, 1000, 1000000000, comment);
+
+		int maxReceive = maxEnergy / 20;
+
+		comment = "Adjust this value to set the maximum radius for this Scythe.";
+		radius = config.getInt("Radius", category, radius, 1, 16, comment);
+
+		return new ItemRFScythe(maxEnergy, maxReceive, radius);
+	}
+
 	private static ItemWateringCan createWateringCan(String id, int fluidCapacity, int radius, int effectiveness) {
 
 		String category = "Tools.WateringCan." + titleCase(id);
@@ -102,7 +119,7 @@ public class ItemsTC {
 		fluidCapacity = config.getInt("Water", category, fluidCapacity, Fluid.BUCKET_VOLUME * 2, Fluid.BUCKET_VOLUME * 1000, comment);
 
 		comment = "Adjust this value to set the maximum radius for this Watering Can.";
-		radius = config.getInt("Radius", category, radius, 0, 16, comment);
+		radius = config.getInt("Radius", category, radius, 1, 16, comment);
 
 		comment = "Adjust this value to set the base effectiveness for this Watering Can.";
 		effectiveness = config.getInt("Effectiveness", category, effectiveness, 1, 200, comment);
@@ -155,9 +172,9 @@ public class ItemsTC {
 
 	// region TOOLS
 	public static ItemWateringCan itemWateringCanBasic;
-	//	public static ItemWateringCan itemWateringCanBasic;
-	//	public static ItemWateringCan itemWateringCanBasic;
-	//	public static ItemWateringCan itemWateringCanBasic;
 	public static ItemWateringCan itemWateringCanCreative;
+
+	public static ItemRFScythe itemScytheBasic;
+	public static ItemRFScythe itemScytheCreative;
 	// endregion
 }

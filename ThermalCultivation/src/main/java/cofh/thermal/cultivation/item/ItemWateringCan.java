@@ -29,7 +29,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -132,7 +131,7 @@ public class ItemWateringCan extends ItemFluidContainer implements IMultiModeIte
 		}
 		BlockPos tracePos = traceResult.getBlockPos();
 
-		if (!player.isSneaking() || !world.isBlockModifiable(player, tracePos) || player instanceof FakePlayer && !allowFakePlayers) {
+		if (!player.isSneaking() || !world.isBlockModifiable(player, tracePos) || Utils.isFakePlayer(player) && !allowFakePlayers) {
 			return new ActionResult<>(EnumActionResult.FAIL, stack);
 		}
 		if (isWater(world.getBlockState(tracePos)) && getSpace(stack) > 0) {
@@ -151,7 +150,7 @@ public class ItemWateringCan extends ItemFluidContainer implements IMultiModeIte
 
 		RayTraceResult traceResult = RayTracer.retrace(player, true);
 
-		if (traceResult == null || traceResult.sideHit == null || player instanceof FakePlayer && !allowFakePlayers) {
+		if (traceResult == null || traceResult.sideHit == null || Utils.isFakePlayer(player) && !allowFakePlayers) {
 			return EnumActionResult.FAIL;
 		}
 		ItemStack stack = player.getHeldItem(hand);
@@ -207,6 +206,16 @@ public class ItemWateringCan extends ItemFluidContainer implements IMultiModeIte
 	}
 
 	// region HELPERS
+	protected boolean isWater(IBlockState state) {
+
+		return (state.getBlock() == Blocks.WATER || state.getBlock() == Blocks.FLOWING_WATER) && state.getValue(BlockLiquid.LEVEL) == 0;
+	}
+
+	protected int getRadius(ItemStack stack) {
+
+		return 1 + getMode(stack);
+	}
+
 	public ItemStack setDefaultTag(ItemStack stack) {
 
 		if (stack.getTagCompound() == null) {
@@ -218,16 +227,6 @@ public class ItemWateringCan extends ItemFluidContainer implements IMultiModeIte
 			fill(stack, new FluidStack(FluidRegistry.WATER, getCapacity(stack)), true);
 		}
 		return stack;
-	}
-
-	protected static boolean isWater(IBlockState state) {
-
-		return (state.getBlock() == Blocks.WATER || state.getBlock() == Blocks.FLOWING_WATER) && state.getValue(BlockLiquid.LEVEL) == 0;
-	}
-
-	public int getRadius(ItemStack stack) {
-
-		return 1 + getMode(stack);
 	}
 	// endregion
 
@@ -246,7 +245,7 @@ public class ItemWateringCan extends ItemFluidContainer implements IMultiModeIte
 	@Override
 	public int getNumModes(ItemStack stack) {
 
-		return radius + 1;
+		return radius;
 	}
 
 	@Override

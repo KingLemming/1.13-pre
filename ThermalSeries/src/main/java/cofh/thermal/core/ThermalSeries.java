@@ -126,6 +126,7 @@ public class ThermalSeries {
 	@EventHandler
 	public void handleIdMappingEvent(FMLModIdMappingEvent event) {
 
+		FluidsTSeries.refreshReferences();
 		RecipesTSeries.refreshManagers();
 	}
 

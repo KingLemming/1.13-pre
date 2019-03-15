@@ -1,0 +1,56 @@
+{
+	"refinery": [
+		{
+			"input": {
+				"fluid": "coal",
+				"amount": 250
+			},
+			"output": [
+				{
+					"fluid": "refined_oil",
+					"amount": 150
+				},
+				{
+					"fluid": "creosote",
+					"amount": 50
+				},
+				{
+					"constant": "tar",
+					"chance": 0.50
+				}
+			]
+		},
+		{
+			"input": {
+				"fluid": "crude_oil",
+				"amount": 200
+			},
+			"output": [
+				{
+					"fluid": "refined_oil",
+					"amount": 150
+				},
+				{
+					"constant": "tar",
+					"chance": 0.50
+				}
+			]
+		},
+		{
+			"input": {
+				"fluid": "refined_oil",
+				"amount": 150
+			},
+			"output": [
+				{
+					"fluid": "refined_fuel",
+					"amount": 100
+				},
+				{
+					"ore": "dustSulfur",
+					"chance": 0.75
+				}
+			]
+		}
+	]
+}

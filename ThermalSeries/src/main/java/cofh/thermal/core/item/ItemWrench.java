@@ -56,21 +56,13 @@ public class ItemWrench extends ItemCoFH implements IToolHammer {
 	}
 
 	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean isFull3D() {
-
-		return true;
-	}
-
-	@Override
 	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
-
-		IBlockState state = world.getBlockState(pos);
-		Block block = state.getBlock();
 
 		if (world.isAirBlock(pos)) {
 			return EnumActionResult.PASS;
 		}
+		IBlockState state = world.getBlockState(pos);
+		Block block = state.getBlock();
 		PlayerInteractEvent.RightClickBlock event = new PlayerInteractEvent.RightClickBlock(player, hand, pos, side, new Vec3d(hitX, hitY, hitZ));
 		if (MinecraftForge.EVENT_BUS.post(event) || event.getResult() == Result.DENY || event.getUseBlock() == Result.DENY || event.getUseItem() == Result.DENY) {
 			return EnumActionResult.PASS;

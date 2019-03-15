@@ -8,8 +8,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
@@ -70,42 +68,11 @@ public class BlockCropTall extends BlockCrop {
 	}
 
 	@Override
-	protected boolean isHarvestable(IBlockState state) {
-
-		return getAge(state) == getHarvestAge() + (isTop(state) ? getSplitOffset() : 0);
-	}
-
-	@Override
 	protected BlockStateContainer createBlockState() {
 
 		BlockStateContainer.Builder builder = new BlockStateContainer.Builder(this);
 		builder.add(getAgeProperty());
 		return builder.build();
-	}
-
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-
-		if (!isHarvestable(state)) {
-			return false;
-		}
-		if (Utils.isClientWorld(worldIn)) {
-			return true;
-		}
-		if (getPostHarvestAge() >= 0) {
-			Utils.dropItemStackIntoWorldWithVelocity(getCrop(), worldIn, pos);
-			if (isTop(state)) {
-				worldIn.setBlockState(pos, this.withAge(getPostHarvestAge() + getSplitOffset()), 2);
-				worldIn.setBlockState(pos.down(), this.withAge(getPostHarvestAge()), 2);
-				Utils.dropItemStackIntoWorldWithVelocity(getCrop(), worldIn, pos.down());
-			} else {
-				worldIn.setBlockState(pos, this.withAge(getPostHarvestAge()), 2);
-				worldIn.setBlockState(pos.up(), this.withAge(getPostHarvestAge() + getSplitOffset()), 2);
-				Utils.dropItemStackIntoWorldWithVelocity(getCrop(), worldIn, pos.up());
-			}
-			return true;
-		}
-		return false;
 	}
 
 	@Override
@@ -119,7 +86,7 @@ public class BlockCropTall extends BlockCrop {
 			return;
 		}
 		if (worldIn.getLightFromNeighbors(pos.up()) >= reqLight) {
-			if (!isHarvestable(state)) {
+			if (!canHarvest(state)) {
 				int age = getAge(state);
 				float growthChance = getGrowthChance(this, worldIn, pos);
 				if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int) (25.0F / growthChance) + 1) == 0)) {
@@ -163,7 +130,7 @@ public class BlockCropTall extends BlockCrop {
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 
-		if (isHarvestable(state)) {
+		if (canHarvest(state)) {
 			return;
 		}
 		if (isTop(state)) {
@@ -185,6 +152,41 @@ public class BlockCropTall extends BlockCrop {
 				worldIn.setBlockState(above, this.withAge(newAge + getSplitOffset()), 2);
 			}
 		}
+	}
+	// endregion
+
+	// region IHarvestable
+	@Override
+	public boolean canHarvest(IBlockState state) {
+
+		return getAge(state) == getHarvestAge() + (isTop(state) ? getSplitOffset() : 0);
+	}
+
+	@Override
+	public boolean harvest(World world, BlockPos pos, IBlockState state, int fortune) {
+
+		if (!canHarvest(state)) {
+			return false;
+		}
+		if (Utils.isClientWorld(world)) {
+			return true;
+		}
+		if (getPostHarvestAge() >= 0) {
+			Utils.dropItemStackIntoWorldWithVelocity(getCrop(), world, pos);
+			if (isTop(state)) {
+				world.setBlockState(pos, this.withAge(getPostHarvestAge() + getSplitOffset()), 2);
+				world.setBlockState(pos.down(), this.withAge(getPostHarvestAge()), 2);
+				Utils.dropItemStackIntoWorldWithVelocity(getCrop(), world, pos.down());
+			} else {
+				world.setBlockState(pos, this.withAge(getPostHarvestAge()), 2);
+				world.setBlockState(pos.up(), this.withAge(getPostHarvestAge() + getSplitOffset()), 2);
+				Utils.dropItemStackIntoWorldWithVelocity(getCrop(), world, pos.up());
+			}
+		} else {
+			world.destroyBlock(pos, true);
+			world.destroyBlock(isTop(state) ? pos.down() : pos.up(), true);
+		}
+		return true;
 	}
 	// endregion
 }

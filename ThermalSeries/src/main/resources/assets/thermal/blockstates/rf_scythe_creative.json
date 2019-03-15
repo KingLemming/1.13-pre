@@ -1,0 +1,30 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "builtin/generated",
+		"textures": {
+			"layer0": "thermal:items/tools/rf_scythe/rf_scythe_creative",
+			"layer1": "thermal:items/tools/rf_scythe/rf_scythe_drained",
+			"layer2": "thermal:items/blank"
+		},
+		"transform": "forge:default-tool"
+	},
+	"variants": {
+		"color": {
+			"0": {},
+			"1": {
+				"textures": {
+					"layer2": "thermal:items/tools/rf_scythe/rf_scythe_color"
+				}
+			}
+		},
+		"state": {
+			"charged": {
+				"textures": {
+					"layer1": "thermal:items/tools/rf_scythe/rf_scythe_charged"
+				}
+			},
+			"drained": {}
+		}
+	}
+}

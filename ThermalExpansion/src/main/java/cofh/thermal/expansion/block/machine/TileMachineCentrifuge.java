@@ -2,7 +2,6 @@ package cofh.thermal.expansion.block.machine;
 
 import cofh.core.network.PacketBufferCoFH;
 import cofh.lib.fluid.FluidStorageCoFH;
-import cofh.lib.inventory.IItemStackHolder;
 import cofh.lib.inventory.ItemStorageCoFH;
 import cofh.lib.util.helpers.FluidHelper;
 import cofh.thermal.core.block.machine.TileMachineProcess;
@@ -118,7 +117,7 @@ public class TileMachineCentrifuge extends TileMachineProcess {
 	@Override
 	protected boolean validateOutputs() {
 
-		List<? extends IItemStackHolder> slotOutputs = getOutputSlots();
+		List<? extends ItemStorageCoFH> slotOutputs = getOutputSlots();
 		List<ItemStack> recipeOutputItems = curRecipe.getOutputItems(getInputSlots(), getInputTanks());
 		boolean[] used = new boolean[getOutputSlots().size()];
 		for (ItemStack recipeOutput : recipeOutputItems) {

@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,6 +28,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.util.HashSet;
 
 import static cofh.core.util.CoreUtils.configDir;
 
@@ -40,7 +42,7 @@ public abstract class ItemToolCoFH extends ItemTool implements IModelRegister {
 
 	public ItemToolCoFH(float baseDamage, float attackSpeed, ToolMaterial toolMaterial) {
 
-		super(baseDamage, attackSpeed, toolMaterial, null);
+		super(baseDamage, attackSpeed, toolMaterial, new HashSet<>());
 		harvestLevel = toolMaterial.getHarvestLevel();
 	}
 
@@ -56,7 +58,7 @@ public abstract class ItemToolCoFH extends ItemTool implements IModelRegister {
 		return this;
 	}
 
-	protected boolean harvestBlock(World world, BlockPos pos, EntityPlayer player) {
+	protected static boolean harvestBlock(World world, BlockPos pos, EntityPlayer player) {
 
 		if (world.isAirBlock(pos)) {
 			return false;
@@ -71,7 +73,7 @@ public abstract class ItemToolCoFH extends ItemTool implements IModelRegister {
 		if (!ForgeHooks.canHarvestBlock(block, player, world, pos)) {
 			return false;
 		}
-		// send the blockbreak event
+		// Send the Break Event
 		int xpToDrop = 0;
 		if (playerMP != null) {
 			xpToDrop = ForgeHooks.onBlockBreakEvent(world, playerMP.interactionManager.getGameType(), playerMP, pos);
@@ -89,13 +91,17 @@ public abstract class ItemToolCoFH extends ItemTool implements IModelRegister {
 					}
 				}
 			}
-			// always send block update to client
-			playerMP.connection.sendPacket(new SPacketBlockChange(world, pos));
+			if (playerMP != null) {
+				playerMP.connection.sendPacket(new SPacketBlockChange(world, pos));
+			}
 		} else {
 			if (block.removedByPlayer(state, world, pos, player, !player.capabilities.isCreativeMode)) {
 				block.onBlockDestroyedByPlayer(world, pos, state);
 			}
-			Minecraft.getMinecraft().getConnection().sendPacket(new CPacketPlayerDigging(CPacketPlayerDigging.Action.START_DESTROY_BLOCK, pos, Minecraft.getMinecraft().objectMouseOver.sideHit));
+			NetHandlerPlayClient client = Minecraft.getMinecraft().getConnection();
+			if (client != null) {
+				Minecraft.getMinecraft().getConnection().sendPacket(new CPacketPlayerDigging(CPacketPlayerDigging.Action.START_DESTROY_BLOCK, pos, Minecraft.getMinecraft().objectMouseOver.sideHit));
+			}
 		}
 		return true;
 	}

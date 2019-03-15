@@ -34,7 +34,7 @@ public class Utils {
 
 	public static boolean isFakePlayer(Entity player) {
 
-		return (player instanceof FakePlayer);
+		return player instanceof FakePlayer;
 	}
 
 	public static String createPrettyJSON(String jsonString) {

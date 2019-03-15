@@ -1,0 +1,34 @@
+{
+	"pulverizer": [
+		{
+			"type": "default-ore",
+			"input": {
+				"ore": "oreLead"
+			},
+			"output": [
+				{
+					"ore": "dustLead"
+				},
+				{
+					"ore": "dustSilver",
+					"chance": 0.10
+				}
+			]
+		},
+		{
+			"type": "default-ore",
+			"input": {
+				"ore": "oreTin"
+			},
+			"output": [
+				{
+					"ore": "dustTin"
+				},
+				{
+					"ore": "dustIron",
+					"chance": 0.10
+				}
+			]
+		}
+	]
+}

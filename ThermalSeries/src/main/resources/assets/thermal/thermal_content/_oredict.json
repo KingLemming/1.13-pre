@@ -7,18 +7,6 @@
 			}
 		},
 		{
-			"ore": "dustTin",
-			"entry": {
-				"item": "thermal:dust_tin"
-			}
-		},
-		{
-			"ore": "dustLead",
-			"entry": {
-				"item": "thermal:dust_lead"
-			}
-		},
-		{
 			"ore": "dustSilver",
 			"entry": {
 				"item": "thermal:dust_silver"
@@ -28,6 +16,18 @@
 			"ore": "dustNickel",
 			"entry": {
 				"item": "thermal:dust_nickel"
+			}
+		},
+		{
+			"ore": "dustTin",
+			"entry": {
+				"item": "thermal:dust_tin"
+			}
+		},
+		{
+			"ore": "dustLead",
+			"entry": {
+				"item": "thermal:dust_lead"
 			}
 		},
 		{

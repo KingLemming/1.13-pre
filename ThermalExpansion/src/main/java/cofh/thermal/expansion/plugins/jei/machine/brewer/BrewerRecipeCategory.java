@@ -34,8 +34,10 @@ public class BrewerRecipeCategory extends BaseRecipeCategory<BrewerRecipeWrapper
 
 	protected IDrawableStatic progress;
 	protected IDrawableStatic speed;
+
 	protected IDrawableStatic tankInput;
 	protected IDrawableStatic tankOutput;
+
 	protected IDrawableStatic inputOverlay;
 	protected IDrawableStatic outputOverlay;
 

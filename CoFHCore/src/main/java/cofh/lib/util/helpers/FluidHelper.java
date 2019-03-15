@@ -13,10 +13,7 @@ import net.minecraft.util.Tuple;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidActionResult;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.IItemHandler;
@@ -40,6 +37,16 @@ public class FluidHelper {
 
 	}
 
+	public static boolean isWater(FluidStack fluid) {
+
+		return FluidHelper.fluidsEqual(fluid, FluidRegistry.WATER);
+	}
+
+	public static boolean isLava(FluidStack fluid) {
+
+		return FluidHelper.fluidsEqual(fluid, FluidRegistry.LAVA);
+	}
+
 	public static int fluidHashcode(FluidStack stack) {
 
 		return stack.tag != null ? stack.getFluid().getName().hashCode() + 31 * stack.tag.toString().hashCode() : stack.getFluid().getName().hashCode();
@@ -54,6 +61,11 @@ public class FluidHelper {
 	public static boolean fluidsEqual(Fluid fluidA, FluidStack resourceB) {
 
 		return fluidA != null && resourceB != null && fluidA == resourceB.getFluid();
+	}
+
+	public static boolean fluidsEqual(FluidStack resourceA, Fluid fluidB) {
+
+		return fluidB != null && resourceA != null && fluidB == resourceA.getFluid();
 	}
 
 	public static boolean fluidsEqual(Fluid fluidA, Fluid fluidB) {

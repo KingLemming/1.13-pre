@@ -33,23 +33,23 @@ public class ElementFluidStorage extends ElementResourceStorage {
 		int resourceWidth = width - 2;
 
 		int amount = getScaled(resourceHeight);
-		boolean invert = FluidHelper.density(tank.getFluid()) < 0;
+		boolean invert = FluidHelper.density(tank.getFluidStack()) < 0;
 
 		if (fluidTexture != null) {
 			RenderHelper.setBlockTextureSheet();
 			RenderHelper.drawTiledTexture(posX + 1, posY + 1 + (invert ? 0 : resourceHeight - amount), fluidTexture, resourceWidth, amount);
 		} else {
-			RenderHelper.drawFluid(posX + 1, posY + 1 + (invert ? 0 : resourceHeight - amount), tank.getFluid(), resourceWidth, amount);
+			RenderHelper.drawFluid(posX + 1, posY + 1 + (invert ? 0 : resourceHeight - amount), tank.getFluidStack(), resourceWidth, amount);
 		}
 	}
 
 	@Override
 	public void addTooltip(List<String> tooltip, int mouseX, int mouseY) {
 
-		if (tank.getFluid() != null && tank.getFluidAmount() > 0) {
-			tooltip.add(StringHelper.getFluidName(tank.getFluid()));
-			if (FluidHelper.hasPotionTag(tank.getFluid())) {
-				FluidHelper.addPotionTooltip(tank.getFluid(), tooltip);
+		if (tank.getFluidStack() != null && tank.getFluidAmount() > 0) {
+			tooltip.add(StringHelper.getFluidName(tank.getFluidStack()));
+			if (FluidHelper.hasPotionTag(tank.getFluidStack())) {
+				FluidHelper.addPotionTooltip(tank.getFluidStack(), tooltip);
 			}
 		}
 		super.addTooltip(tooltip, mouseX, mouseY);

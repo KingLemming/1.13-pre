@@ -3,6 +3,7 @@ package cofh.thermal.core.init;
 import cofh.core.fluid.BlockFluidCoFH;
 import cofh.core.fluid.FluidCoFH;
 import cofh.core.fluid.FluidPotion;
+import cofh.thermal.core.fluid.BlockFluidCrudeOil;
 import cofh.thermal.core.fluid.BlockFluidEnder;
 import cofh.thermal.core.fluid.BlockFluidGlowstone;
 import cofh.thermal.core.fluid.BlockFluidRedstone;
@@ -21,6 +22,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import static cofh.lib.util.Constants.ID_THERMAL_SERIES;
 import static cofh.thermal.core.ThermalSeries.registerBlock;
+import static cofh.thermal.core.init.ConfigTSeries.*;
 
 public class FluidsTSeries {
 
@@ -64,6 +66,42 @@ public class FluidsTSeries {
 		FluidRegistry.registerFluid(fluidRedstone);
 		FluidRegistry.registerFluid(fluidGlowstone);
 		FluidRegistry.registerFluid(fluidEnder);
+
+		if (enableBioFuelFluids) {
+			fluidSeedOil = new FluidCoFH("seed_oil", ID_THERMAL_SERIES).setDensity(950).setViscosity(1300);
+			fluidBiocrude = new FluidCoFH("biocrude", ID_THERMAL_SERIES).setDensity(1500).setViscosity(2500);
+			fluidBiofuel = new FluidCoFH("refined_biofuel", ID_THERMAL_SERIES).setDensity(750).setViscosity(800);
+
+			FluidRegistry.registerFluid(fluidSeedOil);
+			FluidRegistry.registerFluid(fluidBiocrude);
+			FluidRegistry.registerFluid(fluidBiofuel);
+		}
+
+		if (enableFossilFuelFluids) {
+			fluidCreosote = new FluidCoFH("creosote", ID_THERMAL_SERIES).setDensity(1100).setViscosity(2000);
+			fluidCoal = new FluidCoFH("coal", ID_THERMAL_SERIES).setDensity(900).setViscosity(2000);
+			fluidCrudeOil = new FluidCoFH("crude_oil", ID_THERMAL_SERIES).setDensity(900).setViscosity(2000);
+			fluidRefinedOil = new FluidCoFH("refined_oil", ID_THERMAL_SERIES).setDensity(800).setViscosity(1400);
+			fluidRefinedFuel = new FluidCoFH("refined_fuel", ID_THERMAL_SERIES).setDensity(750).setViscosity(800);
+
+			FluidRegistry.registerFluid(fluidCreosote);
+			FluidRegistry.registerFluid(fluidCoal);
+			FluidRegistry.registerFluid(fluidCrudeOil);
+			FluidRegistry.registerFluid(fluidRefinedOil);
+			FluidRegistry.registerFluid(fluidRefinedFuel);
+		}
+
+		if (enableTreeFluids) {
+			fluidSap = new FluidCoFH("sap", ID_THERMAL_SERIES).setDensity(1050).setViscosity(1500);
+			fluidSyrup = new FluidCoFH("syrup", ID_THERMAL_SERIES).setDensity(1400).setViscosity(2500);
+			fluidResin = new FluidCoFH("resin", ID_THERMAL_SERIES).setDensity(900).setViscosity(3000);
+			fluidTreeOil = new FluidCoFH("tree_oil", ID_THERMAL_SERIES).setDensity(900).setViscosity(1200);
+
+			FluidRegistry.registerFluid(fluidSap);
+			FluidRegistry.registerFluid(fluidSyrup);
+			FluidRegistry.registerFluid(fluidResin);
+			FluidRegistry.registerFluid(fluidTreeOil);
+		}
 	}
 
 	public static void createFluidBlocks() {
@@ -75,6 +113,12 @@ public class FluidsTSeries {
 		registerBlock("fluid_redstone", blockFluidRedstone);
 		registerBlock("fluid_glowstone", blockFluidGlowstone);
 		registerBlock("fluid_ender", blockFluidEnder);
+
+		if (enableFossilFuelFluids) {
+			blockFluidCrudeOil = new BlockFluidCrudeOil(fluidCrudeOil);
+
+			registerBlock("fluid_crude_oil", blockFluidCrudeOil);
+		}
 	}
 
 	public static void createBuckets() {
@@ -91,6 +135,27 @@ public class FluidsTSeries {
 		FluidRegistry.addBucketForFluid(fluidRedstone);
 		FluidRegistry.addBucketForFluid(fluidGlowstone);
 		FluidRegistry.addBucketForFluid(fluidEnder);
+
+		if (enableBioFuelFluids) {
+			FluidRegistry.addBucketForFluid(fluidSeedOil);
+			FluidRegistry.addBucketForFluid(fluidBiocrude);
+			FluidRegistry.addBucketForFluid(fluidBiofuel);
+		}
+
+		if (enableFossilFuelFluids) {
+			FluidRegistry.addBucketForFluid(fluidCreosote);
+			FluidRegistry.addBucketForFluid(fluidCoal);
+			FluidRegistry.addBucketForFluid(fluidCrudeOil);
+			FluidRegistry.addBucketForFluid(fluidRefinedOil);
+			FluidRegistry.addBucketForFluid(fluidRefinedFuel);
+		}
+
+		if (enableTreeFluids) {
+			FluidRegistry.addBucketForFluid(fluidSap);
+			FluidRegistry.addBucketForFluid(fluidSyrup);
+			FluidRegistry.addBucketForFluid(fluidResin);
+			FluidRegistry.addBucketForFluid(fluidTreeOil);
+		}
 	}
 
 	public static void refreshReferences() {
@@ -107,6 +172,21 @@ public class FluidsTSeries {
 		fluidRedstone = FluidRegistry.getFluid("redstone");
 		fluidGlowstone = FluidRegistry.getFluid("glowstone");
 		fluidEnder = FluidRegistry.getFluid("ender");
+
+		fluidCreosote = FluidRegistry.getFluid("creosote");
+		fluidCoal = FluidRegistry.getFluid("coal");
+		fluidCrudeOil = FluidRegistry.getFluid("crude_oil");
+		fluidRefinedOil = FluidRegistry.getFluid("refined_oil");
+		fluidRefinedFuel = FluidRegistry.getFluid("refined_fuel");
+
+		fluidSap = FluidRegistry.getFluid("sap");
+		fluidSyrup = FluidRegistry.getFluid("syrup");
+		fluidResin = FluidRegistry.getFluid("resin");
+		fluidTreeOil = FluidRegistry.getFluid("tree_oil");
+
+		fluidSeedOil = FluidRegistry.getFluid("seed_oil");
+		fluidBiocrude = FluidRegistry.getFluid("biocrude");
+		fluidBiofuel = FluidRegistry.getFluid("refined_biofuel");
 	}
 	// endregion
 
@@ -176,8 +256,29 @@ public class FluidsTSeries {
 	public static Fluid fluidGlowstone;
 	public static Fluid fluidEnder;
 
+	// BIOFUEL FLUIDS
+	public static Fluid fluidSeedOil;
+	public static Fluid fluidBiocrude;
+	public static Fluid fluidBiofuel;
+
+	// FOSSIL FUEL FLUIDS
+	public static Fluid fluidCreosote;
+	public static Fluid fluidCoal;
+	public static Fluid fluidCrudeOil;
+	public static Fluid fluidRefinedOil;
+	public static Fluid fluidRefinedFuel;
+
+	// TREE FLUIDS
+	public static Fluid fluidSap;
+	public static Fluid fluidSyrup;
+	public static Fluid fluidResin;
+	public static Fluid fluidTreeOil;
+
+	// BLOCKS
 	public static BlockFluidCoFH blockFluidRedstone;
 	public static BlockFluidCoFH blockFluidGlowstone;
 	public static BlockFluidCoFH blockFluidEnder;
+
+	public static BlockFluidCoFH blockFluidCrudeOil;
 	// endregion
 }

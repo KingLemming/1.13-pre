@@ -55,7 +55,7 @@ public class RefineryRecipeParser extends AbstractContentParser {
 		if (outputItems.isEmpty()) {
 			RefineryRecipeManager.instance().addRecipe(energy, input, outputFluids);
 		} else {
-			RefineryRecipeManager.instance().addRecipe(energy, input, outputFluids, outputItems.get(0));
+			RefineryRecipeManager.instance().addRecipe(energy, input, outputFluids, outputItems.get(0), chance.get(0));
 		}
 	}
 

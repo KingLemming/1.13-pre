@@ -126,9 +126,12 @@ public class CentrifugeRecipeCategory extends BaseRecipeCategory<CentrifugeRecip
 				guiItemStacks.set(i + 1, outputs.get(i));
 			}
 		}
+		if (!outputFluids.isEmpty()) {
+			guiFluidStacks.set(0, outputFluids.get(0));
+		}
 		guiItemStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) -> {
 			if (!recipeWrapper.chances.isEmpty() && slotIndex >= 1 && slotIndex <= 4) {
-				float chance = recipeWrapper.chances.get(slotIndex - 1);
+				float chance = Math.abs(recipeWrapper.chances.get(slotIndex - 1));
 				if (chance < BASE_CHANCE) {
 					tooltip.add(StringHelper.localize("info.cofh.chance") + ": " + (int) (100 * chance) + "%");
 				} else {
@@ -140,9 +143,6 @@ public class CentrifugeRecipeCategory extends BaseRecipeCategory<CentrifugeRecip
 			}
 		});
 
-		if (!outputFluids.isEmpty()) {
-			guiFluidStacks.set(0, outputFluids.get(0));
-		}
 		guiFluidStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) -> {
 
 			if (FluidHelper.hasPotionTag(ingredient)) {

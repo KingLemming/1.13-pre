@@ -44,13 +44,6 @@ public class ItemRedprint extends ItemCoFH {
 	}
 
 	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean isFull3D() {
-
-		return true;
-	}
-
-	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
 
 		String baseName = localize(getUnlocalizedName(stack) + ".name");

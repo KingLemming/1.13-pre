@@ -27,16 +27,18 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static cofh.lib.util.Constants.TANK_MEDIUM;
-import static cofh.lib.util.Constants.TANK_SMALL;
+import static cofh.lib.util.Constants.BASE_CHANCE;
+import static net.minecraftforge.fluids.Fluid.BUCKET_VOLUME;
 
 public class RefineryRecipeCategory extends BaseRecipeCategory<RefineryRecipeWrapper> {
 
 	protected IDrawableStatic progress;
 	protected IDrawableStatic speed;
+
 	protected IDrawableStatic tankInput;
 	protected IDrawableStatic tankOutputA;
 	protected IDrawableStatic tankOutputB;
+
 	protected IDrawableStatic inputOverlay;
 	protected IDrawableStatic outputOverlayA;
 	protected IDrawableStatic outputOverlayB;
@@ -123,18 +125,31 @@ public class RefineryRecipeCategory extends BaseRecipeCategory<RefineryRecipeWra
 		IGuiFluidStackGroup guiFluidStacks = recipeLayout.getFluidStacks();
 
 		guiItemStacks.init(0, true, 96, 23);
-		guiFluidStacks.init(0, true, 29, 6, 16, 32, TANK_SMALL, false, inputOverlay);
-		guiFluidStacks.init(1, false, 126, 12, 16, 40, TANK_MEDIUM, false, outputOverlayA);
-		guiFluidStacks.init(2, false, 144, 12, 16, 40, TANK_MEDIUM, false, outputOverlayB);
+		guiFluidStacks.init(0, true, 29, 6, 16, 32, BUCKET_VOLUME, false, inputOverlay);
+		guiFluidStacks.init(1, false, 126, 12, 16, 40, BUCKET_VOLUME, false, outputOverlayA);
+		guiFluidStacks.init(2, false, 144, 12, 16, 40, BUCKET_VOLUME, false, outputOverlayB);
 
 		if (!outputItems.isEmpty()) {
 			guiItemStacks.set(0, outputItems.get(0));
 		}
 		guiFluidStacks.set(0, inputFluids.get(0));
+
 		for (int i = 0; i < outputFluids.size(); i++) {
 			guiFluidStacks.set(i + 1, outputFluids.get(i));
 		}
-
+		guiItemStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) -> {
+			if (!recipeWrapper.chances.isEmpty() && slotIndex == 0) {
+				float chance = Math.abs(recipeWrapper.chances.get(slotIndex));
+				if (chance < BASE_CHANCE) {
+					tooltip.add(StringHelper.localize("info.cofh.chance") + ": " + (int) (100 * chance) + "%");
+				} else {
+					chance -= (int) chance;
+					if (chance > 0) {
+						tooltip.add(StringHelper.localize("info.cofh.chance_additional") + ": " + (int) (100 * chance) + "%");
+					}
+				}
+			}
+		});
 		guiFluidStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) -> {
 
 			if (FluidHelper.hasPotionTag(ingredient)) {

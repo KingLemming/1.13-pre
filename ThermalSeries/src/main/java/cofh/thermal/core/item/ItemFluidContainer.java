@@ -79,13 +79,6 @@ public abstract class ItemFluidContainer extends ItemCoFH implements IColorableI
 	}
 
 	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean isFull3D() {
-
-		return true;
-	}
-
-	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
 
 		return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged) && (slotChanged || !areItemStacksEqualIgnoreTags(oldStack, newStack, TAG_FLUID));

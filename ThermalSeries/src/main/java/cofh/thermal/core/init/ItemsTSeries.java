@@ -48,11 +48,23 @@ public class ItemsTSeries {
 		dustObsidian = registerItem("dust_obsidian", "dustObsidian", new ItemCoFH(GROUP_DUSTS));
 
 		dustWood = registerItem("dust_wood", "dustWood", new ItemCoFH(GROUP_RESOURCES));
-		//		dustWoodCompressed = registerItem("dust_wood_compressed", "dustWoodCompressed", new ItemCore());
-		coalCoke = registerItem("coal_coke", "fuelCoke", new ItemFuel(fuelCoalCoke, GROUP_RESOURCES));
+		ingotWood = registerItem("ingot_wood", "ingotWood", new ItemCoFH(GROUP_RESOURCES));
+		fuelCoke = registerItem("fuel_coke", "fuelCoke", new ItemFuel(fuelCoalCoke, GROUP_RESOURCES));
+
 		dustSulfur = registerItem("dust_sulfur", "dustSulfur", new ItemCoFH(GROUP_RESOURCES));
 		dustNiter = registerItem("dust_niter", "dustNiter", new ItemCoFH(GROUP_RESOURCES));
-		crystalCinnabar = registerItem("crystal_cinnabar", "itemCinnabar", new ItemCoFH(GROUP_RESOURCES));
+		mineralCinnabar = registerItem("mineral_cinnabar", "itemCinnabar", new ItemCoFH(GROUP_RESOURCES));
+
+		mineralSlag = registerItem("mineral_slag", "itemSlag", new ItemCoFH(GROUP_RESOURCES));
+		mineralSlagRich = registerItem("mineral_slag_rich", "itemSlagRich", new ItemCoFH(GROUP_RESOURCES));
+		//
+		//		dustBiomass = registerItem("biomass", new ItemCoFH(GROUP_RESOURCES));
+		//		dustBiomassRich = registerItem("biomass_rich", new ItemCoFH(GROUP_RESOURCES));
+		//		dustBioblend = registerItem("bioblend", new ItemCoFH(GROUP_RESOURCES));
+		//		dustBioblendRich = registerItem("bioblend_rich", new ItemCoFH(GROUP_RESOURCES));
+
+		globRosin = registerItem("glob_rosin", new ItemCoFH(GROUP_RESOURCES));
+		globTar = registerItem("glob_tar", new ItemCoFH(GROUP_RESOURCES));
 
 		itemPhytoGro = registerItem("phytogro", new ItemFertilizer(1));
 		itemPhytoGroRich = registerItem("phytogro_rich", new ItemFertilizer(2));
@@ -226,12 +238,23 @@ public class ItemsTSeries {
 	public static ItemStack dustObsidian;
 
 	public static ItemStack dustWood;
-	public static ItemStack dustWoodCompressed;
+	public static ItemStack ingotWood;
 
-	public static ItemStack coalCoke;
+	public static ItemStack fuelCoke;
 	public static ItemStack dustSulfur;
 	public static ItemStack dustNiter;
-	public static ItemStack crystalCinnabar;
+	public static ItemStack mineralCinnabar;
+
+	public static ItemStack mineralSlag;
+	public static ItemStack mineralSlagRich;
+
+	public static ItemStack dustBiomass;
+	public static ItemStack dustBiomassRich;
+	public static ItemStack dustBioblend;
+	public static ItemStack dustBioblendRich;
+
+	public static ItemStack globRosin;
+	public static ItemStack globTar;
 
 	public static ItemStack itemPhytoGro;
 	public static ItemStack itemPhytoGroRich;

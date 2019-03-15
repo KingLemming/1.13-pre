@@ -1,5 +1,6 @@
 package cofh.core.block;
 
+import cofh.lib.block.IHarvestable;
 import cofh.lib.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -10,7 +11,9 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -34,7 +37,7 @@ import static cofh.lib.util.Constants.AGE;
 import static cofh.lib.util.Constants.CROPS_AABB;
 import static cofh.lib.util.helpers.ItemHelper.cloneStack;
 
-public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
+public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable, IHarvestable {
 
 	protected final EnumPlantType type;
 	protected int reqLight = 9;
@@ -86,11 +89,6 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 		return AGE;
 	}
 
-	protected boolean isHarvestable(IBlockState state) {
-
-		return getAge(state) == getHarvestAge();
-	}
-
 	protected int getAge(IBlockState state) {
 
 		return state.getValue(this.getAgeProperty());
@@ -137,18 +135,7 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
-		if (!isHarvestable(state)) {
-			return false;
-		}
-		if (Utils.isClientWorld(worldIn)) {
-			return true;
-		}
-		if (getPostHarvestAge() >= 0) {
-			Utils.dropItemStackIntoWorldWithVelocity(getCrop(), worldIn, pos);
-			worldIn.setBlockState(pos, this.withAge(getPostHarvestAge()), 2);
-			return true;
-		}
-		return false;
+		return harvest(worldIn, pos, state, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, playerIn.getHeldItem(hand)));
 	}
 
 	@Override
@@ -158,7 +145,7 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 			return;
 		}
 		if (worldIn.getLightFromNeighbors(pos.up()) >= reqLight) {
-			if (!isHarvestable(state)) {
+			if (!canHarvest(state)) {
 				int age = getAge(state);
 				float growthChance = getGrowthChance(this, worldIn, pos);
 				if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int) (25.0F / growthChance) + 1) == 0)) {
@@ -214,7 +201,7 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 		boolean noSeed = getSeed().isEmpty();
 		Random rand = world instanceof World ? ((World) world).rand : RANDOM;
 
-		if (isHarvestable(state)) {
+		if (canHarvest(state)) {
 			if (getCrop().isEmpty()) {
 				super.getDrops(drops, world, pos, state, fortune);
 			} else {
@@ -294,7 +281,7 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 	@Override
 	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
 
-		return !isHarvestable(state);
+		return !canHarvest(state);
 	}
 
 	@Override
@@ -306,7 +293,7 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 
-		if (isHarvestable(state)) {
+		if (canHarvest(state)) {
 			return;
 		}
 		int age = this.getAge(state);
@@ -332,6 +319,32 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable {
 			return getDefaultState();
 		}
 		return state;
+	}
+	// endregion
+
+	// region IHarvestable
+	@Override
+	public boolean canHarvest(IBlockState state) {
+
+		return getAge(state) == getHarvestAge();
+	}
+
+	@Override
+	public boolean harvest(World world, BlockPos pos, IBlockState state, int fortune) {
+
+		if (!canHarvest(state)) {
+			return false;
+		}
+		if (Utils.isClientWorld(world)) {
+			return true;
+		}
+		if (getPostHarvestAge() >= 0) {
+			Utils.dropItemStackIntoWorldWithVelocity(getCrop(), world, pos);
+			world.setBlockState(pos, this.withAge(getPostHarvestAge()), 2);
+		} else {
+			world.destroyBlock(pos, true);
+		}
+		return true;
 	}
 	// endregion
 

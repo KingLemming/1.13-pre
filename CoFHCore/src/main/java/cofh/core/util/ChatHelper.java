@@ -11,7 +11,6 @@ import net.minecraft.stats.StatBase;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.common.util.FakePlayer;
 
 import java.util.List;
 
@@ -76,7 +75,7 @@ public class ChatHelper {
 
 	public static void sendIndexedChatMessageToPlayer(EntityPlayer player, ITextComponent message) {
 
-		if (player.world == null || player instanceof FakePlayer) {
+		if (player.world == null || Utils.isFakePlayer(player)) {
 			return;
 		}
 		if (indexChat) {
@@ -94,7 +93,7 @@ public class ChatHelper {
 
 	public static void sendIndexedChatMessagesToPlayer(EntityPlayer player, List<ITextComponent> messages) {
 
-		if (player.world == null || player instanceof FakePlayer) {
+		if (player.world == null || Utils.isFakePlayer(player)) {
 			return;
 		}
 		if (indexChat) {

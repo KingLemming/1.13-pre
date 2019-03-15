@@ -18,29 +18,14 @@
 		{
 			"type": "default-ore",
 			"input": {
-				"ore": "oreTin"
+				"ore": "oreNickel"
 			},
 			"output": [
 				{
-					"ore": "dustTin"
+					"ore": "dustNickel"
 				},
 				{
-					"ore": "dustIron",
-					"chance": 0.10
-				}
-			]
-		},
-		{
-			"type": "default-ore",
-			"input": {
-				"ore": "oreLead"
-			},
-			"output": [
-				{
-					"ore": "dustLead"
-				},
-				{
-					"ore": "dustSilver",
+					"ore": "dustPlatinum",
 					"chance": 0.10
 				}
 			]
@@ -59,6 +44,36 @@
 					"chance": 0.10
 				}
 			]
+		},
+		{
+			"type": "ore",
+			"input": {
+				"ore": "oreCinnabar"
+			},
+			"output": {
+				"constant": "cinnabar",
+				"count": 2
+			}
+		},
+		{
+			"type": "ore",
+			"input": {
+				"ore": "oreNiter"
+			},
+			"output": {
+				"ore": "dustNiter",
+				"count": 6
+			}
+		},
+		{
+			"type": "ore",
+			"input": {
+				"ore": "oreSulfur"
+			},
+			"output": {
+				"ore": "dustSulfur",
+				"count": 6
+			}
 		}
 	]
 }

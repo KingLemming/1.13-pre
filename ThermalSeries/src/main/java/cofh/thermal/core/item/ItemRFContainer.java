@@ -16,8 +16,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -89,13 +87,6 @@ public abstract class ItemRFContainer extends ItemCoFH implements IEnergyContain
 	}
 
 	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean isFull3D() {
-
-		return true;
-	}
-
-	@Override
 	public boolean shouldCauseBlockBreakReset(ItemStack oldStack, ItemStack newStack) {
 
 		return !oldStack.equals(newStack) && (getEnergyStored(oldStack) > 0 != getEnergyStored(newStack) > 0);
@@ -135,7 +126,7 @@ public abstract class ItemRFContainer extends ItemCoFH implements IEnergyContain
 	}
 
 	// region HELPERS
-	public static ItemStack setDefaultTag(ItemStack stack, int energy) {
+	public ItemStack setDefaultTag(ItemStack stack, int energy) {
 
 		return EnergyHelper.setDefaultEnergyTag(stack, energy);
 	}

@@ -3,6 +3,21 @@
 		{
 			"type": "default-plant",
 			"input": {
+				"item": "thermal:seed_barley"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_barley"
+				},
+				{
+					"item": "thermal:seed_barley",
+					"chance": 1.1
+				}
+			]
+		},
+		{
+			"type": "default-plant",
+			"input": {
 				"item": "thermal:seed_onion"
 			},
 			"output": [
@@ -11,6 +26,21 @@
 				},
 				{
 					"item": "thermal:seed_onion",
+					"chance": 1.1
+				}
+			]
+		},
+		{
+			"type": "default-plant",
+			"input": {
+				"item": "thermal:seed_rice"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_rice"
+				},
+				{
+					"item": "thermal:seed_rice",
 					"chance": 1.1
 				}
 			]
@@ -41,6 +71,141 @@
 				},
 				{
 					"item": "thermal:seed_spinach",
+					"chance": 1.1
+				}
+			]
+		},
+		{
+			"type": "default-plant",
+			"input": {
+				"item": "thermal:seed_corn"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_corn"
+				},
+				{
+					"item": "thermal:seed_corn",
+					"chance": 1.1
+				}
+			]
+		},
+		{
+			"type": "default-plant",
+			"input": {
+				"item": "thermal:seed_bell_pepper"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_bell_pepper"
+				},
+				{
+					"item": "thermal:seed_bell_pepper",
+					"chance": 1.1
+				}
+			]
+		},
+		{
+			"type": "default-plant",
+			"input": {
+				"item": "thermal:seed_green_bean"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_green_bean"
+				},
+				{
+					"item": "thermal:seed_green_bean",
+					"chance": 1.1
+				}
+			]
+		},
+		{
+			"type": "default-plant",
+			"input": {
+				"item": "thermal:seed_peanut"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_peanut"
+				},
+				{
+					"item": "thermal:seed_peanut",
+					"chance": 1.1
+				}
+			]
+		},
+		{
+			"type": "default-plant",
+			"input": {
+				"item": "thermal:seed_strawberry"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_strawberry"
+				},
+				{
+					"item": "thermal:seed_strawberry",
+					"chance": 1.1
+				}
+			]
+		},
+		{
+			"type": "default-plant",
+			"input": {
+				"item": "thermal:seed_tomato"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_tomato"
+				},
+				{
+					"item": "thermal:seed_tomato",
+					"chance": 1.1
+				}
+			]
+		},
+		{
+			"type": "default-plant",
+			"input": {
+				"item": "thermal:seed_coffee"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_coffee"
+				},
+				{
+					"item": "thermal:seed_coffee",
+					"chance": 1.1
+				}
+			]
+		},
+		{
+			"type": "default-plant",
+			"input": {
+				"item": "thermal:seed_tea"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_tea"
+				},
+				{
+					"item": "thermal:seed_tea",
+					"chance": 1.1
+				}
+			]
+		},
+		{
+			"type": "default-plant",
+			"input": {
+				"item": "thermal:seed_hops"
+			},
+			"output": [
+				{
+					"item": "thermal:crop_hops"
+				},
+				{
+					"item": "thermal:seed_hops",
 					"chance": 1.1
 				}
 			]

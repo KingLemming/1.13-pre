@@ -30,6 +30,24 @@ public class TexturesTSeries {
 		registerFluidTextures(fluidRedstone);
 		registerFluidTextures(fluidGlowstone);
 		registerFluidTextures(fluidEnder);
+
+		// BIOFUEL FLUIDS
+		registerFluidTextures(fluidSeedOil);
+		registerFluidTextures(fluidBiocrude);
+		registerFluidTextures(fluidBiofuel);
+
+		// FOSSIL FUEL FLUIDS
+		registerFluidTextures(fluidCreosote);
+		registerFluidTextures(fluidCoal);
+		registerFluidTextures(fluidCrudeOil);
+		registerFluidTextures(fluidRefinedOil);
+		registerFluidTextures(fluidRefinedFuel);
+
+		// TREE FLUIDS
+		registerFluidTextures(fluidSap);
+		registerFluidTextures(fluidSyrup);
+		registerFluidTextures(fluidResin);
+		registerFluidTextures(fluidTreeOil);
 	}
 	// endregion
 
@@ -38,6 +56,9 @@ public class TexturesTSeries {
 
 	private static void registerFluidTextures(Fluid fluid) {
 
+		if (fluid == null) {
+			return;
+		}
 		registerFluidTextures(fluid.getName());
 	}
 

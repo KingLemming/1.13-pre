@@ -1,12 +1,12 @@
 package cofh.thermal.expansion.block.machine;
 
 import cofh.lib.fluid.FluidStorageCoFH;
-import cofh.lib.inventory.IItemStackHolder;
+import cofh.lib.inventory.ItemStorageCoFH;
+import cofh.lib.util.helpers.FluidHelper;
 import cofh.thermal.core.block.machine.TileMachineProcess;
 import cofh.thermal.expansion.init.MachinesTE;
 import cofh.thermal.expansion.util.managers.machine.InsolatorRecipeManager;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import static cofh.lib.util.helpers.ItemHelper.itemsIdentical;
 
 public class TileMachineInsolator extends TileMachineProcess {
 
-	protected FluidStorageCoFH waterTank = new FluidStorageCoFH(TANK_SMALL).lockFluid(FluidRegistry.WATER);
+	protected FluidStorageCoFH waterTank = new FluidStorageCoFH(TANK_SMALL, FluidHelper::isWater);
 
 	public TileMachineInsolator() {
 
@@ -60,7 +60,7 @@ public class TileMachineInsolator extends TileMachineProcess {
 	@Override
 	protected boolean validateOutputs() {
 
-		List<? extends IItemStackHolder> slotOutputs = getOutputSlots();
+		List<? extends ItemStorageCoFH> slotOutputs = getOutputSlots();
 		List<ItemStack> recipeOutputItems = curRecipe.getOutputItems(getInputSlots(), getInputTanks());
 
 		boolean[] used = new boolean[getOutputSlots().size()];

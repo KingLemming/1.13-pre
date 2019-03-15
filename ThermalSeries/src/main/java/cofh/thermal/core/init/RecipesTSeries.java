@@ -93,9 +93,9 @@ public class RecipesTSeries {
 		addTwoWayStorageRecipe(gemEmerald, "gemEmerald", nuggetEmerald, "nuggetEmerald");
 
 		addTwoWayStorageRecipe(storageCharcoal, "blockCharcoal", itemCharcoal, "charcoal");
-		addTwoWayStorageRecipe(storageCoalCoke, "blockFuelCoke", coalCoke, "fuelCoke");
+		addTwoWayStorageRecipe(storageCoalCoke, "blockFuelCoke", fuelCoke, "fuelCoke");
 
-		addSmelting(itemCoal, coalCoke, 0.2F);
+		addSmelting(itemCoal, fuelCoke, 0.2F);
 		addSmelting(dustIron, ingotIron);
 		addSmelting(dustGold, ingotGold);
 	}

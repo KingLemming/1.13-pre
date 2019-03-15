@@ -5,6 +5,7 @@ import cofh.lib.energy.EnergyStorageCoFH;
 import cofh.lib.fluid.FluidStorageCoFH;
 import cofh.lib.fluid.IFluidStackHolder;
 import cofh.lib.inventory.IItemStackHolder;
+import cofh.lib.inventory.ItemStorageCoFH;
 import cofh.lib.util.Utils;
 import cofh.thermal.core.block.AbstractTileType;
 import cofh.thermal.core.util.recipes.IMachineRecipe;
@@ -155,14 +156,14 @@ public abstract class TileMachineProcess extends TileMachine {
 		if (!cacheRecipe()) {
 			return false;
 		}
-		List<? extends IItemStackHolder> slotInputs = getInputSlots();
+		List<? extends ItemStorageCoFH> slotInputs = getInputSlots();
 		for (int i = 0; i < slotInputs.size(); i++) {
 			int inputCount = itemInputCounts.get(i);
 			if (inputCount > 0 && slotInputs.get(i).getItemStack().getCount() < inputCount) {
 				return false;
 			}
 		}
-		List<? extends IFluidStackHolder> tankInputs = getInputTanks();
+		List<? extends FluidStorageCoFH> tankInputs = getInputTanks();
 		for (int i = 0; i < tankInputs.size(); i++) {
 			int inputCount = fluidInputCounts.get(i);
 			FluidStack input = tankInputs.get(i).getFluidStack();
@@ -177,7 +178,7 @@ public abstract class TileMachineProcess extends TileMachine {
 	protected boolean validateOutputs() {
 
 		// ITEMS
-		List<? extends IItemStackHolder> slotOutputs = getOutputSlots();
+		List<? extends ItemStorageCoFH> slotOutputs = getOutputSlots();
 		List<ItemStack> recipeOutputItems = curRecipe.getOutputItems(getInputSlots(), getInputTanks());
 		boolean[] used = new boolean[getOutputSlots().size()];
 		for (ItemStack recipeOutput : recipeOutputItems) {
@@ -250,10 +251,10 @@ public abstract class TileMachineProcess extends TileMachine {
 
 	protected void resolveRecipe() {
 
-		List<? extends IItemStackHolder> slotInputs = getInputSlots();
-		List<? extends IItemStackHolder> slotOutputs = getOutputSlots();
-		List<? extends IFluidStackHolder> tankInputs = getInputTanks();
-		List<? extends IFluidStackHolder> tankOutputs = getOutputTanks();
+		List<? extends ItemStorageCoFH> slotInputs = getInputSlots();
+		List<? extends ItemStorageCoFH> slotOutputs = getOutputSlots();
+		List<? extends FluidStorageCoFH> tankInputs = getInputTanks();
+		List<? extends FluidStorageCoFH> tankOutputs = getOutputTanks();
 
 		List<ItemStack> recipeOutputItems = curRecipe.getOutputItems(slotInputs, tankInputs);
 		List<FluidStack> recipeOutputFluids = curRecipe.getOutputFluids(slotInputs, tankInputs);

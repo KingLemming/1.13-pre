@@ -9,10 +9,7 @@ import cofh.thermal.core.util.managers.IRecipeManager;
 import cofh.thermal.core.util.recipes.IMachineRecipe;
 import cofh.thermal.expansion.util.recipes.RefineryRecipe;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
@@ -85,7 +82,7 @@ public class RefineryRecipeManager extends AbstractManager implements IRecipeMan
 		return recipe;
 	}
 
-	public IMachineRecipe addRecipe(int energy, FluidStack inputFluid, List<FluidStack> outputFluids, ItemStack outputItem) {
+	public IMachineRecipe addRecipe(int energy, FluidStack inputFluid, List<FluidStack> outputFluids, ItemStack outputItem, float chance) {
 
 		if (inputFluid == null || outputFluids.isEmpty() || outputItem.isEmpty() || energy <= 0 || validRecipe(inputFluid)) {
 			return null;
@@ -95,7 +92,7 @@ public class RefineryRecipeManager extends AbstractManager implements IRecipeMan
 				return null;
 			}
 		}
-		IMachineRecipe recipe = new RefineryRecipe(energy, inputFluid, outputFluids, outputItem);
+		IMachineRecipe recipe = new RefineryRecipe(energy, inputFluid, outputFluids, outputItem, chance);
 		recipeMap.put(FluidHelper.fluidHashcode(inputFluid), recipe);
 		return recipe;
 	}
@@ -148,9 +145,6 @@ public class RefineryRecipeManager extends AbstractManager implements IRecipeMan
 		if (defaultPotionRecipes) {
 
 		}
-
-		// TODO: Remove
-		addRecipe(defaultEnergy, new FluidStack(FluidRegistry.WATER, Fluid.BUCKET_VOLUME), new FluidStack(FluidRegistry.LAVA, Fluid.BUCKET_VOLUME), new ItemStack(Items.FLINT));
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package cofh.thermal.expansion.block.machine;
 
-import cofh.lib.inventory.IItemStackHolder;
 import cofh.lib.inventory.ItemStorageCoFH;
 import cofh.thermal.core.block.machine.TileMachineProcess;
 import cofh.thermal.expansion.init.MachinesTE;
@@ -49,7 +48,7 @@ public class TileMachinePulverizer extends TileMachineProcess {
 	@Override
 	protected boolean validateOutputs() {
 
-		List<? extends IItemStackHolder> slotOutputs = getOutputSlots();
+		List<? extends ItemStorageCoFH> slotOutputs = getOutputSlots();
 		List<ItemStack> recipeOutputItems = curRecipe.getOutputItems(getInputSlots(), getInputTanks());
 
 		boolean[] used = new boolean[getOutputSlots().size()];

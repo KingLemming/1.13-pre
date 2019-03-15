@@ -11,11 +11,16 @@ import java.util.function.Predicate;
 import static cofh.lib.util.helpers.ItemHelper.cloneStack;
 import static cofh.lib.util.helpers.ItemHelper.itemsIdentical;
 
+/**
+ * Implementation of an Item Storage object.
+ *
+ * @author King Lemming
+ */
 public class ItemStorageCoFH implements IItemHandler, IItemStackHolder {
 
-	private final Predicate<ItemStack> validator;
-
+	protected Predicate<ItemStack> validator;
 	protected ItemStack item = ItemStack.EMPTY;
+	protected int capacity;
 
 	public ItemStorageCoFH() {
 
@@ -25,6 +30,14 @@ public class ItemStorageCoFH implements IItemHandler, IItemStackHolder {
 	public ItemStorageCoFH(Predicate<ItemStack> validator) {
 
 		this.validator = validator;
+	}
+
+	public ItemStorageCoFH setValidator(Predicate<ItemStack> validator) {
+
+		if (validator != null) {
+			this.validator = validator;
+		}
+		return this;
 	}
 
 	public boolean isItemValid(@Nonnull ItemStack stack) {
@@ -56,7 +69,6 @@ public class ItemStorageCoFH implements IItemHandler, IItemStackHolder {
 	public void modify(int quantity) {
 
 		this.item.grow(quantity);
-
 		if (this.item.isEmpty()) {
 			this.item = ItemStack.EMPTY;
 		}

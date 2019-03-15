@@ -11,7 +11,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 import static cofh.lib.util.Constants.TAG_ENERGY;
 
 /**
- * Reference implementation of {@link IEnergyStorage}. Use/extend this or implement your own.
+ * Implementation of an Energy Storage object. See {@link IEnergyStorage}.
  *
  * @author King Lemming
  */

@@ -1,0 +1,36 @@
+{
+	"refinery": [
+		{
+			"input": {
+				"fluid": "biocrude",
+				"amount": 200
+			},
+			"output": [
+				{
+					"fluid": "refined_biofuel",
+					"amount": 150
+				}
+			]
+		},
+		{
+			"input": {
+				"fluid": "resin",
+				"amount": 200
+			},
+			"output": [
+				{
+					"fluid": "tree_oil",
+					"amount": 100
+				},
+				{
+					"fluid": "water",
+					"amount": 50
+				},
+				{
+					"constant": "rosin",
+					"chance": 0.50
+				}
+			]
+		}
+	]
+}

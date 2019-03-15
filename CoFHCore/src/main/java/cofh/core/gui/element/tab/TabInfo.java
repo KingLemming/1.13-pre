@@ -27,6 +27,8 @@ public class TabInfo extends TabScrolledText {
 		subheaderColor = defaultSubHeaderColor;
 		textColor = defaultTextColor;
 		backgroundColor = defaultBackgroundColor;
+
+		this.setVisible(!info.isEmpty());
 	}
 
 	@Override

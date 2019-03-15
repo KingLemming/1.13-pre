@@ -66,6 +66,12 @@ public class ConfigTSeries {
 	public static int tileUpdateDelay = 160;
 	// endregion
 
+	// region THERMAL OPTIONS
+	public static boolean enableBioFuelFluids = true;
+	public static boolean enableFossilFuelFluids = true;
+	public static boolean enableTreeFluids = true;
+	// endregion
+
 	// region CRAFTING
 	public static boolean enableAlternateGears = false;
 	public static boolean enableBasicGears = false;

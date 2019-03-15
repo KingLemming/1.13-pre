@@ -12,8 +12,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static cofh.lib.util.Constants.GROUP_UTILS;
 
@@ -30,13 +28,6 @@ public abstract class ItemTome extends ItemCoFH implements IMultiModeItem {
 	protected boolean isEmpowered(ItemStack stack) {
 
 		return getMode(stack) == 1;
-	}
-
-	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean isFull3D() {
-
-		return true;
 	}
 
 	@Override

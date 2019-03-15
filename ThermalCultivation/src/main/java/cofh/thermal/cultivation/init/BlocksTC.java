@@ -19,9 +19,9 @@ public class BlocksTC {
 
 		((BlockCrop) plantBarley).setCrop(cropBarley).setSeed(seedBarley);
 		((BlockCrop) plantOnion).setCrop(cropOnion).setSeed(seedOnion);
+		((BlockCrop) plantRice).setCrop(cropRice).setSeed(seedRice);
 		((BlockCrop) plantSadiroot).setCrop(cropSadiroot).setSeed(seedSadiroot);
 		((BlockCrop) plantSpinach).setCrop(cropSpinach).setSeed(seedSpinach);
-		((BlockCrop) plantRice).setCrop(cropRice).setSeed(seedRice);
 
 		((BlockCrop) plantCorn).setCrop(cropCorn); //.setSeed(seedCorn);
 
@@ -41,9 +41,9 @@ public class BlocksTC {
 
 		plantBarley = registerBlock("plant_barley", new BlockCrop());
 		plantOnion = registerBlock("plant_onion", new BlockCrop());
+		plantRice = registerBlock("plant_rice", new BlockCrop());
 		plantSadiroot = registerBlock("plant_sadiroot", new BlockCrop());
 		plantSpinach = registerBlock("plant_spinach", new BlockCrop());
-		plantRice = registerBlock("plant_rice", new BlockCrop());
 
 		plantCorn = registerBlock("plant_corn", new BlockCropTall());
 
@@ -61,11 +61,12 @@ public class BlocksTC {
 
 	// region CROPS
 	public static Block plantBarley;
-	public static Block plantCorn;
 	public static Block plantOnion;
+	public static Block plantRice;
 	public static Block plantSadiroot;
 	public static Block plantSpinach;
-	public static Block plantRice;
+
+	public static Block plantCorn;
 
 	public static Block plantBellPepper;
 	public static Block plantGreenBean;

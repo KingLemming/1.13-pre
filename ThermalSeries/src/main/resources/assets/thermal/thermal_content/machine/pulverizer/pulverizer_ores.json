@@ -93,52 +93,6 @@
 					"chance": 0.25
 				}
 			]
-		},
-		{
-			"type": "ore",
-			"input": {
-				"ore": "oreApatite"
-			},
-			"output": [
-				{
-					"ore": "gemApatite",
-					"count": 12
-				},
-				{
-					"ore": "dustSulfur",
-					"chance": 0.15
-				}
-			]
-		},
-		{
-			"type": "ore",
-			"input": {
-				"ore": "oreNiter"
-			},
-			"output": {
-				"ore": "dustNiter",
-				"count": 6
-			}
-		},
-		{
-			"type": "ore",
-			"input": {
-				"ore": "oreSaltpeter"
-			},
-			"output": {
-				"ore": "dustSaltpeter",
-				"count": 6
-			}
-		},
-		{
-			"type": "ore",
-			"input": {
-				"ore": "oreSulfur"
-			},
-			"output": {
-				"ore": "dustSulfur",
-				"count": 6
-			}
 		}
 	]
 }

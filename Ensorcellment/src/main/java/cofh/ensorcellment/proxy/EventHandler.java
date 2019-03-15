@@ -14,6 +14,7 @@ import cofh.ensorcellment.enchantment.override.EnchantmentProtectionImp;
 import cofh.ensorcellment.enchantment.override.EnchantmentThornsImp;
 import cofh.ensorcellment.enchantment.shield.EnchantmentPhalanx;
 import cofh.ensorcellment.enchantment.weapon.EnchantmentVorpal;
+import cofh.lib.util.Utils;
 import cofh.lib.util.helpers.MathHelper;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -548,7 +549,7 @@ public class EventHandler {
 	public void handlePlayerDropsEvent(PlayerDropsEvent event) {
 
 		EntityPlayer player = event.getEntityPlayer();
-		if (player instanceof FakePlayer) {
+		if (Utils.isFakePlayer(player)) {
 			return;
 		}
 		if (player.world.getGameRules().getBoolean("keepInventory")) {
@@ -574,7 +575,7 @@ public class EventHandler {
 		}
 		EntityPlayer player = event.getEntityPlayer();
 		EntityPlayer oldPlayer = event.getOriginal();
-		if (player instanceof FakePlayer) {
+		if (Utils.isFakePlayer(player)) {
 			return;
 		}
 		if (player.world.getGameRules().getBoolean("keepInventory")) {

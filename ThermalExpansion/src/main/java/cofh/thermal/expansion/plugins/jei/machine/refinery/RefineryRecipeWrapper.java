@@ -35,6 +35,7 @@ public class RefineryRecipeWrapper extends BaseRecipeWrapper {
 		outputFluids = new ArrayList<>(recipe.getOutputFluids(Collections.emptyList(), Collections.emptyList()));
 		outputItems = new ArrayList<>(recipe.getOutputItems(Collections.emptyList(), Collections.emptyList()));
 		energy = recipe.getEnergy(Collections.emptyList(), Collections.emptyList());
+		chances = recipe.getOutputItemChances(Collections.emptyList(), Collections.emptyList());
 
 		IDrawableStatic progressMaskDrawable = Drawables.getDrawables(guiHelper).getProgress(Drawables.PROGRESS_DROP);
 		IDrawableStatic progressDrawable = Drawables.getDrawables(guiHelper).getProgressFill(Drawables.PROGRESS_DROP);

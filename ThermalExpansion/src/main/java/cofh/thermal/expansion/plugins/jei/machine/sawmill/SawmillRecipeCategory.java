@@ -111,7 +111,7 @@ public class SawmillRecipeCategory extends BaseRecipeCategory<SawmillRecipeWrapp
 		}
 		guiItemStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) -> {
 			if (!recipeWrapper.chances.isEmpty() && slotIndex >= 1 && slotIndex <= 4) {
-				float chance = recipeWrapper.chances.get(slotIndex - 1);
+				float chance = Math.abs(recipeWrapper.chances.get(slotIndex - 1));
 				if (chance < BASE_CHANCE) {
 					tooltip.add(StringHelper.localize("info.cofh.chance") + ": " + (int) (100 * chance) + "%");
 				} else {

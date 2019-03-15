@@ -25,7 +25,7 @@ public class BlockFluidRedstone extends BlockFluidCoFH {
 
 	public BlockFluidRedstone(Fluid fluid) {
 
-		super(fluid, new MaterialLiquid(MapColor.RED), "redstone", ID_THERMAL_SERIES);
+		super(fluid, new MaterialLiquid(MapColor.RED), fluid.getName(), ID_THERMAL_SERIES);
 
 		setQuantaPerBlock(8);
 		setTickRate(5);

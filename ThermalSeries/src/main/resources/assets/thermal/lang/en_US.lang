@@ -46,6 +46,9 @@ tab.thermal.lexicon.transmute.1=Quell the Lexicon to relinquish mastery over the
 # INFO - CULTIVATION
 #=======================================================================================================================
 
+info.thermal.rf_scythe.0=Harvests fully grown crops.
+info.thermal.rf_scythe.a.0=§ePress (%s) to adjust the area.§r
+
 info.thermal.watering_can.0=Irrigates farmland and speeds up plant growth.
 info.thermal.watering_can.1=Water may be collected while sneaking.
 info.thermal.watering_can.a.0=§ePress (%s) to adjust the area.§r
@@ -164,6 +167,21 @@ fluid.redstone=Destabilized Redstone
 fluid.glowstone=Energized Glowstone
 fluid.ender=Resonant Ender
 
+fluid.seed_oil=Seed Oil
+fluid.biocrude=Biocrude
+fluid.refined_biofuel=Grassoline
+
+fluid.creosote=Creosote Oil
+fluid.coal=Liquifacted Coal
+fluid.crude_oil=Crude Oil
+fluid.refined_oil=Naphtha
+fluid.refined_fuel=Refined Fuel
+
+fluid.sap=Sap
+fluid.syrup=Syrup
+fluid.resin=Resin
+fluid.tree_oil=Tree Oil
+
 tile.thermal.fluid_redstone.name=Destabilized Redstone
 tile.thermal.fluid_glowstone.name=Energized Glowstone
 tile.thermal.fluid_ender.name=Resonant Ender
@@ -188,10 +206,18 @@ item.thermal.dust_coal.name=Pulverized Coal
 item.thermal.dust_obsidian.name=Pulverized Obsidian
 
 item.thermal.dust_wood.name=Sawdust
-item.thermal.coal_coke.name=Coal Coke
+item.thermal.ingot_wood.name=Compressed Sawdust
+item.thermal.fuel_coke.name=Coal Coke
+
 item.thermal.dust_sulfur.name=Sulfur
 item.thermal.dust_niter.name=Niter
-item.thermal.crystal_cinnabar.name=Cinnabar Crystal
+item.thermal.mineral_cinnabar.name=Cinnabar
+
+item.thermal.mineral_slag.name=Slag
+item.thermal.mineral_slag_rich.name=Rich Slag
+
+item.thermal.glob_rosin.name=Rosin
+item.thermal.glob_tar.name=Tar
 
 item.thermal.phytogro.name=Phyto-Gro
 item.thermal.phytogro_rich.name=Rich Phyto-Gro
@@ -430,6 +456,9 @@ item.thermal.seed_spinach.name=Spinach Seeds
 item.thermal.seed_strawberry.name=Strawberry Seeds
 item.thermal.seed_tea.name=Tea Seeds
 item.thermal.seed_tomato.name=Tomato Seeds
+
+item.thermal.rf_scythe_basic.name=Harvester's Scythe
+item.thermal.rf_scythe_creative.name=Harvester's Scythe (Creative)
 
 item.thermal.watering_can_basic.name=Watering Can
 item.thermal.watering_can_creative.name=Watering Can (Creative)

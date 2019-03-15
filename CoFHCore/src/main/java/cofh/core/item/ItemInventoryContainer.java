@@ -37,13 +37,6 @@ public class ItemInventoryContainer extends ItemCoFH implements IInventoryContai
 	}
 
 	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean isFull3D() {
-
-		return true;
-	}
-
-	@Override
 	public int getItemEnchantability(ItemStack stack) {
 
 		return 10;

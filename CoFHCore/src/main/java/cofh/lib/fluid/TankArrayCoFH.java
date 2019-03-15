@@ -66,7 +66,7 @@ public class TankArrayCoFH extends SimpleFluidHandler {
 
 	public void set(int tank, FluidStack stack) {
 
-		tanks.get(tank).setFluid(stack);
+		tanks.get(tank).setFluidStack(stack);
 	}
 
 	public FluidStack get(int tank) {

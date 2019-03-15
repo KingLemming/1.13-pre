@@ -6,9 +6,7 @@ package cofh.lib.fluid;
 
 import cofh.lib.util.IResourceStorage;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.FluidTankProperties;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -18,51 +16,27 @@ import javax.annotation.Nullable;
 import java.util.function.Predicate;
 
 /**
- * Reference implementation of {@link IFluidTank}. Use/extend this or implement your own.
+ * Implementation of a Fluid Storage object. Does NOT implement {@link IFluidTank}.
  *
- * @author King Lemming, cpw (LiquidTank)
+ * @author King Lemming
  */
-public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder, IResourceStorage {
+public class FluidStorageCoFH implements IFluidHandler, IFluidStackHolder, IResourceStorage {
 
-	private final Predicate<FluidStack> validator;
-
+	protected Predicate<FluidStack> validator;
 	@Nullable
-	protected FluidStack fluid;
+	protected FluidStack fluid = null;
 	protected int capacity;
-	protected boolean locked;
 	protected IFluidTankProperties properties;
 
 	public FluidStorageCoFH(int capacity) {
 
-		this(null, capacity, e -> true);
+		this(capacity, e -> true);
 	}
 
 	public FluidStorageCoFH(int capacity, Predicate<FluidStack> validator) {
 
-		this(null, capacity, validator);
-	}
-
-	public FluidStorageCoFH(Fluid fluid, int amount, int capacity) {
-
-		this(new FluidStack(fluid, amount), capacity, e -> true);
-	}
-
-	public FluidStorageCoFH(FluidStack stack, int capacity) {
-
-		this(stack, capacity, e -> true);
-	}
-
-	public FluidStorageCoFH(FluidStack stack, int capacity, Predicate<FluidStack> validator) {
-
-		this.fluid = stack;
 		this.capacity = capacity;
 		this.validator = validator;
-	}
-
-	public FluidStorageCoFH setFluid(FluidStack fluid) {
-
-		this.fluid = fluid;
-		return this;
 	}
 
 	public FluidStorageCoFH setCapacity(int capacity) {
@@ -71,41 +45,22 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder, IResourc
 		return this;
 	}
 
-	public FluidStorageCoFH lockFluid(Fluid fluid) {
+	public FluidStorageCoFH setValidator(Predicate<FluidStack> validator) {
 
-		locked = fluid != null;
-		if (locked) {
-			if (this.fluid == null || !this.fluid.getFluid().equals(fluid)) {
-				this.fluid = new FluidStack(fluid, 0);
-			}
+		if (validator != null) {
+			this.validator = validator;
 		}
 		return this;
 	}
 
-	// region HELPERS
-	public void lock(boolean lock) {
+	public boolean isFluidValid(FluidStack stack) {
 
-		if (lock) {
-			lock();
-		} else {
-			unlock();
-		}
+		return validator.test(stack);
 	}
 
-	protected void lock() {
+	public int getCapacity() {
 
-		if (locked || this.fluid == null) {
-			return;
-		}
-		locked = true;
-	}
-
-	protected void unlock() {
-
-		locked = false;
-		if (this.getFluidAmount() <= 0) {
-			this.fluid = null;
-		}
+		return capacity;
 	}
 
 	public IFluidTankProperties getProperties() {
@@ -116,28 +71,14 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder, IResourc
 		return properties;
 	}
 
-	/**
-	 * Method for parity with {@link IFluidHandler}
-	 */
-	public FluidStack drain(FluidStack resource, boolean doDrain) {
-
-		if (resource == null || !resource.isFluidEqual(fluid)) {
-			return null;
-		}
-		return drain(resource.amount, doDrain);
-	}
-	// endregion
-
 	// region NBT
 	public FluidStorageCoFH readFromNBT(NBTTagCompound nbt) {
 
 		FluidStack fluid = null;
-		locked = false;
 		if (!nbt.hasKey("Empty")) {
 			fluid = FluidStack.loadFluidStackFromNBT(nbt);
-			locked = nbt.getBoolean("Lock") && fluid != null;
 		}
-		setFluid(fluid);
+		setFluidStack(fluid);
 		return this;
 	}
 
@@ -145,9 +86,8 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder, IResourc
 
 		if (fluid != null) {
 			fluid.writeToNBT(nbt);
-			nbt.setBoolean("Lock", locked);
 		} else {
-			nbt.setString("Empty", "");
+			nbt.setBoolean("Empty", true);
 		}
 		return nbt;
 	}
@@ -158,13 +98,12 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder, IResourc
 	public void modify(int amount) {
 
 		if (this.fluid == null) {
-			// TODO: Error Logging - this should really never happen.
 			return;
 		}
 		this.fluid.amount += amount;
 		if (this.fluid.amount > capacity) {
 			this.fluid.amount = capacity;
-		} else if (this.fluid.amount < 0) {
+		} else if (this.fluid.amount <= 0) {
 			this.fluid = null;
 		}
 	}
@@ -182,20 +121,6 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder, IResourc
 	}
 
 	@Override
-	public boolean isEmpty() {
-
-		return fluid == null || fluid.amount <= 0;
-	}
-	// endregion
-
-	// region IFluidTank
-	@Override
-	public FluidStack getFluid() {
-
-		return fluid;
-	}
-
-	@Override
 	public int getFluidAmount() {
 
 		if (fluid == null) {
@@ -205,21 +130,23 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder, IResourc
 	}
 
 	@Override
-	public int getCapacity() {
+	public boolean isEmpty() {
 
-		return capacity;
+		return fluid == null || fluid.amount <= 0;
 	}
+	// endregion
 
+	// region IFluidHandler
 	@Override
-	public FluidTankInfo getInfo() {
+	public IFluidTankProperties[] getTankProperties() {
 
-		return new FluidTankInfo(this);
+		return new IFluidTankProperties[] { getProperties() };
 	}
 
 	@Override
 	public int fill(FluidStack resource, boolean doFill) {
 
-		if (resource == null || !validator.test(resource)) {
+		if (resource == null || !isFluidValid(resource)) {
 			return 0;
 		}
 		if (!doFill) {
@@ -250,9 +177,18 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder, IResourc
 	}
 
 	@Override
+	public FluidStack drain(FluidStack resource, boolean doDrain) {
+
+		if (resource == null || !resource.isFluidEqual(fluid)) {
+			return null;
+		}
+		return drain(resource.amount, doDrain);
+	}
+
+	@Override
 	public FluidStack drain(int maxDrain, boolean doDrain) {
 
-		if (fluid == null || locked && fluid.amount <= 0) {
+		if (fluid == null) {
 			return null;
 		}
 		int drained = maxDrain;
@@ -263,11 +199,7 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder, IResourc
 		if (doDrain) {
 			fluid.amount -= drained;
 			if (fluid.amount <= 0) {
-				if (locked) {
-					fluid.amount = 0;
-				} else {
-					fluid = null;
-				}
+				fluid = null;
 			}
 		}
 		return stack;
@@ -278,15 +210,7 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder, IResourc
 	@Override
 	public void modifyAmount(int amount) {
 
-		if (!locked || fluid == null) {
-			return;
-		}
-		this.fluid.amount += amount;
-		if (this.fluid.amount > capacity) {
-			this.fluid.amount = capacity;
-		} else if (this.fluid.amount < 0) {
-			this.fluid.amount = 0;
-		}
+		modify(amount);
 	}
 
 	@Override
@@ -295,7 +219,7 @@ public class FluidStorageCoFH implements IFluidTank, IFluidStackHolder, IResourc
 		if (isEmpty()) {
 			return false;
 		}
-		drain(capacity, true);
+		fluid = null;
 		return true;
 	}
 

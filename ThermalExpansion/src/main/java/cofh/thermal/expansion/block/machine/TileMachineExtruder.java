@@ -2,11 +2,11 @@ package cofh.thermal.expansion.block.machine;
 
 import cofh.lib.fluid.FluidStorageCoFH;
 import cofh.lib.inventory.ItemStorageCoFH;
+import cofh.lib.util.helpers.FluidHelper;
 import cofh.thermal.core.block.machine.TileMachineProcess;
 import cofh.thermal.expansion.init.MachinesTE;
 import cofh.thermal.expansion.util.managers.machine.ExtruderRecipeManager;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidRegistry;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import static cofh.lib.util.helpers.ItemHelper.itemsIdentical;
 // TODO: Finish
 public class TileMachineExtruder extends TileMachineProcess {
 
-	protected FluidStorageCoFH lavaTank = new FluidStorageCoFH(TANK_SMALL).lockFluid(FluidRegistry.LAVA);
-	protected FluidStorageCoFH waterTank = new FluidStorageCoFH(TANK_SMALL).lockFluid(FluidRegistry.WATER);
+	protected FluidStorageCoFH lavaTank = new FluidStorageCoFH(TANK_SMALL, FluidHelper::isLava);
+	protected FluidStorageCoFH waterTank = new FluidStorageCoFH(TANK_SMALL, FluidHelper::isWater);
 
 	public TileMachineExtruder() {
 

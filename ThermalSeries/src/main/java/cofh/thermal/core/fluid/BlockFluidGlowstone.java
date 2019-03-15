@@ -48,7 +48,7 @@ public class BlockFluidGlowstone extends BlockFluidCoFH {
 
 	public BlockFluidGlowstone(Fluid fluid) {
 
-		super(fluid, new MaterialLiquid(MapColor.YELLOW), "glowstone", ID_THERMAL_SERIES);
+		super(fluid, new MaterialLiquid(MapColor.YELLOW), fluid.getName(), ID_THERMAL_SERIES);
 
 		setQuantaPerBlock(2);
 		setTickRate(10);

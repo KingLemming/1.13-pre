@@ -1,9 +1,27 @@
 {
 	"constants": [
 		{
+			"constant": "cinnabar",
+			"entry": {
+				"item": "thermal:mineral_cinnabar"
+			}
+		},
+		{
+			"constant": "rosin",
+			"entry": {
+				"item": "thermal:glob_rosin"
+			}
+		},
+		{
 			"constant": "sawdust",
 			"entry": {
 				"item": "thermal:dust_wood"
+			}
+		},
+		{
+			"constant": "tar",
+			"entry": {
+				"item": "thermal:glob_tar"
 			}
 		}
 	]

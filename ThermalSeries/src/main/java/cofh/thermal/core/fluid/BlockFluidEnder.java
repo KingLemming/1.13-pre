@@ -31,7 +31,7 @@ public class BlockFluidEnder extends BlockFluidCoFH {
 
 	public BlockFluidEnder(Fluid fluid) {
 
-		super(fluid, new MaterialLiquid(MapColor.GREEN), "ender", ID_THERMAL_SERIES);
+		super(fluid, new MaterialLiquid(MapColor.GREEN), fluid.getName(), ID_THERMAL_SERIES);
 
 		setQuantaPerBlock(4);
 		setTickRate(20);
