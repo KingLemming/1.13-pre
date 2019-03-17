@@ -25,8 +25,6 @@ public abstract class AbstractRecipe implements IMachineRecipe {
 		this.energy = energy;
 	}
 
-	//public AbstractRecipe(int energy, List<ItemStack> inputItems, List<FluidStack> inputFluids, List<ItemStack> outputItems, List<FluidStack> outputFluids)
-
 	// region IMachineRecipe
 	@Override
 	public List<ItemStack> getInputItems() {
@@ -62,7 +60,9 @@ public abstract class AbstractRecipe implements IMachineRecipe {
 		ArrayList<Float> modifiedChances = new ArrayList<>(outputItemChances);
 		for (int i = 0; i < modifiedChances.size(); i++) {
 			if (modifiedChances.get(i) < 0.0F) {
-				modifiedChances.set(i, modifiedChances.get(i) * -BASE_CHANCE_LOCKED);
+				modifiedChances.set(i, Math.abs(modifiedChances.get(i)));
+				System.out.println("CALLED THIS");
+				System.out.println(modifiedChances.get(i));
 			}
 		}
 		return modifiedChances;

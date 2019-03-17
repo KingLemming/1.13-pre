@@ -10,12 +10,6 @@ public interface ISecurableTile extends ISecurable, ITileCallback {
 
 	// region ISecurable
 	@Override
-	default boolean canAccess(EntityPlayer player) {
-
-		return securityControl().canAccess(player);
-	}
-
-	@Override
 	default void setAccess(AccessMode access) {
 
 		securityControl().setAccess(access);

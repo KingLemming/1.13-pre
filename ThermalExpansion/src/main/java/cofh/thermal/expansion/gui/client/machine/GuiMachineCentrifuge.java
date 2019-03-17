@@ -26,7 +26,7 @@ public class GuiMachineCentrifuge extends GuiMachine {
 
 	public GuiMachineCentrifuge(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerMachineCentrifuge(inventory, tile), (TileMachine) tile, generateTabInfo("tab.thermal.machine_centrifuge"));
+		super(new ContainerMachineCentrifuge(inventory, tile), (TileMachine) tile, inventory.player, generateTabInfo("tab.thermal.machine_centrifuge"));
 		name = StringHelper.localize("tile.thermal.machine_centrifuge.name");
 		texture = TEXTURE;
 	}

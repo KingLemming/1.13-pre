@@ -26,7 +26,7 @@ public class GuiMachineCrucible extends GuiMachine {
 
 	public GuiMachineCrucible(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerMachineCrucible(inventory, tile), (TileMachine) tile, generateTabInfo("tab.thermal.machine_crucible"));
+		super(new ContainerMachineCrucible(inventory, tile), (TileMachine) tile, inventory.player, generateTabInfo("tab.thermal.machine_crucible"));
 		name = StringHelper.localize("tile.thermal.machine_crucible.name");
 		texture = TEXTURE;
 	}

@@ -13,6 +13,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -104,17 +105,26 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable, IHarv
 		return seed;
 	}
 
-	public int getHarvestAge() {
+	protected boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+
+		if (state.getBlock() == this) {
+			IBlockState below = worldIn.getBlockState(pos.down());
+			return below.getBlock().canSustainPlant(below, worldIn, pos.down(), EnumFacing.UP, this);
+		}
+		return true;
+	}
+
+	protected int getHarvestAge() {
 
 		return 7;
 	}
 
-	public int getMaximumAge() {
+	protected int getMaximumAge() {
 
 		return 7;
 	}
 
-	public int getPostHarvestAge() {
+	protected int getPostHarvestAge() {
 
 		return -1;
 	}
@@ -136,6 +146,15 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable, IHarv
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
 		return harvest(worldIn, pos, state, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, playerIn.getHeldItem(hand)));
+	}
+
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+
+		if (!canBlockStay(worldIn, pos, state)) {
+			dropBlockAsItem(worldIn, pos, state, 0);
+			worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+		}
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class GuiLexiconTransmute extends GuiContainerCoFH {
 
 	public GuiLexiconTransmute(InventoryPlayer inventory, ContainerLexiconTransmute container) {
 
-		super(container);
+		super(container, inventory.player);
 		lexicon = container;
 		texture = TEXTURE;
 		name = "gui.thermal.lexicon.transmute";

@@ -1,11 +1,15 @@
 package cofh.lib.util.control;
 
+import cofh.core.util.FriendRegistry;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.player.EntityPlayer;
 
-public interface ISecurable {
+import java.util.UUID;
 
-	boolean canAccess(EntityPlayer player);
+import static cofh.lib.util.helpers.SecurityHelper.getID;
+import static cofh.lib.util.helpers.SecurityHelper.isDefaultUUID;
+
+public interface ISecurable {
 
 	void setAccess(AccessMode access);
 
@@ -18,6 +22,11 @@ public interface ISecurable {
 	default String getOwnerName() {
 
 		return getOwner().getName();
+	}
+
+	default boolean canAccess(EntityPlayer player) {
+
+		return getAccess().matches(getOwner(), player);
 	}
 
 	/**
@@ -33,6 +42,28 @@ public interface ISecurable {
 		PUBLIC, PRIVATE, FRIENDS, TEAM;
 
 		public static final AccessMode[] VALUES = values();
+
+		public boolean matches(GameProfile owner, EntityPlayer player) {
+
+			UUID ownerID = owner.getId();
+			if (isDefaultUUID(ownerID)) {
+				return true;
+			}
+			UUID otherID = getID(player);
+
+			switch (this) {
+				case PUBLIC:
+					return true;
+				case PRIVATE:
+					return ownerID.equals(otherID);
+				case FRIENDS:
+					return ownerID.equals(otherID) || FriendRegistry.playerHasAccess(owner, player);
+				case TEAM:
+					return ownerID.equals(otherID);
+				default:
+					return true;
+			}
+		}
 
 		public boolean isPublic() {
 

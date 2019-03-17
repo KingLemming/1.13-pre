@@ -56,9 +56,9 @@ public abstract class ItemRFContainer extends ItemCoFH implements IEnergyContain
 
 		if (isInCreativeTab(tab) && showInCreativeTab) {
 			if (!isCreative()) {
-				items.add(EnergyHelper.setDefaultEnergyTag(new ItemStack(this, 1, 0), 0));
+				items.add(setDefaultTag(new ItemStack(this, 1, 0), 0));
 			}
-			items.add(EnergyHelper.setDefaultEnergyTag(new ItemStack(this, 1, 0), maxEnergy));
+			items.add(setDefaultTag(new ItemStack(this, 1, 0), maxEnergy));
 		}
 	}
 

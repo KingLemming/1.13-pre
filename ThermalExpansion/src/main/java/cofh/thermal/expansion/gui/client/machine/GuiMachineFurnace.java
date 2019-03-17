@@ -24,7 +24,7 @@ public class GuiMachineFurnace extends GuiMachine {
 
 	public GuiMachineFurnace(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerMachineFurnace(inventory, tile), (TileMachine) tile, generateTabInfo("tab.thermal.machine_furnace"));
+		super(new ContainerMachineFurnace(inventory, tile), (TileMachine) tile, inventory.player, generateTabInfo("tab.thermal.machine_furnace"));
 		name = StringHelper.localize("tile.thermal.machine_furnace.name");
 		texture = TEXTURE;
 	}

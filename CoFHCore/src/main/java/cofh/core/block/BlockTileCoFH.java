@@ -148,7 +148,7 @@ public abstract class BlockTileCoFH extends BlockCoFH implements IDismantleable 
 			return true;
 		}
 		TileEntity tile = world.getTileEntity(pos);
-		if (!(tile instanceof TileCoFH) || !((TileCoFH) tile).canAccess(player) || tile.isInvalid()) {
+		if (!(tile instanceof TileCoFH) || !((TileCoFH) tile).canPlayerChange(player) || tile.isInvalid()) {
 			return false;
 		}
 		if (onBlockActivatedDelegate(world, pos, state, player, hand, side, hitX, hitY, hitZ)) {

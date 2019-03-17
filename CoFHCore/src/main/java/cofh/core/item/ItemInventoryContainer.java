@@ -3,8 +3,6 @@ package cofh.core.item;
 import cofh.lib.item.IInventoryContainerItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static cofh.lib.util.Constants.GROUP_UTILS;
 import static cofh.lib.util.Constants.TAG_ACCESSIBLE;

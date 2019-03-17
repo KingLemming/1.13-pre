@@ -24,7 +24,7 @@ public class GuiMachinePulverizer extends GuiMachine {
 
 	public GuiMachinePulverizer(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerMachinePulverizer(inventory, tile), (TileMachine) tile, generateTabInfo("tab.thermal.machine_pulverizer"));
+		super(new ContainerMachinePulverizer(inventory, tile), (TileMachine) tile, inventory.player, generateTabInfo("tab.thermal.machine_pulverizer"));
 		name = StringHelper.localize("tile.thermal.machine_pulverizer.name");
 		texture = TEXTURE;
 	}

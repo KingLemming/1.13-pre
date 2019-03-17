@@ -26,7 +26,7 @@ public class GuiMachineInsolator extends GuiMachine {
 
 	public GuiMachineInsolator(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerMachineInsolator(inventory, tile), (TileMachine) tile, generateTabInfo("tab.thermal.machine_insolator"));
+		super(new ContainerMachineInsolator(inventory, tile), (TileMachine) tile, inventory.player, generateTabInfo("tab.thermal.machine_insolator"));
 		name = StringHelper.localize("tile.thermal.machine_insolator.name");
 		texture = TEXTURE;
 	}

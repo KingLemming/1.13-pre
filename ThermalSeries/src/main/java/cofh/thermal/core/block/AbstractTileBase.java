@@ -172,6 +172,16 @@ public abstract class AbstractTileBase extends TileCoFH implements ISecurableTil
 		}
 		return false;
 	}
+
+	public int getScaledProgress(int scale) {
+
+		return isActive ? scale : 0;
+	}
+
+	public int getScaledSpeed(int scale) {
+
+		return isActive ? scale : 0;
+	}
 	// endregion
 
 	// region NETWORK

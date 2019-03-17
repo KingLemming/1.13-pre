@@ -114,12 +114,6 @@ public class ContainerSatchel extends ContainerInventoryItem implements ISecurab
 
 	// region ISecurable
 	@Override
-	public boolean canAccess(EntityPlayer player) {
-
-		return this.player.equals(player);
-	}
-
-	@Override
 	public void setAccess(AccessMode access) {
 
 		SecurityHelper.setAccess(getContainerStack(), access);

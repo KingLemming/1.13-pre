@@ -22,7 +22,7 @@ public class GuiMachineExtruder extends GuiMachine {
 
 	public GuiMachineExtruder(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerMachineExtruder(inventory, tile), (TileMachine) tile, generateTabInfo("tab.thermal.machine_extruder"));
+		super(new ContainerMachineExtruder(inventory, tile), (TileMachine) tile, inventory.player, generateTabInfo("tab.thermal.machine_extruder"));
 		name = StringHelper.localize("tile.thermal.machine_extruder.name");
 		texture = TEXTURE;
 	}

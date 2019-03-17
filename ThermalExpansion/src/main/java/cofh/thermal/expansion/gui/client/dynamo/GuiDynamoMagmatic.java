@@ -18,7 +18,7 @@ public class GuiDynamoMagmatic extends GuiDynamo {
 
 	public GuiDynamoMagmatic(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerDynamoMagmatic(inventory, tile), (TileDynamo) tile, generateTabInfo("tab.thermal.dynamo_magmatic"));
+		super(new ContainerDynamoMagmatic(inventory, tile), (TileDynamo) tile, inventory.player, generateTabInfo("tab.thermal.dynamo_magmatic"));
 		name = StringHelper.localize("tile.thermal.dynamo_magmatic.name");
 		texture = TEXTURE;
 	}

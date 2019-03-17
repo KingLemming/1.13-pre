@@ -20,7 +20,7 @@ public class DynamosTE {
 	}
 
 	public static final AbstractTileType STIRLING = registerDynamo("stirling", 7, TileDynamoStirling.class, ContainerDynamoStirling.class, GuiDynamoStirling.class);
-	public static final AbstractTileType MAGMATIC = registerDynamo("magmatic", 12, TileDynamoMagmatic.class, ContainerDynamoMagmatic.class, GuiDynamoMagmatic.class);
 	public static final AbstractTileType COMPRESSION = registerDynamo("compression", 7, TileDynamoCompression.class, ContainerDynamoCompression.class, GuiDynamoCompression.class);
+	public static final AbstractTileType MAGMATIC = registerDynamo("magmatic", 12, TileDynamoMagmatic.class, ContainerDynamoMagmatic.class, GuiDynamoMagmatic.class);
 
 }

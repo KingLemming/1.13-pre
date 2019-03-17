@@ -24,7 +24,7 @@ public class GuiMachineSmelter extends GuiMachine {
 
 	public GuiMachineSmelter(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerMachineSmelter(inventory, tile), (TileMachine) tile, generateTabInfo("tab.thermal.machine_smelter"));
+		super(new ContainerMachineSmelter(inventory, tile), (TileMachine) tile, inventory.player, generateTabInfo("tab.thermal.machine_smelter"));
 		name = StringHelper.localize("tile.thermal.machine_smelter.name");
 		texture = TEXTURE;
 	}

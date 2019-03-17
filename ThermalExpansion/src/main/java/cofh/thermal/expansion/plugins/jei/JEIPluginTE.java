@@ -1,6 +1,7 @@
 package cofh.thermal.expansion.plugins.jei;
 
 import cofh.thermal.core.plugins.jei.JEIPluginTSeries;
+import cofh.thermal.expansion.plugins.jei.dynamo.stirling.StirlingFuelCategory;
 import cofh.thermal.expansion.plugins.jei.machine.brewer.BrewerRecipeCategory;
 import cofh.thermal.expansion.plugins.jei.machine.centrifuge.CentrifugeRecipeCategory;
 import cofh.thermal.expansion.plugins.jei.machine.crucible.CrucibleRecipeCategory;
@@ -25,6 +26,8 @@ public class JEIPluginTE implements IModPlugin {
 		JEIPluginTSeries.addCategory(new CrucibleRecipeCategory(CRUCIBLE));
 		JEIPluginTSeries.addCategory(new RefineryRecipeCategory(REFINERY));
 		JEIPluginTSeries.addCategory(new BrewerRecipeCategory(BREWER));
+
+		JEIPluginTSeries.addCategory(new StirlingFuelCategory(STIRLING));
 	}
 
 	public static final String FURNACE = "thermal:machine_furnace";
@@ -36,4 +39,5 @@ public class JEIPluginTE implements IModPlugin {
 	public static final String REFINERY = "thermal:machine_refinery";
 	public static final String BREWER = "thermal:machine_brewer";
 
+	public static final String STIRLING = "thermal:dynamo_stirling";
 }

@@ -35,7 +35,7 @@ public class BlockDynamo extends BlockAbstractTile6Way {
 	protected boolean onBlockActivatedDelegate(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 
 		TileCoFH tile = (TileCoFH) world.getTileEntity(pos);
-		if (tile == null || !tile.canAccess(player)) {
+		if (tile == null || !tile.canPlayerChange(player)) {
 			return false;
 		}
 		if (tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null)) {

@@ -13,8 +13,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.UUID;
-
 import static cofh.lib.util.helpers.StringHelper.generateTabInfo;
 import static cofh.lib.util.helpers.StringHelper.localize;
 import static cofh.lib.util.modhelpers.EnsorcellmentHelper.HOLDING;
@@ -23,14 +21,12 @@ public class GuiSatchel extends GuiContainerCoFH {
 
 	private static final String TEX_PATH = "cofh:textures/gui/storage/";
 
-	protected UUID playerID;
 	private boolean secure;
 
 	public GuiSatchel(InventoryPlayer inventory, ContainerSatchel container) {
 
-		super(container);
+		super(container, inventory.player);
 
-		playerID = SecurityHelper.getID(inventory.player);
 		secure = SecurityHelper.hasSecurity(container.getContainerStack());
 		texture = new ResourceLocation(TEX_PATH + "storage_" + container.slots + ".png");
 		name = container.getInventoryName();
@@ -60,7 +56,7 @@ public class GuiSatchel extends GuiContainerCoFH {
 			addTab(new TabInfo(this, info));
 		}
 		if (secure) {
-			addTab(new TabSecurity(this, (ISecurable) inventorySlots, playerID));
+			addTab(new TabSecurity(this, (ISecurable) inventorySlots, SecurityHelper.getID(player)));
 		}
 	}
 

@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -40,6 +41,7 @@ public abstract class GuiContainerCoFH extends GuiContainer implements IGuiAcces
 	protected String name;
 	protected String info;
 	protected ResourceLocation texture;
+	protected EntityPlayer player;
 
 	protected ArrayList<TabBase> tabs = new ArrayList<>();
 	protected ArrayList<ElementBase> elements = new ArrayList<>();
@@ -49,14 +51,15 @@ public abstract class GuiContainerCoFH extends GuiContainer implements IGuiAcces
 	protected boolean drawInventory = true;
 	protected boolean showTooltips = true;
 
-	public GuiContainerCoFH(Container inventorySlotsIn) {
+	public GuiContainerCoFH(Container inventorySlotsIn, EntityPlayer player) {
 
-		this(inventorySlotsIn, "");
+		this(inventorySlotsIn, player, "");
 	}
 
-	public GuiContainerCoFH(Container inventorySlotsIn, String info) {
+	public GuiContainerCoFH(Container inventorySlotsIn, EntityPlayer player, String info) {
 
 		super(inventorySlotsIn);
+		this.player = player;
 		this.info = info;
 	}
 

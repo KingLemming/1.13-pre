@@ -30,7 +30,7 @@ public class ContainerTileAugmentable extends ContainerCoFH {
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
 
-		return baseTile == null || baseTile.isUsableByPlayer(player);
+		return baseTile == null || baseTile.playerWithinDistance(player, 64D);
 	}
 
 	@Override

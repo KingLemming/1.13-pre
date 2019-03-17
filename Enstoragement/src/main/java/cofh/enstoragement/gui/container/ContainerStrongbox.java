@@ -63,7 +63,7 @@ public class ContainerStrongbox extends ContainerCoFH {
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
 
-		return tile.isUsableByPlayer(playerIn);
+		return tile.playerWithinDistance(playerIn, 64D);
 	}
 
 	@Override

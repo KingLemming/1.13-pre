@@ -11,8 +11,6 @@ import cofh.lib.util.helpers.SoundHelper;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.UUID;
-
 public class GuiFilterItem extends GuiContainerCoFH {
 
 	private static final String TEX_PATH = "cofh:textures/gui/filter/";
@@ -22,7 +20,6 @@ public class GuiFilterItem extends GuiContainerCoFH {
 	public static final String BUTTON_META = "FilterMeta";
 	public static final String BUTTON_NBT = "FilterNbt";
 
-	protected UUID playerID;
 	private String texturePath;
 	private boolean secure;
 
@@ -31,16 +28,10 @@ public class GuiFilterItem extends GuiContainerCoFH {
 	protected ElementButton buttonMeta;
 	protected ElementButton buttonNbt;
 
-	public GuiFilterItem(InventoryPlayer inventory, ContainerFilterItem container) {
-
-		this(inventory, container, "");
-	}
-
 	public GuiFilterItem(InventoryPlayer inventory, ContainerFilterItem container, String info) {
 
-		super(container, info);
+		super(container, inventory.player, info);
 
-		playerID = SecurityHelper.getID(inventory.player);
 		secure = SecurityHelper.hasSecurity(container.getContainerStack());
 		texture = new ResourceLocation(TEX_PATH + "filter_" + container.slots + ".png");
 		texturePath = texture.toString();
@@ -58,7 +49,7 @@ public class GuiFilterItem extends GuiContainerCoFH {
 			addTab(new TabInfo(this, info));
 		}
 		if (secure) {
-			addTab(new TabSecurity(this, (ISecurable) inventorySlots, playerID));
+			addTab(new TabSecurity(this, (ISecurable) inventorySlots, SecurityHelper.getID(player)));
 		}
 		buttonList = new ElementButton(this, 119, 20, BUTTON_LIST, 176, 0, 176, 20, 20, 20, texturePath);
 		buttonOre = new ElementButton(this, 145, 20, BUTTON_ORE, 216, 0, 216, 20, 20, 20, texturePath);

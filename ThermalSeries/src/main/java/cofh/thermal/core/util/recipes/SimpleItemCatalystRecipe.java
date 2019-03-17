@@ -69,7 +69,7 @@ public abstract class SimpleItemCatalystRecipe extends AbstractRecipe {
 		}
 		for (int i = 0; i < modifiedChances.size(); i++) {
 			if (modifiedChances.get(i) < 0.0F) {
-				modifiedChances.set(i, modifiedChances.get(i) * -BASE_CHANCE_LOCKED);
+				modifiedChances.set(i, Math.abs(modifiedChances.get(i)));
 			}
 		}
 		return modifiedChances;

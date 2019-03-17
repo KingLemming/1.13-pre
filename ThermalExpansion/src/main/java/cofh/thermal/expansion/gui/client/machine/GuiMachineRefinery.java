@@ -26,7 +26,7 @@ public class GuiMachineRefinery extends GuiMachine {
 
 	public GuiMachineRefinery(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerMachineRefinery(inventory, tile), (TileMachine) tile, generateTabInfo("tab.thermal.machine_refinery"));
+		super(new ContainerMachineRefinery(inventory, tile), (TileMachine) tile, inventory.player, generateTabInfo("tab.thermal.machine_refinery"));
 		name = StringHelper.localize("tile.thermal.machine_refinery.name");
 		texture = TEXTURE;
 	}

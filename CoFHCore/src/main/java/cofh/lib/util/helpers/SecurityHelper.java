@@ -1,6 +1,5 @@
 package cofh.lib.util.helpers;
 
-import cofh.core.util.CoreUtils;
 import cofh.lib.util.control.ISecurable;
 import cofh.lib.util.control.ISecurable.AccessMode;
 import com.google.common.base.Strings;
@@ -41,6 +40,9 @@ public class SecurityHelper {
 
 	public static UUID getID(EntityPlayer player) {
 
+		if (player == null) {
+			return DEFAULT_GAME_PROFILE.getId();
+		}
 		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 		if (server != null && server.isServerRunning()) {
 			return player.getGameProfile().getId();
@@ -59,23 +61,9 @@ public class SecurityHelper {
 		return cachedId;
 	}
 
-	// TODO: Fix
 	public static boolean canPlayerAccess(ItemStack stack, EntityPlayer player) {
 
-		if (!hasSecurity(stack)) {
-			return true;
-		}
-		AccessMode access = getAccess(stack);
-		if (access.isPublic() || (/*CoreProps.enableOpSecureAccess &&*/ CoreUtils.isOp(player))) {
-			return true;
-		}
-		GameProfile profile = getOwner(stack);
-		UUID ownerID = profile.getId();
-		if (isDefaultUUID(ownerID)) {
-			return true;
-		}
-		UUID otherID = getID(player);
-		return ownerID.equals(otherID);// || access.isFriendsOnly() && RegistrySocial.playerHasAccess(name, profile);
+		return !hasSecurity(stack) || getAccess(stack).matches(getOwner(stack), player);
 	}
 
 	/**

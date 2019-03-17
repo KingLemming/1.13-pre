@@ -24,7 +24,7 @@ public class GuiMachineSawmill extends GuiMachine {
 
 	public GuiMachineSawmill(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerMachineSawmill(inventory, tile), (TileMachine) tile, generateTabInfo("tab.thermal.machine_sawmill"));
+		super(new ContainerMachineSawmill(inventory, tile), (TileMachine) tile, inventory.player, generateTabInfo("tab.thermal.machine_sawmill"));
 		name = StringHelper.localize("tile.thermal.machine_sawmill.name");
 		texture = TEXTURE;
 	}

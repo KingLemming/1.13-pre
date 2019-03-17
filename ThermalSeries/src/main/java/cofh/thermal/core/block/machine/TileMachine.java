@@ -85,18 +85,6 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 	}
 	// endregion
 
-	// region GUI
-	public int getScaledProgress(int scale) {
-
-		return isActive ? scale : 0;
-	}
-
-	public int getScaledSpeed(int scale) {
-
-		return isActive ? scale : 0;
-	}
-	// endregion
-
 	// region NETWORK
 	@Override
 	public PacketBufferCoFH getControlPacket(PacketBufferCoFH buffer) {

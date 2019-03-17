@@ -28,8 +28,8 @@ public class BlocksTE {
 		machineBrewer = registerBlock("machine_brewer", new ItemBlockCoFH(new BlockMachine(BREWER)));
 
 		dynamoStirling = registerBlock("dynamo_stirling", new ItemBlockCoFH(new BlockDynamo(STIRLING)));
-		dynamoMagmatic = registerBlock("dynamo_magmatic", new ItemBlockCoFH(new BlockDynamo(MAGMATIC)));
 		dynamoCompression = registerBlock("dynamo_compression", new ItemBlockCoFH(new BlockDynamo(COMPRESSION)));
+		dynamoMagmatic = registerBlock("dynamo_magmatic", new ItemBlockCoFH(new BlockDynamo(MAGMATIC)));
 	}
 	// endregion
 
@@ -46,7 +46,7 @@ public class BlocksTE {
 
 	// region DYNAMOS
 	public static ItemStack dynamoStirling;
-	public static ItemStack dynamoMagmatic;
 	public static ItemStack dynamoCompression;
+	public static ItemStack dynamoMagmatic;
 	// endregion
 }

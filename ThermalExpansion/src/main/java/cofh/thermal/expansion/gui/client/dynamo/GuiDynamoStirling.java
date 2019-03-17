@@ -17,7 +17,7 @@ public class GuiDynamoStirling extends GuiDynamo {
 
 	public GuiDynamoStirling(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerDynamoStirling(inventory, tile), (TileDynamo) tile, generateTabInfo("tab.thermal.dynamo_stirling"));
+		super(new ContainerDynamoStirling(inventory, tile), (TileDynamo) tile, inventory.player, generateTabInfo("tab.thermal.dynamo_stirling"));
 		name = StringHelper.localize("tile.thermal.dynamo_stirling.name");
 		texture = TEXTURE;
 	}

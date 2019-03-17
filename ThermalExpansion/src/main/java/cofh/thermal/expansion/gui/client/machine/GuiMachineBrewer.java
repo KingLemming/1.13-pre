@@ -26,7 +26,7 @@ public class GuiMachineBrewer extends GuiMachine {
 
 	public GuiMachineBrewer(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerMachineBrewer(inventory, tile), (TileMachine) tile, generateTabInfo("tab.thermal.machine_brewer"));
+		super(new ContainerMachineBrewer(inventory, tile), (TileMachine) tile, inventory.player, generateTabInfo("tab.thermal.machine_brewer"));
 		name = StringHelper.localize("tile.thermal.machine_brewer.name");
 		texture = TEXTURE;
 	}

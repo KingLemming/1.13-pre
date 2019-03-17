@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "thermal:items/resources/coal_coke"
+		"layer0": "thermal:items/resources/fuel_coke"
 	}
 }

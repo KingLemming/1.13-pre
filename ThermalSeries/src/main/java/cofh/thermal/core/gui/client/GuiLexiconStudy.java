@@ -146,7 +146,7 @@ public class GuiLexiconStudy extends GuiContainerCoFH {
 
 	public GuiLexiconStudy(InventoryPlayer inventory, ContainerLexiconStudy container) {
 
-		super(container);
+		super(container, inventory.player);
 
 		lexicon = container;
 		texture = TEXTURE;

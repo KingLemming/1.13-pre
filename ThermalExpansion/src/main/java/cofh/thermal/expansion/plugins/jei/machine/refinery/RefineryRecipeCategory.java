@@ -139,7 +139,7 @@ public class RefineryRecipeCategory extends BaseRecipeCategory<RefineryRecipeWra
 		}
 		guiItemStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) -> {
 			if (!recipeWrapper.chances.isEmpty() && slotIndex == 0) {
-				float chance = Math.abs(recipeWrapper.chances.get(slotIndex));
+				float chance = recipeWrapper.chances.get(slotIndex);
 				if (chance < BASE_CHANCE) {
 					tooltip.add(StringHelper.localize("info.cofh.chance") + ": " + (int) (100 * chance) + "%");
 				} else {

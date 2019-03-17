@@ -4,6 +4,7 @@ import cofh.core.network.PacketBufferCoFH;
 import cofh.core.network.packet.client.PacketTileGui;
 import cofh.lib.block.ITileCallback;
 import cofh.lib.util.Utils;
+import cofh.lib.util.control.ISecurable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -111,7 +112,7 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 
 	protected boolean canDismantle(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
 
-		return canAccess(player);
+		return canPlayerChange(player);
 	}
 
 	protected int getComparatorInputOverride() {
@@ -136,7 +137,7 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 
 	protected float getPlayerRelativeBlockHardness(float blockHardness, IBlockState state, EntityPlayer player) {
 
-		return canAccess(player) ? blockHardness : -1.0F;
+		return canPlayerChange(player) ? blockHardness : -1.0F;
 	}
 
 	protected IBlockState getExtendedState(IBlockState state) {
@@ -168,9 +169,19 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 		return false;
 	}
 
+	public boolean canPlayerChange(EntityPlayer player) {
+
+		return !(this instanceof ISecurable) || ((ISecurable) this).canAccess(player);
+	}
+
+	public boolean playerWithinDistance(EntityPlayer player, double distanceSq) {
+
+		return player.getDistanceSq(pos) <= distanceSq && world.getTileEntity(pos) == this;
+	}
+
 	public boolean isUsableByPlayer(EntityPlayer player) {
 
-		return player.getDistanceSq(pos) <= 64D && world.getTileEntity(pos) == this;
+		return player.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64D && world.getTileEntity(pos) == this;
 	}
 
 	public boolean onWrench(EntityPlayer player, EnumFacing side) {
@@ -316,31 +327,6 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 	public int invSize() {
 
 		return 0;
-	}
-	// endregion
-
-	// region ISecurable
-	public boolean canAccess(EntityPlayer player) {
-
-		//		if (!(this instanceof ISecurable)) {
-		//			return true;
-		//		}
-		//		ISecurable.AccessMode access = ((ISecurable) this).getAccess();
-		//
-		//		if (access.isPublic() || CoreUtils.isOp(player)) {
-		//			return true;
-		//		}
-		//		GameProfile profile = ((ISecurable) this).getOwner();
-		//		UUID ownerID = profile.getId();
-		//		if (SecurityHelper.isDefaultUUID(ownerID)) {
-		//			return true;
-		//		}
-		//		UUID otherID = SecurityHelper.getID(player);
-		//		if (ownerID.equals(otherID)) {
-		//			return true;
-		//		}
-		//		return access.isFriendsOnly() && RegistrySocial.playerHasAccess(name, profile);
-		return true;
 	}
 	// endregion
 }

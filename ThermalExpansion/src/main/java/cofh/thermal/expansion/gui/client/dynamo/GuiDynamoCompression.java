@@ -18,7 +18,7 @@ public class GuiDynamoCompression extends GuiDynamo {
 
 	public GuiDynamoCompression(InventoryPlayer inventory, TileEntity tile) {
 
-		super(new ContainerDynamoCompression(inventory, tile), (TileDynamo) tile, generateTabInfo("tab.thermal.dynamo_compression"));
+		super(new ContainerDynamoCompression(inventory, tile), (TileDynamo) tile, inventory.player, generateTabInfo("tab.thermal.dynamo_compression"));
 		name = StringHelper.localize("tile.thermal.dynamo_compression.name");
 		texture = TEXTURE;
 	}

@@ -2,6 +2,7 @@ package cofh.lib.util.control;
 
 import cofh.core.network.PacketBufferCoFH;
 import cofh.core.network.packet.server.PacketSecurity;
+import cofh.core.util.CoreUtils;
 import cofh.lib.util.Utils;
 import cofh.lib.util.helpers.SecurityHelper;
 import com.mojang.authlib.GameProfile;
@@ -77,22 +78,6 @@ public class SecurityControlModule implements ISecurable {
 	public boolean isSecurable() {
 
 		return enabled;
-	}
-
-	@Override
-	public boolean canAccess(EntityPlayer player) {
-
-		if (SecurityHelper.isDefaultProfile(owner) || access.isPublic()) {
-			return true;
-		}
-		// TODO: Op Logic
-		UUID ownerID = owner.getId();
-		UUID otherID = SecurityHelper.getID(player);
-		if (ownerID.equals(otherID)) {
-			return true;
-		}
-		//return access.isFriendsOnly() && RegistrySocial.playerHasAccess(name, owner);
-		return false;
 	}
 
 	@Override

@@ -6,8 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
@@ -44,6 +43,15 @@ public class BlockCropTall extends BlockCrop {
 		this.splitOffset = getSplitAge() + getMaximumAge() - getHarvestAge();
 
 		return this;
+	}
+
+	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+
+		if (state.getBlock() == this) {
+			IBlockState below = worldIn.getBlockState(pos.down());
+			return isTop(state) ? below.getBlock() == this && !isTop(below) : below.getBlock().canSustainPlant(below, worldIn, pos.down(), EnumFacing.UP, this);
+		}
+		return true;
 	}
 
 	protected boolean isTop(IBlockState state) {
@@ -101,24 +109,24 @@ public class BlockCropTall extends BlockCrop {
 		}
 	}
 
-	@Override
-	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-
-		if (isTop(state)) {
-			BlockPos below = pos.down();
-			if (worldIn.getBlockState(below).getBlock() == this) {
-				worldIn.setBlockState(below, Blocks.AIR.getDefaultState(), 2);
-				Utils.dropItemStackIntoWorldWithVelocity(getCrop(), worldIn, below);
-			}
-		} else {
-			BlockPos above = pos.up();
-			if (worldIn.getBlockState(above).getBlock() == this) {
-				worldIn.setBlockState(above, Blocks.AIR.getDefaultState(), 2);
-				Utils.dropItemStackIntoWorldWithVelocity(getCrop(), worldIn, above);
-			}
-		}
-		super.onBlockHarvested(worldIn, pos, state, player);
-	}
+	//	@Override
+	//	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
+	//
+	//		if (isTop(state)) {
+	//			BlockPos below = pos.down();
+	//			if (worldIn.getBlockState(below).getBlock() == this) {
+	//				worldIn.setBlockState(below, Blocks.AIR.getDefaultState(), 2);
+	//				Utils.dropItemStackIntoWorldWithVelocity(getCrop(), worldIn, below);
+	//			}
+	//		} else {
+	//			BlockPos above = pos.up();
+	//			if (worldIn.getBlockState(above).getBlock() == this) {
+	//				worldIn.setBlockState(above, Blocks.AIR.getDefaultState(), 2);
+	//				Utils.dropItemStackIntoWorldWithVelocity(getCrop(), worldIn, above);
+	//			}
+	//		}
+	//		super.onBlockHarvested(worldIn, pos, state, player);
+	//	}
 
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
