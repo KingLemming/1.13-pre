@@ -50,6 +50,18 @@ public class StirlingFuelWrapper extends BaseRecipeWrapper {
 		// energyMeter = guiHelper.createAnimatedDrawable(energyDrawable, 1000, StartDirection.BOTTOM, false);
 	}
 
+	public StirlingFuelWrapper(IGuiHelper guiHelper, ItemStack stack, int energy) {
+
+		this.input = singletonList(singletonList(stack));
+		this.energy = energy;
+
+		IDrawableStatic progressDrawable = Drawables.getDrawables(guiHelper).getScaleFill(Drawables.SCALE_FLAME);
+		IDrawableStatic energyDrawable = Drawables.getDrawables(guiHelper).getEnergyFill();
+
+		duration = guiHelper.createAnimatedDrawable(progressDrawable, 1000, StartDirection.TOP, true);
+		// energyMeter = guiHelper.createAnimatedDrawable(energyDrawable, 1000, StartDirection.BOTTOM, false);
+	}
+
 	@Override
 	public void getIngredients(IIngredients ingredients) {
 

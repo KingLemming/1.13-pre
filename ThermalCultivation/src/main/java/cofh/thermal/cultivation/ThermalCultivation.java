@@ -2,10 +2,14 @@ package cofh.thermal.cultivation;
 
 import cofh.lib.util.IModule;
 import cofh.thermal.core.ThermalSeries;
+import cofh.thermal.core.init.ParsersTSeries;
+import cofh.thermal.core.init.RecipesTSeries;
 import cofh.thermal.cultivation.init.BlocksTC;
 import cofh.thermal.cultivation.init.ItemsTC;
 import cofh.thermal.cultivation.init.RecipesTC;
 import cofh.thermal.cultivation.proxy.ProxyCommon;
+import cofh.thermal.cultivation.util.managers.dynamo.GourmandFuelManager;
+import cofh.thermal.cultivation.util.parsers.dynamo.GourmandFuelParser;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
@@ -87,6 +91,10 @@ public class ThermalCultivation implements IModule {
 	public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 
 		RecipesTC.registerRecipes();
+
+		RecipesTSeries.registerManager(GourmandFuelManager.instance());
+
+		ParsersTSeries.registerParser("fuel_gourmand", GourmandFuelParser.instance());
 	}
 
 	@Override

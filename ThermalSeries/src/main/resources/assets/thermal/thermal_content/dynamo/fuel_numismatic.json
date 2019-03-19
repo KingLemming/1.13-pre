@@ -1,0 +1,112 @@
+{
+	"fuel_numismatic": [
+		{
+			"input": {
+				"item": "thermal:coin_iron"
+			},
+			"energy": 32000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_gold"
+			},
+			"energy": 48000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_copper"
+			},
+			"energy": 32000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_silver"
+			},
+			"energy": 48000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_nickel"
+			},
+			"energy": 64000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_tin"
+			},
+			"energy": 32000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_aluminum"
+			},
+			"energy": 48000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_lead"
+			},
+			"energy": 48000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_platinum"
+			},
+			"energy": 96000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_iridium"
+			},
+			"energy": 128000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_invar"
+			},
+			"energy": 48000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_constantan"
+			},
+			"energy": 56000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_electrum"
+			},
+			"energy": 48000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_bronze"
+			},
+			"energy": 32000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_steel"
+			},
+			"energy": 48000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_signalum"
+			},
+			"energy": 128000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_lumium"
+			},
+			"energy": 128000
+		},
+		{
+			"input": {
+				"item": "thermal:coin_enderium"
+			},
+			"energy": 192000
+		}
+	]
+}

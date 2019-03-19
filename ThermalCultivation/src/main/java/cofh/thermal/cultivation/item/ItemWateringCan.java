@@ -66,6 +66,7 @@ public class ItemWateringCan extends ItemFluidContainer implements IMultiModeIte
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 
+		tooltip.add(getInfoText("info.thermal.watering_can.0"));
 		if (displayShiftForDetail && !isShiftKeyDown()) {
 			tooltip.add(shiftForDetails());
 		}
@@ -73,8 +74,6 @@ public class ItemWateringCan extends ItemFluidContainer implements IMultiModeIte
 			return;
 		}
 		int radius = getRadius(stack) * 2 + 1;
-
-		tooltip.add(getInfoText("info.thermal.watering_can.0"));
 		tooltip.add(localize("info.cofh.area") + ": " + radius + "x" + radius);
 
 		if (getNumModes(stack) > 1) {

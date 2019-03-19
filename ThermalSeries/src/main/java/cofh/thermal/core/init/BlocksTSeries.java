@@ -18,8 +18,7 @@ import static cofh.lib.util.Constants.*;
 import static cofh.thermal.core.ThermalSeries.registerBlock;
 import static cofh.thermal.core.init.ConfigTSeries.fuelCoal;
 import static cofh.thermal.core.init.ConfigTSeries.fuelCoalCoke;
-import static cofh.thermal.core.init.ItemsTSeries.dustNiter;
-import static cofh.thermal.core.init.ItemsTSeries.dustSulfur;
+import static cofh.thermal.core.init.ItemsTSeries.*;
 
 public class BlocksTSeries {
 
@@ -32,7 +31,7 @@ public class BlocksTSeries {
 
 		((BlockOre) blockOreSulfur).addDrop(new RandomDrop(dustSulfur, 2, 4));
 		((BlockOre) blockOreNiter).addDrop(new RandomDrop(dustNiter, 2, 4));
-		//  ((BlockOre)blockOreCinnabar).addDrop(new RandomDrop(itemCinnabar, 1, 3));
+		((BlockOre) blockOreCinnabar).addDrop(new RandomDrop(mineralCinnabar, 1, 2));
 
 		// TODO: Fix
 		//  blockOreFluidExperience.addDrop(new RandomDrop(new ItemStack(Items.DYE, 1, EnumDyeColor.BLUE.getDyeDamage()), 2, 4));

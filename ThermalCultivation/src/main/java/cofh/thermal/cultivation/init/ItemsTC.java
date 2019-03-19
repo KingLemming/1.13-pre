@@ -86,7 +86,7 @@ public class ItemsTC {
 		itemWateringCanBasic = createWateringCan("basic", 4000, 1, 40);
 		itemWateringCanCreative = (ItemWateringCan) createWateringCan("creative", 2000, 5, 200).setRarity(EnumRarity.EPIC).setCreative(true);
 
-		itemScytheBasic = createScythe("basic", 20000, 2);
+		itemScytheBasic = createScythe("basic", 20000, 1);
 		itemScytheCreative = (ItemRFScythe) createScythe("creative", 1000, 5).setRarity(EnumRarity.EPIC).setCreative(true);
 
 		registerItem("watering_can_basic", itemWateringCanBasic, CreativeTabsTSeries.tabTools);

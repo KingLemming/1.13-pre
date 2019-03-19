@@ -43,6 +43,10 @@ public class GuiHelper {
 		return (ElementFluidStorage) new ElementFluidStorage(gui, posX, posY, storage).setOverlayTexture(overlayTexture).setSize(width, height).setTexture(texture, texW, texH);
 	}
 
+	public static final int DURATION = 16;
+	public static final int PROGRESS = 24;
+	public static final int SPEED = 16;
+
 	// region ELEMENTS
 	public static final String PROG_ARROW_LEFT = PATH_ELEMENTS + "progress_arrow_left.png";
 	public static final String PROG_ARROW_RIGHT = PATH_ELEMENTS + "progress_arrow_right.png";

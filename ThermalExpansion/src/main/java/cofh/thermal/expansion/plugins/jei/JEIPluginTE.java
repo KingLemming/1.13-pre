@@ -1,6 +1,10 @@
 package cofh.thermal.expansion.plugins.jei;
 
 import cofh.thermal.core.plugins.jei.JEIPluginTSeries;
+import cofh.thermal.expansion.plugins.jei.dynamo.compression.CompressionFuelCategory;
+import cofh.thermal.expansion.plugins.jei.dynamo.lapidary.LapidaryFuelCategory;
+import cofh.thermal.expansion.plugins.jei.dynamo.magmatic.MagmaticFuelCategory;
+import cofh.thermal.expansion.plugins.jei.dynamo.numismatic.NumismaticFuelCategory;
 import cofh.thermal.expansion.plugins.jei.dynamo.stirling.StirlingFuelCategory;
 import cofh.thermal.expansion.plugins.jei.machine.brewer.BrewerRecipeCategory;
 import cofh.thermal.expansion.plugins.jei.machine.centrifuge.CentrifugeRecipeCategory;
@@ -28,6 +32,10 @@ public class JEIPluginTE implements IModPlugin {
 		JEIPluginTSeries.addCategory(new BrewerRecipeCategory(BREWER));
 
 		JEIPluginTSeries.addCategory(new StirlingFuelCategory(STIRLING));
+		JEIPluginTSeries.addCategory(new CompressionFuelCategory(COMPRESSION));
+		JEIPluginTSeries.addCategory(new MagmaticFuelCategory(MAGMATIC));
+		JEIPluginTSeries.addCategory(new NumismaticFuelCategory(NUMISMATIC));
+		JEIPluginTSeries.addCategory(new LapidaryFuelCategory(LAPIDARY));
 	}
 
 	public static final String FURNACE = "thermal:machine_furnace";
@@ -40,4 +48,8 @@ public class JEIPluginTE implements IModPlugin {
 	public static final String BREWER = "thermal:machine_brewer";
 
 	public static final String STIRLING = "thermal:dynamo_stirling";
+	public static final String COMPRESSION = "thermal:dynamo_compression";
+	public static final String MAGMATIC = "thermal:dynamo_magmatic";
+	public static final String NUMISMATIC = "thermal:dynamo_numismatic";
+	public static final String LAPIDARY = "thermal:dynamo_lapidary";
 }

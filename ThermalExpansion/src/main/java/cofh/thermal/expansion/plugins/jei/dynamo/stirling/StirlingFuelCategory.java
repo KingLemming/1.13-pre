@@ -61,17 +61,26 @@ public class StirlingFuelCategory extends BaseRecipeCategory<StirlingFuelWrapper
 		IJeiHelpers jeiHelpers = registry.getJeiHelpers();
 		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 
-		registry.addRecipes(getFuels(guiHelper), uId);
+		registry.addRecipes(getFuels(guiHelper, registry), uId);
 		registry.addRecipeClickArea(GuiDynamoStirling.class, 115, 35, 16, 16, uId);
 		registry.addRecipeCatalyst(BlocksTE.dynamoStirling, uId);
 	}
 
-	private static List<StirlingFuelWrapper> getFuels(IGuiHelper guiHelper) {
+	private static List<StirlingFuelWrapper> getFuels(IGuiHelper guiHelper, IModRegistry registry) {
 
 		List<StirlingFuelWrapper> fuels = new ArrayList<>();
 
 		for (IDynamoFuel fuel : StirlingFuelManager.instance().getFuelList()) {
 			fuels.add(new StirlingFuelWrapper(guiHelper, fuel));
+		}
+		for (ItemStack stack : registry.getIngredientRegistry().getFuels()) {
+			if (StirlingFuelManager.instance().validFuel(stack)) {
+				continue;
+			}
+			int energy = StirlingFuelManager.getEnergyFurnaceFuel(stack);
+			if (energy > 0) {
+				fuels.add(new StirlingFuelWrapper(guiHelper, stack, energy));
+			}
 		}
 		return fuels;
 	}
@@ -88,11 +97,9 @@ public class StirlingFuelCategory extends BaseRecipeCategory<StirlingFuelWrapper
 	public void setRecipe(IRecipeLayout recipeLayout, StirlingFuelWrapper fuelWrapper, IIngredients ingredients) {
 
 		List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);
-
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
 		guiItemStacks.init(0, true, 33, 23);
-
 		guiItemStacks.set(0, inputs.get(0));
 	}
 	// endregion

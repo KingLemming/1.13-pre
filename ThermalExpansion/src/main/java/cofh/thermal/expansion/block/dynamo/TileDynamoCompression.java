@@ -16,7 +16,7 @@ public class TileDynamoCompression extends TileDynamo {
 
 	public TileDynamoCompression() {
 
-		super(DynamosTE.MAGMATIC);
+		super(DynamosTE.COMPRESSION);
 
 		tankInv.addTank(fuelTank, INPUT);
 		// tankInv.addTank(new FluidStorageCoFH(TANK_SMALL), INPUT); // TODO: Coolant

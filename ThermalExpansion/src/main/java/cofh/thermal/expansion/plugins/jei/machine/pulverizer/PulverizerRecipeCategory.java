@@ -5,7 +5,7 @@ import cofh.thermal.core.ThermalSeries;
 import cofh.thermal.core.plugins.jei.BaseRecipeCategory;
 import cofh.thermal.core.plugins.jei.Drawables;
 import cofh.thermal.core.util.recipes.IMachineRecipe;
-import cofh.thermal.expansion.gui.client.machine.GuiMachinePulverizer;
+import cofh.thermal.expansion.gui.client.machine.process.GuiMachinePulverizer;
 import cofh.thermal.expansion.init.BlocksTE;
 import cofh.thermal.expansion.util.managers.machine.PulverizerRecipeManager;
 import mezz.jei.api.IGuiHelper;

@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static cofh.lib.util.Constants.BASE_CHANCE_LOCKED;
-
 public abstract class AbstractRecipe implements IMachineRecipe {
 
 	protected final List<ItemStack> inputItems = new ArrayList<>();
@@ -61,8 +59,6 @@ public abstract class AbstractRecipe implements IMachineRecipe {
 		for (int i = 0; i < modifiedChances.size(); i++) {
 			if (modifiedChances.get(i) < 0.0F) {
 				modifiedChances.set(i, Math.abs(modifiedChances.get(i)));
-				System.out.println("CALLED THIS");
-				System.out.println(modifiedChances.get(i));
 			}
 		}
 		return modifiedChances;

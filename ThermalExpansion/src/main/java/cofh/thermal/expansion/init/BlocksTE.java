@@ -25,11 +25,16 @@ public class BlocksTE {
 		machineCentrifuge = registerBlock("machine_centrifuge", new ItemBlockCoFH(new BlockMachine(CENTRIFUGE)));
 		machineCrucible = registerBlock("machine_crucible", new ItemBlockCoFH(new BlockMachine(CRUCIBLE)));
 		machineRefinery = registerBlock("machine_refinery", new ItemBlockCoFH(new BlockMachine(REFINERY)));
+		// machineCrafter = registerBlock("machine_crafter", new ItemBlockCoFH(new BlockMachine(CRAFTER)));
 		machineBrewer = registerBlock("machine_brewer", new ItemBlockCoFH(new BlockMachine(BREWER)));
+		// machineEnchanter = registerBlock("machine_enchanter", new ItemBlockCoFH(new BlockMachine(ENCHANTER)));
+		// machineWaterGen = registerBlock("machine_water_gen", new ItemBlockCoFH(new BlockMachine(WATER_GEN)));
 
 		dynamoStirling = registerBlock("dynamo_stirling", new ItemBlockCoFH(new BlockDynamo(STIRLING)));
 		dynamoCompression = registerBlock("dynamo_compression", new ItemBlockCoFH(new BlockDynamo(COMPRESSION)));
 		dynamoMagmatic = registerBlock("dynamo_magmatic", new ItemBlockCoFH(new BlockDynamo(MAGMATIC)));
+		dynamoNumismatic = registerBlock("dynamo_numismatic", new ItemBlockCoFH(new BlockDynamo(NUMISMATIC)));
+		dynamoLapidary = registerBlock("dynamo_lapidary", new ItemBlockCoFH(new BlockDynamo(LAPIDARY)));
 	}
 	// endregion
 
@@ -41,12 +46,18 @@ public class BlocksTE {
 	public static ItemStack machineCentrifuge;
 	public static ItemStack machineCrucible;
 	public static ItemStack machineRefinery;
+	public static ItemStack machineCrafter;
 	public static ItemStack machineBrewer;
+	public static ItemStack machineEnchanter;
+
+	public static ItemStack machineWaterGen;
 	// endregion
 
 	// region DYNAMOS
 	public static ItemStack dynamoStirling;
 	public static ItemStack dynamoCompression;
 	public static ItemStack dynamoMagmatic;
+	public static ItemStack dynamoNumismatic;
+	public static ItemStack dynamoLapidary;
 	// endregion
 }

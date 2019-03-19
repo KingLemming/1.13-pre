@@ -58,13 +58,13 @@ public class ItemPotionInjector extends ItemPotionContainer implements IMultiMod
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 
+		tooltip.add(getInfoText("info.thermal.potion_injector.0"));
 		if (displayShiftForDetail && !isShiftKeyDown()) {
 			tooltip.add(shiftForDetails());
 		}
 		if (!isShiftKeyDown()) {
 			return;
 		}
-		tooltip.add(getInfoText("info.thermal.potion_injector.0"));
 		tooltip.add(localize("info.thermal.potion_injector.1"));
 		tooltip.add(getNoticeText("info.thermal.potion_injector.2"));
 		tooltip.add(localizeFormat("info.thermal.potion_injector.a." + getMode(stack), getKeyName(KeyMultiModeItem.INSTANCE.getKey())));

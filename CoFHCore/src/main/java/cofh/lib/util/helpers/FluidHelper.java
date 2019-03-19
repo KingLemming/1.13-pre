@@ -1,9 +1,12 @@
 package cofh.lib.util.helpers;
 
 import com.google.common.collect.Lists;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -37,9 +40,19 @@ public class FluidHelper {
 
 	}
 
+	public static boolean isWater(IBlockState state) {
+
+		return (state.getBlock() == Blocks.WATER || state.getBlock() == Blocks.FLOWING_WATER) && state.getValue(BlockLiquid.LEVEL) == 0;
+	}
+
 	public static boolean isWater(FluidStack fluid) {
 
 		return FluidHelper.fluidsEqual(fluid, FluidRegistry.WATER);
+	}
+
+	public static boolean isLava(IBlockState state) {
+
+		return (state.getBlock() == Blocks.LAVA || state.getBlock() == Blocks.FLOWING_LAVA) && state.getValue(BlockLiquid.LEVEL) == 0;
 	}
 
 	public static boolean isLava(FluidStack fluid) {

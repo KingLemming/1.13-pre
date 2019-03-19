@@ -1,7 +1,10 @@
 package cofh.thermal.expansion.util.managers.dynamo;
 
 import cofh.thermal.core.util.managers.SimpleItemFuelManager;
+import cofh.thermal.core.util.recipes.IDynamoFuel;
+import net.minecraft.item.ItemStack;
 
+import static cofh.lib.util.Constants.PREFIX_GEM;
 import static cofh.thermal.core.ThermalSeries.config;
 
 public class LapidaryFuelManager extends SimpleItemFuelManager {
@@ -17,7 +20,17 @@ public class LapidaryFuelManager extends SimpleItemFuelManager {
 	private LapidaryFuelManager() {
 
 		super(DEFAULT_ENERGY);
+
+		defaultValidator.addPrefix(PREFIX_GEM);
 	}
+
+	// region HELPERS
+	public int getEnergy(ItemStack stack) {
+
+		IDynamoFuel fuel = getFuel(stack);
+		return fuel != null ? fuel.getEnergy() : 0;
+	}
+	// endregion
 
 	// region IManager
 	@Override

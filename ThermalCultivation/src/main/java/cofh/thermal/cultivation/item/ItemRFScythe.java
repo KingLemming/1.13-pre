@@ -63,6 +63,7 @@ public class ItemRFScythe extends ItemRFContainer implements IMultiModeItem {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 
+		tooltip.add(getInfoText("info.thermal.rf_scythe.0"));
 		if (displayShiftForDetail && !isShiftKeyDown()) {
 			tooltip.add(shiftForDetails());
 		}
@@ -70,8 +71,6 @@ public class ItemRFScythe extends ItemRFContainer implements IMultiModeItem {
 			return;
 		}
 		int radius = getRadius(stack) * 2 + 1;
-
-		tooltip.add(getInfoText("info.thermal.rf_scythe.0"));
 		tooltip.add(localize("info.cofh.area") + ": " + radius + "x" + radius);
 
 		if (getNumModes(stack) > 1) {

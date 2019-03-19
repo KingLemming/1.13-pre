@@ -1,0 +1,10 @@
+{
+	"fuel_gourmand": [
+		{
+			"input": {
+				"item": "minecraft:cake"
+			},
+			"energy": 19200
+		}
+	]
+}

@@ -21,12 +21,12 @@ public class TileDynamoStirling extends TileDynamo {
 	// region PROCESS
 	protected boolean canProcessStart() {
 
-		return StirlingFuelManager.getEnergyFurnaceFuel(fuelSlot.getItemStack()) > 0;
+		return StirlingFuelManager.instance().getEnergy(fuelSlot.getItemStack()) > 0;
 	}
 
 	protected void processStart() {
 
-		fuel += StirlingFuelManager.getEnergyFurnaceFuel(fuelSlot.getItemStack());
+		fuel += StirlingFuelManager.instance().getEnergy(fuelSlot.getItemStack());
 		fuelSlot.consume();
 	}
 	// endregion

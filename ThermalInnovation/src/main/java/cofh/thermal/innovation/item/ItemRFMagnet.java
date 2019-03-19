@@ -66,13 +66,13 @@ public class ItemRFMagnet extends ItemRFContainer implements IFilterContainerIte
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 
+		tooltip.add(getInfoText("info.thermal.rf_magnet.0"));
 		if (displayShiftForDetail && !isShiftKeyDown()) {
 			tooltip.add(shiftForDetails());
 		}
 		if (!isShiftKeyDown()) {
 			return;
 		}
-		tooltip.add(getInfoText("info.thermal.rf_magnet.0"));
 		tooltip.add(localize("info.thermal.rf_magnet.1"));
 		tooltip.add(getNoticeText("info.thermal.rf_magnet.2"));
 		tooltip.add(localizeFormat("info.thermal.rf_magnet.a." + getMode(stack), getKeyName(KeyMultiModeItem.INSTANCE.getKey())));

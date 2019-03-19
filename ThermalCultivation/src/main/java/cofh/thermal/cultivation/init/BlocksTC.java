@@ -4,9 +4,13 @@ import cofh.core.block.BlockCrop;
 import cofh.core.block.BlockCropPerennial;
 import cofh.core.block.BlockCropTall;
 import cofh.core.block.BlockCropTallPerennial;
+import cofh.core.item.ItemBlockCoFH;
+import cofh.thermal.core.block.BlockDynamo;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
 import static cofh.thermal.core.ThermalSeries.registerBlock;
+import static cofh.thermal.cultivation.init.DynamosTC.GOURMAND;
 import static cofh.thermal.cultivation.init.ItemsTC.*;
 
 public class BlocksTC {
@@ -56,6 +60,8 @@ public class BlocksTC {
 		plantCoffee = registerBlock("plant_coffee", new BlockCropPerennial());
 		plantTea = registerBlock("plant_tea", new BlockCropPerennial());
 		plantHops = registerBlock("plant_hops", new BlockCropTallPerennial());
+
+		dynamoGourmand = registerBlock("dynamo_gourmand", new ItemBlockCoFH(new BlockDynamo(GOURMAND)));
 	}
 	// endregion
 
@@ -77,5 +83,9 @@ public class BlocksTC {
 	public static Block plantCoffee;
 	public static Block plantTea;
 	public static Block plantHops;
+	// endregion
+
+	// region DYNAMOS
+	public static ItemStack dynamoGourmand;
 	// endregion
 }

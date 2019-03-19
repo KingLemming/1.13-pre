@@ -73,13 +73,13 @@ public class ItemRFSaw extends ItemRFTool implements IAreaEffectItem, IMultiMode
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 
+		tooltip.add(getInfoText("info.thermal.rf_saw.0"));
 		if (displayShiftForDetail && !isShiftKeyDown()) {
 			tooltip.add(shiftForDetails());
 		}
 		if (!isShiftKeyDown()) {
 			return;
 		}
-		tooltip.add(getInfoText("info.thermal.rf_saw.0"));
 		tooltip.add(localize("info.thermal.rf_saw.b." + getMode(stack)));
 		tooltip.add(localizeFormat("info.thermal.rf_saw.a.0", getKeyName(KeyMultiModeItem.INSTANCE.getKey())));
 

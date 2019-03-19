@@ -48,13 +48,13 @@ public class ItemRFPump extends ItemRFContainer implements IAreaEffectItem, IMul
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 
+		tooltip.add(getInfoText("info.thermal.rf_pump.0"));
 		if (displayShiftForDetail && !isShiftKeyDown()) {
 			tooltip.add(shiftForDetails());
 		}
 		if (!isShiftKeyDown()) {
 			return;
 		}
-		tooltip.add(getInfoText("info.thermal.rf_pump.0"));
 		tooltip.add(localize("info.thermal.rf_pump.b." + getMode(stack)));
 		tooltip.add(localizeFormat("info.thermal.rf_pump.a.0", getKeyName(KeyMultiModeItem.INSTANCE.getKey())));
 

@@ -58,14 +58,14 @@ public class ItemRFCapacitor extends ItemRFContainer implements IMultiModeItem, 
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 
+		tooltip.add(getInfoText("info.thermal.rf_capacitor.0"));
 		if (displayShiftForDetail && !isShiftKeyDown()) {
 			tooltip.add(shiftForDetails());
 		}
 		if (!isShiftKeyDown()) {
 			return;
 		}
-		tooltip.add(getInfoText("info.thermal.rf_capacitor.0"));
-
+		// TODO: Fix
 		if (isActive(stack)) {
 			tooltip.add(getNoticeText("info.thermal.rf_capacitor.b." + getMode(stack)));
 			//			tooltip.add(getDeactivationText("info.thermal.rf_capacitor.2"));

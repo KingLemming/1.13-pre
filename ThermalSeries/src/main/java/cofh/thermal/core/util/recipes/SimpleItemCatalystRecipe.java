@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static cofh.lib.util.Constants.BASE_CHANCE;
-import static cofh.lib.util.Constants.BASE_CHANCE_LOCKED;
 
 /**
  * Abstract catalyst-supporting recipe class - single item key'd, catalyst as 2nd input.

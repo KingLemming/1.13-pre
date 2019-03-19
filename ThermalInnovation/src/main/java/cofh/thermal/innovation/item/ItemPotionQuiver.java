@@ -62,13 +62,13 @@ public class ItemPotionQuiver extends ItemPotionContainer implements IMultiModeI
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 
+		tooltip.add(getInfoText("info.thermal.potion_quiver.0"));
 		if (displayShiftForDetail && !isShiftKeyDown()) {
 			tooltip.add(shiftForDetails());
 		}
 		if (!isShiftKeyDown()) {
 			return;
 		}
-		tooltip.add(getInfoText("info.thermal.potion_quiver.0"));
 		tooltip.add(localize("info.thermal.potion_quiver.1"));
 		tooltip.add(getNoticeText("info.thermal.potion_quiver.2"));
 		tooltip.add(localizeFormat("info.thermal.potion_quiver.a." + getMode(stack), getKeyName(KeyMultiModeItem.INSTANCE.getKey())));
