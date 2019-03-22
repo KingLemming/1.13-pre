@@ -2,11 +2,9 @@ package cofh.lib.util.control;
 
 import cofh.core.network.PacketBufferCoFH;
 import cofh.core.network.packet.server.PacketSecurity;
-import cofh.core.util.CoreUtils;
 import cofh.lib.util.Utils;
 import cofh.lib.util.helpers.SecurityHelper;
 import com.mojang.authlib.GameProfile;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.UUID;
@@ -81,6 +79,18 @@ public class SecurityControlModule implements ISecurable {
 	}
 
 	@Override
+	public AccessMode getAccess() {
+
+		return access;
+	}
+
+	@Override
+	public GameProfile getOwner() {
+
+		return owner;
+	}
+
+	@Override
 	public void setAccess(AccessMode access) {
 
 		this.access = access;
@@ -95,18 +105,6 @@ public class SecurityControlModule implements ISecurable {
 		if (SecurityHelper.isDefaultProfile(owner)) {
 			owner = profile;
 		}
-	}
-
-	@Override
-	public AccessMode getAccess() {
-
-		return access;
-	}
-
-	@Override
-	public GameProfile getOwner() {
-
-		return owner;
 	}
 	// endregion
 }

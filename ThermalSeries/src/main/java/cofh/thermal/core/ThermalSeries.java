@@ -98,8 +98,6 @@ public class ThermalSeries {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 
-		BlocksTSeries.initialize();
-
 		proxy.initialize(event);
 	}
 

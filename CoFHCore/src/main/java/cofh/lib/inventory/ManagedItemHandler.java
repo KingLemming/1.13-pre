@@ -51,7 +51,7 @@ public class ManagedItemHandler implements IItemHandler {
 	@Override
 	public ItemStack getStackInSlot(int slot) {
 
-		if (slot < 0 || slot > getSlots()) {
+		if (slot < 0 || slot >= getSlots()) {
 			return ItemStack.EMPTY;
 		}
 		return slots.get(slot).getItemStack();
@@ -61,7 +61,7 @@ public class ManagedItemHandler implements IItemHandler {
 	@Override
 	public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
 
-		if (slot < 0 || slot > getSlots()) {
+		if (slot < 0 || slot >= inputSlots.size()) {
 			return stack;
 		}
 		ItemStack ret = inputSlots.get(slot).insertItem(slot, stack, simulate);
@@ -76,7 +76,7 @@ public class ManagedItemHandler implements IItemHandler {
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate) {
 
-		if (slot < 0 || slot > getSlots()) {
+		if (slot < 0 || slot >= outputSlots.size()) {
 			return ItemStack.EMPTY;
 		}
 		ItemStack ret = outputSlots.get(slot).extractItem(slot, amount, simulate);

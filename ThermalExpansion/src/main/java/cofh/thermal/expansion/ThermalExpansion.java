@@ -31,7 +31,7 @@ public class ThermalExpansion implements IModule {
 
 	public static final String MOD_ID = ID_THERMAL_EXPANSION;
 	public static final String MOD_NAME = "Thermal Expansion";
-	public static final String DEPENDENCIES = "required-after:" + ID_COFH_CORE + ";required-before:" + ID_THERMAL_SERIES;
+	public static final String DEPENDENCIES = "required-after:" + ID_COFH_CORE + ";required-before:" + ID_THERMAL_SERIES + ";after:" + ID_THERMAL_FOUNDATION;
 
 	@Instance (MOD_ID)
 	public static ThermalExpansion instance;

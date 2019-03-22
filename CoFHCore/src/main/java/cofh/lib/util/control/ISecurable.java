@@ -11,13 +11,13 @@ import static cofh.lib.util.helpers.SecurityHelper.isDefaultUUID;
 
 public interface ISecurable {
 
-	void setAccess(AccessMode access);
-
-	void setOwner(GameProfile profile);
-
 	AccessMode getAccess();
 
 	GameProfile getOwner();
+
+	void setAccess(AccessMode access);
+
+	void setOwner(GameProfile profile);
 
 	default String getOwnerName() {
 

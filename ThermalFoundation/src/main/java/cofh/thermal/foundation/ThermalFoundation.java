@@ -47,6 +47,8 @@ public class ThermalFoundation implements IModule {
 	@EventHandler
 	public void initialize(FMLInitializationEvent event) {
 
+		BlocksTF.initialize();
+
 		proxy.initialize(event);
 	}
 

@@ -22,7 +22,7 @@ import static cofh.lib.util.helpers.ItemHelper.itemsIdentical;
 
 public class TileMachineRefinery extends TileMachineProcess {
 
-	private FluidStack renderFluid = new FluidStack(FluidRegistry.WATER, 0);
+	protected FluidStack renderFluid = new FluidStack(FluidRegistry.WATER, 0);
 
 	protected ItemStorageCoFH outputSlot = new ItemStorageCoFH();
 	protected FluidStorageCoFH inputTank = new FluidStorageCoFH(TANK_SMALL, RefineryRecipeManager.instance()::validRecipe);

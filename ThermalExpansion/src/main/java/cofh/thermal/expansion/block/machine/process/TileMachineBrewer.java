@@ -18,6 +18,7 @@ import static cofh.lib.util.StorageGroup.OUTPUT;
 public class TileMachineBrewer extends TileMachineProcess {
 
 	protected FluidStack renderFluid = new FluidStack(FluidsTSeries.fluidPotion, 0);
+
 	protected ItemStorageCoFH inputSlot = new ItemStorageCoFH(BrewerRecipeManager.instance()::validItem);
 	protected FluidStorageCoFH inputTank = new FluidStorageCoFH(TANK_SMALL, BrewerRecipeManager.instance()::validFluid);
 	protected FluidStorageCoFH outputTank = new FluidStorageCoFH(TANK_MEDIUM);

@@ -15,7 +15,7 @@ import static cofh.lib.util.StorageGroup.*;
 // TODO: Finish
 public class TileMachineCrafter extends TileMachineProcess {
 
-	private FluidStack renderFluid = new FluidStack(FluidRegistry.WATER, 0);
+	protected FluidStack renderFluid = new FluidStack(FluidRegistry.WATER, 0);
 
 	protected FluidStorageCoFH inputTank = new FluidStorageCoFH(TANK_SMALL);
 

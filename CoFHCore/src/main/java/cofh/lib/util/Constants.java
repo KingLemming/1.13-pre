@@ -152,6 +152,7 @@ public class Constants {
 	public static final String TAG_SECURE = "Secure";
 	public static final String TAG_SECURITY = "Security";
 	public static final String TAG_SIDE_CONFIG = "SideConfig";
+	public static final String TAG_SIDES = "Sides";
 	public static final String TAG_SLOT = "Slot";
 	public static final String TAG_TANK = "Tank";
 	public static final String TAG_TANK_ARRAY = "TankArray";

@@ -2,11 +2,13 @@ package cofh.thermal.expansion.block.machine.process;
 
 import cofh.core.network.PacketBufferCoFH;
 import cofh.lib.fluid.FluidStorageCoFH;
+import cofh.lib.inventory.InventoryCraftingFalse;
 import cofh.lib.inventory.ItemStorageCoFH;
 import cofh.lib.util.helpers.FluidHelper;
 import cofh.thermal.core.block.machine.TileMachineProcess;
 import cofh.thermal.expansion.init.MachinesTE;
 import cofh.thermal.expansion.util.managers.machine.CrucibleRecipeManager;
+import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -19,8 +21,12 @@ import static cofh.lib.util.StorageGroup.OUTPUT;
 public class TileMachineCrucible extends TileMachineProcess {
 
 	protected FluidStack renderFluid = new FluidStack(FluidRegistry.LAVA, 0);
+
 	protected ItemStorageCoFH inputSlot = new ItemStorageCoFH(CrucibleRecipeManager.instance()::validRecipe);
 	protected FluidStorageCoFH outputTank = new FluidStorageCoFH(TANK_MEDIUM);
+
+	private InventoryCraftingFalse craftMatrix = new InventoryCraftingFalse(3, 3);
+	private InventoryCraftResult craftResult = new InventoryCraftResult();
 
 	public TileMachineCrucible() {
 

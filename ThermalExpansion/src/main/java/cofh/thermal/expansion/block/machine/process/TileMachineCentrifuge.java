@@ -23,6 +23,7 @@ import static cofh.lib.util.helpers.ItemHelper.itemsIdentical;
 public class TileMachineCentrifuge extends TileMachineProcess {
 
 	protected FluidStack renderFluid = new FluidStack(FluidRegistry.WATER, 0);
+
 	protected ItemStorageCoFH inputSlot = new ItemStorageCoFH(CentrifugeRecipeManager.instance()::validRecipe);
 	protected FluidStorageCoFH outputTank = new FluidStorageCoFH(TANK_SMALL);
 

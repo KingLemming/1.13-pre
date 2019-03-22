@@ -31,7 +31,7 @@ public class ThermalCultivation implements IModule {
 
 	public static final String MOD_ID = ID_THERMAL_CULTIVATION;
 	public static final String MOD_NAME = "Thermal Cultivation";
-	public static final String DEPENDENCIES = "required-after:" + ID_COFH_CORE + ";required-before:" + ID_THERMAL_SERIES;
+	public static final String DEPENDENCIES = "required-after:" + ID_COFH_CORE + ";required-before:" + ID_THERMAL_SERIES + ";after:" + ID_THERMAL_EXPANSION;
 
 	@Instance (MOD_ID)
 	public static ThermalCultivation instance;

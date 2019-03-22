@@ -2,7 +2,6 @@ package cofh.lib.util.control;
 
 import cofh.lib.block.ITileCallback;
 import com.mojang.authlib.GameProfile;
-import net.minecraft.entity.player.EntityPlayer;
 
 public interface ISecurableTile extends ISecurable, ITileCallback {
 
