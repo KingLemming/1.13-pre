@@ -2,6 +2,7 @@ package cofh.core.block;
 
 import cofh.lib.util.RandomDrop;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -26,6 +27,18 @@ public class BlockCoFH extends Block {
 	public BlockCoFH(Material blockMaterial, MapColor color) {
 
 		super(blockMaterial, color);
+	}
+
+	public BlockCoFH setLightLevel(int value) {
+
+		this.lightValue = value;
+		return this;
+	}
+
+	public BlockCoFH setSoundType(SoundType sound) {
+
+		this.blockSoundType = sound;
+		return this;
 	}
 
 	public BlockCoFH setHarvestParams(String toolClass, int level) {

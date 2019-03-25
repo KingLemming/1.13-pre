@@ -1,0 +1,82 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"shape": {
+			"north_south": {
+				"model": "rail_flat",
+				"textures": {
+					"rail": "thermal:blocks/rails/rail_reinforced"
+				}
+			},
+			"east_west": {
+				"model": "rail_flat",
+				"textures": {
+					"rail": "thermal:blocks/rails/rail_reinforced"
+				},
+				"y": 90
+			},
+			"ascending_east": {
+				"model": "rail_raised_ne",
+				"textures": {
+					"rail": "thermal:blocks/rails/rail_reinforced"
+				},
+				"y": 90
+			},
+			"ascending_west": {
+				"model": "rail_raised_sw",
+				"textures": {
+					"rail": "thermal:blocks/rails/rail_reinforced"
+				},
+				"y": 90
+			},
+			"ascending_north": {
+				"model": "rail_raised_ne",
+				"textures": {
+					"rail": "thermal:blocks/rails/rail_reinforced"
+				}
+			},
+			"ascending_south": {
+				"model": "rail_raised_sw",
+				"textures": {
+					"rail": "thermal:blocks/rails/rail_reinforced"
+				}
+			},
+			"south_east": {
+				"model": "rail_curved",
+				"textures": {
+					"rail": "thermal:blocks/rails/rail_reinforced_corner"
+				}
+			},
+			"south_west": {
+				"model": "rail_curved",
+				"textures": {
+					"rail": "thermal:blocks/rails/rail_reinforced_corner"
+				},
+				"y": 90
+			},
+			"north_west": {
+				"model": "rail_curved",
+				"textures": {
+					"rail": "thermal:blocks/rails/rail_reinforced_corner"
+				},
+				"y": 180
+			},
+			"north_east": {
+				"model": "rail_curved",
+				"textures": {
+					"rail": "thermal:blocks/rails/rail_reinforced_corner"
+				},
+				"y": 270
+			}
+		},
+		"inventory": [
+			{
+				"model": "builtin/generated",
+				"textures": {
+					"layer0": "thermal:blocks/rails/rail_reinforced"
+				},
+				"transform": "forge:default-item"
+			}
+		]
+	}
+}

@@ -1,4 +1,4 @@
-package cofh.core.block;
+package cofh.core.block.crops;
 
 import cofh.lib.util.Utils;
 import net.minecraft.block.material.MapColor;

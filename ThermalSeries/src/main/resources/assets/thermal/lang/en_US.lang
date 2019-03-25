@@ -558,6 +558,10 @@ tile.thermal.block_steel.name=Block of Steel
 tile.thermal.dynamo_gourmand.name=Gourmand Dynamo
 
 #=======================================================================================================================
+# BLOCKS - DYNAMICS
+#=======================================================================================================================
+
+#=======================================================================================================================
 # BLOCKS - EXPANSION
 #=======================================================================================================================
 
@@ -587,3 +591,11 @@ tile.thermal.machine_brewer.name=Alchemical Imbuer
 tile.thermal.machine_enchanter.name=Arcane Ensorcellator
 
 tile.thermal.machine_water_gen.name=Aqueous Accumulator
+
+#=======================================================================================================================
+# BLOCKS - LOCOMOTION
+#=======================================================================================================================
+
+tile.thermal.rail_wood.name=Wooden Rail
+tile.thermal.rail_reinforced.name=Reinforced Rail
+tile.thermal.rail_lumium.name=Lumium Rail

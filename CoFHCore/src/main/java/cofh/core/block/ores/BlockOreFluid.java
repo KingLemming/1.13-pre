@@ -1,5 +1,6 @@
-package cofh.core.block;
+package cofh.core.block.ores;
 
+import cofh.core.block.BlockCoFH;
 import cofh.core.fluid.BlockFluidCoFH;
 import cofh.lib.render.particle.EntityDropParticleFX;
 import cofh.lib.util.Utils;

@@ -104,7 +104,7 @@ public class FluidHelper {
 			return;
 		}
 		List<PotionEffect> effects = PotionUtils.getEffectsFromTag(stack.tag);
-		List<Tuple<String, AttributeModifier>> list1 = Lists.<Tuple<String, AttributeModifier>>newArrayList();
+		List<Tuple<String, AttributeModifier>> list1 = Lists.newArrayList();
 
 		if (effects.isEmpty()) {
 			String s = StringHelper.localize("effect.none").trim();

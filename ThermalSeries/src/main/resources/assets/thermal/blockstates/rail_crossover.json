@@ -1,0 +1,29 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"shape": {
+			"north_south": {
+				"model": "rail_flat",
+				"textures": {
+					"rail": "thermal:blocks/rails/rail_crossover"
+				}
+			},
+			"east_west": {
+				"model": "rail_flat",
+				"textures": {
+					"rail": "thermal:blocks/rails/rail_crossover"
+				},
+				"y": 90
+			}
+		},
+		"inventory": [
+			{
+				"model": "builtin/generated",
+				"textures": {
+					"layer0": "thermal:blocks/rails/rail_crossover"
+				},
+				"transform": "forge:default-item"
+			}
+		]
+	}
+}

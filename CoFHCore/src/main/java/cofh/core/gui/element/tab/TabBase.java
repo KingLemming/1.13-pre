@@ -89,13 +89,10 @@ public abstract class TabBase extends ElementBase {
 		shiftY += offsetY;
 
 		if (side == LEFT) {
-			if (mouseX <= shiftX && mouseX >= shiftX - width && mouseY >= shiftY && mouseY <= shiftY + height) {
-				return true;
-			}
-		} else if (mouseX >= shiftX && mouseX <= shiftX + width && mouseY >= shiftY && mouseY <= shiftY + height) {
-			return true;
+			return mouseX <= shiftX && mouseX >= shiftX - width && mouseY >= shiftY && mouseY <= shiftY + height;
+		} else {
+			return mouseX >= shiftX && mouseX <= shiftX + width && mouseY >= shiftY && mouseY <= shiftY + height;
 		}
-		return false;
 	}
 
 	protected void drawTabIcon(TextureAtlasSprite iconName) {

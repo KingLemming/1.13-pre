@@ -1,9 +1,9 @@
 package cofh.thermal.cultivation.init;
 
-import cofh.core.block.BlockCrop;
-import cofh.core.block.BlockCropPerennial;
-import cofh.core.block.BlockCropTall;
-import cofh.core.block.BlockCropTallPerennial;
+import cofh.core.block.crops.BlockCrop;
+import cofh.core.block.crops.BlockCropPerennial;
+import cofh.core.block.crops.BlockCropTall;
+import cofh.core.block.crops.BlockCropTallPerennial;
 import cofh.core.item.ItemBlockCoFH;
 import cofh.thermal.core.block.BlockDynamo;
 import net.minecraft.block.Block;

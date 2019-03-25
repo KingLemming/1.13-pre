@@ -1,6 +1,6 @@
 package cofh.redstonearsenal.block;
 
-import cofh.core.block.BlockStorageMetal;
+import cofh.core.block.storage.BlockStorageMetal;
 import cofh.lib.util.helpers.BaublesHelper;
 import cofh.lib.util.helpers.DamageHelper;
 import cofh.lib.util.helpers.EnergyHelper;

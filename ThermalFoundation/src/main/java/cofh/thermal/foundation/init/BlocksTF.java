@@ -1,7 +1,7 @@
 package cofh.thermal.foundation.init;
 
-import cofh.core.block.BlockOre;
-import cofh.core.block.BlockStorageMetal;
+import cofh.core.block.ores.BlockOre;
+import cofh.core.block.storage.BlockStorageMetal;
 import cofh.core.item.ItemBlockCoFH;
 import cofh.lib.util.RandomDrop;
 import net.minecraft.block.Block;

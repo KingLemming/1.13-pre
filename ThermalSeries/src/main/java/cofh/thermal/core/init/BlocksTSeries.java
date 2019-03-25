@@ -1,12 +1,9 @@
 package cofh.thermal.core.init;
 
-import cofh.core.block.BlockOre;
-import cofh.core.block.BlockStorageMetal;
-import cofh.core.block.BlockStorageResource;
+import cofh.core.block.storage.BlockStorageMetal;
+import cofh.core.block.storage.BlockStorageResource;
 import cofh.core.item.ItemBlockCoFH;
 import cofh.core.item.ItemBlockFuel;
-import cofh.lib.util.RandomDrop;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -19,7 +16,6 @@ import static cofh.lib.util.Constants.TOOL_PICKAXE;
 import static cofh.thermal.core.ThermalSeries.registerBlock;
 import static cofh.thermal.core.init.ConfigTSeries.fuelCoal;
 import static cofh.thermal.core.init.ConfigTSeries.fuelCoalCoke;
-import static cofh.thermal.core.init.ItemsTSeries.*;
 
 public class BlocksTSeries {
 

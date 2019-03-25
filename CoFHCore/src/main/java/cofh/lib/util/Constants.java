@@ -1,13 +1,16 @@
 package cofh.lib.util;
 
+import net.minecraft.block.BlockRailBase.EnumRailDirection;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumFacing.Plane;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fluids.Fluid;
 
 import java.util.UUID;
+import java.util.function.Predicate;
 
 public class Constants {
 
@@ -28,7 +31,15 @@ public class Constants {
 	public static final PropertyInteger AGE_TALL = PropertyInteger.create("age", 0, 11);
 	public static final PropertyInteger AGE_TALL_PERENNIAL = PropertyInteger.create("age", 0, 15);
 	public static final PropertyDirection FACING_ALL = PropertyDirection.create("facing");
-	public static final PropertyDirection FACING_HORIZONTAL = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	public static final PropertyDirection FACING_HORIZONTAL = PropertyDirection.create("facing", Plane.HORIZONTAL);
+
+	private static final Predicate<EnumRailDirection> PRED_STRAIGHT = dir -> dir != EnumRailDirection.NORTH_EAST && dir != EnumRailDirection.NORTH_WEST && dir != EnumRailDirection.SOUTH_EAST && dir != EnumRailDirection.SOUTH_WEST;
+	private static final Predicate<EnumRailDirection> PRED_NO_SLOPE = dir -> dir != EnumRailDirection.ASCENDING_EAST && dir != EnumRailDirection.ASCENDING_WEST && dir != EnumRailDirection.ASCENDING_NORTH && dir != EnumRailDirection.ASCENDING_SOUTH;
+
+	public static final PropertyEnum<EnumRailDirection> RAIL = PropertyEnum.create("shape", EnumRailDirection.class);
+	public static final PropertyEnum<EnumRailDirection> RAIL_STRAIGHT = PropertyEnum.create("shape", EnumRailDirection.class, PRED_STRAIGHT::test);
+	public static final PropertyEnum<EnumRailDirection> RAIL_FLAT = PropertyEnum.create("shape", EnumRailDirection.class, PRED_NO_SLOPE::test);
+	public static final PropertyEnum<EnumRailDirection> RAIL_STRAIGHT_FLAT = PropertyEnum.create("shape", EnumRailDirection.class, dir -> PRED_STRAIGHT.test(dir) && PRED_NO_SLOPE.test(dir));
 
 	@Deprecated // Remove in 1.13, UnlistedProperties have been changed up.
 	public static final UnlistedMapProperty<String, String> MODEL_PROPERTIES = new UnlistedMapProperty<>("model_properties");
@@ -187,6 +198,7 @@ public class Constants {
 	public static final String GROUP_ORES = "ores";
 	public static final String GROUP_NUGGETS = "nuggets";
 	public static final String GROUP_PLATES = "plates";
+	public static final String GROUP_RAILS = "rails";
 	public static final String GROUP_RESOURCES = "resources";
 	public static final String GROUP_RODS = "rods";
 	public static final String GROUP_SEEDS = "seeds";

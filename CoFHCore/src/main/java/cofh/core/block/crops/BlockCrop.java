@@ -1,5 +1,6 @@
-package cofh.core.block;
+package cofh.core.block.crops;
 
+import cofh.core.block.BlockCoFH;
 import cofh.lib.block.IHarvestable;
 import cofh.lib.util.Utils;
 import net.minecraft.block.Block;

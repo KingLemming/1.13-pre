@@ -2,14 +2,17 @@ package cofh.thermal.locomotion;
 
 import cofh.lib.util.IModule;
 import cofh.thermal.core.ThermalSeries;
+import cofh.thermal.locomotion.init.BlocksTL;
+import cofh.thermal.locomotion.init.RecipesTL;
+import cofh.thermal.locomotion.proxy.ProxyCommon;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -27,8 +30,8 @@ public class ThermalLocomotion implements IModule {
 	@Instance (MOD_ID)
 	public static ThermalLocomotion instance;
 
-	//	@SidedProxy (clientSide = "cofh.thermal.locomotion.proxy.ProxyClient", serverSide = "cofh.thermal.locomotion.proxy.ProxyCommon")
-	//	public static ProxyCommon proxy;
+	@SidedProxy (clientSide = "cofh.thermal.locomotion.proxy.ProxyClient", serverSide = "cofh.thermal.locomotion.proxy.ProxyCommon")
+	public static ProxyCommon proxy;
 
 	// region INITIALIZATION
 	@EventHandler
@@ -36,19 +39,19 @@ public class ThermalLocomotion implements IModule {
 
 		ThermalSeries.addModule(instance);
 
-		// proxy.preInit(event);
+		proxy.preInit(event);
 	}
 
 	@EventHandler
 	public void initialize(FMLInitializationEvent event) {
 
-		// proxy.initialize(event);
+		proxy.initialize(event);
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 
-		// proxy.postInit(event);
+		proxy.postInit(event);
 	}
 	// endregion
 
@@ -56,6 +59,7 @@ public class ThermalLocomotion implements IModule {
 	@Override
 	public void registerBlocks(RegistryEvent.Register<Block> event) {
 
+		BlocksTL.registerBlocks();
 	}
 
 	@Override
@@ -68,20 +72,10 @@ public class ThermalLocomotion implements IModule {
 
 	}
 
-	// TODO: Placeholder for 1.13.
-	@Override
-	public void registerFluids() {
-
-	}
-
 	@Override
 	public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 
-	}
-
-	@Override
-	public void registerSoundEvents(RegistryEvent.Register<SoundEvent> event) {
-
+		RecipesTL.registerRecipes();
 	}
 	// endregion
 }
