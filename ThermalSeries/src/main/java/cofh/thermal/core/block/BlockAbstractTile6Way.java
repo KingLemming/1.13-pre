@@ -76,9 +76,7 @@ public class BlockAbstractTile6Way extends BlockTileCoFH {
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 
-		EnumFacing facing = EnumFacing.getFront(meta);
-		boolean active = meta >= 6;
-		return getDefaultState().withProperty(FACING_ALL, facing).withProperty(ACTIVE, active);
+		return getDefaultState().withProperty(FACING_ALL, EnumFacing.getFront(meta)).withProperty(ACTIVE, meta >= 6);
 	}
 	// endregion
 }

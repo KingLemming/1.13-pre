@@ -331,6 +331,9 @@ public abstract class AbstractContentParser implements IContentParser {
 	public static final String TYPE = "type";
 	public static final String WILDCARD = "wildcard";
 
+	public static final String LAVA = "lava";
+	public static final String WATER = "water";
+
 	public static final String RECIPE_TYPE_CROP_DEFAULT = "default-crop";
 	public static final String RECIPE_TYPE_LOG_DEFAULT = "default-log";
 	public static final String RECIPE_TYPE_ORE_DEFAULT = "default-ore";

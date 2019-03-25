@@ -555,6 +555,8 @@ tile.thermal.block_steel.name=Block of Steel
 # BLOCKS - CULTIVATION
 #=======================================================================================================================
 
+tile.thermal.soil_infused.name=Infused Soil
+
 tile.thermal.dynamo_gourmand.name=Gourmand Dynamo
 
 #=======================================================================================================================
@@ -597,5 +599,12 @@ tile.thermal.machine_water_gen.name=Aqueous Accumulator
 #=======================================================================================================================
 
 tile.thermal.rail_wood.name=Wooden Rail
+tile.thermal.rail_wood_crossover.name=Wooden Crossover Rail
+
+tile.thermal.rail_crossover.name=Crossover Rail
+
 tile.thermal.rail_reinforced.name=Reinforced Rail
+tile.thermal.rail_reinforced_crossover.name=Reinforced Crossover Rail
+
 tile.thermal.rail_lumium.name=Lumium Rail
+tile.thermal.rail_lumium_crossover.name=Lumium Crossover Rail

@@ -52,14 +52,14 @@ public class BlockCrop extends BlockCoFH implements IGrowable, IPlantable, IHarv
 		this(Material.PLANTS, EnumPlantType.Crop);
 	}
 
-	public BlockCrop(Material blockMaterialIn, EnumPlantType type) {
+	public BlockCrop(Material blockMaterial, EnumPlantType type) {
 
-		this(blockMaterialIn, blockMaterialIn.getMaterialMapColor(), type);
+		this(blockMaterial, blockMaterial.getMaterialMapColor(), type);
 	}
 
-	public BlockCrop(Material blockMaterialIn, MapColor blockMapColorIn, EnumPlantType type) {
+	public BlockCrop(Material blockMaterial, MapColor color, EnumPlantType type) {
 
-		super(blockMaterialIn, blockMapColorIn);
+		super(blockMaterial, color);
 		this.type = type;
 
 		this.setTickRandomly(true);

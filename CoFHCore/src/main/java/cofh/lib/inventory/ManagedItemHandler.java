@@ -64,7 +64,7 @@ public class ManagedItemHandler implements IItemHandler {
 		if (slot < 0 || slot >= inputSlots.size()) {
 			return stack;
 		}
-		ItemStack ret = inputSlots.get(slot).insertItem(slot, stack, simulate);
+		ItemStack ret = slots.get(slot).insertItem(slot, stack, simulate);
 
 		if (tile != null && !simulate) {
 			tile.onInventoryChange(slot);
@@ -76,10 +76,10 @@ public class ManagedItemHandler implements IItemHandler {
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate) {
 
-		if (slot < 0 || slot >= outputSlots.size()) {
+		if (slot < 0 || slot >= slots.size()) {
 			return ItemStack.EMPTY;
 		}
-		ItemStack ret = outputSlots.get(slot).extractItem(slot, amount, simulate);
+		ItemStack ret = slots.get(slot).extractItem(slot, amount, simulate);
 
 		if (tile != null && !simulate) {
 			tile.onInventoryChange(slot);

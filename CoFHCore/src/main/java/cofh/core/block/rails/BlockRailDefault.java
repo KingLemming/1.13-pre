@@ -20,36 +20,36 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
-import static cofh.lib.util.Constants.RAIL;
+import static cofh.lib.util.Constants.RAIL_DEFAULT;
 
-public class BlockRailCoFH extends BlockRailBase implements IDismantleable {
+public class BlockRailDefault extends BlockRailBase implements IDismantleable {
 
 	protected float maxSpeed = 0.4F;
 
-	public BlockRailCoFH() {
+	public BlockRailDefault() {
 
 		this(false);
 	}
 
-	public BlockRailCoFH(boolean isPowered) {
+	public BlockRailDefault(boolean isPowered) {
 
 		super(isPowered);
 		setSoundType(SoundType.METAL);
 	}
 
-	public BlockRailCoFH setLightLevel(int value) {
+	public BlockRailDefault setLightLevel(int value) {
 
 		this.lightValue = value;
 		return this;
 	}
 
-	public BlockRailCoFH setSoundType(SoundType sound) {
+	public BlockRailDefault setSoundType(SoundType sound) {
 
 		this.blockSoundType = sound;
 		return this;
 	}
 
-	public BlockRailCoFH setMaxSpeed(float maxSpeed) {
+	public BlockRailDefault setMaxSpeed(float maxSpeed) {
 
 		this.maxSpeed = MathHelper.clamp(maxSpeed, 0F, 1F);
 		return this;
@@ -58,7 +58,7 @@ public class BlockRailCoFH extends BlockRailBase implements IDismantleable {
 	@Override
 	public IProperty<EnumRailDirection> getShapeProperty() {
 
-		return RAIL;
+		return RAIL_DEFAULT;
 	}
 
 	@Override
@@ -99,74 +99,75 @@ public class BlockRailCoFH extends BlockRailBase implements IDismantleable {
 	}
 
 	@Override
-	@SuppressWarnings ("incomplete-switch")
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
+
+		IProperty<EnumRailDirection> shape = getShapeProperty();
 
 		switch (rot) {
 			case CLOCKWISE_180:
-				switch (state.getValue(getShapeProperty())) {
+				switch (state.getValue(shape)) {
 					case ASCENDING_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_WEST);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_WEST);
 					case ASCENDING_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_EAST);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_EAST);
 					case ASCENDING_NORTH:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_SOUTH);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_SOUTH);
 					case ASCENDING_SOUTH:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_NORTH);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_NORTH);
 					case SOUTH_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.NORTH_WEST);
+						return state.withProperty(shape, EnumRailDirection.NORTH_WEST);
 					case SOUTH_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.NORTH_EAST);
+						return state.withProperty(shape, EnumRailDirection.NORTH_EAST);
 					case NORTH_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.SOUTH_EAST);
+						return state.withProperty(shape, EnumRailDirection.SOUTH_EAST);
 					case NORTH_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.SOUTH_WEST);
+						return state.withProperty(shape, EnumRailDirection.SOUTH_WEST);
 				}
 			case COUNTERCLOCKWISE_90:
-				switch (state.getValue(getShapeProperty())) {
+				switch (state.getValue(shape)) {
 					case ASCENDING_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_NORTH);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_NORTH);
 					case ASCENDING_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_SOUTH);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_SOUTH);
 					case ASCENDING_NORTH:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_WEST);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_WEST);
 					case ASCENDING_SOUTH:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_EAST);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_EAST);
 					case SOUTH_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.NORTH_EAST);
+						return state.withProperty(shape, EnumRailDirection.NORTH_EAST);
 					case SOUTH_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.SOUTH_EAST);
+						return state.withProperty(shape, EnumRailDirection.SOUTH_EAST);
 					case NORTH_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.SOUTH_WEST);
+						return state.withProperty(shape, EnumRailDirection.SOUTH_WEST);
 					case NORTH_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.NORTH_WEST);
+						return state.withProperty(shape, EnumRailDirection.NORTH_WEST);
 					case NORTH_SOUTH:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.EAST_WEST);
+						return state.withProperty(shape, EnumRailDirection.EAST_WEST);
 					case EAST_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.NORTH_SOUTH);
+						return state.withProperty(shape, EnumRailDirection.NORTH_SOUTH);
 				}
 			case CLOCKWISE_90:
-				switch (state.getValue(getShapeProperty())) {
+				switch (state.getValue(shape)) {
 					case ASCENDING_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_SOUTH);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_SOUTH);
 					case ASCENDING_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_NORTH);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_NORTH);
 					case ASCENDING_NORTH:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_EAST);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_EAST);
 					case ASCENDING_SOUTH:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_WEST);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_WEST);
 					case SOUTH_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.SOUTH_WEST);
+						return state.withProperty(shape, EnumRailDirection.SOUTH_WEST);
 					case SOUTH_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.NORTH_WEST);
+						return state.withProperty(shape, EnumRailDirection.NORTH_WEST);
 					case NORTH_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.NORTH_EAST);
+						return state.withProperty(shape, EnumRailDirection.NORTH_EAST);
 					case NORTH_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.SOUTH_EAST);
+						return state.withProperty(shape, EnumRailDirection.SOUTH_EAST);
 					case NORTH_SOUTH:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.EAST_WEST);
+						return state.withProperty(shape, EnumRailDirection.EAST_WEST);
 					case EAST_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.NORTH_SOUTH);
+						return state.withProperty(shape, EnumRailDirection.NORTH_SOUTH);
 				}
 			default:
 				return state;
@@ -174,25 +175,26 @@ public class BlockRailCoFH extends BlockRailBase implements IDismantleable {
 	}
 
 	@Override
-	@SuppressWarnings ("incomplete-switch")
 	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
 
-		EnumRailDirection direction = state.getValue(getShapeProperty());
+		IProperty<EnumRailDirection> shape = getShapeProperty();
+		EnumRailDirection direction = state.getValue(shape);
+
 		switch (mirrorIn) {
 			case LEFT_RIGHT:
 				switch (direction) {
 					case ASCENDING_NORTH:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_SOUTH);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_SOUTH);
 					case ASCENDING_SOUTH:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_NORTH);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_NORTH);
 					case SOUTH_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.NORTH_EAST);
+						return state.withProperty(shape, EnumRailDirection.NORTH_EAST);
 					case SOUTH_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.NORTH_WEST);
+						return state.withProperty(shape, EnumRailDirection.NORTH_WEST);
 					case NORTH_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.SOUTH_WEST);
+						return state.withProperty(shape, EnumRailDirection.SOUTH_WEST);
 					case NORTH_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.SOUTH_EAST);
+						return state.withProperty(shape, EnumRailDirection.SOUTH_EAST);
 					default:
 						return super.withMirror(state, mirrorIn);
 				}
@@ -200,21 +202,21 @@ public class BlockRailCoFH extends BlockRailBase implements IDismantleable {
 			case FRONT_BACK:
 				switch (direction) {
 					case ASCENDING_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_WEST);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_WEST);
 					case ASCENDING_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.ASCENDING_EAST);
+						return state.withProperty(shape, EnumRailDirection.ASCENDING_EAST);
 					case ASCENDING_NORTH:
 					case ASCENDING_SOUTH:
 					default:
 						break;
 					case SOUTH_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.SOUTH_WEST);
+						return state.withProperty(shape, EnumRailDirection.SOUTH_WEST);
 					case SOUTH_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.SOUTH_EAST);
+						return state.withProperty(shape, EnumRailDirection.SOUTH_EAST);
 					case NORTH_WEST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.NORTH_EAST);
+						return state.withProperty(shape, EnumRailDirection.NORTH_EAST);
 					case NORTH_EAST:
-						return state.withProperty(getShapeProperty(), EnumRailDirection.NORTH_WEST);
+						return state.withProperty(shape, EnumRailDirection.NORTH_WEST);
 				}
 		}
 		return super.withMirror(state, mirrorIn);

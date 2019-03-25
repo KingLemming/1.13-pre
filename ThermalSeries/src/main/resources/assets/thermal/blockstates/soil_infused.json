@@ -1,0 +1,37 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:cube_all",
+		"transform": "forge:default-block",
+		"textures": {
+			"all": "thermal:blocks/storage/block_tin"
+		}
+	},
+	"variants": {
+		"infused": {
+			"0": {
+			},
+			"1": {
+			},
+			"2": {
+			},
+			"3": {
+			}
+		},
+		"tilled": {
+			"true": {
+				"model": "farmland",
+				"textures": {
+					"particle": "thermal:blocks/storage/block_copper",
+					"dirt": "thermal:blocks/storage/block_invar",
+					"top": "thermal:blocks/storage/block_copper"
+				}
+			},
+			"false": {
+			}
+		},
+		"inventory": [
+			{}
+		]
+	}
+}

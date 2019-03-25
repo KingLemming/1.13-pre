@@ -2,23 +2,20 @@ package cofh.core.block.rails;
 
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import static cofh.lib.util.Constants.RAIL_STRAIGHT_FLAT;
 
-import static cofh.lib.util.Constants.RAIL_SINGLE;
-
-public class BlockRailCrossover extends BlockRailDefault {
+public class BlockRailStraightFlat extends BlockRailDefault {
 
 	@Override
 	public IProperty<EnumRailDirection> getShapeProperty() {
 
-		return RAIL_SINGLE;
+		return RAIL_STRAIGHT_FLAT;
 	}
 
 	@Override
@@ -40,22 +37,28 @@ public class BlockRailCrossover extends BlockRailDefault {
 	}
 
 	@Override
-	public EnumRailDirection getRailDirection(IBlockAccess world, BlockPos pos, IBlockState state, @Nullable EntityMinecart cart) {
-
-		if (cart != null) {
-			if (Math.abs(cart.motionX) > 0) {
-				return EnumRailDirection.EAST_WEST;
-			} else if (Math.abs(cart.motionZ) > 0) {
-				return EnumRailDirection.NORTH_SOUTH;
-			}
-		}
-		return state.getValue(getShapeProperty());
-	}
-
-	@Override
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
 
-		return state;
+		IProperty<EnumRailDirection> shape = getShapeProperty();
+
+		switch (rot) {
+			case COUNTERCLOCKWISE_90:
+				switch (state.getValue(shape)) {
+					case NORTH_SOUTH:
+						return state.withProperty(shape, EnumRailDirection.EAST_WEST);
+					case EAST_WEST:
+						return state.withProperty(shape, EnumRailDirection.NORTH_SOUTH);
+				}
+			case CLOCKWISE_90:
+				switch (state.getValue(shape)) {
+					case NORTH_SOUTH:
+						return state.withProperty(shape, EnumRailDirection.EAST_WEST);
+					case EAST_WEST:
+						return state.withProperty(shape, EnumRailDirection.NORTH_SOUTH);
+				}
+			default:
+				return state;
+		}
 	}
 
 	@Override

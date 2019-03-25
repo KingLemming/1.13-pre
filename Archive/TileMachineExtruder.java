@@ -20,6 +20,9 @@ public class TileMachineExtruder extends TileMachineProcess {
 	protected FluidStorageCoFH lavaTank = new FluidStorageCoFH(TANK_SMALL, FluidHelper::isLava);
 	protected FluidStorageCoFH waterTank = new FluidStorageCoFH(TANK_SMALL, FluidHelper::isWater);
 
+	protected int index = 0;
+	protected int direction = 0;
+
 	public TileMachineExtruder() {
 
 		super(MachinesTE.EXTRUDER);

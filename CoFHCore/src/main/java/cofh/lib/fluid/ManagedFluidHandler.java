@@ -87,6 +87,12 @@ public class ManagedFluidHandler implements IFluidHandler {
 				return ret;
 			}
 		}
+		for (FluidStorageCoFH tank : inputTanks) {
+			ret = tank.drain(resource, doDrain);
+			if (ret != null) {
+				return ret;
+			}
+		}
 		return null;
 	}
 
@@ -96,6 +102,12 @@ public class ManagedFluidHandler implements IFluidHandler {
 
 		FluidStack ret;
 		for (FluidStorageCoFH tank : outputTanks) {
+			ret = tank.drain(maxDrain, doDrain);
+			if (ret != null) {
+				return ret;
+			}
+		}
+		for (FluidStorageCoFH tank : inputTanks) {
 			ret = tank.drain(maxDrain, doDrain);
 			if (ret != null) {
 				return ret;

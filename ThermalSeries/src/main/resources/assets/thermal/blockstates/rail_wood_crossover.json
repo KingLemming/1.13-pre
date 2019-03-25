@@ -5,7 +5,7 @@
 			"north_south": {
 				"model": "rail_flat",
 				"textures": {
-					"rail": "thermal:blocks/rails/rail_crossover"
+					"rail": "thermal:blocks/rails/rail_wood_crossover"
 				}
 			}
 		},
@@ -13,7 +13,7 @@
 			{
 				"model": "builtin/generated",
 				"textures": {
-					"layer0": "thermal:blocks/rails/rail_crossover"
+					"layer0": "thermal:blocks/rails/rail_wood_crossover"
 				},
 				"transform": "forge:default-item"
 			}

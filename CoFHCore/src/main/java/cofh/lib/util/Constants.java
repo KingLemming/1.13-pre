@@ -12,6 +12,8 @@ import net.minecraftforge.fluids.Fluid;
 import java.util.UUID;
 import java.util.function.Predicate;
 
+import static net.minecraft.block.BlockRailBase.EnumRailDirection.NORTH_SOUTH;
+
 public class Constants {
 
 	private Constants() {
@@ -26,6 +28,7 @@ public class Constants {
 
 	// region BLOCK PROPERTIES
 	public static final PropertyBool ACTIVE = PropertyBool.create("active");
+	public static final PropertyBool TILLED = PropertyBool.create("tilled");
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 7);
 	public static final PropertyInteger AGE_PERENNIAL = PropertyInteger.create("age", 0, 10);
 	public static final PropertyInteger AGE_TALL = PropertyInteger.create("age", 0, 11);
@@ -36,10 +39,11 @@ public class Constants {
 	private static final Predicate<EnumRailDirection> PRED_STRAIGHT = dir -> dir != EnumRailDirection.NORTH_EAST && dir != EnumRailDirection.NORTH_WEST && dir != EnumRailDirection.SOUTH_EAST && dir != EnumRailDirection.SOUTH_WEST;
 	private static final Predicate<EnumRailDirection> PRED_NO_SLOPE = dir -> dir != EnumRailDirection.ASCENDING_EAST && dir != EnumRailDirection.ASCENDING_WEST && dir != EnumRailDirection.ASCENDING_NORTH && dir != EnumRailDirection.ASCENDING_SOUTH;
 
-	public static final PropertyEnum<EnumRailDirection> RAIL = PropertyEnum.create("shape", EnumRailDirection.class);
+	public static final PropertyEnum<EnumRailDirection> RAIL_DEFAULT = PropertyEnum.create("shape", EnumRailDirection.class);
 	public static final PropertyEnum<EnumRailDirection> RAIL_STRAIGHT = PropertyEnum.create("shape", EnumRailDirection.class, PRED_STRAIGHT::test);
 	public static final PropertyEnum<EnumRailDirection> RAIL_FLAT = PropertyEnum.create("shape", EnumRailDirection.class, PRED_NO_SLOPE::test);
 	public static final PropertyEnum<EnumRailDirection> RAIL_STRAIGHT_FLAT = PropertyEnum.create("shape", EnumRailDirection.class, dir -> PRED_STRAIGHT.test(dir) && PRED_NO_SLOPE.test(dir));
+	public static final PropertyEnum<EnumRailDirection> RAIL_SINGLE = PropertyEnum.create("shape", EnumRailDirection.class, NORTH_SOUTH);
 
 	@Deprecated // Remove in 1.13, UnlistedProperties have been changed up.
 	public static final UnlistedMapProperty<String, String> MODEL_PROPERTIES = new UnlistedMapProperty<>("model_properties");

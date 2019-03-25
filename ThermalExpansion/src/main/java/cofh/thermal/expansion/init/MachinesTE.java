@@ -29,7 +29,7 @@ public class MachinesTE {
 	// public static final TileStruct ENCHANTER = registerMachine("enchanter", 12, TileMachineEnchanter.class, ContainerMachineEnchanter.class, GuiMachineEnchanter.class);
 
 	public static final AbstractTileType SMELTER = registerMachine("smelter", 14, TileMachineSmelter.class, ContainerMachineSmelter.class, GuiMachineSmelter.class);
-	public static final AbstractTileType EXTRUDER = registerMachine("extruder", 14, TileMachineExtruder.class, ContainerMachineExtruder.class, GuiMachineExtruder.class);
+	// public static final AbstractTileType EXTRUDER = registerMachine("extruder", 14, TileMachineExtruder.class, ContainerMachineExtruder.class, GuiMachineExtruder.class);
 
 	public static final AbstractTileType WATER_GEN = registerMachine("water_gen", 4, TileMachineWaterGen.class, ContainerMachineWaterGen.class, GuiMachineWaterGen.class);
 

@@ -63,9 +63,7 @@ public class BlockAbstractTile4Way extends BlockTileCoFH {
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 
-		EnumFacing facing = EnumFacing.getHorizontal(meta);
-		boolean active = meta >= 4;
-		return getDefaultState().withProperty(FACING_HORIZONTAL, facing).withProperty(ACTIVE, active);
+		return getDefaultState().withProperty(FACING_HORIZONTAL, EnumFacing.getHorizontal(meta)).withProperty(ACTIVE, meta >= 4);
 	}
 	// endregion
 }
