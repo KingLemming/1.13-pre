@@ -8,7 +8,7 @@ public class ItemFuel extends ItemCoFH {
 
 	public ItemFuel(int burnTime) {
 
-		super();
+		this(burnTime, "");
 		this.burnTime = burnTime < 0 ? -1 : burnTime;
 	}
 

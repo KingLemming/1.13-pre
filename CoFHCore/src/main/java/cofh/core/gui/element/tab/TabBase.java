@@ -301,7 +301,7 @@ public abstract class TabBase extends ElementBase {
 	/**
 	 * @return Whether the tab should stay open or not.
 	 */
-	public boolean mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+	public boolean mouseClicked(int mouseX, int mouseY, int mouseButton) {
 
 		mouseX -= this.posX();
 		mouseY -= this.posY;

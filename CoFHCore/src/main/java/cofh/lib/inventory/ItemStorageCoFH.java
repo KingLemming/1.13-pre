@@ -20,7 +20,6 @@ public class ItemStorageCoFH implements IItemHandler, IItemStackHolder {
 
 	protected Predicate<ItemStack> validator;
 	protected ItemStack item = ItemStack.EMPTY;
-	protected int capacity;
 
 	public ItemStorageCoFH() {
 
@@ -96,6 +95,12 @@ public class ItemStorageCoFH implements IItemHandler, IItemStackHolder {
 	public boolean isEmpty() {
 
 		return item.isEmpty();
+	}
+
+	@Override
+	public boolean isFull() {
+
+		return item.getCount() >= item.getMaxStackSize();
 	}
 	// endregion
 

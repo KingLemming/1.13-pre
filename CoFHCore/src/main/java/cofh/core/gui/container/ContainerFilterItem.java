@@ -21,7 +21,7 @@ import static cofh.lib.util.helpers.StringHelper.localize;
 
 public class ContainerFilterItem extends ContainerCoFH implements IFilterable, ISecurable {
 
-	public static final String NAME = "gui.cofh.filter";
+	public static final String NAME = "info.cofh.filter";
 
 	protected final ItemFilterWrapper containerWrapper;
 	protected final EntityPlayer player;

@@ -201,17 +201,17 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 		return world.getTotalWorldTime() % TIME_CONSTANT == 0;
 	}
 
-	protected final boolean timeCheck2() {
+	protected final boolean timeCheckHalf() {
 
 		return world.getTotalWorldTime() % TIME_CONSTANT_HALF == 0;
 	}
 
-	protected final boolean timeCheck4() {
+	protected final boolean timeCheckQuarter() {
 
 		return world.getTotalWorldTime() % TIME_CONSTANT_QUARTER == 0;
 	}
 
-	protected final boolean timeCheck8() {
+	protected final boolean timeCheckEighth() {
 
 		return world.getTotalWorldTime() % TIME_CONSTANT_EIGHTH == 0;
 	}

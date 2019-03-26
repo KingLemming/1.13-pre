@@ -1,0 +1,26 @@
+package cofh.thermal.expansion.gui.client.machine;
+
+import cofh.lib.util.helpers.StringHelper;
+import cofh.thermal.core.block.machine.TileMachine;
+import cofh.thermal.core.gui.client.GuiMachine;
+import cofh.thermal.expansion.gui.container.machine.ContainerMachineLexicon;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+
+import static cofh.lib.util.Constants.ID_THERMAL_SERIES;
+import static cofh.lib.util.helpers.StringHelper.generateTabInfo;
+
+public class GuiMachineLexicon extends GuiMachine {
+
+	public static final String TEX_PATH = ID_THERMAL_SERIES + ":textures/gui/machine/lexicon.png";
+	public static final ResourceLocation TEXTURE = new ResourceLocation(TEX_PATH);
+
+	public GuiMachineLexicon(InventoryPlayer inventory, TileEntity tile) {
+
+		super(new ContainerMachineLexicon(inventory, tile), (TileMachine) tile, inventory.player, generateTabInfo("tab.thermal.machine_lexicon"));
+		name = StringHelper.localize("tile.thermal.machine_lexicon.name");
+		texture = TEXTURE;
+	}
+
+}

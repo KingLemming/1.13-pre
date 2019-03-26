@@ -3,6 +3,7 @@ package cofh.thermal.core.gui.client;
 import cofh.core.gui.GuiHelper;
 import cofh.core.gui.client.GuiContainerCoFH;
 import cofh.core.gui.element.ElementScaled;
+import cofh.core.gui.element.tab.TabConfiguration;
 import cofh.core.gui.element.tab.TabInfo;
 import cofh.core.gui.element.tab.TabRedstoneControl;
 import cofh.thermal.core.block.machine.TileMachine;
@@ -32,6 +33,7 @@ public class GuiMachine extends GuiContainerCoFH {
 
 		addTab(new TabInfo(this, info));
 		addTab(new TabRedstoneControl(this, tile));
+		addTab(new TabConfiguration(this, tile, tile));
 
 		if (tile.getEnergyStorage().getMaxEnergyStored() > 0) {
 			addElement(GuiHelper.createDefaultEnergyStorage(this, 8, 8, tile.getEnergyStorage()));

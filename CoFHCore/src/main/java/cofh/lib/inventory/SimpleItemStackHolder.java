@@ -44,4 +44,10 @@ public class SimpleItemStackHolder implements IItemStackHolder {
 		return stack.isEmpty();
 	}
 
+	@Override
+	public boolean isFull() {
+
+		return stack.getCount() >= stack.getMaxStackSize();
+	}
+
 }

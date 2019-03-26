@@ -65,7 +65,7 @@ public abstract class TileMachineProcess extends TileMachine {
 				transferOutput();
 				transferInput();
 			}
-			if (timeCheck4() && canProcessStart()) {
+			if (timeCheckQuarter() && canProcessStart()) {
 				processStart();
 				processTick();
 				isActive = true;

@@ -61,6 +61,20 @@ tab.thermal.dynamo_gourmand.2=Om nom nom. Nom nom nom nom. Nom.
 # INFO - EXPANSION
 #=======================================================================================================================
 
+info.thermal.machine_brewer=Brews potions.
+info.thermal.machine_centrifuge=Spins items to separate products.
+info.thermal.machine_crafter=Crafts items.
+info.thermal.machine_crucible=Melts items into fluids.
+info.thermal.machine_enchanter=Enchants items and creates magical tomes.
+info.thermal.machine_furnace=Smelts items.
+info.thermal.machine_insolator=Infuses plants with 'sun' and RF.
+info.thermal.machine_lexicon=Transmutes items between equivalent forms.
+info.thermal.machine_pulverizer=Smashes items.
+info.thermal.machine_refinery=Refines fluids into other products.
+info.thermal.machine_sawmill=Provides additional lumber.
+info.thermal.machine_smelter=Smelts alloys and metals.
+info.thermal.machine_transposer=Manipulates fluids and fluid containers.
+
 tab.thermal.dynamo_compression.0=Generates Redstone Flux using combustible fluids.
 
 tab.thermal.dynamo_lapidary.0=Generates Redstone Flux using gems!
@@ -94,6 +108,10 @@ tab.thermal.machine_crucible.2=Keep away from small children and pets.
 tab.thermal.machine_furnace.0=Smelts things using Redstone Flux.
 tab.thermal.machine_furnace.1=Uses very little energy to cook food.
 tab.thermal.machine_furnace.2=Om nom nom.
+
+tab.thermal.machine_lexicon.0=Transmutes equivalent items.
+tab.thermal.machine_lexicon.1=Place preferred items into the transmutation array.
+tab.thermal.machine_lexicon.2=Items may be restricted by higher powers.
 
 tab.thermal.machine_pulverizer.0=Smashes things into other things.
 tab.thermal.machine_pulverizer.1=Useful for processing ores or converting items.
@@ -591,6 +609,8 @@ tile.thermal.machine_refinery.name=Fractionating Still
 tile.thermal.machine_crafter.name=Sequential Fabricator
 tile.thermal.machine_brewer.name=Alchemical Imbuer
 tile.thermal.machine_enchanter.name=Arcane Ensorcellator
+
+tile.thermal.machine_lexicon.name=Lexical Transmuter
 
 tile.thermal.machine_water_gen.name=Aqueous Accumulator
 

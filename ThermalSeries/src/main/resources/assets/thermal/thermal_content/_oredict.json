@@ -35,6 +35,42 @@
 			"entry": {
 				"item": "thermal:dust_platinum"
 			}
+		},
+		{
+			"ore": "ingotCopper",
+			"entry": {
+				"item": "thermal:ingot_copper"
+			}
+		},
+		{
+			"ore": "ingotSilver",
+			"entry": {
+				"item": "thermal:ingot_silver"
+			}
+		},
+		{
+			"ore": "ingotNickel",
+			"entry": {
+				"item": "thermal:ingot_nickel"
+			}
+		},
+		{
+			"ore": "ingotTin",
+			"entry": {
+				"item": "thermal:ingot_tin"
+			}
+		},
+		{
+			"ore": "ingotLead",
+			"entry": {
+				"item": "thermal:ingot_lead"
+			}
+		},
+		{
+			"ore": "ingotPlatinum",
+			"entry": {
+				"item": "thermal:ingot_platinum"
+			}
 		}
 	]
 }

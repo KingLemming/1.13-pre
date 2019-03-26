@@ -1,0 +1,45 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "cofh:layered_template",
+		"transform": "forge:default-block",
+		"textures": {
+			"top": "thermal:blocks/machines/machine_top",
+			"side": "thermal:blocks/machines/machine_side",
+			"bottom": "thermal:blocks/machines/machine_bottom",
+			"front": "thermal:blocks/machines/machine_front_lexicon"
+		},
+		"custom": {
+			"template": "thermal:block/machine"
+		}
+	},
+	"variants": {
+		"active": {
+			"true": {
+				"textures": {
+					"front": "thermal:blocks/machines/machine_active_lexicon"
+				}
+			},
+			"false": {
+				"textures": {
+					"front": "thermal:blocks/machines/machine_front_lexicon"
+				}
+			}
+		},
+		"facing": {
+			"north": {},
+			"south": {
+				"y": 180
+			},
+			"west": {
+				"y": 270
+			},
+			"east": {
+				"y": 90
+			}
+		},
+		"inventory": [
+			{}
+		]
+	}
+}

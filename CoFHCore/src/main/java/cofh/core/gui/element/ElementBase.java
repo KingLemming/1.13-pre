@@ -193,7 +193,7 @@ public abstract class ElementBase {
 		return false;
 	}
 
-	public boolean mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+	public boolean mouseClicked(int mouseX, int mouseY, int mouseButton) {
 
 		return false;
 	}

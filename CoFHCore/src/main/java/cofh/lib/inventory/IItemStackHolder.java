@@ -17,4 +17,6 @@ public interface IItemStackHolder {
 
 	boolean isEmpty();
 
+	boolean isFull();
+
 }

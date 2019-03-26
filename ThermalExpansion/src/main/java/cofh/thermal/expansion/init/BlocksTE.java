@@ -28,6 +28,9 @@ public class BlocksTE {
 		// machineCrafter = registerBlock("machine_crafter", new ItemBlockCoFH(new BlockMachine(CRAFTER)));
 		machineBrewer = registerBlock("machine_brewer", new ItemBlockCoFH(new BlockMachine(BREWER)));
 		// machineEnchanter = registerBlock("machine_enchanter", new ItemBlockCoFH(new BlockMachine(ENCHANTER)));
+
+		machineLexicon = registerBlock("machine_lexicon", new ItemBlockCoFH(new BlockMachine(LEXICON)));
+
 		// machineWaterGen = registerBlock("machine_water_gen", new ItemBlockCoFH(new BlockMachine(WATER_GEN)));
 
 		dynamoStirling = registerBlock("dynamo_stirling", new ItemBlockCoFH(new BlockDynamo(STIRLING)));
@@ -49,6 +52,8 @@ public class BlocksTE {
 	public static ItemStack machineCrafter;
 	public static ItemStack machineBrewer;
 	public static ItemStack machineEnchanter;
+
+	public static ItemStack machineLexicon;
 
 	public static ItemStack machineWaterGen;
 	// endregion

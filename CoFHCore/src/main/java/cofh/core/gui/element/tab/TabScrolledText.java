@@ -6,7 +6,6 @@ import cofh.lib.util.helpers.MathHelper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 
-import java.io.IOException;
 import java.util.List;
 
 public abstract class TabScrolledText extends TabBase {
@@ -69,7 +68,7 @@ public abstract class TabScrolledText extends TabBase {
 	}
 
 	@Override
-	public boolean mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+	public boolean mouseClicked(int mouseX, int mouseY, int mouseButton) {
 
 		int shiftedMouseX = mouseX - this.posX();
 		int shiftedMouseY = mouseY - this.posY;

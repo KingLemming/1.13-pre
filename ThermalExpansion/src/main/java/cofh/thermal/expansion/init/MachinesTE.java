@@ -1,10 +1,13 @@
 package cofh.thermal.expansion.init;
 
 import cofh.thermal.core.block.AbstractTileType;
+import cofh.thermal.expansion.block.machine.TileMachineLexicon;
 import cofh.thermal.expansion.block.machine.process.*;
 import cofh.thermal.expansion.block.machine.world.TileMachineWaterGen;
+import cofh.thermal.expansion.gui.client.machine.GuiMachineLexicon;
 import cofh.thermal.expansion.gui.client.machine.process.*;
 import cofh.thermal.expansion.gui.client.machine.world.GuiMachineWaterGen;
+import cofh.thermal.expansion.gui.container.machine.ContainerMachineLexicon;
 import cofh.thermal.expansion.gui.container.machine.process.*;
 import cofh.thermal.expansion.gui.container.machine.world.ContainerMachineWaterGen;
 
@@ -27,6 +30,8 @@ public class MachinesTE {
 	// public static final AbstractTileType CRAFTER = registerMachine("crafter", 7, TileMachineCrafter.class, ContainerMachineCrafter.class, GuiMachineCrafter.class);
 	public static final AbstractTileType BREWER = registerMachine("brewer", 12, TileMachineBrewer.class, ContainerMachineBrewer.class, GuiMachineBrewer.class);
 	// public static final TileStruct ENCHANTER = registerMachine("enchanter", 12, TileMachineEnchanter.class, ContainerMachineEnchanter.class, GuiMachineEnchanter.class);
+
+	public static final AbstractTileType LEXICON = registerMachine("lexicon", 12, TileMachineLexicon.class, ContainerMachineLexicon.class, GuiMachineLexicon.class);
 
 	public static final AbstractTileType SMELTER = registerMachine("smelter", 14, TileMachineSmelter.class, ContainerMachineSmelter.class, GuiMachineSmelter.class);
 	// public static final AbstractTileType EXTRUDER = registerMachine("extruder", 14, TileMachineExtruder.class, ContainerMachineExtruder.class, GuiMachineExtruder.class);

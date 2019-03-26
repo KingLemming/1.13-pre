@@ -7,6 +7,7 @@ import cofh.ensorcellment.enchantment.digger.EnchantmentInsight;
 import cofh.ensorcellment.enchantment.digger.EnchantmentSmashing;
 import cofh.ensorcellment.enchantment.digger.EnchantmentSmelting;
 import cofh.ensorcellment.enchantment.looting.EnchantmentAngler;
+import cofh.ensorcellment.enchantment.looting.EnchantmentFarmer;
 import cofh.ensorcellment.enchantment.looting.EnchantmentHunter;
 import cofh.ensorcellment.enchantment.misc.EnchantmentSoulbound;
 import cofh.ensorcellment.enchantment.override.EnchantmentMendingAlt;
@@ -18,9 +19,9 @@ import cofh.lib.util.Utils;
 import cofh.lib.util.helpers.MathHelper;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentFrostWalker;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -52,6 +53,8 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AnvilUpdateEvent;
@@ -69,6 +72,8 @@ import java.util.ListIterator;
 
 import static cofh.lib.util.Constants.*;
 import static cofh.lib.util.modhelpers.EnsorcellmentHelper.*;
+import static net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel;
+import static net.minecraft.enchantment.EnchantmentHelper.getMaxEnchantmentLevel;
 import static net.minecraft.init.Enchantments.*;
 
 public class EventHandler {
@@ -98,7 +103,7 @@ public class EventHandler {
 		}
 		Entity entity = event.getEntity();
 		if (entity instanceof EntityLivingBase) {
-			int encFeatherFalling = EnchantmentHelper.getMaxEnchantmentLevel(FEATHER_FALLING, (EntityLivingBase) entity);
+			int encFeatherFalling = getMaxEnchantmentLevel(FEATHER_FALLING, (EntityLivingBase) entity);
 			if (encFeatherFalling > 0) {
 				event.setCanceled(true);
 			}
@@ -116,7 +121,7 @@ public class EventHandler {
 			// SHIELD LOGIC
 			if (stack.getItem().isShield(stack, player)) {
 				// THORNS
-				int encThorns = EnchantmentHelper.getEnchantmentLevel(THORNS, stack);
+				int encThorns = getEnchantmentLevel(THORNS, stack);
 				if (EnchantmentThornsImp.shouldHit(encThorns, MathHelper.RANDOM) && attacker != null) {
 					attacker.attackEntityFrom(DamageSource.causeThornsDamage(entity), EnchantmentThorns.getDamage(encThorns, MathHelper.RANDOM));
 					if (MathHelper.RANDOM.nextInt(1 + encThorns) == 0) {
@@ -126,7 +131,7 @@ public class EventHandler {
 					}
 				}
 				// DISPLACEMENT
-				int encDisplacement = EnchantmentHelper.getEnchantmentLevel(DISPLACEMENT, stack);
+				int encDisplacement = getEnchantmentLevel(DISPLACEMENT, stack);
 				if (EnchantmentDisplacement.shouldHit(encDisplacement, MathHelper.RANDOM) && attacker != null) {
 					EnchantmentDisplacement.teleportEntity(encDisplacement, MathHelper.RANDOM, attacker);
 					if (MathHelper.RANDOM.nextInt(1 + encDisplacement) == 0) {
@@ -139,7 +144,7 @@ public class EventHandler {
 		} else if (entity instanceof EntityHorse) {
 			ItemStack armor = ((EntityHorse) entity).horseChest.getStackInSlot(1);
 			if (!armor.isEmpty()) {
-				int encFrostWalker = EnchantmentHelper.getEnchantmentLevel(FROST_WALKER, armor);
+				int encFrostWalker = getEnchantmentLevel(FROST_WALKER, armor);
 				if (event.getSource().equals(DamageSource.HOT_FLOOR) && encFrostWalker > 0) {
 					event.setCanceled(true);
 				}
@@ -197,7 +202,7 @@ public class EventHandler {
 		}
 
 		// VORPAL
-		int encVorpal = EnchantmentHelper.getEnchantmentLevel(VORPAL, player.getHeldItemMainhand());
+		int encVorpal = getEnchantmentLevel(VORPAL, player.getHeldItemMainhand());
 		if (encVorpal > 0) {
 			ItemStack itemSkull = ItemStack.EMPTY;
 
@@ -240,18 +245,18 @@ public class EventHandler {
 
 			if (!armor.isEmpty()) {
 				// PROTECTION
-				int encProtection = EnchantmentHelper.getEnchantmentLevel(PROTECTION, armor);
+				int encProtection = getEnchantmentLevel(PROTECTION, armor);
 				if (encProtection > 0) {
 					float damageReduction = Math.min(encProtection * EnchantmentProtectionImp.protection, 20) / 25F;
 					event.setAmount(event.getAmount() * damageReduction);
 				}
 				// THORNS
-				int encThorns = EnchantmentHelper.getEnchantmentLevel(THORNS, armor);
+				int encThorns = getEnchantmentLevel(THORNS, armor);
 				if (EnchantmentThorns.shouldHit(encThorns, MathHelper.RANDOM) && attacker != null) {
 					attacker.attackEntityFrom(DamageSource.causeThornsDamage(entity), EnchantmentThorns.getDamage(encThorns, MathHelper.RANDOM));
 				}
 				// DISPLACEMENT
-				int encDisplacement = EnchantmentHelper.getEnchantmentLevel(DISPLACEMENT, armor);
+				int encDisplacement = getEnchantmentLevel(DISPLACEMENT, armor);
 				if (EnchantmentDisplacement.shouldHit(encDisplacement, MathHelper.RANDOM) && attacker != null) {
 					EnchantmentDisplacement.teleportEntity(encDisplacement, MathHelper.RANDOM, attacker);
 				}
@@ -288,8 +293,8 @@ public class EventHandler {
 			EntityPlayer player = (EntityPlayer) entity;
 			ItemStack stack = player.getActiveItemStack();
 			if (stack.getItem().isShield(stack, player)) {
-				int encBulwark = EnchantmentHelper.getEnchantmentLevel(BULWARK, stack);
-				int encPhalanx = EnchantmentHelper.getEnchantmentLevel(PHALANX, stack);
+				int encBulwark = getEnchantmentLevel(BULWARK, stack);
+				int encPhalanx = getEnchantmentLevel(PHALANX, stack);
 
 				Multimap<String, AttributeModifier> attributes = HashMultimap.create();
 				if (encBulwark > 0) {
@@ -310,7 +315,7 @@ public class EventHandler {
 		} else if (entity instanceof EntityHorse) {
 			ItemStack armor = ((EntityHorse) entity).horseChest.getStackInSlot(1);
 			if (!armor.isEmpty()) {
-				int encFrostWalker = EnchantmentHelper.getEnchantmentLevel(FROST_WALKER, armor);
+				int encFrostWalker = getEnchantmentLevel(FROST_WALKER, armor);
 				if (encFrostWalker > 0) {
 					EnchantmentFrostWalker.freezeNearby((EntityHorse) entity, entity.world, new BlockPos(entity), encFrostWalker);
 				}
@@ -370,7 +375,7 @@ public class EventHandler {
 		}
 		ItemStack prevStack = event.getItem();
 		if (prevStack.getItem() instanceof ItemFood) {
-			int encGourmand = EnchantmentHelper.getMaxEnchantmentLevel(GOURMAND, entity);
+			int encGourmand = getMaxEnchantmentLevel(GOURMAND, entity);
 			if (encGourmand > 0) {
 				ItemFood food = ((ItemFood) prevStack.getItem());
 				int foodLevel = food.getHealAmount(prevStack);
@@ -395,7 +400,7 @@ public class EventHandler {
 			return;
 		}
 		if (event.getExpToDrop() > 0) {
-			int encInsight = EnchantmentHelper.getEnchantmentLevel(INSIGHT, player.getHeldItemMainhand());
+			int encInsight = getEnchantmentLevel(INSIGHT, player.getHeldItemMainhand());
 			if (encInsight > 0) {
 				event.setExpToDrop(event.getExpToDrop() + encInsight + player.world.rand.nextInt(1 + encInsight * EnchantmentInsight.experience));
 			}
@@ -406,7 +411,7 @@ public class EventHandler {
 	public void handleBreakSpeedEvent(PlayerEvent.BreakSpeed event) {
 
 		EntityPlayer player = event.getEntityPlayer();
-		if (!player.onGround && EnchantmentHelper.getMaxEnchantmentLevel(AIR_WORKER, player) > 0) {
+		if (!player.onGround && getMaxEnchantmentLevel(AIR_WORKER, player) > 0) {
 			float oldSpeed = event.getOriginalSpeed();
 			float newSpeed = event.getNewSpeed();
 			if (oldSpeed < newSpeed * 5.0F) {
@@ -423,23 +428,23 @@ public class EventHandler {
 			return;
 		}
 		final ItemStack tool = player.getHeldItemMainhand();
-		// final int encFarmer = EnchantmentHelper.getEnchantmentLevel(FARMER, tool);
-		final int encSmashing = EnchantmentHelper.getEnchantmentLevel(SMASHING, tool);
-		final int encSmelting = EnchantmentHelper.getEnchantmentLevel(SMELTING, tool);
+		final int encFarmer = getEnchantmentLevel(FARMER, tool);
+		final int encSmashing = getEnchantmentLevel(SMASHING, tool);
+		final int encSmelting = getEnchantmentLevel(SMELTING, tool);
 
 		List<ItemStack> drops = event.getDrops();
 
 		// FARMER
-		//		Block block = event.getState().getBlock();
-		//		if (encFarmer > 0 && block instanceof IGrowable && !((IGrowable) block).canGrow(event.getWorld(), event.getPos(), event.getState(), false)) {
-		//			for (int i = 0; i < encFarmer; i++) {
-		//				if (player.getRNG().nextInt(100) < EnchantmentFarmer.chance) {
-		//					for (ItemStack stack : drops) {
-		//						stack.grow(1);
-		//					}
-		//				}
-		//			}
-		//		}
+		Block block = event.getState().getBlock();
+		if (encFarmer > 0 && block instanceof IPlantable && ((IPlantable) block).getPlantType(event.getWorld(), event.getPos()) == EnumPlantType.Crop) {
+			for (int i = 0; i < encFarmer; i++) {
+				if (player.getRNG().nextInt(100) < EnchantmentFarmer.chance) {
+					for (ItemStack stack : drops) {
+						stack.grow(1);
+					}
+				}
+			}
+		}
 
 		// SMASHING / SMELTING
 		drops.replaceAll(stack -> {
@@ -474,7 +479,7 @@ public class EventHandler {
 		ItemStack output = event.getItemResult();
 
 		// PRESERVATION
-		if (!EnchantmentsEnsorc.overrideMending.enable || getEnchantmentLevel(left, Enchantments.MENDING) <= 0) {
+		if (!EnchantmentsEnsorc.overrideMending.enable || getEnchantmentLevel(Enchantments.MENDING, left) <= 0) {
 			return;
 		}
 		if (output.getItemDamage() < left.getItemDamage()) {
@@ -490,7 +495,7 @@ public class EventHandler {
 		ItemStack output = left.copy();
 
 		// PRESERVATION
-		if (!EnchantmentsEnsorc.overrideMending.enable || getEnchantmentLevel(left, Enchantments.MENDING) <= 0) {
+		if (!EnchantmentsEnsorc.overrideMending.enable || getEnchantmentLevel(Enchantments.MENDING, left) <= 0) {
 			return;
 		}
 		if (output.isItemStackDamageable() && output.getItem().getIsRepairable(left, right)) {
@@ -559,7 +564,7 @@ public class EventHandler {
 		while (iter.hasNext()) {
 			EntityItem drop = iter.next();
 			ItemStack stack = drop.getItem();
-			if (getEnchantmentLevel(stack, SOULBOUND) > 0) {
+			if (getEnchantmentLevel(SOULBOUND, stack) > 0) {
 				if (addToPlayerInventory(player, stack)) {
 					iter.remove();
 				}
@@ -583,7 +588,7 @@ public class EventHandler {
 		}
 		for (int i = 0; i < oldPlayer.inventory.armorInventory.size(); i++) {
 			ItemStack stack = oldPlayer.inventory.armorInventory.get(i);
-			int encSoulbound = EnchantmentHelper.getEnchantmentLevel(SOULBOUND, stack);
+			int encSoulbound = getEnchantmentLevel(SOULBOUND, stack);
 			if (encSoulbound > 0) {
 				if (EnchantmentSoulbound.permanent) {
 					if (encSoulbound > 1) {
@@ -603,7 +608,7 @@ public class EventHandler {
 		}
 		for (int i = 0; i < oldPlayer.inventory.mainInventory.size(); i++) {
 			ItemStack stack = oldPlayer.inventory.mainInventory.get(i);
-			int encSoulbound = EnchantmentHelper.getEnchantmentLevel(SOULBOUND, stack);
+			int encSoulbound = getEnchantmentLevel(SOULBOUND, stack);
 			if (encSoulbound > 0) {
 				if (player.world.rand.nextInt(1 + encSoulbound) == 0) {
 					removeEnchantment(stack, SOULBOUND);
@@ -645,12 +650,7 @@ public class EventHandler {
 
 	public static int getHeldEnchantmentLevel(EntityLivingBase player, Enchantment enc) {
 
-		return Math.max(EnchantmentHelper.getEnchantmentLevel(enc, player.getHeldItemMainhand()), EnchantmentHelper.getEnchantmentLevel(enc, player.getHeldItemOffhand()));
-	}
-
-	public static int getEnchantmentLevel(ItemStack item, Enchantment enc) {
-
-		return EnchantmentHelper.getEnchantmentLevel(enc, item);
+		return Math.max(getEnchantmentLevel(enc, player.getHeldItemMainhand()), getEnchantmentLevel(enc, player.getHeldItemOffhand()));
 	}
 
 	public static void addEnchantment(ItemStack stack, Enchantment enc, int level) {
