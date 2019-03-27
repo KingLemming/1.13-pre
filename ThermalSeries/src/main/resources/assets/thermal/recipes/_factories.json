@@ -1,0 +1,8 @@
+{
+	"ingredients": {
+		"fluid": "cofh.lib.crafting.FluidIngredientFactory"
+	},
+	"recipes": {
+		"fluid_shapeless": "cofh.lib.crafting.ShapelessFluidRecipeFactory"
+	}
+}

@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static cofh.lib.util.Constants.PATH_ELEMENTS;

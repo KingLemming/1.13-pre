@@ -2,6 +2,7 @@ package cofh.thermal.core.init;
 
 import cofh.core.item.ItemCoFH;
 import cofh.core.item.ItemFuel;
+import cofh.core.item.ItemLock;
 import cofh.thermal.core.item.ItemCoin;
 import cofh.thermal.core.item.ItemFertilizer;
 import cofh.thermal.core.item.ItemRedprint;
@@ -37,6 +38,7 @@ public class ItemsTSeries {
 
 		utilWrench = registerItem("util_wrench", new ItemWrench(), CreativeTabsTSeries.tabTools);
 		utilRedprint = registerItem("util_redprint", new ItemRedprint(), CreativeTabsTSeries.tabTools);
+		utilLock = registerItem("util_lock", new ItemLock(GROUP_UTILS), CreativeTabsTSeries.tabTools);
 		utilTomeLexicon = registerItem("tome_lexicon", new ItemTomeLexicon(), CreativeTabsTSeries.tabTools);
 		utilTomeExperience = registerItem("tome_experience", new ItemTomeExperience(), CreativeTabsTSeries.tabTools);
 	}
@@ -131,6 +133,7 @@ public class ItemsTSeries {
 	// region TOOLS
 	public static ItemStack utilWrench;
 	public static ItemStack utilRedprint;
+	public static ItemStack utilLock;
 	public static ItemStack utilTomeLexicon;
 	public static ItemStack utilTomeExperience;
 	// endregion

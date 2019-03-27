@@ -1,7 +1,10 @@
 package cofh.core.block;
 
+import cofh.core.util.ChatHelper;
 import cofh.lib.block.IDismantleable;
+import cofh.lib.item.IPlacementItem;
 import cofh.lib.util.Utils;
+import cofh.lib.util.helpers.SecurityHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -21,6 +24,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -148,7 +152,11 @@ public abstract class BlockTileCoFH extends BlockCoFH implements IDismantleable 
 			return true;
 		}
 		TileEntity tile = world.getTileEntity(pos);
-		if (!(tile instanceof TileCoFH) || !((TileCoFH) tile).canPlayerChange(player) || tile.isInvalid()) {
+		if (!(tile instanceof TileCoFH) || tile.isInvalid()) {
+			return false;
+		}
+		if (!((TileCoFH) tile).canPlayerChange(player) && SecurityHelper.hasSecurity(tile)) {
+			ChatHelper.sendIndexedChatMessageToPlayer(player, new TextComponentTranslation("chat.cofh.secure_warning", SecurityHelper.getOwnerName(tile)));
 			return false;
 		}
 		if (onBlockActivatedDelegate(world, pos, state, player, hand, side, hitX, hitY, hitZ)) {
@@ -166,6 +174,12 @@ public abstract class BlockTileCoFH extends BlockCoFH implements IDismantleable 
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile instanceof TileCoFH) {
 			((TileCoFH) tile).onBlockPlacedBy(world, pos, state, placer, stack);
+		}
+		if (Utils.isServerWorld(world)) {
+			ItemStack offhand = placer.getHeldItemOffhand();
+			if (!offhand.isEmpty() && offhand.getItem() instanceof IPlacementItem) {
+				((IPlacementItem) offhand.getItem()).onBlockPlacement(offhand, world, pos, state, (EntityPlayer) placer);
+			}
 		}
 	}
 

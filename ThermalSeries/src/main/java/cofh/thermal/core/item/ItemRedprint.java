@@ -1,6 +1,7 @@
 package cofh.thermal.core.item;
 
 import cofh.core.item.ItemCoFH;
+import cofh.lib.item.IPlacementItem;
 import cofh.lib.util.IPortableData;
 import cofh.lib.util.Utils;
 import cofh.lib.util.control.ISecurable;
@@ -26,7 +27,7 @@ import static cofh.lib.util.Constants.GROUP_UTILS;
 import static cofh.lib.util.Constants.TAG_TYPE;
 import static cofh.lib.util.helpers.StringHelper.localize;
 
-public class ItemRedprint extends ItemCoFH {
+public class ItemRedprint extends ItemCoFH implements IPlacementItem {
 
 	public ItemRedprint() {
 
@@ -124,4 +125,29 @@ public class ItemRedprint extends ItemCoFH {
 		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 
+	// region IPlacementItem
+	@Override
+	public boolean onBlockPlacement(ItemStack stack, World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+
+		TileEntity tile = world.getTileEntity(pos);
+
+		if (tile instanceof ISecurable && !((ISecurable) tile).canAccess(player)) {
+			return false;
+		}
+		if (tile instanceof IPortableData) {
+			if (Utils.isServerWorld(world)) {
+				if (!stack.hasTagCompound()) {
+					return false;
+				} else {
+					if (stack.getTagCompound().getString("Type").equals(((IPortableData) tile).getDataType())) {
+						((IPortableData) tile).readPortableData(player, stack.getTagCompound());
+						player.world.playSound(null, player.getPosition(), SoundEvents.UI_BUTTON_CLICK, SoundCategory.PLAYERS, 0.5F, 0.8F);
+					}
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	// endregion
 }

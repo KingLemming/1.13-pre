@@ -7,7 +7,6 @@ import cofh.lib.item.IMultiModeItem;
 import cofh.lib.util.Utils;
 import cofh.lib.util.helpers.EnergyHelper;
 import cofh.lib.util.helpers.MathHelper;
-import cofh.lib.util.helpers.StringHelper;
 import cofh.redstonearsenal.init.ConfigRSA;
 import cofh.redstonearsenal.init.CreativeTabsRSA;
 import net.minecraft.client.util.ITooltipFlag;
@@ -40,6 +39,7 @@ import java.util.List;
 import static cofh.core.util.CoreUtils.configDir;
 import static cofh.lib.util.Constants.RGB_DURABILITY_FLUX;
 import static cofh.lib.util.Constants.TAG_ENERGY;
+import static cofh.lib.util.helpers.StringHelper.*;
 import static cofh.lib.util.modhelpers.EnsorcellmentHelper.HOLDING;
 
 public class ItemFishingRodFlux extends ItemFishingRodCoFH implements IEnergyContainerItem, IMultiModeItem {
@@ -101,17 +101,17 @@ public class ItemFishingRodFlux extends ItemFishingRodCoFH implements IEnergyCon
 	@SideOnly (Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 
-		if (StringHelper.displayShiftForDetail && !StringHelper.isShiftKeyDown()) {
-			tooltip.add(StringHelper.shiftForDetails());
+		if (displayShiftForDetail && !isShiftKeyDown()) {
+			tooltip.add(shiftForDetails());
 		}
-		if (!StringHelper.isShiftKeyDown()) {
+		if (!isShiftKeyDown()) {
 			return;
 		}
 		if (stack.getTagCompound() == null) {
 			EnergyHelper.setDefaultEnergyTag(stack, 0);
 		}
-		tooltip.add(StringHelper.localize("info.cofh.charge") + ": " + StringHelper.getScaledNumber(getEnergyStored(stack)) + " / " + StringHelper.getScaledNumber(getMaxEnergyStored(stack)) + " RF");
-		tooltip.add(StringHelper.ORANGE + getEnergyPerUse(stack) + " " + StringHelper.localize("info.redstonearsenal.tool.energyPerUse") + StringHelper.END);
+		tooltip.add(localize("info.cofh.charge") + ": " + getScaledNumber(getEnergyStored(stack)) + " / " + getScaledNumber(getMaxEnergyStored(stack)) + " RF");
+		tooltip.add(ORANGE + getEnergyPerUse(stack) + " " + localize("info.redstonearsenal.tool.energyPerUse") + END);
 		ConfigRSA.addEmpoweredTip(this, stack, tooltip);
 	}
 

@@ -5,7 +5,6 @@ import cofh.lib.energy.EnergyEnchantableItemWrapper;
 import cofh.lib.energy.IEnergyContainerItem;
 import cofh.lib.util.helpers.EnergyHelper;
 import cofh.lib.util.helpers.MathHelper;
-import cofh.lib.util.helpers.StringHelper;
 import cofh.redstonearsenal.init.ConfigRSA;
 import cofh.redstonearsenal.init.CreativeTabsRSA;
 import com.google.common.collect.HashMultimap;
@@ -39,6 +38,7 @@ import java.util.List;
 
 import static cofh.lib.util.Constants.RGB_DURABILITY_FLUX;
 import static cofh.lib.util.Constants.TAG_ENERGY;
+import static cofh.lib.util.helpers.StringHelper.*;
 import static cofh.lib.util.modhelpers.EnsorcellmentHelper.HOLDING;
 
 public class ItemArmorFlux extends ItemArmorCoFH implements ISpecialArmor, IEnergyContainerItem {
@@ -80,16 +80,16 @@ public class ItemArmorFlux extends ItemArmorCoFH implements ISpecialArmor, IEner
 	@SideOnly (Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 
-		if (StringHelper.displayShiftForDetail && !StringHelper.isShiftKeyDown()) {
-			tooltip.add(StringHelper.shiftForDetails());
+		if (displayShiftForDetail && !isShiftKeyDown()) {
+			tooltip.add(shiftForDetails());
 		}
-		if (!StringHelper.isShiftKeyDown()) {
+		if (!isShiftKeyDown()) {
 			return;
 		}
 		if (stack.getTagCompound() == null) {
 			EnergyHelper.setDefaultEnergyTag(stack, 0);
 		}
-		tooltip.add(StringHelper.localize("info.cofh.charge") + ": " + StringHelper.formatNumber(stack.getTagCompound().getInteger(TAG_ENERGY)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
+		tooltip.add(localize("info.cofh.charge") + ": " + formatNumber(stack.getTagCompound().getInteger(TAG_ENERGY)) + " / " + formatNumber(getMaxEnergyStored(stack)) + " RF");
 	}
 
 	@Override

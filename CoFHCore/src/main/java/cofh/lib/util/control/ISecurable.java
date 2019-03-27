@@ -17,7 +17,7 @@ public interface ISecurable {
 
 	void setAccess(AccessMode access);
 
-	void setOwner(GameProfile profile);
+	boolean setOwner(GameProfile profile);
 
 	default String getOwnerName() {
 

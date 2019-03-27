@@ -162,8 +162,9 @@ public class ContainerFilterItem extends ContainerCoFH implements IFilterable, I
 	}
 
 	@Override
-	public void setOwner(GameProfile profile) {
+	public boolean setOwner(GameProfile profile) {
 
+		return false;
 	}
 
 	@Override

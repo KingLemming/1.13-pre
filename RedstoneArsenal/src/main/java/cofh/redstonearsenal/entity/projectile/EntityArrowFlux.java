@@ -247,7 +247,6 @@ public class EntityArrowFlux extends EntityArrow {
 			this.rotationYaw = (float) (MathHelper.atan2(this.motionX, this.motionZ) * (180D / Math.PI));
 
 			for (this.rotationPitch = (float) (MathHelper.atan2(this.motionY, (double) f4) * (180D / Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
-				;
 			}
 			while (this.rotationPitch - this.prevRotationPitch >= 180.0F) {
 				this.prevRotationPitch += 360.0F;
@@ -291,7 +290,7 @@ public class EntityArrowFlux extends EntityArrow {
 
 		if (particleCount > 0) {
 			for (int i = 0; i < particleCount; i++) {
-				getEntityWorld().spawnParticle(EnumParticleTypes.REDSTONE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D, new int[0]);
+				getEntityWorld().spawnParticle(EnumParticleTypes.REDSTONE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 			}
 		}
 	}

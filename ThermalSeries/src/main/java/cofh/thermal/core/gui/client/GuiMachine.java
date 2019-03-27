@@ -6,6 +6,8 @@ import cofh.core.gui.element.ElementScaled;
 import cofh.core.gui.element.tab.TabConfiguration;
 import cofh.core.gui.element.tab.TabInfo;
 import cofh.core.gui.element.tab.TabRedstoneControl;
+import cofh.core.gui.element.tab.TabSecurity;
+import cofh.lib.util.helpers.SecurityHelper;
 import cofh.thermal.core.block.machine.TileMachine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -32,6 +34,9 @@ public class GuiMachine extends GuiContainerCoFH {
 		super.initGui();
 
 		addTab(new TabInfo(this, info));
+		if (SecurityHelper.hasSecurity(tile)) {
+			addTab(new TabSecurity(this, tile, SecurityHelper.getID(player)));
+		}
 		addTab(new TabRedstoneControl(this, tile));
 		addTab(new TabConfiguration(this, tile, tile));
 

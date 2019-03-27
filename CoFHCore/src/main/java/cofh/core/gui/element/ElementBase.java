@@ -4,7 +4,6 @@ import cofh.core.gui.IGuiAccess;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.ResourceLocation;
 
-import java.io.IOException;
 import java.util.List;
 
 public abstract class ElementBase {

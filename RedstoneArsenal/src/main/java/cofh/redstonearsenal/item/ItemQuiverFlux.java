@@ -43,6 +43,7 @@ import java.util.List;
 
 import static cofh.core.util.CoreUtils.configDir;
 import static cofh.lib.util.Constants.*;
+import static cofh.lib.util.helpers.StringHelper.*;
 
 public class ItemQuiverFlux extends ItemCoFH implements IEnergyContainerItem, IMultiModeItem, IToolQuiver {
 
@@ -99,17 +100,17 @@ public class ItemQuiverFlux extends ItemCoFH implements IEnergyContainerItem, IM
 	@SideOnly (Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 
-		if (StringHelper.displayShiftForDetail && !StringHelper.isShiftKeyDown()) {
+		if (displayShiftForDetail && !isShiftKeyDown()) {
 			tooltip.add(StringHelper.shiftForDetails());
 		}
-		if (!StringHelper.isShiftKeyDown()) {
+		if (!isShiftKeyDown()) {
 			return;
 		}
 		if (stack.getTagCompound() == null) {
 			EnergyHelper.setDefaultEnergyTag(stack, 0);
 		}
-		tooltip.add(StringHelper.localize("info.cofh.charge") + ": " + StringHelper.getScaledNumber(getEnergyStored(stack)) + " / " + StringHelper.getScaledNumber(getMaxEnergyStored(stack)) + " RF");
-		tooltip.add(StringHelper.ORANGE + getEnergyPerUse(stack) + " " + StringHelper.localize("info.redstonearsenal.tool.energyPerUse") + StringHelper.END);
+		tooltip.add(localize("info.cofh.charge") + ": " + getScaledNumber(getEnergyStored(stack)) + " / " + getScaledNumber(getMaxEnergyStored(stack)) + " RF");
+		tooltip.add(ORANGE + getEnergyPerUse(stack) + " " + localize("info.redstonearsenal.tool.energyPerUse") + END);
 		ConfigRSA.addEmpoweredTip(this, stack, tooltip);
 	}
 

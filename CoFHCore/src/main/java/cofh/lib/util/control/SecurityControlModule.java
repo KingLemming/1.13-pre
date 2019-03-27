@@ -1,7 +1,7 @@
 package cofh.lib.util.control;
 
 import cofh.core.network.PacketBufferCoFH;
-import cofh.core.network.packet.server.PacketSecurity;
+import cofh.core.network.packet.server.PacketSecurityControl;
 import cofh.lib.util.Utils;
 import cofh.lib.util.helpers.SecurityHelper;
 import com.mojang.authlib.GameProfile;
@@ -95,16 +95,23 @@ public class SecurityControlModule implements ISecurable {
 
 		this.access = access;
 		if (Utils.isClientWorld(tile.world())) {
-			PacketSecurity.sendToServer(this.access);
+			PacketSecurityControl.sendToServer(tile);
+		} else {
+			tile.onControlUpdate();
 		}
 	}
 
 	@Override
-	public void setOwner(GameProfile profile) {
+	public boolean setOwner(GameProfile profile) {
 
-		if (SecurityHelper.isDefaultProfile(owner)) {
+		if (SecurityHelper.isDefaultProfile(owner) && !SecurityHelper.isDefaultProfile(profile)) {
 			owner = profile;
+			if (Utils.isServerWorld(tile.world())) {
+				tile.onControlUpdate();
+			}
+			return true;
 		}
+		return false;
 	}
 	// endregion
 }

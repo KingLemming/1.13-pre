@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PreYggdrasilConverter;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.List;
@@ -130,6 +131,24 @@ public class SecurityHelper {
 		}
 	}
 
+	// region TILE HELPERS
+	public static boolean hasSecurity(TileEntity tile) {
+
+		if (tile instanceof ISecurable) {
+			return !isDefaultProfile(((ISecurable) tile).getOwner());
+		}
+		return false;
+	}
+
+	public static String getOwnerName(TileEntity tile) {
+
+		if (hasSecurity(tile)) {
+			return ((ISecurable) tile).getOwnerName();
+		}
+		return DEFAULT_GAME_PROFILE.getName();
+	}
+	// endregion
+
 	// region ITEM HELPERS
 	public static boolean hasSecurity(ItemStack stack) {
 
@@ -214,7 +233,7 @@ public class SecurityHelper {
 		NBTTagCompound secureTag = stack.getSubCompound(TAG_SECURITY);
 		boolean hasUUID;
 		if (secureTag == null || (!(hasUUID = secureTag.hasKey(TAG_OWNER_UUID)) && !secureTag.hasKey(TAG_OWNER_NAME))) {
-			return "[None]";
+			return DEFAULT_GAME_PROFILE.getName();
 		}
 		return hasUUID ? secureTag.getString(TAG_OWNER_NAME) : localize("info.cofh.another_player");
 	}

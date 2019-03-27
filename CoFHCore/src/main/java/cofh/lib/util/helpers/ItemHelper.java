@@ -1,6 +1,7 @@
 package cofh.lib.util.helpers;
 
 import cofh.lib.item.IMultiModeItem;
+import com.google.common.base.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -92,6 +93,31 @@ public class ItemHelper {
 	public static ItemStack cloneStack(ItemStack stack) {
 
 		return stack.isEmpty() ? ItemStack.EMPTY : stack.copy();
+	}
+	// endregion
+
+	// region NBT TAGS
+	public static ItemStack copyTag(ItemStack container, ItemStack other) {
+
+		if (!other.isEmpty() && other.hasTagCompound()) {
+			container.setTagCompound(other.getTagCompound().copy());
+		}
+		return container;
+	}
+
+	public static NBTTagCompound setItemStackTagName(NBTTagCompound tag, String name) {
+
+		if (Strings.isNullOrEmpty(name)) {
+			return null;
+		}
+		if (tag == null) {
+			tag = new NBTTagCompound();
+		}
+		if (!tag.hasKey("display")) {
+			tag.setTag("display", new NBTTagCompound());
+		}
+		tag.getCompoundTag("display").setString("Name", name);
+		return tag;
 	}
 	// endregion
 

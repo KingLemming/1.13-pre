@@ -124,8 +124,9 @@ public class ContainerSatchel extends ContainerInventoryItem implements ISecurab
 	}
 
 	@Override
-	public void setOwner(GameProfile profile) {
+	public boolean setOwner(GameProfile profile) {
 
+		return false;
 	}
 
 	@Override

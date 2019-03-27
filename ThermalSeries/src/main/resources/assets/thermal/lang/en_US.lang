@@ -263,6 +263,7 @@ item.thermal.tome_reference.name=Thermal Reference
 
 item.thermal.util_wrench.name=Crescent Hammer
 item.thermal.util_redprint.name=Redprint
+item.thermal.util_lock.name=Signalum Security Lock
 
 #-----------------------------------------------------------------------------------------------------------------------
 # COINS

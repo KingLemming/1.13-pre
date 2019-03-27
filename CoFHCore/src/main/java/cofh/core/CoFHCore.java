@@ -10,6 +10,7 @@ import cofh.core.network.packet.client.PacketTileState;
 import cofh.core.network.packet.server.PacketFilter;
 import cofh.core.network.packet.server.PacketRedstoneControl;
 import cofh.core.network.packet.server.PacketSecurity;
+import cofh.core.network.packet.server.PacketSecurityControl;
 import cofh.core.proxy.ProxyCommon;
 import cofh.core.util.CoreUtils;
 import cofh.core.util.oredict.OreDictionaryArbiter;
@@ -127,6 +128,7 @@ public class CoFHCore {
 		packetHandler.registerPacket(PACKET_CHAT, PacketIndexedChat::new);
 		packetHandler.registerPacket(PACKET_SECURITY, PacketSecurity::new);
 		packetHandler.registerPacket(PACKET_FILTER, PacketFilter::new);
+		packetHandler.registerPacket(PACKET_SECURITY_CONTROL, PacketSecurityControl::new);
 		packetHandler.registerPacket(PACKET_REDSTONE_CONTROL, PacketRedstoneControl::new);
 		packetHandler.registerPacket(PACKET_KEY, PacketKey::new);
 

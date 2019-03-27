@@ -15,9 +15,9 @@ public interface ISecurableTile extends ISecurable, ITileCallback {
 	}
 
 	@Override
-	default void setOwner(GameProfile profile) {
+	default boolean setOwner(GameProfile profile) {
 
-		securityControl().setOwner(profile);
+		return securityControl().setOwner(profile);
 	}
 
 	@Override

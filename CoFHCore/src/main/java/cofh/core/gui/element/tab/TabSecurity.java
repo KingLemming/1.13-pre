@@ -3,7 +3,6 @@ package cofh.core.gui.element.tab;
 import cofh.core.gui.IGuiAccess;
 import cofh.lib.util.control.ISecurable;
 import cofh.lib.util.helpers.SoundHelper;
-import cofh.lib.util.helpers.StringHelper;
 import net.minecraft.client.renderer.GlStateManager;
 
 import java.util.List;
@@ -74,15 +73,15 @@ public class TabSecurity extends TabBase {
 		switch (mySecurable.getAccess()) {
 			case PUBLIC:
 				gui.drawIcon(ICON_BUTTON_HIGHLIGHT, 28, 20);
-				getFontRenderer().drawString(StringHelper.localize("info.cofh.access_public"), sideOffset() + 14, 54, textColor);
+				getFontRenderer().drawString(localize("info.cofh.access_public"), sideOffset() + 14, 54, textColor);
 				break;
 			case FRIENDS:
 				gui.drawIcon(ICON_BUTTON_HIGHLIGHT, 48, 20);
-				getFontRenderer().drawString(StringHelper.localize("info.cofh.access_friends"), sideOffset() + 14, 54, textColor);
+				getFontRenderer().drawString(localize("info.cofh.access_friends"), sideOffset() + 14, 54, textColor);
 				break;
 			case PRIVATE:
 				gui.drawIcon(ICON_BUTTON_HIGHLIGHT, 68, 20);
-				getFontRenderer().drawString(StringHelper.localize("info.cofh.access_private"), sideOffset() + 14, 54, textColor);
+				getFontRenderer().drawString(localize("info.cofh.access_private"), sideOffset() + 14, 54, textColor);
 				break;
 		}
 		gui.drawIcon(ICON_ACCESS_PUBLIC, 28, 20);
@@ -142,6 +141,9 @@ public class TabSecurity extends TabBase {
 	@Override
 	public boolean mouseClicked(int mouseX, int mouseY, int mouseButton) {
 
+		if (!myPlayer.equals(mySecurable.getOwner().getId())) {
+			return true;
+		}
 		if (!fullyOpen) {
 			return false;
 		}
