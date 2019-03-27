@@ -152,7 +152,7 @@ public class ItemShieldFlux extends ItemShieldCoFH implements IEnergyContainerIt
 	@Override
 	public boolean shouldCauseBlockBreakReset(ItemStack oldStack, ItemStack newStack) {
 
-		return !oldStack.equals(newStack) && (getEnergyStored(oldStack) > 0 != getEnergyStored(newStack) > 0);
+		return !(newStack.getItem() == oldStack.getItem()) || (getEnergyStored(oldStack) > 0 != getEnergyStored(newStack) > 0);
 	}
 
 	@Override

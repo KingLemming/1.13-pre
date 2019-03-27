@@ -111,12 +111,6 @@ public abstract class ItemRFTool extends ItemRFContainer {
 	}
 
 	@Override
-	public boolean shouldCauseBlockBreakReset(ItemStack oldStack, ItemStack newStack) {
-
-		return !oldStack.equals(newStack) && (getEnergyStored(oldStack) > 0 != getEnergyStored(newStack) > 0);
-	}
-
-	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state) {
 
 		for (String type : getToolClasses(stack)) {
