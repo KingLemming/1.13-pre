@@ -1,12 +1,13 @@
 package cofh.thermal.core.block.machine;
 
+import cofh.lib.util.helpers.MathHelper;
 import cofh.thermal.core.block.AbstractTileType;
 
 public abstract class TileMachineWorld extends TileMachine {
 
 	protected boolean cached;
 	protected int timeConstant = TIME_CONSTANT;
-	protected int timeOffset;
+	protected int timeOffset = MathHelper.RANDOM.nextInt(timeConstant);
 
 	public TileMachineWorld(AbstractTileType type) {
 

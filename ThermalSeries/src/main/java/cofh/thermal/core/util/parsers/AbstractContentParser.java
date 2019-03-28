@@ -323,12 +323,16 @@ public abstract class AbstractContentParser implements IContentParser {
 	public static final String INPUT = "input";
 	public static final String ITEM = "item";
 	public static final String LOCKED = "locked";
+	public static final String MIN_CHANCE = "min_chance";
 	public static final String MOD = "mod";
 	public static final String NBT = "nbt";
 	public static final String ORE = "ore";
 	public static final String OUTPUT = "output";
+	public static final String PRIMARY_MOD = "primary_mod";
 	public static final String REMOVE = "remove";
+	public static final String SECONDARY_MOD = "secondary_mod";
 	public static final String TYPE = "type";
+	public static final String USE_CHANCE = "use_chance";
 	public static final String WILDCARD = "wildcard";
 
 	public static final String LAVA = "lava";

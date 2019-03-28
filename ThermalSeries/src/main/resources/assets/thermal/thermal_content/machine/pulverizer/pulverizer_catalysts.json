@@ -1,0 +1,14 @@
+{
+	"catalyst_pulverizer": [
+		{
+			"input": {
+				"item": "minecraft:flint"
+			},
+			"primary_mod": 1.25,
+			"secondary_mod": 1.5,
+			"energy_mod": 0.9,
+			"min_chance": 0.20,
+			"use_chance": 0.25
+		}
+	]
+}

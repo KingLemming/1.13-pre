@@ -13,7 +13,126 @@
 		"parent": "",
 		"screenshots": [],
 		"dependencies": [
-			"forge, cofh.core"
+			"forge,cofh.core"
+		]
+	},
+	{
+		"modid": "thermal_foundation",
+		"name": "Thermal Foundation",
+		"description": "The Foundation of a Thermally enhanced world!",
+		"version": "${version}",
+		"credits": "Team CoFH",
+		"logoFile": "assets/logo_foundation.png",
+		"mcversion": "${mc_version}",
+		"url": "http://www.teamcofh.com",
+		"updateUrl": "",
+		"authorList": [ "Team CoFH" ],
+		"parent": "thermal",
+		"screenshots": [],
+		"dependencies": [
+			"forge,cofh.core"
+		]
+	},
+	{
+		"modid": "thermal_expansion",
+		"name": "Thermal Expansion",
+		"description": "Expanding Minecraft Thermally - provides new options for automation and processing!",
+		"version": "${version}",
+		"credits": "Team CoFH",
+		"logoFile": "assets/logo_expansion.png",
+		"mcversion": "${mc_version}",
+		"url": "http://www.teamcofh.com",
+		"updateUrl": "",
+		"authorList": [ "Team CoFH" ],
+		"parent": "thermal",
+		"screenshots": [],
+		"dependencies": [
+			"forge,cofh.core"
+		]
+	},
+	{
+		"modid": "thermal_dynamics",
+		"name": "Thermal Dynamics",
+		"description": "Thermal gets Dynamic! Adds ducts - blocks for transporting Items, Fluids, Redstone Flux, and even Players!",
+		"version": "${version}",
+		"credits": "Team CoFH",
+		"logoFile": "assets/logo_dynamics.png",
+		"mcversion": "${mc_version}",
+		"url": "http://www.teamcofh.com",
+		"updateUrl": "",
+		"authorList": [ "Team CoFH" ],
+		"parent": "thermal",
+		"screenshots": [],
+		"dependencies": [
+			"forge,cofh.core"
+		]
+	},
+	{
+		"modid": "thermal_innovation",
+		"name": "Thermal Innovation",
+		"description": "Thermal Technology marches on. Adds Thermal-style tools and equipment!",
+		"version": "${version}",
+		"credits": "Team CoFH",
+		"logoFile": "assets/logo_innovation.png",
+		"mcversion": "${mc_version}",
+		"url": "http://www.teamcofh.com",
+		"updateUrl": "",
+		"authorList": [ "Team CoFH" ],
+		"parent": "thermal",
+		"screenshots": [],
+		"dependencies": [
+			"forge,cofh.core"
+		]
+	},
+	{
+		"modid": "thermal_cultivation",
+		"name": "Thermal Cultivation",
+		"description": "Thermal gets Agrarian - provides options for farming and related activities!",
+		"version": "${version}",
+		"credits": "Team CoFH",
+		"logoFile": "assets/logo_cultivation.png",
+		"mcversion": "${mc_version}",
+		"url": "http://www.teamcofh.com",
+		"updateUrl": "",
+		"authorList": [ "Team CoFH" ],
+		"parent": "thermal",
+		"screenshots": [],
+		"dependencies": [
+			"forge,cofh.core"
+		]
+	},
+	{
+		"modid": "thermal_locomotion",
+		"name": "Thermal Locomotion",
+		"description": "Thermally expanding the railyard! Time for the other kind of engineering.",
+		"version": "${version}",
+		"credits": "Team CoFH",
+		"logoFile": "assets/logo_locomotion.png",
+		"mcversion": "${mc_version}",
+		"url": "http://www.teamcofh.com",
+		"updateUrl": "",
+		"authorList": [ "Team CoFH" ],
+		"parent": "thermal",
+		"screenshots": [],
+		"dependencies": [
+			"forge,cofh.core"
+		]
+	},
+	{
+		"modid": "thermal_atomics",
+		"name": "Thermal Atomics",
+		"description": "Thermal goes Thermonuclear - time to split some atoms!",
+		"version": "${version}",
+		"credits": "Team CoFH",
+		"logoFile": "assets/logo_atomics.png",
+		"mcversion": "${mc_version}",
+		"url": "http://www.teamcofh.com",
+		"updateUrl": "",
+		"authorList": [ "Team CoFH" ],
+		"parent": "thermal",
+		"screenshots": [],
+		"dependencies": [
+			"forge,cofh.core"
 		]
 	}
 ]
