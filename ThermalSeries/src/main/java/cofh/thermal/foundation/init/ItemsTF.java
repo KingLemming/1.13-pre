@@ -45,6 +45,13 @@ public class ItemsTF {
 		plateSilver = registerItem("plate_silver", "plateSilver", new ItemCoFH(GROUP_PLATES));
 		coinSilver = registerItem("coin_silver", "coinSilver", new ItemCoin());
 
+		ingotLead = registerItem("ingot_lead", "ingotLead", new ItemCoFH(GROUP_INGOTS));
+		nuggetLead = registerItem("nugget_lead", "nuggetLead", new ItemCoFH(GROUP_NUGGETS));
+		dustLead = registerItem("dust_lead", "dustLead", new ItemCoFH(GROUP_DUSTS));
+		gearLead = registerItem("gear_lead", "gearLead", new ItemCoFH(GROUP_GEARS));
+		plateLead = registerItem("plate_lead", "plateLead", new ItemCoFH(GROUP_PLATES));
+		coinLead = registerItem("coin_lead", "coinLead", new ItemCoin());
+
 		ingotNickel = registerItem("ingot_nickel", "ingotNickel", new ItemCoFH(GROUP_INGOTS));
 		nuggetNickel = registerItem("nugget_nickel", "nuggetNickel", new ItemCoFH(GROUP_NUGGETS));
 		dustNickel = registerItem("dust_nickel", "dustNickel", new ItemCoFH(GROUP_DUSTS));
@@ -89,13 +96,6 @@ public class ItemsTF {
 		gearAluminum = registerItem("gear_aluminum", "gearAluminum", new ItemCoFH(GROUP_GEARS));
 		plateAluminum = registerItem("plate_aluminum", "plateAluminum", new ItemCoFH(GROUP_PLATES));
 		coinAluminum = registerItem("coin_aluminum", "coinAluminum", new ItemCoin());
-
-		ingotLead = registerItem("ingot_lead", "ingotLead", new ItemCoFH(GROUP_INGOTS));
-		nuggetLead = registerItem("nugget_lead", "nuggetLead", new ItemCoFH(GROUP_NUGGETS));
-		dustLead = registerItem("dust_lead", "dustLead", new ItemCoFH(GROUP_DUSTS));
-		gearLead = registerItem("gear_lead", "gearLead", new ItemCoFH(GROUP_GEARS));
-		plateLead = registerItem("plate_lead", "plateLead", new ItemCoFH(GROUP_PLATES));
-		coinLead = registerItem("coin_lead", "coinLead", new ItemCoin());
 
 		ingotPlatinum = registerItem("ingot_platinum", "ingotPlatinum", new ItemCoFH(GROUP_INGOTS).setRarity(UNCOMMON));
 		nuggetPlatinum = registerItem("nugget_platinum", "nuggetPlatinum", new ItemCoFH(GROUP_NUGGETS).setRarity(UNCOMMON));
@@ -142,6 +142,13 @@ public class ItemsTF {
 	public static ItemStack plateSilver;
 	public static ItemStack coinSilver;
 
+	public static ItemStack ingotLead;
+	public static ItemStack nuggetLead;
+	public static ItemStack dustLead;
+	public static ItemStack gearLead;
+	public static ItemStack plateLead;
+	public static ItemStack coinLead;
+
 	public static ItemStack ingotNickel;
 	public static ItemStack nuggetNickel;
 	public static ItemStack dustNickel;
@@ -186,13 +193,6 @@ public class ItemsTF {
 	public static ItemStack plateAluminum;
 	public static ItemStack coinAluminum;
 
-	public static ItemStack ingotLead;
-	public static ItemStack nuggetLead;
-	public static ItemStack dustLead;
-	public static ItemStack gearLead;
-	public static ItemStack plateLead;
-	public static ItemStack coinLead;
-
 	public static ItemStack ingotPlatinum;
 	public static ItemStack nuggetPlatinum;
 	public static ItemStack dustPlatinum;
@@ -236,31 +236,6 @@ public class ItemsTF {
 	public static ItemStack powerCoilGold;
 	public static ItemStack powerCoilSilver;
 	public static ItemStack powerCoilElectrum;
-
-	public static ItemStack partToolCasing;
-	public static ItemStack partDrillHead;
-	public static ItemStack partSawBlade;
-
-	public static ItemStack dustWood;
-	public static ItemStack dustWoodCompressed;
-	public static ItemStack fuelCoke;
-
-	public static ItemStack dustBiomass;
-	public static ItemStack dustBiomassRich;
-	public static ItemStack dustBioblend;
-	public static ItemStack dustBioblendRich;
-
-	public static ItemStack globRosin;
-	public static ItemStack globTar;
-
-	public static ItemStack crystalSlag;
-	public static ItemStack crystalSlagRich;
-	public static ItemStack crystalCinnabar;
-
-	public static ItemStack crystalCrudeOil;
-	public static ItemStack crystalRedstone;
-	public static ItemStack crystalGlowstone;
-	public static ItemStack crystalEnder;
 
 	public static ItemStack dustPyrotheum;
 	public static ItemStack dustCryotheum;

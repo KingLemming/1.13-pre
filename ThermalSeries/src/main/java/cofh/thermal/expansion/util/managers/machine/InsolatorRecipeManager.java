@@ -26,7 +26,7 @@ public class InsolatorRecipeManager extends SimpleCatalystRecipeManager {
 	protected static float plantMultiplier = 2.0F;
 	protected static float tuberMultiplier = 2.5F;
 	protected static boolean defaultPlantRecipes = true;
-	public static FluidStack defaultPlantFluid = new FluidStack(FluidRegistry.WATER, Fluid.BUCKET_VOLUME / 2);
+	public static FluidStack defaultFluidStack = new FluidStack(FluidRegistry.WATER, Fluid.BUCKET_VOLUME / 2);
 
 	public static InsolatorRecipeManager instance() {
 
@@ -56,7 +56,7 @@ public class InsolatorRecipeManager extends SimpleCatalystRecipeManager {
 		if (maxOutputItems <= 0 || input.isEmpty() || output.isEmpty() || energy <= 0 || validRecipe(input)) {
 			return null;
 		}
-		energy = (energy * scaleFactor) / 100;
+		energy = (energy * getDefaultScale()) / 100;
 
 		InsolatorPlantRecipe recipe = new InsolatorPlantRecipe(energy, input, output, chance);
 		if (hasCustomOreID(input)) {
@@ -77,7 +77,7 @@ public class InsolatorRecipeManager extends SimpleCatalystRecipeManager {
 				return null;
 			}
 		}
-		energy = (energy * scaleFactor) / 100;
+		energy = (energy * getDefaultScale()) / 100;
 
 		InsolatorPlantRecipe recipe = new InsolatorPlantRecipe(energy, input, output, chance);
 		if (hasCustomOreID(input)) {

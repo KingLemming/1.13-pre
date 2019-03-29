@@ -482,7 +482,7 @@ item.thermal.seed_bell_pepper.name=Bell Pepper Seeds
 item.thermal.seed_coffee.name=Coffee Beans
 item.thermal.seed_corn.name=Corn Seeds
 item.thermal.seed_green_bean.name=Green Bean Seeds
-item.thermal.seed_hops.name=Hop Rhizome
+item.thermal.seed_hops.name=Hop Seeds
 item.thermal.seed_onion.name=Onion Seeds
 item.thermal.seed_peanut.name=Peanut Seeds
 item.thermal.seed_rice.name=Rice Seeds
@@ -614,6 +614,7 @@ tile.thermal.machine_enchanter.name=Arcane Ensorcellator
 tile.thermal.machine_lexicon.name=Lexical Transmuter
 
 tile.thermal.machine_water_gen.name=Aqueous Accumulator
+tile.thermal.machine_tapper.name=Arboreal Extractor
 
 #=======================================================================================================================
 # BLOCKS - LOCOMOTION

@@ -2,8 +2,10 @@ package cofh.thermal.expansion.block.machine.process;
 
 import cofh.core.network.PacketBufferCoFH;
 import cofh.lib.fluid.FluidStorageCoFH;
+import cofh.lib.inventory.InventoryCraftingFalse;
 import cofh.thermal.core.block.AbstractTileType;
 import cofh.thermal.core.block.machine.TileMachineProcess;
+import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -15,7 +17,8 @@ import static cofh.lib.util.StorageGroup.*;
 // TODO: Finish
 public class TileMachineCrafter extends TileMachineProcess {
 
-	protected FluidStack renderFluid = new FluidStack(FluidRegistry.WATER, 0);
+	private InventoryCraftingFalse craftMatrix = new InventoryCraftingFalse(3, 3);
+	private InventoryCraftResult craftResult = new InventoryCraftResult();
 
 	protected FluidStorageCoFH inputTank = new FluidStorageCoFH(TANK_SMALL);
 
@@ -27,6 +30,8 @@ public class TileMachineCrafter extends TileMachineProcess {
 		inventory.addSlot(OUTPUT);
 		inventory.addSlot(INTERNAL, 9);
 		tankInv.addTank(inputTank, INPUT);
+
+		renderFluid = new FluidStack(FluidRegistry.WATER, 0);
 	}
 
 	@Override

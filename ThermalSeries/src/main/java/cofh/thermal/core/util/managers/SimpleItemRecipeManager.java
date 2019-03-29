@@ -52,7 +52,7 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 		if (maxOutputItems <= 0 || input.isEmpty() || output.isEmpty() || energy <= 0 || validRecipe(input)) {
 			return null;
 		}
-		energy = (energy * scaleFactor) / 100;
+		energy = (energy * getDefaultScale()) / 100;
 
 		SimpleItemRecipe recipe = new SimpleItemRecipe(energy, input, output, chance);
 		if (hasCustomOreID(input)) {
@@ -80,7 +80,7 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 				return null;
 			}
 		}
-		energy = (energy * scaleFactor) / 100;
+		energy = (energy * getDefaultScale()) / 100;
 
 		SimpleItemRecipe recipe = new SimpleItemRecipe(energy, input, output, chance);
 		if (hasCustomOreID(input)) {
@@ -98,7 +98,7 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 		if (maxOutputFluids <= 0 || input.isEmpty() || output == null || energy <= 0 || validRecipe(input)) {
 			return null;
 		}
-		energy = (energy * scaleFactor) / 100;
+		energy = (energy * getDefaultScale()) / 100;
 
 		SimpleItemRecipe recipe = new SimpleItemRecipe(energy, input, output);
 		if (hasCustomOreID(input)) {
@@ -126,7 +126,7 @@ public abstract class SimpleItemRecipeManager extends AbstractManager implements
 				return null;
 			}
 		}
-		energy = (energy * scaleFactor) / 100;
+		energy = (energy * getDefaultScale()) / 100;
 
 		SimpleItemRecipe recipe = new SimpleItemRecipe(energy, input, output, chance, outputFluids);
 		if (hasCustomOreID(input)) {

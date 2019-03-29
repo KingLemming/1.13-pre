@@ -56,7 +56,7 @@ public abstract class SimpleItemFuelManager extends AbstractManager implements I
 		if (input.isEmpty() || energy < MIN_ENERGY || energy > MAX_ENERGY || validFuel(input)) {
 			return null;
 		}
-		energy = (energy * scaleFactor) / 100;
+		energy = (energy * getDefaultScale()) / 100;
 
 		SimpleItemFuel fuel = new SimpleItemFuel(input, energy);
 		if (hasCustomOreID(input)) {

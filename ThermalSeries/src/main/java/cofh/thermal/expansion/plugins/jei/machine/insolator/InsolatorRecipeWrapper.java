@@ -81,7 +81,7 @@ public class InsolatorRecipeWrapper extends BaseRecipeWrapper {
 	@Override
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 
-		RenderHelper.drawFluid(74, 14, inputFluids.isEmpty() ? InsolatorRecipeManager.defaultPlantFluid : inputFluids.get(0), 24, 16);
+		RenderHelper.drawFluid(74, 14, inputFluids.isEmpty() ? InsolatorRecipeManager.defaultFluidStack : inputFluids.get(0), 24, 16);
 
 		progressMask.draw(minecraft, 74, 14);
 		progress.draw(minecraft, 74, 14);

@@ -33,7 +33,7 @@ public class TileMachineInsolator extends TileMachineProcess {
 	@Override
 	public FluidStack getRenderFluid() {
 
-		return InsolatorRecipeManager.defaultPlantFluid;
+		return InsolatorRecipeManager.defaultFluidStack;
 	}
 
 	@Override

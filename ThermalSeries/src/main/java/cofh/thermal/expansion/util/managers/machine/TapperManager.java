@@ -6,6 +6,7 @@ import cofh.lib.util.comparison.ItemWrapper;
 import cofh.lib.util.helpers.ItemHelper;
 import cofh.thermal.core.init.FluidsTSeries;
 import cofh.thermal.core.init.ItemsTSeries;
+import cofh.thermal.core.util.managers.IManager;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import gnu.trove.iterator.TObjectIntIterator;
@@ -24,53 +25,30 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-// TODO: Fix / completely redo
-public class TapperManager {
+// TODO: Finish
+public class TapperManager implements IManager {
 
-	private static Map<BlockWrapper, FluidStack> blockMap = new Object2ObjectOpenHashMap<>();
-	private static Map<ItemWrapper, FluidStack> itemMap = new Object2ObjectOpenHashMap<>();
-	private static SetMultimap<BlockWrapper, BlockWrapper> leafMap = HashMultimap.create();
-	private static TObjectIntHashMap<ComparableItemStack> fertilizerMap = new TObjectIntHashMap<>();
+	private static final TapperManager INSTANCE = new TapperManager();
+	public static FluidStack defaultFluidStack = new FluidStack(FluidsTSeries.fluidResin, 0);
 
-	public static FluidStack DEFAULT_FLUID = new FluidStack(FluidsTSeries.fluidResin, 0);
-	public static final int ITEM_FLUID_FACTOR = 5;
+	protected Map<BlockWrapper, FluidStack> blockMap = new Object2ObjectOpenHashMap<>();
+	protected Map<ItemWrapper, FluidStack> itemMap = new Object2ObjectOpenHashMap<>();
+	protected SetMultimap<BlockWrapper, BlockWrapper> leafMap = HashMultimap.create();
+	protected TObjectIntHashMap<ComparableItemStack> fertilizerMap = new TObjectIntHashMap<>();
 
-	public static FluidStack getFluid(IBlockState state) {
+	public final int ITEM_FLUID_FACTOR = 5;
 
-		FluidStack ret = blockMap.get(new BlockWrapper(state.getBlock(), state.getBlock().getMetaFromState(state)));
-		return ret != null ? ret : DEFAULT_FLUID;
+	public static TapperManager instance() {
+
+		return INSTANCE;
 	}
 
-	public static boolean mappingExists(IBlockState state) {
+	// region IManager
+	public void config() {
 
-		return getFluid(state) != DEFAULT_FLUID;
 	}
 
-	public static FluidStack getFluid(ItemStack stack) {
-
-		FluidStack ret = itemMap.get(new ItemWrapper(stack.getItem(), ItemHelper.getItemDamage(stack)));
-		return ret != null ? ret : DEFAULT_FLUID;
-	}
-
-	public static boolean mappingExists(ItemStack stack) {
-
-		return getFluid(stack) != DEFAULT_FLUID;
-	}
-
-	public static Set<BlockWrapper> getLeaf(IBlockState state) {
-
-		return leafMap.get(new BlockWrapper(state.getBlock(), state.getBlock().getMetaFromState(state)));
-	}
-
-	public static int getFertilizerMultiplier(ItemStack stack) {
-
-		if (stack.isEmpty()) {
-			return 0;
-		}
-		return fertilizerMap.get(new ComparableItemStack(stack));
-	}
-
-	public static void initialize() {
+	public void initialize() {
 
 		FluidStack sap = new FluidStack(FluidsTSeries.fluidSap, 50);
 		FluidStack resin = new FluidStack(FluidsTSeries.fluidResin, 50);
@@ -113,63 +91,9 @@ public class TapperManager {
 			addLeafMapping(Blocks.RED_MUSHROOM_BLOCK.getDefaultState().withProperty(BlockHugeMushroom.VARIANT, EnumType.STEM), Blocks.RED_MUSHROOM_BLOCK.getDefaultState().withProperty(BlockHugeMushroom.VARIANT, EnumType.SOUTH));
 			addLeafMapping(Blocks.RED_MUSHROOM_BLOCK.getDefaultState().withProperty(BlockHugeMushroom.VARIANT, EnumType.STEM), Blocks.RED_MUSHROOM_BLOCK.getDefaultState().withProperty(BlockHugeMushroom.VARIANT, EnumType.SOUTH_EAST));
 		}
-
-		/* LOAD MAPPINGS */
-		loadMappings();
 	}
 
-	public static void loadMappings() {
-
-	}
-
-	/* ADD MAPPING */
-	public static boolean addStandardMapping(ItemStack item, FluidStack fluid) {
-
-		if (item.isEmpty() || fluid == null) {
-			return false;
-		}
-		addBlockStateMapping(item, fluid);
-		addItemMapping(item, new FluidStack(fluid, fluid.amount / ITEM_FLUID_FACTOR));
-		return true;
-	}
-
-	public static boolean addBlockStateMapping(ItemStack item, FluidStack fluid) {
-
-		if (item.isEmpty() || fluid == null) {
-			return false;
-		}
-		blockMap.put(new BlockWrapper(((ItemBlock) item.getItem()).getBlock(), ItemHelper.getItemDamage(item)), fluid.copy());
-		return true;
-	}
-
-	public static boolean addBlockStateMapping(IBlockState state, FluidStack fluid) {
-
-		if (fluid == null) {
-			return false;
-		}
-		blockMap.put(new BlockWrapper(state.getBlock(), state.getBlock().getMetaFromState(state)), fluid.copy());
-		return true;
-	}
-
-	public static boolean addItemMapping(ItemStack item, FluidStack fluid) {
-
-		if (item.isEmpty() || fluid == null) {
-			return false;
-		}
-		itemMap.put(new ItemWrapper(item.getItem(), ItemHelper.getItemDamage(item)), fluid.copy());
-		return true;
-	}
-
-	public static boolean addLeafMapping(IBlockState logState, IBlockState leafState) {
-
-		if (logState == null || leafState == null) {
-			return false;
-		}
-		leafMap.put(new BlockWrapper(logState), new BlockWrapper(leafState));
-		return true;
-	}
-
-	public static void refresh() {
+	public void refresh() {
 
 		Map<BlockWrapper, FluidStack> tempBlockMap = new Object2ObjectOpenHashMap<>(blockMap.size());
 		Map<ItemWrapper, FluidStack> tempItemMap = new Object2ObjectOpenHashMap<>(itemMap.size());
@@ -202,9 +126,89 @@ public class TapperManager {
 		leafMap = tempLeafMap;
 		fertilizerMap = tempFertilizerMap;
 	}
+	// endregion
+
+	public FluidStack getFluid(IBlockState state) {
+
+		FluidStack ret = blockMap.get(new BlockWrapper(state.getBlock(), state.getBlock().getMetaFromState(state)));
+		return ret != null ? ret : defaultFluidStack;
+	}
+
+	public boolean mappingExists(IBlockState state) {
+
+		return getFluid(state) != defaultFluidStack;
+	}
+
+	public FluidStack getFluid(ItemStack stack) {
+
+		FluidStack ret = itemMap.get(new ItemWrapper(stack.getItem(), ItemHelper.getItemDamage(stack)));
+		return ret != null ? ret : defaultFluidStack;
+	}
+
+	public boolean mappingExists(ItemStack stack) {
+
+		return getFluid(stack) != defaultFluidStack;
+	}
+
+	public Set<BlockWrapper> getLeaf(IBlockState state) {
+
+		return leafMap.get(new BlockWrapper(state.getBlock(), state.getBlock().getMetaFromState(state)));
+	}
+
+	public int getFertilizerMultiplier(ItemStack stack) {
+
+		return stack.isEmpty() ? 0 : fertilizerMap.get(new ComparableItemStack(stack));
+	}
+
+	/* ADD MAPPING */
+	public boolean addStandardMapping(ItemStack item, FluidStack fluid) {
+
+		if (item.isEmpty() || fluid == null) {
+			return false;
+		}
+		addBlockStateMapping(item, fluid);
+		addItemMapping(item, new FluidStack(fluid, fluid.amount / ITEM_FLUID_FACTOR));
+		return true;
+	}
+
+	public boolean addBlockStateMapping(ItemStack item, FluidStack fluid) {
+
+		if (item.isEmpty() || fluid == null) {
+			return false;
+		}
+		blockMap.put(new BlockWrapper(((ItemBlock) item.getItem()).getBlock(), ItemHelper.getItemDamage(item)), fluid.copy());
+		return true;
+	}
+
+	public boolean addBlockStateMapping(IBlockState state, FluidStack fluid) {
+
+		if (fluid == null) {
+			return false;
+		}
+		blockMap.put(new BlockWrapper(state.getBlock(), state.getBlock().getMetaFromState(state)), fluid.copy());
+		return true;
+	}
+
+	public boolean addItemMapping(ItemStack item, FluidStack fluid) {
+
+		if (item.isEmpty() || fluid == null) {
+			return false;
+		}
+		itemMap.put(new ItemWrapper(item.getItem(), ItemHelper.getItemDamage(item)), fluid.copy());
+		return true;
+	}
+
+	public boolean addLeafMapping(IBlockState logState, IBlockState leafState) {
+
+		if (logState == null || leafState == null) {
+			return false;
+		}
+		leafMap.put(new BlockWrapper(logState), new BlockWrapper(leafState));
+		return true;
+	}
 
 	/* HELPERS */
-	private static void addVanillaLeafMappings(Block logBlock, PropertyEnum<BlockPlanks.EnumType> logVariantProperty, Block leavesBlock, PropertyEnum<BlockPlanks.EnumType> leafVariantProperty) {
+	protected void addVanillaLeafMappings(Block logBlock, PropertyEnum<BlockPlanks.EnumType> logVariantProperty, Block leavesBlock, PropertyEnum<BlockPlanks.EnumType> leafVariantProperty) {
 
 		for (BlockPlanks.EnumType variant : logVariantProperty.getAllowedValues()) {
 			IBlockState logState = logBlock.getDefaultState().withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y).withProperty(logVariantProperty, variant);
@@ -216,7 +220,7 @@ public class TapperManager {
 		}
 	}
 
-	private static void addFertilizer(ItemStack fertilizer, int multiplier) {
+	protected void addFertilizer(ItemStack fertilizer, int multiplier) {
 
 		fertilizerMap.put(new ComparableItemStack(fertilizer), multiplier);
 	}

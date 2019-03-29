@@ -27,12 +27,14 @@ public class RecipesTC {
 		addShapelessRecipe(cloneStack(seedCorn, 2), "cropCorn");
 
 		addShapelessRecipe(cloneStack(seedBellPepper, 2), "cropBellPepper");
-		addShapelessRecipe(cloneStack(seedCoffee, 2), "cropCoffee");
 		addShapelessRecipe(cloneStack(seedGreenBean, 2), "cropGreenBean");
 		addShapelessRecipe(cloneStack(seedPeanut, 2), "cropPeanut");
 		addShapelessRecipe(cloneStack(seedStrawberry, 2), "cropStrawberry");
-		addShapelessRecipe(cloneStack(seedTea, 2), "cropTea");
 		addShapelessRecipe(cloneStack(seedTomato, 2), "cropTomato");
+
+		addShapelessRecipe(cloneStack(seedCoffee, 2), "cropCoffee");
+		addShapelessRecipe(cloneStack(seedTea, 2), "cropTea");
+		addShapelessRecipe(cloneStack(seedHops, 2), "cropHops");
 	}
 
 	private static void registerToolRecipes() {

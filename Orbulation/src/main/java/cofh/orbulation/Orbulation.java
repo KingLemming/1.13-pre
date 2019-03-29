@@ -89,6 +89,8 @@ public class Orbulation {
 	public void loadComplete(FMLLoadCompleteEvent event) {
 
 		config.save();
+
+		log.info(MOD_NAME + ": Load Complete.");
 	}
 	// endregion
 

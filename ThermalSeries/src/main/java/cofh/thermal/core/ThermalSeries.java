@@ -118,6 +118,8 @@ public class ThermalSeries {
 
 		config.save();
 		configClient.save();
+
+		log.info(MOD_NAME + ": Load Complete.");
 	}
 	// endregion
 

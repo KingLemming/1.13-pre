@@ -32,13 +32,13 @@ public class TileMachineTapper extends TileMachineWorld {
 
 	public static void config() {
 
-		String category = "Device.Tapper";
+		String category = "Machines.Tapper";
 
 		String comment = "If TRUE, the Arboreal Extractor will REQUIRE Phyto-Gro to operate.";
 		requireFertilizer = config.getBoolean("Require Fertilizer", category, requireFertilizer, comment);
 
 		comment = "Adjust this value to set the number of cycles Phyto-Gro lasts.";
-		boostCycles = config.getInt("Fertilizer Duration", category, boostCycles, 2, 64, comment);
+		boostCycles = config.getInt("Boost Duration", category, boostCycles, 2, 64, comment);
 	}
 
 	protected ItemStorageCoFH inputSlot = new ItemStorageCoFH();
@@ -80,12 +80,12 @@ public class TileMachineTapper extends TileMachineWorld {
 	protected int processTick() {
 
 		int ret = 0;
-		genFluid = TapperManager.getFluid(world.getBlockState(trunkPos));
+		genFluid = TapperManager.instance().getFluid(world.getBlockState(trunkPos));
 		if (boostTime > 0) {
 			ret = outputTank.fill(new FluidStack(genFluid, genFluid.amount * boostMult), true);
 			boostTime--;
 		} else {
-			boostMult = TapperManager.getFertilizerMultiplier(inputSlot.getItemStack());
+			boostMult = TapperManager.instance().getFertilizerMultiplier(inputSlot.getItemStack());
 			if (boostMult > 0) {
 				ret = outputTank.fill(new FluidStack(genFluid, genFluid.amount * boostMult), true);
 				boostTime = boostCycles - 1;
@@ -109,7 +109,7 @@ public class TileMachineTapper extends TileMachineWorld {
 		timeConstant = updateTimeConstant();
 		if (validTree) {
 			if (isTrunkBase(trunkPos)) {
-				Set<BlockWrapper> leafSet = TapperManager.getLeaf(world.getBlockState(trunkPos));
+				Set<BlockWrapper> leafSet = TapperManager.instance().getLeaf(world.getBlockState(trunkPos));
 				int leafCount = 0;
 				for (int i = 0; i < numLeaves; i++) {
 					IBlockState state = world.getBlockState(leafPos[i]);
@@ -139,7 +139,7 @@ public class TileMachineTapper extends TileMachineWorld {
 						}
 					}
 					cached = true;
-					genFluid = TapperManager.getFluid(world.getBlockState(trunkPos));
+					genFluid = TapperManager.instance().getFluid(world.getBlockState(trunkPos));
 					return;
 				}
 			}
@@ -161,7 +161,7 @@ public class TileMachineTapper extends TileMachineWorld {
 		}
 		Iterable<MutableBlockPos> area = BlockPos.getAllInBoxMutable(pos.add(-1, 0, -1), pos.add(1, Math.min(256 - pos.getY(), 40), 1));
 
-		Set<BlockWrapper> leafSet = TapperManager.getLeaf(world.getBlockState(trunkPos));
+		Set<BlockWrapper> leafSet = TapperManager.instance().getLeaf(world.getBlockState(trunkPos));
 		int leafCount = 0;
 
 		for (BlockPos scan : area) {
@@ -199,7 +199,7 @@ public class TileMachineTapper extends TileMachineWorld {
 				}
 			}
 			validTree = true;
-			genFluid = TapperManager.getFluid(world.getBlockState(trunkPos));
+			genFluid = TapperManager.instance().getFluid(world.getBlockState(trunkPos));
 		}
 		cached = true;
 	}
@@ -212,7 +212,7 @@ public class TileMachineTapper extends TileMachineWorld {
 		if (material != Material.GRASS && material != Material.GROUND && material != Material.ROCK) {
 			return false;
 		}
-		return TapperManager.mappingExists(world.getBlockState(checkPos)) && TapperManager.mappingExists(world.getBlockState(checkPos.up())) && TapperManager.mappingExists(world.getBlockState(checkPos.up(2)));
+		return TapperManager.instance().mappingExists(world.getBlockState(checkPos)) && TapperManager.instance().mappingExists(world.getBlockState(checkPos.up())) && TapperManager.instance().mappingExists(world.getBlockState(checkPos.up(2)));
 	}
 
 	protected int updateTimeConstant() {

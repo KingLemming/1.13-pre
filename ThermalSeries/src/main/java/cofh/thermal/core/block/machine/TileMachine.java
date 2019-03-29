@@ -27,6 +27,7 @@ import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABI
 public abstract class TileMachine extends AbstractTileBase implements ITickable, ITransferControllableTile, IReconfigurableTile {
 
 	protected EnumFacing facing;
+	protected FluidStack renderFluid;
 
 	protected ReconfigControlModule reconfigControl = new ReconfigControlModule(this);
 	protected TransferControlModule transferControl = new TransferControlModule(this);
@@ -88,7 +89,7 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 
 	public FluidStack getRenderFluid() {
 
-		return null;
+		return renderFluid;
 	}
 
 	// TODO: Finish
@@ -126,6 +127,28 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		reconfigControl.writeToBuffer(buffer);
 		transferControl.writeToBuffer(buffer);
 
+		buffer.writeFluidStack(renderFluid);
+
+		return buffer;
+	}
+
+	@Override
+	public PacketBufferCoFH getGuiPacket(PacketBufferCoFH buffer) {
+
+		super.getGuiPacket(buffer);
+
+		buffer.writeFluidStack(renderFluid);
+
+		return buffer;
+	}
+
+	@Override
+	public PacketBufferCoFH getStatePacket(PacketBufferCoFH buffer) {
+
+		super.getControlPacket(buffer);
+
+		buffer.writeFluidStack(renderFluid);
+
 		return buffer;
 	}
 
@@ -136,6 +159,24 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 
 		reconfigControl.readFromBuffer(buffer);
 		transferControl.readFromBuffer(buffer);
+
+		renderFluid = buffer.readFluidStack();
+	}
+
+	@Override
+	public void handleGuiPacket(PacketBufferCoFH buffer) {
+
+		super.handleGuiPacket(buffer);
+
+		renderFluid = buffer.readFluidStack();
+	}
+
+	@Override
+	public void handleStatePacket(PacketBufferCoFH buffer) {
+
+		super.handleControlPacket(buffer);
+
+		renderFluid = buffer.readFluidStack();
 	}
 	// endregion
 
@@ -147,6 +188,8 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 
 		reconfigControl.readFromNBT(nbt.getCompoundTag(TAG_SIDE_CONFIG));
 		transferControl.readFromNBT(nbt.getCompoundTag(TAG_TRANSFER));
+
+		renderFluid = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag(TAG_RENDER_FLUID));
 	}
 
 	@Override
@@ -157,6 +200,9 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		nbt.setTag(TAG_SIDE_CONFIG, reconfigControl.writeToNBT(new NBTTagCompound()));
 		nbt.setTag(TAG_TRANSFER, transferControl.writeToNBT(new NBTTagCompound()));
 
+		if (renderFluid != null) {
+			nbt.setTag(TAG_RENDER_FLUID, renderFluid.writeToNBT(new NBTTagCompound()));
+		}
 		return nbt;
 	}
 	// endregion

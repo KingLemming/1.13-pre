@@ -31,7 +31,6 @@ public class ItemsTSeries {
 		registerResources();
 		registerVanillaComponents();
 		registerThermalMetals();
-		// registerExtraMetals();
 	}
 
 	private static void registerTools() {
@@ -59,7 +58,7 @@ public class ItemsTSeries {
 
 		mineralSlag = registerItem("mineral_slag", "itemSlag", new ItemCoFH(GROUP_RESOURCES));
 		mineralSlagRich = registerItem("mineral_slag_rich", "itemSlagRich", new ItemCoFH(GROUP_RESOURCES));
-		//
+
 		//		dustBiomass = registerItem("biomass", new ItemCoFH(GROUP_RESOURCES));
 		//		dustBiomassRich = registerItem("biomass_rich", new ItemCoFH(GROUP_RESOURCES));
 		//		dustBioblend = registerItem("bioblend", new ItemCoFH(GROUP_RESOURCES));
@@ -168,6 +167,17 @@ public class ItemsTSeries {
 	public static ItemStack itemPhytoGro;
 	public static ItemStack itemPhytoGroRich;
 	public static ItemStack itemPhytoGroFlux;
+	// endregion
+
+	// region PARTS
+	public static ItemStack redstoneServo;
+	public static ItemStack powerCoilGold;
+	public static ItemStack powerCoilSilver;
+	public static ItemStack powerCoilElectrum;
+
+	public static ItemStack partToolCasing;
+	public static ItemStack partDrillHead;
+	public static ItemStack partSawBlade;
 	// endregion
 
 	// region VANILLA

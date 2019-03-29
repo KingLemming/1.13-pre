@@ -86,6 +86,8 @@ public class ThermalExpansion implements IModule {
 		RecipesTSeries.registerManager(RefineryRecipeManager.instance());
 		RecipesTSeries.registerManager(BrewerRecipeManager.instance());
 
+		RecipesTSeries.registerManager(TapperManager.instance());
+
 		RecipesTSeries.registerManager(StirlingFuelManager.instance());
 		RecipesTSeries.registerManager(MagmaticFuelManager.instance());
 		RecipesTSeries.registerManager(CompressionFuelManager.instance());

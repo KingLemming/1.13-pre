@@ -1,6 +1,7 @@
 package cofh.thermal.core.block.machine;
 
 import cofh.core.network.PacketBufferCoFH;
+import cofh.core.network.packet.client.PacketTileState;
 import cofh.lib.energy.EnergyStorageCoFH;
 import cofh.lib.fluid.FluidStorageCoFH;
 import cofh.lib.fluid.IFluidStackHolder;
@@ -97,9 +98,8 @@ public abstract class TileMachineProcess extends TileMachine {
 		processMax = curRecipe.getEnergy(getInputSlots(), getInputTanks());
 		process = processMax;
 
-		// TODO: Tile update packet.
 		if (cacheRenderFluid()) {
-
+			PacketTileState.sendToClient(this);
 		}
 	}
 

@@ -40,7 +40,7 @@ public class Quartermastery {
 	@SidedProxy (clientSide = "cofh.quartermastery.proxy.ProxyClient", serverSide = "cofh.quartermastery.proxy.ProxyCommon")
 	public static ProxyCommon proxy;
 
-	public static final Logger LOG = LogManager.getLogger(MOD_ID);
+	public static Logger log = LogManager.getLogger(MOD_ID);
 	public static Configuration config;
 
 	// region INITIALIZATION
@@ -74,6 +74,8 @@ public class Quartermastery {
 	public void loadComplete(FMLLoadCompleteEvent event) {
 
 		config.save();
+
+		log.info(MOD_NAME + ": Load Complete.");
 	}
 	// endregion
 

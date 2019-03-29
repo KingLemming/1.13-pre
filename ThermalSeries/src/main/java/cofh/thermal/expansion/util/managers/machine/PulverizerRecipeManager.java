@@ -53,7 +53,7 @@ public class PulverizerRecipeManager extends SimpleCatalystRecipeManager {
 		if (maxOutputItems <= 0 || input.isEmpty() || output.isEmpty() || energy <= 0 || validRecipe(input)) {
 			return null;
 		}
-		energy = (energy * scaleFactor) / 100;
+		energy = (energy * getDefaultScale()) / 100;
 
 		PulverizerOreRecipe recipe = new PulverizerOreRecipe(energy, input, output, chance);
 		if (hasCustomOreID(input)) {
@@ -74,7 +74,7 @@ public class PulverizerRecipeManager extends SimpleCatalystRecipeManager {
 				return null;
 			}
 		}
-		energy = (energy * scaleFactor) / 100;
+		energy = (energy * getDefaultScale()) / 100;
 
 		PulverizerOreRecipe recipe = new PulverizerOreRecipe(energy, input, output, chance);
 		if (hasCustomOreID(input)) {

@@ -17,13 +17,13 @@ public class InsolatorPlantRecipe extends SimpleItemCatalystRecipe {
 	public InsolatorPlantRecipe(int energy, ItemStack input, ItemStack output, float chance) {
 
 		super(energy, input, output, chance);
-		this.inputFluids.add(InsolatorRecipeManager.defaultPlantFluid);
+		this.inputFluids.add(InsolatorRecipeManager.defaultFluidStack);
 	}
 
-	public InsolatorPlantRecipe(int energy, ItemStack input, FluidStack inputFluid, ItemStack output, float chance, int water) {
+	public InsolatorPlantRecipe(int energy, ItemStack input, ItemStack output, float chance, int water) {
 
 		super(energy, input, output, chance);
-		this.inputFluids.add(water > 0 ? new FluidStack(FluidRegistry.WATER, water) : InsolatorRecipeManager.defaultPlantFluid);
+		this.inputFluids.add(water > 0 ? new FluidStack(FluidRegistry.WATER, water) : InsolatorRecipeManager.defaultFluidStack);
 	}
 	// endregion
 
@@ -31,13 +31,13 @@ public class InsolatorPlantRecipe extends SimpleItemCatalystRecipe {
 	public InsolatorPlantRecipe(int energy, ItemStack input, List<ItemStack> output, @Nullable List<Float> chance) {
 
 		super(energy, input, output, chance);
-		this.inputFluids.add(InsolatorRecipeManager.defaultPlantFluid);
+		this.inputFluids.add(InsolatorRecipeManager.defaultFluidStack);
 	}
 
 	public InsolatorPlantRecipe(int energy, ItemStack input, List<ItemStack> output, @Nullable List<Float> chance, int water) {
 
 		super(energy, input, output, chance);
-		this.inputFluids.add(water > 0 ? new FluidStack(FluidRegistry.WATER, water) : InsolatorRecipeManager.defaultPlantFluid);
+		this.inputFluids.add(water > 0 ? new FluidStack(FluidRegistry.WATER, water) : InsolatorRecipeManager.defaultFluidStack);
 	}
 	// endregion
 
