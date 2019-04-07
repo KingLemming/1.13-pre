@@ -236,13 +236,13 @@ public class EquipmentTools {
 
 			if (!vanilla) {
 				if (enable[0]) {
-					addShapedRecipe(toolSword, " I ", " I ", " R ", 'I', ingot, 'R', "stickWood");
+					addShapedRecipe(toolSword, " I ", " I ", " S ", 'I', ingot, 'S', "stickWood");
 				}
 				if (enable[1]) {
-					addShapedRecipe(toolShovel, " I ", " R ", " R ", 'I', ingot, 'R', "stickWood");
+					addShapedRecipe(toolShovel, " I ", " S ", " S ", 'I', ingot, 'S', "stickWood");
 				}
 				if (enable[2]) {
-					addShapedRecipe(toolPickaxe, "III", " R ", " R ", 'I', ingot, 'R', "stickWood");
+					addShapedRecipe(toolPickaxe, "III", " S ", " S ", 'I', ingot, 'S', "stickWood");
 				}
 				if (enable[3]) {
 					addShapedRecipe(toolAxe, "II", "IS", " S", 'I', ingot, 'S', "stickWood");

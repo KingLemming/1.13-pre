@@ -7,6 +7,8 @@ import cofh.thermal.core.init.RecipesTSeries;
 import cofh.thermal.expansion.init.BlocksTE;
 import cofh.thermal.expansion.init.ItemsTE;
 import cofh.thermal.expansion.proxy.ProxyCommon;
+import cofh.thermal.expansion.util.managers.FactorizerManager;
+import cofh.thermal.expansion.util.managers.TapperManager;
 import cofh.thermal.expansion.util.managers.dynamo.*;
 import cofh.thermal.expansion.util.managers.machine.*;
 import cofh.thermal.expansion.util.parsers.dynamo.*;
@@ -85,6 +87,8 @@ public class ThermalExpansion implements IModule {
 		RecipesTSeries.registerManager(CrucibleRecipeManager.instance());
 		RecipesTSeries.registerManager(RefineryRecipeManager.instance());
 		RecipesTSeries.registerManager(BrewerRecipeManager.instance());
+
+		RecipesTSeries.registerManager(FactorizerManager.instance());
 
 		RecipesTSeries.registerManager(TapperManager.instance());
 

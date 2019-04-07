@@ -13,6 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Map;
 
+import static cofh.lib.util.Constants.*;
 import static cofh.lib.util.helpers.ItemHelper.cloneStack;
 import static cofh.lib.util.helpers.StringHelper.titleCase;
 import static cofh.lib.util.oredict.OreDictHelper.*;
@@ -96,32 +97,32 @@ public class EnchantmentSmashing extends EnchantmentCoFH {
 
 		/* GENERAL SCAN */
 		{
-			String oreType;
+			String oreSuffix;
 			for (String oreName : OreDictionary.getOreNames()) {
-				if (oreName.startsWith("ore") || oreName.startsWith("gem")) {
-					oreType = oreName.substring(3);
-					addConversions(oreType);
-				} else if (oreName.startsWith("dust")) {
-					oreType = oreName.substring(4);
-					addConversions(oreType);
+				if (oreName.startsWith(PREFIX_ORE) || oreName.startsWith(PREFIX_GEM)) {
+					oreSuffix = oreName.substring(3);
+					addConversions(oreSuffix);
+				} else if (oreName.startsWith(PREFIX_DUST)) {
+					oreSuffix = oreName.substring(4);
+					addConversions(oreSuffix);
 				}
 			}
 		}
 	}
 
-	private static void addConversions(String oreType) {
+	private static void addConversions(String oreSuffix) {
 
-		if (oreType == null || oreType.isEmpty()) {
+		if (oreSuffix == null || oreSuffix.isEmpty()) {
 			return;
 		}
-		String suffix = titleCase(oreType);
+		oreSuffix = titleCase(oreSuffix);
 
-		String oreName = "ore" + suffix;
-		String gemName = "gem" + suffix;
-		String dustName = "dust" + suffix;
+		String oreName = PREFIX_ORE + oreSuffix;
+		String gemName = PREFIX_GEM + oreSuffix;
+		String dustName = PREFIX_DUST + oreSuffix;
 
-		String oreNetherName = "oreNether" + suffix;
-		String oreEndName = "oreEnd" + suffix;
+		String oreNetherName = "oreNether" + oreSuffix;
+		String oreEndName = "oreEnd" + oreSuffix;
 
 		if (oreNameExists(gemName)) {
 			addConversion(oreName, gemName, ORE_MULTIPLIER);

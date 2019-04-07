@@ -90,15 +90,15 @@ public class InsolatorRecipeManager extends SimpleCatalystRecipeManager {
 	// endregion
 
 	// region HELPERS
-	private void addDefaultPlantRecipes(String oreType) {
+	private void addDefaultPlantRecipes(String oreSuffix) {
 
-		if (oreType == null || oreType.isEmpty()) {
+		if (oreSuffix == null || oreSuffix.isEmpty()) {
 			return;
 		}
-		String suffix = titleCase(oreType);
+		oreSuffix = titleCase(oreSuffix);
 
-		String seedName = PREFIX_SEED + suffix;
-		String cropName = PREFIX_CROP + suffix;
+		String seedName = PREFIX_SEED + oreSuffix;
+		String cropName = PREFIX_CROP + oreSuffix;
 
 		ItemStack seed = getPreferredOre(seedName);
 		ItemStack crop = getPreferredOre(cropName);

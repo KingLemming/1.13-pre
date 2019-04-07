@@ -23,11 +23,22 @@ import static cofh.lib.util.helpers.ItemHelper.getItemDamage;
 
 public class LexiconManager {
 
+	public static final String LEXICON_DATA = "thermal.lexicon_data";
+
+	private static HashSet<String> listNames = new HashSet<>();
+	private static HashSet<ItemWrapper> blacklistStacks = new HashSet<>();
+	private static List<String> sortedNames = new ArrayList<>();
+
+	private static boolean isWhitelist = true;
+	private static boolean logEntries = false;
+	private static boolean writeDefaultFile = true;
+	private static boolean alwaysWriteFile = false;
+
+	private static File filterList;
+
 	private LexiconManager() {
 
 	}
-
-	public static final String LEXICON_DATA = "thermal.lexicon_data";
 
 	public static void config() {
 
@@ -54,6 +65,7 @@ public class LexiconManager {
 		sortOreNames();
 	}
 
+	// region HELPERS
 	private static void generateList() {
 
 		filterList = isWhitelist ? new File(CoreUtils.configDir, "/cofh/thermal/lexicon-whitelist.cfg") : new File(CoreUtils.configDir, "/cofh/thermal/lexicon-blacklist.cfg");
@@ -156,6 +168,11 @@ public class LexiconManager {
 		Collections.sort(sortedNames);
 	}
 
+	private static boolean validType(String oreName) {
+
+		return FEATURE_DEBUG || isWhitelist == listNames.contains(oreName);
+	}
+
 	public static List<String> getSortedOreNames() {
 
 		return sortedNames;
@@ -168,11 +185,7 @@ public class LexiconManager {
 		}
 		return OreDictHelper.hasOreName(stack) && isWhitelist == listNames.contains(OreDictHelper.getOreName(stack));
 	}
-
-	private static boolean validType(String oreName) {
-
-		return FEATURE_DEBUG || isWhitelist == listNames.contains(oreName);
-	}
+	// endregion
 
 	// region PLAYER INTERACTION
 	public static ItemStack getPreferredStack(EntityPlayer player, ItemStack stack) {
@@ -257,16 +270,4 @@ public class LexiconManager {
 		return !stack.isEmpty() && blacklistStacks.remove(new ItemWrapper(stack));
 	}
 	// endregion
-
-	private static HashSet<String> listNames = new HashSet<>();
-	private static HashSet<ItemWrapper> blacklistStacks = new HashSet<>();
-	private static List<String> sortedNames = new ArrayList<>();
-
-	private static boolean isWhitelist = true;
-	private static boolean logEntries = false;
-	private static boolean writeDefaultFile = true;
-	private static boolean alwaysWriteFile = false;
-
-	private static File filterList;
-
 }

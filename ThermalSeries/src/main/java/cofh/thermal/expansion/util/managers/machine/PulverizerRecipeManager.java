@@ -87,20 +87,20 @@ public class PulverizerRecipeManager extends SimpleCatalystRecipeManager {
 	// endregion
 
 	// region HELPERS
-	private void addDefaultOreRecipes(String oreType) {
+	private void addDefaultOreRecipes(String oreSuffix) {
 
-		if (oreType == null || oreType.isEmpty()) {
+		if (oreSuffix == null || oreSuffix.isEmpty()) {
 			return;
 		}
-		String suffix = titleCase(oreType);
+		oreSuffix = titleCase(oreSuffix);
 
-		String oreName = PREFIX_ORE + suffix;
-		String gemName = PREFIX_GEM + suffix;
-		String dustName = PREFIX_DUST + suffix;
-		String ingotName = PREFIX_INGOT + suffix;
+		String oreName = PREFIX_ORE + oreSuffix;
+		String gemName = PREFIX_GEM + oreSuffix;
+		String dustName = PREFIX_DUST + oreSuffix;
+		String ingotName = PREFIX_INGOT + oreSuffix;
 
-		String oreNetherName = "oreNether" + suffix;
-		String oreEndName = "oreEnd" + suffix;
+		String oreNetherName = "oreNether" + oreSuffix;
+		String oreEndName = "oreEnd" + oreSuffix;
 
 		ItemStack ore = getPreferredOre(oreName);
 		ItemStack gem = getPreferredOre(gemName);

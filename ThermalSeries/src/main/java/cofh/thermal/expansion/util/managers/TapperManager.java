@@ -1,4 +1,4 @@
-package cofh.thermal.expansion.util.managers.machine;
+package cofh.thermal.expansion.util.managers;
 
 import cofh.lib.util.comparison.BlockWrapper;
 import cofh.lib.util.comparison.ComparableItemStack;
@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-// TODO: Finish
+// TODO: Finish / Overhaul
 public class TapperManager implements IManager {
 
 	private static final TapperManager INSTANCE = new TapperManager();

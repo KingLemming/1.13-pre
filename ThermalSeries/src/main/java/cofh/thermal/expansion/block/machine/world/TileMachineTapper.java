@@ -8,7 +8,7 @@ import cofh.lib.util.helpers.MathHelper;
 import cofh.thermal.core.block.AbstractTileType;
 import cofh.thermal.core.block.machine.TileMachineWorld;
 import cofh.thermal.core.init.FluidsTSeries;
-import cofh.thermal.expansion.util.managers.machine.TapperManager;
+import cofh.thermal.expansion.util.managers.TapperManager;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
