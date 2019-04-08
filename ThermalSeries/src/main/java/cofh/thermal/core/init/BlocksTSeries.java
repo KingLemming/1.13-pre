@@ -16,6 +16,7 @@ import static cofh.lib.util.Constants.TOOL_PICKAXE;
 import static cofh.thermal.core.ThermalSeries.registerBlock;
 import static cofh.thermal.core.init.ConfigTSeries.fuelCoal;
 import static cofh.thermal.core.init.ConfigTSeries.fuelCoalCoke;
+import static net.minecraft.item.EnumRarity.RARE;
 
 public class BlocksTSeries {
 
@@ -75,7 +76,7 @@ public class BlocksTSeries {
 
 		}.setLightLevel(7), GROUP_STORAGE).setRarity(EnumRarity.UNCOMMON));
 		storageLumium = registerBlock("block_lumium", "blockLumium", new ItemBlockCoFH(new BlockStorageMetal().setLightLevel(15), GROUP_STORAGE).setRarity(EnumRarity.UNCOMMON));
-		storageEnderium = registerBlock("block_enderium", "blockEnderium", new ItemBlockCoFH(new BlockStorageMetal().setHarvestParams(pickaxe, 3).setLightLevel(3).setHardness(25.0F).setResistance(50.0F), GROUP_STORAGE).setRarity(EnumRarity.RARE));
+		storageEnderium = registerBlock("block_enderium", "blockEnderium", new ItemBlockCoFH(new BlockStorageMetal().setHarvestParams(pickaxe, 3).setLightLevel(3).setHardness(25.0F).setResistance(50.0F), GROUP_STORAGE).setRarity(RARE));
 	}
 
 	// region REFERENCES

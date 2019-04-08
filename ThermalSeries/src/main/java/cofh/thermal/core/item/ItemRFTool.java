@@ -1,5 +1,6 @@
 package cofh.thermal.core.item;
 
+import cofh.lib.item.IMultiModeItem;
 import cofh.lib.util.Utils;
 import cofh.lib.util.helpers.MathHelper;
 import gnu.trove.set.hash.THashSet;
@@ -7,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -15,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.client.CPacketPlayerDigging;
 import net.minecraft.network.play.server.SPacketBlockChange;
 import net.minecraft.util.math.BlockPos;
@@ -25,8 +28,9 @@ import net.minecraftforge.common.ForgeHooks;
 import java.util.ArrayList;
 
 import static cofh.lib.util.Constants.AOE_BREAK_FACTOR;
+import static cofh.lib.util.Constants.TAG_MODE;
 
-public abstract class ItemRFTool extends ItemRFContainer {
+public abstract class ItemRFTool extends ItemRFContainer implements IMultiModeItem {
 
 	protected THashSet<Material> effectiveMaterials = new THashSet<>();
 
@@ -34,55 +38,13 @@ public abstract class ItemRFTool extends ItemRFContainer {
 	protected int harvestLevel;
 	protected float efficiency;
 
+	protected int numModes = 1;
+
 	public ItemRFTool(int maxEnergy, int maxReceive, int harvestLevel, float efficiency) {
 
 		super(maxEnergy, maxReceive);
 		this.harvestLevel = harvestLevel;
 		this.efficiency = efficiency;
-	}
-
-	protected boolean harvestBlock(World world, BlockPos pos, EntityPlayer player) {
-
-		if (world.isAirBlock(pos)) {
-			return false;
-		}
-		EntityPlayerMP playerMP = null;
-		if (player instanceof EntityPlayerMP) {
-			playerMP = (EntityPlayerMP) player;
-		}
-		IBlockState state = world.getBlockState(pos);
-		Block block = state.getBlock();
-
-		if (!ForgeHooks.canHarvestBlock(block, player, world, pos)) {
-			return false;
-		}
-		// send the blockbreak event
-		int xpToDrop = 0;
-		if (playerMP != null) {
-			xpToDrop = ForgeHooks.onBlockBreakEvent(world, playerMP.interactionManager.getGameType(), playerMP, pos);
-			if (xpToDrop == -1) {
-				return false;
-			}
-		}
-		if (Utils.isServerWorld(world)) {
-			if (block.removedByPlayer(state, world, pos, player, !player.capabilities.isCreativeMode)) {
-				block.onBlockDestroyedByPlayer(world, pos, state);
-				if (!player.capabilities.isCreativeMode) {
-					block.harvestBlock(world, player, pos, state, world.getTileEntity(pos), player.getHeldItemMainhand());
-					if (xpToDrop > 0) {
-						block.dropXpOnBlockBreak(world, pos, xpToDrop);
-					}
-				}
-			}
-			// always send block update to client
-			playerMP.connection.sendPacket(new SPacketBlockChange(world, pos));
-		} else {
-			if (block.removedByPlayer(state, world, pos, player, !player.capabilities.isCreativeMode)) {
-				block.onBlockDestroyedByPlayer(world, pos, state);
-			}
-			Minecraft.getMinecraft().getConnection().sendPacket(new CPacketPlayerDigging(CPacketPlayerDigging.Action.START_DESTROY_BLOCK, pos, Minecraft.getMinecraft().objectMouseOver.sideHit));
-		}
-		return true;
 	}
 
 	protected THashSet<Material> getEffectiveMaterials() {
@@ -107,18 +69,16 @@ public abstract class ItemRFTool extends ItemRFContainer {
 	@Override
 	public boolean canHarvestBlock(IBlockState state, ItemStack stack) {
 
+		if (getEnergyStored(stack) < energyPerUse) {
+			return false;
+		}
 		return harvestLevel >= state.getBlock().getHarvestLevel(state) && getDestroySpeed(stack, state) > 1.0F;
 	}
 
 	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state) {
 
-		for (String type : getToolClasses(stack)) {
-			if (state.getBlock().isToolEffective(type, state)) {
-				return getEfficiency();
-			}
-		}
-		return getEffectiveMaterials().contains(state.getMaterial()) ? getEfficiency() : 1.0F;
+		return effectiveMaterials.contains(state.getMaterial()) ? Math.max(efficiency - 1.5F * getMode(stack), 2.0F) : 1.0F;
 	}
 
 	@Override
@@ -129,6 +89,54 @@ public abstract class ItemRFTool extends ItemRFContainer {
 	}
 
 	// region HELPERS
+	protected boolean harvestBlock(World world, BlockPos pos, EntityPlayer player) {
+
+		if (world.isAirBlock(pos)) {
+			return false;
+		}
+		EntityPlayerMP playerMP = null;
+		if (player instanceof EntityPlayerMP) {
+			playerMP = (EntityPlayerMP) player;
+		}
+		IBlockState state = world.getBlockState(pos);
+		Block block = state.getBlock();
+
+		if (!effectiveMaterials.contains(state.getMaterial()) || !ForgeHooks.canHarvestBlock(block, player, world, pos)) {
+			return false;
+		}
+		// Send the Break Event
+		int xpToDrop = 0;
+		if (playerMP != null) {
+			xpToDrop = ForgeHooks.onBlockBreakEvent(world, playerMP.interactionManager.getGameType(), playerMP, pos);
+			if (xpToDrop == -1) {
+				return false;
+			}
+		}
+		if (Utils.isServerWorld(world)) {
+			if (block.removedByPlayer(state, world, pos, player, !player.capabilities.isCreativeMode)) {
+				block.onBlockDestroyedByPlayer(world, pos, state);
+				if (!player.capabilities.isCreativeMode) {
+					block.harvestBlock(world, player, pos, state, world.getTileEntity(pos), player.getHeldItemMainhand());
+					if (xpToDrop > 0) {
+						block.dropXpOnBlockBreak(world, pos, xpToDrop);
+					}
+				}
+			}
+			if (playerMP != null) {
+				playerMP.connection.sendPacket(new SPacketBlockChange(world, pos));
+			}
+		} else {
+			if (block.removedByPlayer(state, world, pos, player, !player.capabilities.isCreativeMode)) {
+				block.onBlockDestroyedByPlayer(world, pos, state);
+			}
+			NetHandlerPlayClient client = Minecraft.getMinecraft().getConnection();
+			if (client != null) {
+				Minecraft.getMinecraft().getConnection().sendPacket(new CPacketPlayerDigging(CPacketPlayerDigging.Action.START_DESTROY_BLOCK, pos, Minecraft.getMinecraft().objectMouseOver.sideHit));
+			}
+		}
+		return true;
+	}
+
 	protected int useEnergy(ItemStack stack, int count, boolean simulate) {
 
 		if (isCreative()) {
@@ -139,6 +147,24 @@ public abstract class ItemRFTool extends ItemRFContainer {
 			return 0;
 		}
 		return extractEnergy(stack, count * energyPerUse, simulate);
+	}
+
+	@Override
+	public ItemStack setDefaultTag(ItemStack stack, int energy) {
+
+		if (stack.getTagCompound() == null) {
+			stack.setTagCompound(new NBTTagCompound());
+		}
+		stack.getTagCompound().setInteger(TAG_MODE, getNumModes(stack) - 1);
+		return super.setDefaultTag(stack, energy);
+	}
+	// endregion
+
+	// region IMultimodeItem
+	@Override
+	public int getNumModes(ItemStack stack) {
+
+		return numModes;
 	}
 	// endregion
 
@@ -158,8 +184,8 @@ public abstract class ItemRFTool extends ItemRFContainer {
 				adjPos = new BlockPos(pos.down());
 				adjState = world.getBlockState(adjPos);
 				strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-				if (strength > 0F && strength >= maxStrength) {
-					if (harvestBlock(world, adjPos, player)) {
+				if (strength >= maxStrength) {
+					if (harvestBlock(world, adjPos, player) && strength > 0) {
 						return 1;
 					}
 				}
@@ -187,16 +213,16 @@ public abstract class ItemRFTool extends ItemRFContainer {
 					adjPos = new BlockPos(x, y, z - 1);
 					adjState = world.getBlockState(adjPos);
 					strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-					if (strength > 0F && strength >= maxStrength) {
-						if (harvestBlock(world, adjPos, player)) {
+					if (strength >= maxStrength) {
+						if (harvestBlock(world, adjPos, player) && strength > 0) {
 							count++;
 						}
 					}
 					adjPos = new BlockPos(x, y, z + 1);
 					adjState = world.getBlockState(adjPos);
 					strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-					if (strength > 0F && strength >= maxStrength) {
-						if (harvestBlock(world, adjPos, player)) {
+					if (strength >= maxStrength) {
+						if (harvestBlock(world, adjPos, player) && strength > 0) {
 							count++;
 						}
 					}
@@ -204,16 +230,16 @@ public abstract class ItemRFTool extends ItemRFContainer {
 					adjPos = new BlockPos(x - 1, y, z);
 					adjState = world.getBlockState(adjPos);
 					strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-					if (strength > 0F && strength >= maxStrength) {
-						if (harvestBlock(world, adjPos, player)) {
+					if (strength >= maxStrength) {
+						if (harvestBlock(world, adjPos, player) && strength > 0) {
 							count++;
 						}
 					}
 					adjPos = new BlockPos(x + 1, y, z);
 					adjState = world.getBlockState(adjPos);
 					strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-					if (strength > 0F && strength >= maxStrength) {
-						if (harvestBlock(world, adjPos, player)) {
+					if (strength >= maxStrength) {
+						if (harvestBlock(world, adjPos, player) && strength > 0) {
 							count++;
 						}
 					}
@@ -223,16 +249,16 @@ public abstract class ItemRFTool extends ItemRFContainer {
 				adjPos = new BlockPos(x, y - 1, z);
 				adjState = world.getBlockState(adjPos);
 				strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-				if (strength > 0F && strength >= maxStrength) {
-					if (harvestBlock(world, adjPos, player)) {
+				if (strength >= maxStrength) {
+					if (harvestBlock(world, adjPos, player) && strength > 0) {
 						count++;
 					}
 				}
 				adjPos = new BlockPos(x, y + 1, z);
 				adjState = world.getBlockState(adjPos);
 				strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-				if (strength > 0F && strength >= maxStrength) {
-					if (harvestBlock(world, adjPos, player)) {
+				if (strength >= maxStrength) {
+					if (harvestBlock(world, adjPos, player) && strength > 0) {
 						count++;
 					}
 				}
@@ -264,8 +290,8 @@ public abstract class ItemRFTool extends ItemRFContainer {
 						adjPos = new BlockPos(i, y, k);
 						adjState = world.getBlockState(adjPos);
 						strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-						if (strength > 0F && strength >= maxStrength) {
-							if (harvestBlock(world, adjPos, player)) {
+						if (strength >= maxStrength) {
+							if (harvestBlock(world, adjPos, player) && strength > 0) {
 								count++;
 							}
 						}
@@ -282,8 +308,8 @@ public abstract class ItemRFTool extends ItemRFContainer {
 						adjPos = new BlockPos(i, j, z);
 						adjState = world.getBlockState(adjPos);
 						strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-						if (strength > 0F && strength >= maxStrength) {
-							if (harvestBlock(world, adjPos, player)) {
+						if (strength >= maxStrength) {
+							if (harvestBlock(world, adjPos, player) && strength > 0) {
 								count++;
 							}
 						}
@@ -299,8 +325,8 @@ public abstract class ItemRFTool extends ItemRFContainer {
 						adjPos = new BlockPos(x, j, k);
 						adjState = world.getBlockState(adjPos);
 						strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-						if (strength > 0F && strength >= maxStrength) {
-							if (harvestBlock(world, adjPos, player)) {
+						if (strength >= maxStrength) {
+							if (harvestBlock(world, adjPos, player) && strength > 0) {
 								count++;
 							}
 						}
@@ -341,8 +367,8 @@ public abstract class ItemRFTool extends ItemRFContainer {
 							adjPos = new BlockPos(i, j, k);
 							adjState = world.getBlockState(adjPos);
 							strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-							if (strength > 0F && strength >= maxStrength) {
-								if (harvestBlock(world, adjPos, player)) {
+							if (strength >= maxStrength) {
+								if (harvestBlock(world, adjPos, player) && strength > 0) {
 									count++;
 								}
 							}
@@ -363,8 +389,8 @@ public abstract class ItemRFTool extends ItemRFContainer {
 							adjPos = new BlockPos(i, j, k);
 							adjState = world.getBlockState(adjPos);
 							strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-							if (strength > 0F && strength >= maxStrength) {
-								if (harvestBlock(world, adjPos, player)) {
+							if (strength >= maxStrength) {
+								if (harvestBlock(world, adjPos, player) && strength > 0) {
 									count++;
 								}
 							}
@@ -385,8 +411,8 @@ public abstract class ItemRFTool extends ItemRFContainer {
 							adjPos = new BlockPos(i, j, k);
 							adjState = world.getBlockState(adjPos);
 							strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-							if (strength > 0F && strength >= maxStrength) {
-								if (harvestBlock(world, adjPos, player)) {
+							if (strength >= maxStrength) {
+								if (harvestBlock(world, adjPos, player) && strength > 0) {
 									count++;
 								}
 							}
@@ -419,8 +445,8 @@ public abstract class ItemRFTool extends ItemRFContainer {
 						adjPos = new BlockPos(i, y, k);
 						adjState = world.getBlockState(adjPos);
 						strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-						if (strength > 0F && strength >= maxStrength) {
-							if (harvestBlock(world, adjPos, player)) {
+						if (strength >= maxStrength) {
+							if (harvestBlock(world, adjPos, player) && strength > 0) {
 								count++;
 							}
 						}
@@ -439,8 +465,8 @@ public abstract class ItemRFTool extends ItemRFContainer {
 						adjPos = new BlockPos(i, j, z);
 						adjState = world.getBlockState(adjPos);
 						strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-						if (strength > 0F && strength >= maxStrength) {
-							if (harvestBlock(world, adjPos, player)) {
+						if (strength >= maxStrength) {
+							if (harvestBlock(world, adjPos, player) && strength > 0) {
 								count++;
 							}
 						}
@@ -458,8 +484,8 @@ public abstract class ItemRFTool extends ItemRFContainer {
 						adjPos = new BlockPos(x, j, k);
 						adjState = world.getBlockState(adjPos);
 						strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-						if (strength > 0F && strength >= maxStrength) {
-							if (harvestBlock(world, adjPos, player)) {
+						if (strength >= maxStrength) {
+							if (harvestBlock(world, adjPos, player) && strength > 0) {
 								count++;
 							}
 						}
@@ -469,7 +495,7 @@ public abstract class ItemRFTool extends ItemRFContainer {
 		return count;
 	}
 
-	protected void getAOEBlocksTunnel2(ItemStack stack, World world, BlockPos pos, RayTraceResult traceResult, ArrayList<BlockPos> area) {
+	protected void getAOEBlocksTunnel2(ItemStack stack, EntityPlayer player, World world, BlockPos pos, RayTraceResult traceResult, ArrayList<BlockPos> area) {
 
 		BlockPos harvestPos;
 
@@ -486,7 +512,7 @@ public abstract class ItemRFTool extends ItemRFContainer {
 		}
 	}
 
-	protected void getAOEBlocksTunnel3(ItemStack stack, World world, EntityPlayer player, BlockPos pos, RayTraceResult traceResult, ArrayList<BlockPos> area) {
+	protected void getAOEBlocksTunnel3(ItemStack stack, EntityPlayer player, World world, BlockPos pos, RayTraceResult traceResult, ArrayList<BlockPos> area) {
 
 		BlockPos harvestPos;
 
@@ -529,7 +555,7 @@ public abstract class ItemRFTool extends ItemRFContainer {
 		}
 	}
 
-	protected void getAOEBlocksArea3(ItemStack stack, World world, BlockPos pos, RayTraceResult traceResult, ArrayList<BlockPos> area) {
+	protected void getAOEBlocksArea3(ItemStack stack, EntityPlayer player, World world, BlockPos pos, RayTraceResult traceResult, ArrayList<BlockPos> area) {
 
 		BlockPos harvestPos;
 
@@ -582,7 +608,7 @@ public abstract class ItemRFTool extends ItemRFContainer {
 		}
 	}
 
-	protected void getAOEBlocksCube3(ItemStack stack, World world, BlockPos pos, RayTraceResult traceResult, ArrayList<BlockPos> area) {
+	protected void getAOEBlocksCube3(ItemStack stack, EntityPlayer player, World world, BlockPos pos, RayTraceResult traceResult, ArrayList<BlockPos> area) {
 
 		BlockPos harvestPos;
 
@@ -652,7 +678,7 @@ public abstract class ItemRFTool extends ItemRFContainer {
 		}
 	}
 
-	protected void getAOEBlocksArea5(ItemStack stack, World world, BlockPos pos, RayTraceResult traceResult, ArrayList<BlockPos> area) {
+	protected void getAOEBlocksArea5(ItemStack stack, EntityPlayer player, World world, BlockPos pos, RayTraceResult traceResult, ArrayList<BlockPos> area) {
 
 		BlockPos harvestPos;
 
@@ -709,7 +735,7 @@ public abstract class ItemRFTool extends ItemRFContainer {
 		}
 	}
 
-	protected void getAOEBlocksCross1(ItemStack stack, World world, BlockPos pos, RayTraceResult traceResult, ArrayList<BlockPos> area) {
+	protected void getAOEBlocksCross1(ItemStack stack, EntityPlayer player, World world, BlockPos pos, RayTraceResult traceResult, ArrayList<BlockPos> area) {
 
 		BlockPos harvestPos;
 

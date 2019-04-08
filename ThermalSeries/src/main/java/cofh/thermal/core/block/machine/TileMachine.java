@@ -229,7 +229,7 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 			return ENERGY.cast(energyStorage);
 		}
 		if (capability == ITEM_HANDLER_CAPABILITY) {
-			switch (reconfigControl.get(facing)) {
+			switch (reconfigControl.getSideConfig(facing)) {
 				case SIDE_NONE:
 					return ITEM_HANDLER_CAPABILITY.cast(EmptyHandler.INSTANCE);
 				case SIDE_INPUT:
@@ -241,7 +241,7 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 			}
 		}
 		if (capability == FLUID_HANDLER_CAPABILITY) {
-			switch (reconfigControl.get(facing)) {
+			switch (reconfigControl.getSideConfig(facing)) {
 				case SIDE_NONE:
 					return FLUID_HANDLER_CAPABILITY.cast(EmptyFluidHandler.INSTANCE);
 				case SIDE_INPUT:

@@ -21,6 +21,9 @@ import cofh.ensorcellment.enchantment.weapon.EnchantmentLeech;
 import cofh.ensorcellment.enchantment.weapon.EnchantmentVorpal;
 import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantment.Rarity;
+import net.minecraft.enchantment.EnchantmentProtection.Type;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -38,7 +41,13 @@ public class EnchantmentsEnsorc {
 
 		IForgeRegistry<Enchantment> registry = event.getRegistry();
 
-		overrideProtection = new EnchantmentProtectionImp(ID_PROTECTION);
+		EntityEquipmentSlot[] armorSlots = new EntityEquipmentSlot[] { EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET };
+		overrideProtection = new EnchantmentProtectionImp(ID_PROTECTION, Rarity.COMMON, Type.ALL, armorSlots, "Protection", "Protection");
+		overrideProtectionFire = new EnchantmentProtectionImp(ID_PROTECTION_FIRE, Rarity.UNCOMMON, Type.FIRE, armorSlots, "FireProtection", "Fire Protection");
+		overrideProtectionFall = new EnchantmentProtectionImp(ID_PROTECTION_FALL, Rarity.UNCOMMON, Type.FALL, armorSlots, "FeatherFalling", "Feather Falling");
+		overrideProtectionBlast = new EnchantmentProtectionImp(ID_PROTECTION_BLAST, Rarity.RARE, Type.EXPLOSION, armorSlots, "BlastProtection", "Blast Protection");
+		overrideProtectionProjectile = new EnchantmentProtectionImp(ID_PROTECTION_PROJECTILE, Rarity.UNCOMMON, Type.PROJECTILE, armorSlots, "ProjectileProtection", "Projectile Protection");
+
 		overrideThorns = new EnchantmentThornsImp(ID_THORNS);
 		overrideFrostWalker = new EnchantmentFrostWalkerImp(ID_FROST_WALKER);
 		overrideKnockback = new EnchantmentKnockbackImp(ID_KNOCKBACK);
@@ -72,6 +81,11 @@ public class EnchantmentsEnsorc {
 		boostHunter = new EnchantmentHunter(ID_HUNTER);
 
 		registerEnchantmentOverride(registry, overrideProtection);
+		registerEnchantmentOverride(registry, overrideProtectionFire);
+		registerEnchantmentOverride(registry, overrideProtectionFall);
+		registerEnchantmentOverride(registry, overrideProtectionBlast);
+		registerEnchantmentOverride(registry, overrideProtectionProjectile);
+
 		registerEnchantmentOverride(registry, overrideThorns);
 		registerEnchantmentOverride(registry, overrideFrostWalker);
 		registerEnchantmentOverride(registry, overrideKnockback);
@@ -124,6 +138,11 @@ public class EnchantmentsEnsorc {
 
 	// region REFERENCES
 	public static EnchantmentCoFH overrideProtection;
+	public static EnchantmentCoFH overrideProtectionFire;
+	public static EnchantmentCoFH overrideProtectionFall;
+	public static EnchantmentCoFH overrideProtectionBlast;
+	public static EnchantmentCoFH overrideProtectionProjectile;
+
 	public static EnchantmentCoFH overrideThorns;
 	public static EnchantmentCoFH overrideFrostWalker;
 	public static EnchantmentCoFH overrideKnockback;

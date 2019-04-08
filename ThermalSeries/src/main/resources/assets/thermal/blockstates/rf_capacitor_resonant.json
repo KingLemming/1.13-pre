@@ -1,0 +1,54 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "builtin/generated",
+		"textures": {
+			"layer0": "thermal:items/utils/rf_capacitor/rf_capacitor_resonant",
+			"layer1": "thermal:items/utils/rf_capacitor/rf_capacitor_state_0_0",
+			"layer2": "thermal:items/blank"
+		},
+		"transform": "forge:default-item"
+	},
+	"variants": {
+		"color": {
+			"0": {},
+			"1": {
+				"textures": {
+					"layer2": "thermal:items/utils/rf_capacitor/rf_capacitor_color"
+				}
+			}
+		},
+		"state": {
+			"0_0": {
+				"textures": {
+					"layer1": "thermal:items/utils/rf_capacitor/rf_capacitor_state_0_0"
+				}
+			},
+			"0_1": {
+				"textures": {
+					"layer1": "thermal:items/utils/rf_capacitor/rf_capacitor_state_0_1"
+				}
+			},
+			"0_2": {
+				"textures": {
+					"layer1": "thermal:items/utils/rf_capacitor/rf_capacitor_state_0_2"
+				}
+			},
+			"1_0": {
+				"textures": {
+					"layer1": "thermal:items/utils/rf_capacitor/rf_capacitor_state_1_0"
+				}
+			},
+			"1_1": {
+				"textures": {
+					"layer1": "thermal:items/utils/rf_capacitor/rf_capacitor_state_1_1"
+				}
+			},
+			"1_2": {
+				"textures": {
+					"layer1": "thermal:items/utils/rf_capacitor/rf_capacitor_state_1_2"
+				}
+			}
+		}
+	}
+}

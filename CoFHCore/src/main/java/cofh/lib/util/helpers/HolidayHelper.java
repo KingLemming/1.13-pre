@@ -1,6 +1,9 @@
 package cofh.lib.util.helpers;
 
+import java.time.LocalDate;
 import java.time.MonthDay;
+
+import static cofh.lib.util.helpers.HolidayHelper.Holiday.CHRISTMAS;
 
 /**
  * The class contains helper functions related to Holidays!
@@ -11,8 +14,24 @@ import java.time.MonthDay;
  */
 public class HolidayHelper {
 
-	// TODO: Finish
 	private HolidayHelper() {
+
+	}
+
+	public static boolean isChristmas(int daysBefore, int daysAfter) {
+
+		return holidayCheck(CHRISTMAS, daysBefore, daysAfter);
+	}
+
+	public static boolean holidayCheck(Holiday holiday, int daysBefore, int daysAfter) {
+
+		LocalDate dateHoliday = LocalDate.now();
+		holiday.getDate().adjustInto(dateHoliday);
+
+		LocalDate dateBefore = dateHoliday.minusDays(daysBefore);
+		LocalDate dateAfter = dateHoliday.plusDays(daysAfter);
+
+		return !(dateHoliday.isBefore(dateBefore) && dateHoliday.isAfter(dateAfter));
 
 	}
 
@@ -35,11 +54,16 @@ public class HolidayHelper {
 		NEW_YEARS_EVE(12, 31);
 		// @formatter:on
 
-		private final MonthDay date;
+		protected final MonthDay date;
 
 		Holiday(int month, int dayOfMonth) {
 
 			this.date = MonthDay.of(month, dayOfMonth);
+		}
+
+		MonthDay getDate() {
+
+			return date;
 		}
 	}
 	// endregion

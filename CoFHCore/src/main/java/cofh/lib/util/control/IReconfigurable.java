@@ -4,15 +4,15 @@ import net.minecraft.util.EnumFacing;
 
 public interface IReconfigurable {
 
-	SideConfig get(EnumFacing side);
+	SideConfig getSideConfig(EnumFacing side);
 
-	boolean prev(EnumFacing side);
+	boolean prevSideConfig(EnumFacing side);
 
-	boolean next(EnumFacing side);
+	boolean nextSideConfig(EnumFacing side);
 
-	boolean set(EnumFacing side, SideConfig config);
+	boolean setSideConfig(EnumFacing side, SideConfig config);
 
-	boolean clear();
+	boolean clearAllSides();
 
 	/**
 	 * This returns whether or not reconfiguration functionality is enabled at all.

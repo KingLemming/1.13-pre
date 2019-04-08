@@ -5,12 +5,12 @@ import cofh.core.block.storage.BlockStorageMetal;
 import cofh.core.item.ItemBlockCoFH;
 import cofh.lib.util.RandomDrop;
 import net.minecraft.block.Block;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
 import static cofh.lib.util.Constants.*;
 import static cofh.thermal.core.ThermalSeries.registerBlock;
 import static cofh.thermal.core.init.ItemsTSeries.*;
+import static net.minecraft.item.EnumRarity.UNCOMMON;
 
 public class BlocksTF {
 
@@ -61,8 +61,8 @@ public class BlocksTF {
 
 		oreTin = registerBlock("ore_tin", "oreTin", new ItemBlockCoFH(new BlockOre().setHarvestParams(pickaxe, 1), GROUP_ORES));
 		oreAluminum = registerBlock("ore_aluminum", "oreAluminum", new ItemBlockCoFH(new BlockOre().setHarvestParams(pickaxe, 1), GROUP_ORES));
-		orePlatinum = registerBlock("ore_platinum", "orePlatinum", new ItemBlockCoFH(new BlockOre().setHarvestParams(pickaxe, 3), GROUP_ORES).setRarity(EnumRarity.UNCOMMON));
-		oreIridium = registerBlock("ore_iridium", "oreIridium", new ItemBlockCoFH(new BlockOre().setHarvestParams(pickaxe, 3), GROUP_ORES).setRarity(EnumRarity.UNCOMMON));
+		orePlatinum = registerBlock("ore_platinum", "orePlatinum", new ItemBlockCoFH(new BlockOre().setHarvestParams(pickaxe, 3), GROUP_ORES).setRarity(UNCOMMON));
+		oreIridium = registerBlock("ore_iridium", "oreIridium", new ItemBlockCoFH(new BlockOre().setHarvestParams(pickaxe, 3), GROUP_ORES).setRarity(UNCOMMON));
 	}
 
 	private static void registerThermalMetals() {
@@ -85,8 +85,8 @@ public class BlocksTF {
 
 		storageTin = registerBlock("block_tin", "blockTin", new ItemBlockCoFH(new BlockStorageMetal().setHarvestParams(pickaxe, 1), GROUP_STORAGE));
 		storageAluminum = registerBlock("block_aluminum", "blockAluminum", new ItemBlockCoFH(new BlockStorageMetal().setHarvestParams(pickaxe, 1), GROUP_STORAGE));
-		storagePlatinum = registerBlock("block_platinum", "blockPlatinum", new ItemBlockCoFH(new BlockStorageMetal(), GROUP_STORAGE).setRarity(EnumRarity.UNCOMMON));
-		storageIridium = registerBlock("block_iridium", "blockIridium", new ItemBlockCoFH(new BlockStorageMetal(), GROUP_STORAGE).setRarity(EnumRarity.UNCOMMON));
+		storagePlatinum = registerBlock("block_platinum", "blockPlatinum", new ItemBlockCoFH(new BlockStorageMetal(), GROUP_STORAGE).setRarity(UNCOMMON));
+		storageIridium = registerBlock("block_iridium", "blockIridium", new ItemBlockCoFH(new BlockStorageMetal(), GROUP_STORAGE).setRarity(UNCOMMON));
 
 		storageSteel = registerBlock("block_steel", "blockSteel", new ItemBlockCoFH(new BlockStorageMetal().setHardness(7.5F).setResistance(15.0F), GROUP_STORAGE));
 		storageBronze = registerBlock("block_bronze", "blockBronze", new ItemBlockCoFH(new BlockStorageMetal().setHarvestParams(pickaxe, 1), GROUP_STORAGE));

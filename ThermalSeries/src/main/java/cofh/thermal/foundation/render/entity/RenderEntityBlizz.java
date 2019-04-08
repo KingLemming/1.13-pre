@@ -1,5 +1,6 @@
 package cofh.thermal.foundation.render.entity;
 
+import cofh.lib.util.helpers.HolidayHelper;
 import cofh.thermal.foundation.entity.monster.EntityBlizz;
 import cofh.thermal.foundation.render.model.ModelElemental;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -24,20 +25,7 @@ public class RenderEntityBlizz extends RenderLiving<EntityBlizz> {
 	@Override
 	protected ResourceLocation getEntityTexture(EntityBlizz par1Entity) {
 
-		return TEXTURE;
-		// TODO: Fix
-		// return HolidayHelper.isChristmas(5, 3) ? TEXTURE_XMAS : TEXTURE;
-	}
-
-	@Override
-	public void doRender(EntityBlizz entity, double x, double y, double z, float entityYaw, float partialTicks) {
-
-		doRenderBlizz(entity, x, y, z, entityYaw, partialTicks);
-	}
-
-	private void doRenderBlizz(EntityBlizz entity, double x, double y, double z, float entityYaw, float partialTicks) {
-
-		super.doRender(entity, x, y, z, entityYaw, partialTicks);
+		return HolidayHelper.isChristmas(7, 3) ? TEXTURE_XMAS : TEXTURE;
 	}
 
 }

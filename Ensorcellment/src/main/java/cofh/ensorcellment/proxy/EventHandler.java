@@ -244,12 +244,36 @@ public class EventHandler {
 			ItemStack armor = ((EntityHorse) entity).horseChest.getStackInSlot(1);
 
 			if (!armor.isEmpty()) {
+				int totalProtection = 0;
+
 				// PROTECTION
 				int encProtection = getEnchantmentLevel(PROTECTION, armor);
 				if (encProtection > 0) {
-					float damageReduction = Math.min(encProtection * EnchantmentProtectionImp.protection, 20) / 25F;
-					event.setAmount(event.getAmount() * damageReduction);
+					totalProtection += PROTECTION.calcModifierDamage(encProtection, source);
 				}
+				// FIRE PROTECTION
+				int encProtectionFire = getEnchantmentLevel(FIRE_PROTECTION, armor);
+				if (encProtectionFire > 0) {
+					totalProtection += FIRE_PROTECTION.calcModifierDamage(encProtection, source);
+				}
+				// FEATHER FALLING
+				int encProtectionFall = getEnchantmentLevel(FEATHER_FALLING, armor);
+				if (encProtectionFall > 0) {
+					totalProtection += FEATHER_FALLING.calcModifierDamage(encProtection, source);
+				}
+				// BLAST PROTECTION
+				int encProtectionExplosion = getEnchantmentLevel(BLAST_PROTECTION, armor);
+				if (encProtectionExplosion > 0) {
+					totalProtection += BLAST_PROTECTION.calcModifierDamage(encProtection, source);
+				}
+				// PROJECTILE PROTECTION
+				int encProtectionProjectile = getEnchantmentLevel(PROJECTILE_PROTECTION, armor);
+				if (encProtectionProjectile > 0) {
+					totalProtection += PROJECTILE_PROTECTION.calcModifierDamage(encProtection, source);
+				}
+				float damageReduction = Math.min(totalProtection * EnchantmentProtectionImp.HORSE_MODIFIER, 20.0F);
+				event.setAmount(event.getAmount() * (1.0F - damageReduction / 25.0F));
+
 				// THORNS
 				int encThorns = getEnchantmentLevel(THORNS, armor);
 				if (EnchantmentThorns.shouldHit(encThorns, MathHelper.RANDOM) && attacker != null) {

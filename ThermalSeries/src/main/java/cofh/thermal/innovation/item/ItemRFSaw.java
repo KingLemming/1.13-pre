@@ -7,6 +7,7 @@ import cofh.lib.item.IMultiModeItem;
 import cofh.lib.util.RayTracer;
 import cofh.lib.util.Utils;
 import cofh.lib.util.helpers.ColorHelper;
+import cofh.lib.util.helpers.MathHelper;
 import cofh.thermal.core.item.ItemRFTool;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.material.Material;
@@ -53,7 +54,7 @@ public class ItemRFSaw extends ItemRFTool implements IAreaEffectItem, IMultiMode
 
 	protected static boolean enableEnchantEffect = true;
 
-	public ItemRFSaw(int maxEnergy, int maxReceive, int harvestLevel, float efficiency) {
+	public ItemRFSaw(int maxEnergy, int maxReceive, int harvestLevel, float efficiency, int numModes) {
 
 		super(maxEnergy, maxReceive, harvestLevel, efficiency);
 
@@ -68,6 +69,8 @@ public class ItemRFSaw extends ItemRFTool implements IAreaEffectItem, IMultiMode
 		effectiveMaterials.add(Material.PLANTS);
 		effectiveMaterials.add(Material.VINE);
 		effectiveMaterials.add(Material.WEB);
+
+		this.numModes = MathHelper.clamp(numModes, 1, 5);
 	}
 
 	@Override
@@ -113,9 +116,6 @@ public class ItemRFSaw extends ItemRFTool implements IAreaEffectItem, IMultiMode
 		World world = player.world;
 		IBlockState state = world.getBlockState(pos);
 
-		if (state.getBlockHardness(world, pos) == 0.0F) {
-			return false;
-		}
 		if (!canHarvestBlock(state, stack)) {
 			if (!player.capabilities.isCreativeMode) {
 				useEnergy(stack, 1, false);
@@ -128,34 +128,32 @@ public class ItemRFSaw extends ItemRFTool implements IAreaEffectItem, IMultiMode
 			}
 			return false;
 		}
+		RayTraceResult traceResult = RayTracer.retrace(player, false);
+		if (traceResult == null || traceResult.sideHit == null) {
+			return false;
+		}
 		float refStrength = state.getPlayerRelativeBlockHardness(player, world, pos);
-		if (refStrength != 0.0F) {
-			RayTraceResult traceResult = RayTracer.retrace(player, false);
-			if (traceResult == null || traceResult.sideHit == null) {
-				return false;
-			}
-			int count = 1;
-			int mode = getMode(stack);
+		int count = 1;
+		int mode = getMode(stack);
 
-			switch (mode) {
-				case SINGLE:
-					break;
-				case TUNNEL_3:
-					count += breakTunnel3(player, world, pos, traceResult, refStrength);
-					break;
-				case AREA_3:
-					count += breakArea3(player, world, pos, traceResult, refStrength);
-					break;
-				case CUBE_3:
-					count += breakCube3(player, world, pos, traceResult, refStrength);
-					break;
-				case AREA_5:
-					count += breakArea5(player, world, pos, traceResult, refStrength);
-					break;
-			}
-			if (count > 0 && !player.capabilities.isCreativeMode) {
-				useEnergy(stack, count, false);
-			}
+		switch (mode) {
+			case SINGLE:
+				break;
+			case TUNNEL_3:
+				count += breakTunnel3(player, world, pos, traceResult, refStrength);
+				break;
+			case AREA_3:
+				count += breakArea3(player, world, pos, traceResult, refStrength);
+				break;
+			case CUBE_3:
+				count += breakCube3(player, world, pos, traceResult, refStrength);
+				break;
+			case AREA_5:
+				count += breakArea5(player, world, pos, traceResult, refStrength);
+				break;
+		}
+		if (count > 0 && !player.capabilities.isCreativeMode) {
+			useEnergy(stack, count, false);
 		}
 		return false;
 	}
@@ -165,15 +163,6 @@ public class ItemRFSaw extends ItemRFTool implements IAreaEffectItem, IMultiMode
 
 		setActive(stack, entityLiving);
 		return true;
-	}
-
-	@Override
-	public float getDestroySpeed(ItemStack stack, IBlockState state) {
-
-		if (getEnergyStored(stack) < energyPerUse) {
-			return 1.0F;
-		}
-		return effectiveMaterials.contains(state.getMaterial()) ? Math.max(efficiency - 1.5F * getMode(stack), 2.0F) : 1.0F;
 	}
 
 	@Override
@@ -199,16 +188,16 @@ public class ItemRFSaw extends ItemRFTool implements IAreaEffectItem, IMultiMode
 			case SINGLE:
 				break;
 			case TUNNEL_3:
-				getAOEBlocksTunnel3(stack, world, player, pos, traceResult, area);
+				getAOEBlocksTunnel3(stack, player, world, pos, traceResult, area);
 				break;
 			case AREA_3:
-				getAOEBlocksArea3(stack, world, pos, traceResult, area);
+				getAOEBlocksArea3(stack, player, world, pos, traceResult, area);
 				break;
 			case CUBE_3:
-				getAOEBlocksCube3(stack, world, pos, traceResult, area);
+				getAOEBlocksCube3(stack, player, world, pos, traceResult, area);
 				break;
 			case AREA_5:
-				getAOEBlocksArea5(stack, world, pos, traceResult, area);
+				getAOEBlocksArea5(stack, player, world, pos, traceResult, area);
 				break;
 		}
 		return ImmutableList.copyOf(area);
@@ -216,16 +205,6 @@ public class ItemRFSaw extends ItemRFTool implements IAreaEffectItem, IMultiMode
 	// endregion
 
 	// region IMultimodeItem
-	// TODO: Fix
-	//	@Override
-	//	public int getNumModes(ItemStack stack) {
-	//
-	//		if (!typeMap.containsKey(ItemHelper.getItemDamage(stack))) {
-	//			return 0;
-	//		}
-	//		return typeMap.get(ItemHelper.getItemDamage(stack)).numModes;
-	//	}
-
 	@Override
 	public void onModeChange(EntityPlayer player, ItemStack stack) {
 

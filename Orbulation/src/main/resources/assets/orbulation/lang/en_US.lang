@@ -1,19 +1,18 @@
 #en_US
 
-info.orbulation.florb.0=Use on a fluid to fill.
-info.orbulation.florb.1=Yes, you can throw it.
-info.orbulation.florb.2=Throw for fluid to splash out on impact!
 info.orbulation.florb.a.0=Holds 1000 mB of a temperate fluid.
-info.orbulation.florb.a.1=Holds 1000 mB of a any fluid.
-info.orbulation.florb.a.2=This fluid is lighter than air.
-info.orbulation.florb.a.3=The Florb will travel further.
+info.orbulation.florb.a.1=Holds 1000 mB of any fluid.
+info.orbulation.florb.b.0=§eUse on a fluid to fill.§r
+info.orbulation.florb.b.1=§eThrow for fluid to splash out on impact!§r
+info.orbulation.florb.c.0=This fluid is lighter than air.
+info.orbulation.florb.c.1=The Florb will travel further.
 
 info.orbulation.morb.0=Holds a mob in stasis.
-info.orbulation.morb.1=Throw at a mob to capture it.
-info.orbulation.morb.2=Throw to release the captured mob.
+info.orbulation.morb.1=This Morb holds a generic mob.
 info.orbulation.morb.a.0=This Morb has a low chance of being usable again.
 info.orbulation.morb.a.1=This Morb is reusable.
-info.orbulation.morb.a.2=This Morb holds a generic mob.
+info.orbulation.morb.b.0=§eThrow at a mob to capture it.§r
+info.orbulation.morb.b.1=§eThrow to release the captured mob.§r
 
 item.orbulation.florb.name=Florb
 item.orbulation.florb_magmatic.name=Magmatic Florb

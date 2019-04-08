@@ -9,33 +9,33 @@ public interface IReconfigurableTile extends IReconfigurable, ITileCallback {
 
 	// region IReconfigurable
 	@Override
-	default SideConfig get(EnumFacing side) {
+	default SideConfig getSideConfig(EnumFacing side) {
 
-		return reconfigControl().get(side);
+		return reconfigControl().getSideConfig(side);
 	}
 
 	@Override
-	default boolean prev(EnumFacing side) {
+	default boolean prevSideConfig(EnumFacing side) {
 
-		return reconfigControl().prev(side);
+		return reconfigControl().prevSideConfig(side);
 	}
 
 	@Override
-	default boolean next(EnumFacing side) {
+	default boolean nextSideConfig(EnumFacing side) {
 
-		return reconfigControl().next(side);
+		return reconfigControl().nextSideConfig(side);
 	}
 
 	@Override
-	default boolean set(EnumFacing side, SideConfig config) {
+	default boolean setSideConfig(EnumFacing side, SideConfig config) {
 
-		return reconfigControl().set(side, config);
+		return reconfigControl().setSideConfig(side, config);
 	}
 
 	@Override
-	default boolean clear() {
+	default boolean clearAllSides() {
 
-		return reconfigControl().clear();
+		return reconfigControl().clearAllSides();
 	}
 	// endregion
 }

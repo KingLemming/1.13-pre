@@ -58,16 +58,16 @@ public class ItemMorb extends ItemCoFH {
 		if (!isShiftKeyDown()) {
 			return;
 		}
-		tooltip.add(getUseText("info.orbulation.morb.0"));
-		tooltip.add(localize("info.orbulation.morb.a" + (reusable ? 1 : 0)));
+		tooltip.add(getInfoText("info.orbulation.morb.0"));
+		tooltip.add(localize("info.orbulation.morb.a." + (reusable ? 1 : 0)));
 
 		if (stack.getTagCompound() == null) {
-			tooltip.add(getUseText("info.orbulation.morb.1"));
+			tooltip.add(localize("info.orbulation.morb.b.0"));
 		} else {
 			if (stack.getTagCompound().hasKey(GENERIC)) {
-				tooltip.add(getNoticeText("info.orbulation.morb.a.2"));
+				tooltip.add(getNoticeText("info.orbulation.morb.1"));
 			}
-			tooltip.add(localize("info.orbulation.morb.2"));
+			tooltip.add(localize("info.orbulation.morb.b.1"));
 		}
 	}
 

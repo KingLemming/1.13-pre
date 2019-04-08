@@ -86,7 +86,7 @@ public class ReconfigControlModule implements IReconfigurable {
 	}
 
 	@Override
-	public SideConfig get(EnumFacing side) {
+	public SideConfig getSideConfig(EnumFacing side) {
 
 		if (side == null) {
 			return SIDE_ACCESSIBLE;
@@ -95,7 +95,7 @@ public class ReconfigControlModule implements IReconfigurable {
 	}
 
 	@Override
-	public boolean prev(EnumFacing side) {
+	public boolean prevSideConfig(EnumFacing side) {
 
 		if (side == null) {
 			return false;
@@ -105,7 +105,7 @@ public class ReconfigControlModule implements IReconfigurable {
 	}
 
 	@Override
-	public boolean next(EnumFacing side) {
+	public boolean nextSideConfig(EnumFacing side) {
 
 		if (side == null) {
 			return false;
@@ -115,7 +115,7 @@ public class ReconfigControlModule implements IReconfigurable {
 	}
 
 	@Override
-	public boolean set(EnumFacing side, SideConfig config) {
+	public boolean setSideConfig(EnumFacing side, SideConfig config) {
 
 		if (side == null || config == null) {
 			return false;
@@ -125,7 +125,7 @@ public class ReconfigControlModule implements IReconfigurable {
 	}
 
 	@Override
-	public boolean clear() {
+	public boolean clearAllSides() {
 
 		sides = new SideConfig[] { SIDE_NONE, SIDE_NONE, SIDE_NONE, SIDE_NONE, SIDE_NONE, SIDE_NONE };
 		return true;

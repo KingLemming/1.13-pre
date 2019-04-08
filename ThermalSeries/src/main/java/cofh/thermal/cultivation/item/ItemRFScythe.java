@@ -179,7 +179,7 @@ public class ItemRFScythe extends ItemRFContainer implements IMultiModeItem {
 		return false;
 	}
 
-	protected static boolean harvestBlock(World world, BlockPos pos, EntityPlayer player) {
+	protected boolean harvestBlock(World world, BlockPos pos, EntityPlayer player) {
 
 		if (world.isAirBlock(pos)) {
 			return false;

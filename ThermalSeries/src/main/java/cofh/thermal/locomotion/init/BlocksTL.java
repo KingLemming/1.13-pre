@@ -4,11 +4,11 @@ import cofh.core.block.rails.BlockRailCrossover;
 import cofh.core.block.rails.BlockRailDefault;
 import cofh.core.item.ItemBlockCoFH;
 import net.minecraft.block.SoundType;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
 import static cofh.lib.util.Constants.GROUP_RAILS;
 import static cofh.thermal.core.ThermalSeries.registerBlock;
+import static net.minecraft.item.EnumRarity.UNCOMMON;
 
 public class BlocksTL {
 
@@ -27,8 +27,8 @@ public class BlocksTL {
 		railReinforced = registerBlock("rail_reinforced", new ItemBlockCoFH(new BlockRailDefault().setMaxSpeed(0.6F).setHardness(25.0F).setResistance(200.0F), GROUP_RAILS));
 		railReinforcedCrossover = registerBlock("rail_reinforced_crossover", new ItemBlockCoFH(new BlockRailCrossover().setMaxSpeed(0.6F).setHardness(25.0F).setResistance(200.0F), GROUP_RAILS));
 
-		railLumium = registerBlock("rail_lumium", new ItemBlockCoFH(new BlockRailDefault().setLightLevel(15).setMaxSpeed(0.6F).setHardness(10.0F), GROUP_RAILS).setRarity(EnumRarity.UNCOMMON));
-		railLumiumCrossover = registerBlock("rail_lumium_crossover", new ItemBlockCoFH(new BlockRailCrossover().setLightLevel(15).setMaxSpeed(0.6F).setHardness(10.0F), GROUP_RAILS).setRarity(EnumRarity.UNCOMMON));
+		railLumium = registerBlock("rail_lumium", new ItemBlockCoFH(new BlockRailDefault().setLightLevel(15).setMaxSpeed(0.6F).setHardness(10.0F), GROUP_RAILS).setRarity(UNCOMMON));
+		railLumiumCrossover = registerBlock("rail_lumium_crossover", new ItemBlockCoFH(new BlockRailCrossover().setLightLevel(15).setMaxSpeed(0.6F).setHardness(10.0F), GROUP_RAILS).setRarity(UNCOMMON));
 	}
 	// endregion
 

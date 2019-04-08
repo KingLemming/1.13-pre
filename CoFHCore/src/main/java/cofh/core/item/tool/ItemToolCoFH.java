@@ -58,7 +58,7 @@ public abstract class ItemToolCoFH extends ItemTool implements IModelRegister {
 		return this;
 	}
 
-	protected static boolean harvestBlock(World world, BlockPos pos, EntityPlayer player) {
+	protected boolean harvestBlock(World world, BlockPos pos, EntityPlayer player) {
 
 		if (world.isAirBlock(pos)) {
 			return false;
@@ -70,7 +70,7 @@ public abstract class ItemToolCoFH extends ItemTool implements IModelRegister {
 		IBlockState state = world.getBlockState(pos);
 		Block block = state.getBlock();
 
-		if (!ForgeHooks.canHarvestBlock(block, player, world, pos)) {
+		if (!effectiveMaterials.contains(state.getMaterial()) || !ForgeHooks.canHarvestBlock(block, player, world, pos)) {
 			return false;
 		}
 		// Send the Break Event

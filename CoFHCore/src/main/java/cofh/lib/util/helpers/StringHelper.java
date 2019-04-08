@@ -163,11 +163,6 @@ public final class StringHelper {
 	// endregion
 
 	// region ITEM TEXT
-	public static String getUseText(String key) {
-
-		return YELLOW + localize(key) + END;
-	}
-
 	public static String getInfoText(String key) {
 
 		return BRIGHT_GREEN + localize(key) + END;
@@ -181,18 +176,6 @@ public final class StringHelper {
 	public static String getFlavorText(String key) {
 
 		return LIGHT_GRAY + ITALIC + localize(key) + END;
-	}
-
-	public static String getRarity(int level) {
-
-		switch (level) {
-			case 2:
-				return StringHelper.YELLOW;
-			case 3:
-				return StringHelper.BRIGHT_BLUE;
-			default:
-				return StringHelper.LIGHT_GRAY;
-		}
 	}
 
 	public static String shiftForDetails() {

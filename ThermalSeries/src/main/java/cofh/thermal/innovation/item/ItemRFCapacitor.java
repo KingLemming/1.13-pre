@@ -65,18 +65,18 @@ public class ItemRFCapacitor extends ItemRFContainer implements IMultiModeItem, 
 		if (!isShiftKeyDown()) {
 			return;
 		}
-		// TODO: Fix
 		if (isActive(stack)) {
 			tooltip.add(getNoticeText("info.thermal.rf_capacitor.b." + getMode(stack)));
-			//			tooltip.add(getDeactivationText("info.thermal.rf_capacitor.2"));
+			tooltip.add(localize("info.thermal.rf_capacitor.2"));
 		} else {
-			//			tooltip.add(getActivationText("info.thermal.rf_capacitor.1"));
+			tooltip.add(localize("info.thermal.rf_capacitor.1"));
 		}
 		tooltip.add(localizeFormat("info.thermal.rf_capacitor.a.0", getKeyName(KeyMultiModeItem.INSTANCE.getKey())));
 
-		if (!isCreative(stack)) {
-			// tooltip.add(localize("info.cofh.send") + ": " + formatNumber(maxSend) + " RF/t");
-			tooltip.add(localize("info.cofh.send") + "/" + localize("info.cofh.receive") + ": " + formatNumber(maxSend) + "/" + formatNumber(maxReceive) + " RF/t");
+		if (isCreative(stack)) {
+			tooltip.add(localize("info.cofh.send") + ": " + getScaledNumber(maxSend) + " RF/t");
+		} else {
+			tooltip.add(localize("info.cofh.send") + "/" + localize("info.cofh.receive") + ": " + getScaledNumber(maxSend) + "/" + getScaledNumber(maxReceive) + " RF/t");
 		}
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}

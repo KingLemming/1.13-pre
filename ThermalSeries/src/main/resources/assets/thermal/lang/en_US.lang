@@ -150,8 +150,8 @@ info.thermal.potion_quiver.b.0=Imbuing Disabled
 info.thermal.potion_quiver.b.1=Imbuing Enabled
 
 info.thermal.rf_capacitor.0=Stores Redstone Flux. Can recharge equipment and items.
-info.thermal.rf_capacitor.1=Use while sneaking to activate.
-info.thermal.rf_capacitor.2=Use while sneaking to deactivate.
+info.thermal.rf_capacitor.1=§bUse while sneaking to activate.§r
+info.thermal.rf_capacitor.2=§eUse while sneaking to deactivate.§r
 info.thermal.rf_capacitor.a.0=§ePress (%s) to change Charge mode.§r
 info.thermal.rf_capacitor.b.0=Charging Equipment
 info.thermal.rf_capacitor.b.1=Charging Inventory
@@ -493,9 +493,11 @@ item.thermal.seed_tea.name=Tea Seeds
 item.thermal.seed_tomato.name=Tomato Seeds
 
 item.thermal.rf_scythe_basic.name=Harvester's Scythe
+item.thermal.rf_scythe_resonant.name=Harvester's Scythe (Resonant)
 item.thermal.rf_scythe_creative.name=Harvester's Scythe (Creative)
 
 item.thermal.watering_can_basic.name=Watering Can
+item.thermal.watering_can_resonant.name=Watering Can (Resonant)
 item.thermal.watering_can_creative.name=Watering Can (Creative)
 
 #=======================================================================================================================
@@ -503,21 +505,27 @@ item.thermal.watering_can_creative.name=Watering Can (Creative)
 #=======================================================================================================================
 
 item.thermal.potion_injector_basic.name=Hypoinfuser
+item.thermal.potion_injector_resonant.name=Hypoinfuser (Resonant)
 item.thermal.potion_injector_creative.name=Hypoinfuser (Creative)
 
 item.thermal.potion_quiver_basic.name=Alchemical Quiver
+item.thermal.potion_quiver_resonant.name=Alchemical Quiver (Resonant)
 item.thermal.potion_quiver_creative.name=Alchemical Quiver (Creative)
 
 item.thermal.rf_capacitor_basic.name=Flux Capacitor
+item.thermal.rf_capacitor_resonant.name=Flux Capacitor (Resonant)
 item.thermal.rf_capacitor_creative.name=Flux Capacitor (Creative)
 
 item.thermal.rf_drill_basic.name=Fluxbore
+item.thermal.rf_drill_resonant.name=Fluxbore (Resonant)
 item.thermal.rf_drill_creative.name=Fluxbore (Creative)
 
 item.thermal.rf_magnet_basic.name=Fluxomagnet
+item.thermal.rf_magnet_resonant.name=Fluxomagnet (Resonant)
 item.thermal.rf_magnet_creative.name=Fluxomagnet (Creative)
 
 item.thermal.rf_saw_basic.name=Fluxsaw
+item.thermal.rf_saw_resonant.name=Fluxsaw (Resonant)
 item.thermal.rf_saw_creative.name=Fluxsaw (Creative)
 
 #=======================================================================================================================

@@ -13,6 +13,11 @@ public class EnsorcellmentHelper {
 
 	// region ENCHANTMENT IDS
 	public static final String ID_PROTECTION = "minecraft:protection";
+	public static final String ID_PROTECTION_FIRE = "minecraft:fire_protection";
+	public static final String ID_PROTECTION_FALL = "minecraft:feather_falling";
+	public static final String ID_PROTECTION_BLAST = "minecraft:blast_protection";
+	public static final String ID_PROTECTION_PROJECTILE = "minecraft:projectile_protection";
+
 	public static final String ID_THORNS = "minecraft:thorns";
 	public static final String ID_FROST_WALKER = "minecraft:frost_walker";
 	public static final String ID_KNOCKBACK = "minecraft:knockback";

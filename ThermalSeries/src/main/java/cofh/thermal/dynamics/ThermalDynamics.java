@@ -68,12 +68,6 @@ public class ThermalDynamics implements IModule {
 
 	}
 
-	// TODO: Placeholder for 1.13.
-	@Override
-	public void registerFluids() {
-
-	}
-
 	@Override
 	public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 

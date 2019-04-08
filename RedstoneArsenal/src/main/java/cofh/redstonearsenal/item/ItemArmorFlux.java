@@ -89,7 +89,7 @@ public class ItemArmorFlux extends ItemArmorCoFH implements ISpecialArmor, IEner
 		if (stack.getTagCompound() == null) {
 			EnergyHelper.setDefaultEnergyTag(stack, 0);
 		}
-		tooltip.add(localize("info.cofh.charge") + ": " + formatNumber(stack.getTagCompound().getInteger(TAG_ENERGY)) + " / " + formatNumber(getMaxEnergyStored(stack)) + " RF");
+		tooltip.add(localize("info.cofh.charge") + ": " + getScaledNumber(stack.getTagCompound().getInteger(TAG_ENERGY)) + " / " + getScaledNumber(getMaxEnergyStored(stack)) + " RF");
 	}
 
 	@Override

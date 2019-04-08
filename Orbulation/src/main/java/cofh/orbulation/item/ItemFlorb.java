@@ -65,15 +65,14 @@ public class ItemFlorb extends ItemCoFH implements IFluidContainerItem {
 			return;
 		}
 		if (stack.getTagCompound() == null) {
-			tooltip.add(localize("info.orbulation.florb.a." + (magmatic ? 1 : 0)));
-			tooltip.add(getUseText("info.orbulation.florb.0"));
-			tooltip.add(localize("info.orbulation.florb.1"));
+			tooltip.add(getInfoText("info.orbulation.florb.a." + (magmatic ? 1 : 0)));
+			tooltip.add(localize("info.orbulation.florb.b.0"));
 		} else {
-			tooltip.add(getUseText("info.orbulation.florb.2"));
+			tooltip.add(localize("info.orbulation.florb.b.1"));
 			Fluid fluid = FluidRegistry.getFluid(stack.getTagCompound().getString(TAG_FLUID));
 			if (fluid != null && fluid.getDensity() < 0) {
-				tooltip.add(localize("info.orbulation.florb.a.1"));
-				tooltip.add(localize("info.orbulation.florb.a.2"));
+				tooltip.add(localize("info.orbulation.florb.c.0"));
+				tooltip.add(localize("info.orbulation.florb.c.1"));
 			}
 		}
 	}

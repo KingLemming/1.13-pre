@@ -108,8 +108,8 @@ public class ItemHammerCoFH extends ItemToolCoFH implements IAreaEffectItem {
 							adjPos = new BlockPos(i, y, k);
 							adjState = world.getBlockState(adjPos);
 							strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-							if (strength > 0F && strength >= maxStrength) {
-								if (harvestBlock(world, adjPos, player)) {
+							if (strength >= maxStrength) {
+								if (harvestBlock(world, adjPos, player) && strength > 0) {
 									count++;
 								}
 							}
@@ -126,8 +126,8 @@ public class ItemHammerCoFH extends ItemToolCoFH implements IAreaEffectItem {
 							adjPos = new BlockPos(i, j, z);
 							adjState = world.getBlockState(adjPos);
 							strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-							if (strength > 0F && strength >= maxStrength) {
-								if (harvestBlock(world, adjPos, player)) {
+							if (strength >= maxStrength) {
+								if (harvestBlock(world, adjPos, player) && strength > 0) {
 									count++;
 								}
 							}
@@ -144,8 +144,8 @@ public class ItemHammerCoFH extends ItemToolCoFH implements IAreaEffectItem {
 							adjPos = new BlockPos(x, j, k);
 							adjState = world.getBlockState(adjPos);
 							strength = adjState.getPlayerRelativeBlockHardness(player, world, adjPos);
-							if (strength > 0F && strength >= maxStrength) {
-								if (harvestBlock(world, adjPos, player)) {
+							if (strength >= maxStrength) {
+								if (harvestBlock(world, adjPos, player) && strength > 0) {
 									count++;
 								}
 							}

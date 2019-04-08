@@ -1,5 +1,6 @@
 package cofh.thermal.foundation.render.entity;
 
+import cofh.lib.util.helpers.HolidayHelper;
 import cofh.thermal.foundation.entity.monster.EntityBlitz;
 import cofh.thermal.foundation.render.model.ModelElemental;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -24,20 +25,7 @@ public class RenderEntityBlitz extends RenderLiving<EntityBlitz> {
 	@Override
 	protected ResourceLocation getEntityTexture(EntityBlitz par1Entity) {
 
-		return TEXTURE;
-		// TODO: Fix
-		// return HolidayHelper.isChristmas(5, 3) ? TEXTURE_XMAS : TEXTURE;
-	}
-
-	@Override
-	public void doRender(EntityBlitz entity, double x, double y, double z, float entityYaw, float partialTicks) {
-
-		doRenderBlitz(entity, x, y, z, entityYaw, partialTicks);
-	}
-
-	private void doRenderBlitz(EntityBlitz entity, double x, double y, double z, float entityYaw, float partialTicks) {
-
-		super.doRender(entity, x, y, z, entityYaw, partialTicks);
+		return HolidayHelper.isChristmas(7, 3) ? TEXTURE_XMAS : TEXTURE;
 	}
 
 }

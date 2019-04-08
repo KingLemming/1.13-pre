@@ -7,7 +7,7 @@ import cofh.core.item.ItemSeedFoodCoFH;
 import cofh.thermal.core.init.CreativeTabsTSeries;
 import cofh.thermal.cultivation.item.ItemRFScythe;
 import cofh.thermal.cultivation.item.ItemWateringCan;
-import net.minecraft.item.EnumRarity;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 
@@ -16,6 +16,8 @@ import static cofh.lib.util.helpers.StringHelper.titleCase;
 import static cofh.thermal.core.ThermalSeries.config;
 import static cofh.thermal.core.ThermalSeries.registerItem;
 import static cofh.thermal.cultivation.init.BlocksTC.*;
+import static net.minecraft.item.EnumRarity.EPIC;
+import static net.minecraft.item.EnumRarity.RARE;
 
 public class ItemsTC {
 
@@ -83,17 +85,23 @@ public class ItemsTC {
 
 	public static void registerTools() {
 
+		CreativeTabs tab = CreativeTabsTSeries.tabTools;
+
 		itemWateringCanBasic = createWateringCan("basic", 4000, 1, 40);
-		itemWateringCanCreative = (ItemWateringCan) createWateringCan("creative", 2000, 5, 200).setRarity(EnumRarity.EPIC).setCreative(true);
+		itemWateringCanResonant = (ItemWateringCan) createWateringCan("resonant", 40000, 5, 80).setRarity(RARE);
+		itemWateringCanCreative = (ItemWateringCan) createWateringCan("creative", 2000, 5, 200).setRarity(EPIC).setCreative(true);
 
 		itemScytheBasic = createScythe("basic", 20000, 1);
-		itemScytheCreative = (ItemRFScythe) createScythe("creative", 1000, 5).setRarity(EnumRarity.EPIC).setCreative(true);
+		itemScytheResonant = (ItemRFScythe) createScythe("resonant", 200000, 5).setRarity(RARE);
+		itemScytheCreative = (ItemRFScythe) createScythe("creative", 1000, 5).setRarity(EPIC).setCreative(true);
 
-		registerItem("watering_can_basic", itemWateringCanBasic, CreativeTabsTSeries.tabTools);
-		registerItem("watering_can_creative", itemWateringCanCreative, CreativeTabsTSeries.tabTools);
+		registerItem("watering_can_basic", itemWateringCanBasic, tab);
+		registerItem("watering_can_resonant", itemWateringCanResonant, tab);
+		registerItem("watering_can_creative", itemWateringCanCreative, tab);
 
-		registerItem("rf_scythe_basic", itemScytheBasic, CreativeTabsTSeries.tabTools);
-		registerItem("rf_scythe_creative", itemScytheCreative, CreativeTabsTSeries.tabTools);
+		registerItem("rf_scythe_basic", itemScytheBasic, tab);
+		registerItem("rf_scythe_resonant", itemScytheResonant, tab);
+		registerItem("rf_scythe_creative", itemScytheCreative, tab);
 	}
 	// endregion
 
@@ -172,9 +180,11 @@ public class ItemsTC {
 
 	// region TOOLS
 	public static ItemWateringCan itemWateringCanBasic;
+	public static ItemWateringCan itemWateringCanResonant;
 	public static ItemWateringCan itemWateringCanCreative;
 
 	public static ItemRFScythe itemScytheBasic;
+	public static ItemRFScythe itemScytheResonant;
 	public static ItemRFScythe itemScytheCreative;
 	// endregion
 }

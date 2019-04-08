@@ -99,7 +99,7 @@ public class Ensorcellment {
 	public static void config() {
 
 		String category = "Enchantment.FeatherFalling";
-		String comment = "If TRUE, Feather Falling will prevent Farmland from being trampled.";
+		String comment = "If TRUE, Feather Falling will prevent Farmland from being trampled. This option can work with either the vanilla or override version of Feather Falling.";
 
 		preventFarmlandTrampling = config.get("Prevent Farmland Trampling", category, true, comment);
 
