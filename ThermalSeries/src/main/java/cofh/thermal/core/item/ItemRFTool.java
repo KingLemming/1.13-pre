@@ -3,6 +3,8 @@ package cofh.thermal.core.item;
 import cofh.lib.item.IMultiModeItem;
 import cofh.lib.util.Utils;
 import cofh.lib.util.helpers.MathHelper;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import gnu.trove.set.hash.THashSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -13,9 +15,12 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Enchantments;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.client.CPacketPlayerDigging;
@@ -33,10 +38,11 @@ import static cofh.lib.util.Constants.TAG_MODE;
 public abstract class ItemRFTool extends ItemRFContainer implements IMultiModeItem {
 
 	protected THashSet<Material> effectiveMaterials = new THashSet<>();
-
 	protected int energyPerUse = 200;
 	protected int harvestLevel;
 	protected float efficiency;
+	protected float attackSpeed = -2.4F;
+	protected float attackDamage = 1.0F;
 
 	protected int numModes = 1;
 
@@ -47,6 +53,15 @@ public abstract class ItemRFTool extends ItemRFContainer implements IMultiModeIt
 		this.efficiency = efficiency;
 	}
 
+	public ItemRFTool(int maxEnergy, int maxReceive, int harvestLevel, float efficiency, float attackSpeed, float attackDamage) {
+
+		super(maxEnergy, maxReceive);
+		this.harvestLevel = harvestLevel;
+		this.efficiency = efficiency;
+		this.attackSpeed = attackSpeed;
+		this.attackDamage = attackDamage;
+	}
+
 	protected THashSet<Material> getEffectiveMaterials() {
 
 		return effectiveMaterials;
@@ -55,6 +70,16 @@ public abstract class ItemRFTool extends ItemRFContainer implements IMultiModeIt
 	protected float getEfficiency() {
 
 		return efficiency;
+	}
+
+	protected float getAttackSpeed() {
+
+		return attackSpeed;
+	}
+
+	protected float getAttackDamage() {
+
+		return attackDamage;
 	}
 
 	@Override
@@ -86,6 +111,23 @@ public abstract class ItemRFTool extends ItemRFContainer implements IMultiModeIt
 
 		useEnergy(stack, 2, true);
 		return true;
+	}
+
+	@Override
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+
+		Multimap<String, AttributeModifier> multimap = HashMultimap.create();
+
+		if (slot == EntityEquipmentSlot.MAINHAND) {
+			if (getEnergyStored(stack) >= energyPerUse) {
+				multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", getAttackSpeed(), 0));
+				multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", getAttackDamage(), 0));
+			} else {
+				multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -3.2F, 0));
+				multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", 0, 0));
+			}
+		}
+		return multimap;
 	}
 
 	// region HELPERS

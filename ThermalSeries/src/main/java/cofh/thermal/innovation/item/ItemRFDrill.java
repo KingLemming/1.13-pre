@@ -54,9 +54,9 @@ public class ItemRFDrill extends ItemRFTool implements IAreaEffectItem, IMultiMo
 
 	protected static boolean enableEnchantEffect = true;
 
-	public ItemRFDrill(int maxEnergy, int maxReceive, int harvestLevel, float efficiency, int numModes) {
+	public ItemRFDrill(int maxEnergy, int maxReceive, int harvestLevel, float efficiency, float damage, int numModes) {
 
-		super(maxEnergy, maxReceive, harvestLevel, efficiency);
+		super(maxEnergy, maxReceive, harvestLevel, efficiency, -2.2F, damage);
 
 		setHarvestLevel(TOOL_PICKAXE, harvestLevel);
 		setHarvestLevel(TOOL_SHOVEL, harvestLevel);

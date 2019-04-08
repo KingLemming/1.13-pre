@@ -23,14 +23,13 @@ public class ItemsTI {
 
 		CreativeTabs tab = CreativeTabsTSeries.tabTools;
 
-		// TODO: Attack Damage
-		itemDrillBasic = createDrill("basic", 20000, 2, 6.0F, 2);
-		itemDrillResonant = (ItemRFDrill) createDrill("resonant", 200000, 4, 12.0F, 5).setRarity(RARE);
-		itemDrillCreative = (ItemRFDrill) createDrill("creative", 1000, 8, 32.0F, 5).setRarity(EPIC).setCreative(true);
+		itemDrillBasic = createDrill("basic", 20000, 2, 6.0F, 3.0F, 2);
+		itemDrillResonant = (ItemRFDrill) createDrill("resonant", 200000, 4, 12.0F, 5.0F, 5).setRarity(RARE);
+		itemDrillCreative = (ItemRFDrill) createDrill("creative", 1000, 8, 32.0F, 5.0F, 5).setRarity(EPIC).setCreative(true);
 
-		itemSawBasic = createSaw("basic", 20000, 2, 6.0F, 2);
-		itemSawResonant = (ItemRFSaw) createSaw("resonant", 200000, 4, 12.0F, 5).setRarity(RARE);
-		itemSawCreative = (ItemRFSaw) createSaw("creative", 1000, 8, 32.0F, 5).setRarity(EPIC).setCreative(true);
+		itemSawBasic = createSaw("basic", 20000, 2, 6.0F, 4.0F, 2);
+		itemSawResonant = (ItemRFSaw) createSaw("resonant", 200000, 4, 12.0F, 6.0F, 5).setRarity(RARE);
+		itemSawCreative = (ItemRFSaw) createSaw("creative", 1000, 8, 32.0F, 6.0F, 5).setRarity(EPIC).setCreative(true);
 
 		itemCapacitorBasic = createCapacitor("basic", 40000, 4000);
 		itemCapacitorResonant = (ItemRFCapacitor) createCapacitor("resonant", 400000, 40000).setRarity(RARE);
@@ -75,7 +74,7 @@ public class ItemsTI {
 	// endregion
 
 	// region HELPERS
-	private static ItemRFDrill createDrill(String id, int maxEnergy, int harvestLevel, float efficiency, int numModes) {
+	private static ItemRFDrill createDrill(String id, int maxEnergy, int harvestLevel, float efficiency, float damage, int numModes) {
 
 		String category = "Tools.Drill." + titleCase(id);
 		String comment = "Adjust this value to set how much energy (RF) this Drill holds.";
@@ -89,10 +88,13 @@ public class ItemsTI {
 		comment = "Adjust this value to set the base harvest speed for this Drill.";
 		efficiency = config.getFloat("Efficiency", category, efficiency, 2.0F, 100.0F, comment);
 
-		return new ItemRFDrill(maxEnergy, maxReceive, harvestLevel, efficiency, numModes);
+		comment = "Adjust this value to set the base attack damage for this Drill.";
+		damage = config.getFloat("Attack Damage", category, damage, 1.0F, 10.0F, comment);
+
+		return new ItemRFDrill(maxEnergy, maxReceive, harvestLevel, efficiency, damage, numModes);
 	}
 
-	private static ItemRFSaw createSaw(String id, int maxEnergy, int harvestLevel, float efficiency, int numModes) {
+	private static ItemRFSaw createSaw(String id, int maxEnergy, int harvestLevel, float efficiency, float damage, int numModes) {
 
 		String category = "Tools.Saw." + titleCase(id);
 		String comment = "Adjust this value to set how much energy (RF) this Saw holds.";
@@ -106,7 +108,10 @@ public class ItemsTI {
 		comment = "Adjust this value to set the base harvest speed for this Saw.";
 		efficiency = config.getFloat("Efficiency", category, efficiency, 2.0F, 100.0F, comment);
 
-		return new ItemRFSaw(maxEnergy, maxReceive, harvestLevel, efficiency, numModes);
+		comment = "Adjust this value to set the base attack damage for this Saw.";
+		damage = config.getFloat("Attack Damage", category, damage, 1.0F, 10.0F, comment);
+
+		return new ItemRFSaw(maxEnergy, maxReceive, harvestLevel, efficiency, damage, numModes);
 	}
 
 	private static ItemRFCapacitor createCapacitor(String id, int maxEnergy, int maxSend) {
@@ -152,7 +157,7 @@ public class ItemsTI {
 		String comment = "Adjust this value to set how much Potion (mB) this Quiver holds.";
 		fluidCapacity = config.getInt("Potion", category, fluidCapacity, Fluid.BUCKET_VOLUME * 2, Fluid.BUCKET_VOLUME * 1000, comment);
 
-		comment = "Adjust this value to set how many arrows this quiver holds.";
+		comment = "Adjust this value to set how many arrows this Quiver holds.";
 		arrowCapacity = config.getInt("Arrows", category, arrowCapacity, 16, 32000, comment);
 
 		return new ItemPotionQuiver(fluidCapacity, arrowCapacity);

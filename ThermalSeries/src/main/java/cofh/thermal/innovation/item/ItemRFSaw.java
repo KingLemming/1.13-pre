@@ -54,9 +54,9 @@ public class ItemRFSaw extends ItemRFTool implements IAreaEffectItem, IMultiMode
 
 	protected static boolean enableEnchantEffect = true;
 
-	public ItemRFSaw(int maxEnergy, int maxReceive, int harvestLevel, float efficiency, int numModes) {
+	public ItemRFSaw(int maxEnergy, int maxReceive, int harvestLevel, float efficiency, float damage, int numModes) {
 
-		super(maxEnergy, maxReceive, harvestLevel, efficiency);
+		super(maxEnergy, maxReceive, harvestLevel, efficiency, -2.4F, damage);
 
 		setHarvestLevel(TOOL_AXE, harvestLevel);
 		setHarvestLevel(TOOL_SWORD, harvestLevel);

@@ -27,6 +27,7 @@ import static cofh.lib.util.helpers.StringHelper.localize;
 
 public abstract class ItemRFContainer extends ItemCoFH implements IEnergyContainerItem {
 
+	protected int enchantability = 10;
 	protected int maxEnergy;
 	protected int maxReceive;
 
@@ -39,6 +40,12 @@ public abstract class ItemRFContainer extends ItemCoFH implements IEnergyContain
 
 		this.maxEnergy = maxEnergy;
 		this.maxReceive = maxReceive;
+	}
+
+	public ItemRFContainer setEnchantability(int enchantability) {
+
+		this.enchantability = enchantability;
+		return this;
 	}
 
 	@Override
@@ -83,7 +90,7 @@ public abstract class ItemRFContainer extends ItemCoFH implements IEnergyContain
 	@Override
 	public boolean isEnchantable(ItemStack stack) {
 
-		return true;
+		return enchantability > 0;
 	}
 
 	@Override
@@ -107,7 +114,7 @@ public abstract class ItemRFContainer extends ItemCoFH implements IEnergyContain
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
 
-		return 10;
+		return enchantability;
 	}
 
 	@Override
