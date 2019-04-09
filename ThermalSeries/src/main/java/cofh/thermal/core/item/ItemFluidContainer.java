@@ -31,7 +31,9 @@ import static cofh.lib.util.Constants.*;
 import static cofh.lib.util.helpers.ItemHelper.areItemStacksEqualIgnoreTags;
 import static cofh.lib.util.helpers.StringHelper.*;
 
-public abstract class ItemFluidContainer extends ItemCoFH implements IColorableItem, IFluidContainerItem {
+public abstract class ItemFluidContainer extends ItemCoFH implements IFluidContainerItem, IColorableItem {
+
+	protected static boolean enableEnchantEffect = true;
 
 	protected int fluidCapacity;
 
@@ -70,6 +72,13 @@ public abstract class ItemFluidContainer extends ItemCoFH implements IColorableI
 				tooltip.add(localize("info.cofh.level") + ": 0 / " + formatNumber(getCapacity(stack)) + " mB");
 			}
 		}
+	}
+
+	@Override
+	@SideOnly (Side.CLIENT)
+	public boolean hasEffect(ItemStack stack) {
+
+		return enableEnchantEffect && stack.isItemEnchanted();
 	}
 
 	@Override

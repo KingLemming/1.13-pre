@@ -48,8 +48,6 @@ public class ItemPotionInjector extends ItemPotionContainer implements IMultiMod
 	protected static final int MB_PER_USE = 250;
 	protected static final int TIME_CONSTANT = 32;
 
-	protected static boolean enableEnchantEffect = true;
-
 	public ItemPotionInjector(int fluidCapacity) {
 
 		super(fluidCapacity);
@@ -151,13 +149,6 @@ public class ItemPotionInjector extends ItemPotionContainer implements IMultiMod
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean hasEffect(ItemStack stack) {
-
-		return enableEnchantEffect && stack.isItemEnchanted();
 	}
 
 	// region IBauble

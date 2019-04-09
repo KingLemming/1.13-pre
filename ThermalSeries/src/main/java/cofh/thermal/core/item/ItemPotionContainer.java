@@ -10,7 +10,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import static cofh.lib.util.Constants.TINT_INDEX_1;
 
-public abstract class ItemPotionContainer extends ItemFluidContainer implements IColorableItem, IFluidContainerItem {
+public abstract class ItemPotionContainer extends ItemFluidContainer implements IFluidContainerItem, IColorableItem {
 
 	public ItemPotionContainer(int fluidCapacity) {
 

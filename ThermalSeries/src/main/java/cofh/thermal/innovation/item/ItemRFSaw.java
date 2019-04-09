@@ -52,8 +52,6 @@ public class ItemRFSaw extends ItemRFTool implements IAreaEffectItem, IMultiMode
 	protected static final int CUBE_3 = 3;
 	protected static final int AREA_5 = 4;
 
-	protected static boolean enableEnchantEffect = true;
-
 	public ItemRFSaw(int maxEnergy, int maxReceive, int harvestLevel, float efficiency, float damage, int numModes) {
 
 		super(maxEnergy, maxReceive, harvestLevel, efficiency, -2.4F, damage);
@@ -163,13 +161,6 @@ public class ItemRFSaw extends ItemRFTool implements IAreaEffectItem, IMultiMode
 
 		setActive(stack, entityLiving);
 		return true;
-	}
-
-	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean hasEffect(ItemStack stack) {
-
-		return enableEnchantEffect && stack.isItemEnchanted();
 	}
 
 	// region IAreaEffectItem

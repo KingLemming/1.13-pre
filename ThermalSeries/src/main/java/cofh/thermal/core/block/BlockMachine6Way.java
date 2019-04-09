@@ -12,9 +12,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-public class BlockApparatus extends BlockAbstractTile6Way {
+public class BlockMachine6Way extends BlockAbstractTile6Way {
 
-	public BlockApparatus(AbstractTileType type) {
+	public BlockMachine6Way(AbstractTileType type) {
 
 		super(type);
 	}

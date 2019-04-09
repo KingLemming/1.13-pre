@@ -3,6 +3,7 @@ package cofh.thermal.core.item;
 import cofh.core.item.ItemCoFH;
 import cofh.lib.energy.EnergyEnchantableItemWrapper;
 import cofh.lib.energy.IEnergyContainerItem;
+import cofh.lib.item.IColorableItem;
 import cofh.lib.util.helpers.EnergyHelper;
 import cofh.lib.util.helpers.MathHelper;
 import cofh.lib.util.modhelpers.EnsorcellmentHelper;
@@ -16,6 +17,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -25,7 +28,9 @@ import static cofh.lib.util.Constants.*;
 import static cofh.lib.util.helpers.StringHelper.getScaledNumber;
 import static cofh.lib.util.helpers.StringHelper.localize;
 
-public abstract class ItemRFContainer extends ItemCoFH implements IEnergyContainerItem {
+public abstract class ItemRFContainer extends ItemCoFH implements IEnergyContainerItem, IColorableItem {
+
+	protected static boolean enableEnchantEffect = true;
 
 	protected int enchantability = 10;
 	protected int maxEnergy;
@@ -79,6 +84,13 @@ public abstract class ItemRFContainer extends ItemCoFH implements IEnergyContain
 	public boolean getIsRepairable(ItemStack itemToRepair, ItemStack stack) {
 
 		return false;
+	}
+
+	@Override
+	@SideOnly (Side.CLIENT)
+	public boolean hasEffect(ItemStack stack) {
+
+		return enableEnchantEffect && stack.isItemEnchanted();
 	}
 
 	@Override

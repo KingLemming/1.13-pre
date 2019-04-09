@@ -49,7 +49,6 @@ public class ItemRFScythe extends ItemRFContainer implements IMultiModeItem {
 
 	protected static final int ENERGY_PER_USE = 100;
 
-	protected static boolean enableEnchantEffect = true;
 	protected static boolean allowFakePlayers = false;
 
 	protected int radius;
@@ -141,13 +140,6 @@ public class ItemRFScythe extends ItemRFContainer implements IMultiModeItem {
 			return false;
 		}
 		return harvestBlocks(stack, world, pos, player);
-	}
-
-	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean hasEffect(ItemStack stack) {
-
-		return enableEnchantEffect && stack.isItemEnchanted();
 	}
 
 	// region HELPERS

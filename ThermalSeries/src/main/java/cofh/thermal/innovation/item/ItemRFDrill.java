@@ -52,8 +52,6 @@ public class ItemRFDrill extends ItemRFTool implements IAreaEffectItem, IMultiMo
 	protected static final int CUBE_3 = 3;
 	protected static final int AREA_5 = 4;
 
-	protected static boolean enableEnchantEffect = true;
-
 	public ItemRFDrill(int maxEnergy, int maxReceive, int harvestLevel, float efficiency, float damage, int numModes) {
 
 		super(maxEnergy, maxReceive, harvestLevel, efficiency, -2.2F, damage);
@@ -170,13 +168,6 @@ public class ItemRFDrill extends ItemRFTool implements IAreaEffectItem, IMultiMo
 
 		setActive(stack, entityLiving);
 		return true;
-	}
-
-	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean hasEffect(ItemStack stack) {
-
-		return enableEnchantEffect && stack.isItemEnchanted();
 	}
 
 	// region IAreaEffectItem

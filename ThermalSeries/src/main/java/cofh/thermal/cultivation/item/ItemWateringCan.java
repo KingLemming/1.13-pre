@@ -49,7 +49,6 @@ public class ItemWateringCan extends ItemFluidContainer implements IMultiModeIte
 
 	protected static final int MB_PER_USE = 50;
 
-	protected static boolean enableEnchantEffect = true;
 	protected static boolean allowFakePlayers = false;
 	protected static boolean removeSourceBlocks = true;
 
@@ -195,13 +194,6 @@ public class ItemWateringCan extends ItemFluidContainer implements IMultiModeIte
 			}
 		}
 		return EnumActionResult.FAIL;
-	}
-
-	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean hasEffect(ItemStack stack) {
-
-		return enableEnchantEffect && stack.isItemEnchanted();
 	}
 
 	// region HELPERS

@@ -51,8 +51,6 @@ public class ItemRFMagnet extends ItemRFContainer implements IFilterContainerIte
 	protected static final int ENERGY_PER_USE = 250;
 	protected static final int TIME_CONSTANT = 8;
 
-	protected static boolean enableEnchantEffect = true;
-
 	protected int radius;
 	protected int filterSize;
 
@@ -180,13 +178,6 @@ public class ItemRFMagnet extends ItemRFContainer implements IFilterContainerIte
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
 		return EnumActionResult.FAIL;
-	}
-
-	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean hasEffect(ItemStack stack) {
-
-		return enableEnchantEffect && stack.isItemEnchanted();
 	}
 
 	// region IFilterContainerItem

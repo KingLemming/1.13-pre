@@ -150,7 +150,6 @@ public abstract class TileMachineProcess extends TileMachine {
 		fluidInputCounts = new ArrayList<>();
 	}
 
-	@Override
 	protected boolean validateInputs() {
 
 		if (!cacheRecipe()) {
@@ -174,7 +173,6 @@ public abstract class TileMachineProcess extends TileMachine {
 		return true;
 	}
 
-	@Override
 	protected boolean validateOutputs() {
 
 		// ITEMS

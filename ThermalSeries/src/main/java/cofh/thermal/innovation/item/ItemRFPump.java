@@ -38,8 +38,6 @@ import static cofh.lib.util.helpers.StringHelper.*;
 // TODO: Finish
 public class ItemRFPump extends ItemRFContainer implements IAreaEffectItem, IMultiModeItem {
 
-	protected static boolean enableEnchantEffect = true;
-
 	public ItemRFPump(int maxEnergy, int maxReceive) {
 
 		super(maxEnergy, maxReceive);
@@ -71,13 +69,6 @@ public class ItemRFPump extends ItemRFContainer implements IAreaEffectItem, IMul
 		if (entity.world.getTotalWorldTime() > activeTime) {
 			clearActive(stack);
 		}
-	}
-
-	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean hasEffect(ItemStack stack) {
-
-		return enableEnchantEffect && stack.isItemEnchanted();
 	}
 
 	// region IAreaEffectItem

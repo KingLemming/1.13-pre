@@ -1,6 +1,7 @@
 package cofh.lib.util.helpers;
 
 import cofh.lib.gui.slot.SlotFalseCopy;
+import cofh.lib.inventory.ItemStorageCoFH;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.Slot;
@@ -154,10 +155,56 @@ public class InventoryHelper {
 		return successful;
 	}
 
-	public static boolean hasInventoryOnSide(TileEntity tile, EnumFacing side) {
+	// region BLOCK TRANSFER
+	public static boolean transferIn(TileEntity tile, ItemStorageCoFH slot, int amount, EnumFacing side) {
 
-		return hasItemHandlerCap(tile, side.getOpposite()) && getItemHandlerCap(tile, side.getOpposite()).getSlots() > 0;
+		if (!slot.isEmpty()) {
+			amount = Math.min(amount, slot.getSlotLimit(0) - slot.getCount());
+		}
+		TileEntity adjInv = BlockHelper.getAdjacentTileEntity(tile, side);
+		EnumFacing opposite = side.getOpposite();
+
+		if (hasItemHandlerCap(adjInv, opposite)) {
+			IItemHandler handler = getItemHandlerCap(adjInv, opposite);
+			if (handler == null) {
+				return false;
+			}
+			for (int i = 0; i < handler.getSlots() && amount > 0; i++) {
+				ItemStack query = handler.extractItem(i, amount, true);
+				if (query.isEmpty()) {      // Skip empty slots.
+					continue;
+				}
+				ItemStack ret = slot.insertItem(0, query, true);
+				if (ret.getCount() != query.getCount()) {       // If the slot accepted items.
+					slot.insertItem(0, handler.extractItem(i, amount, false), false);
+					amount -= query.getCount() - ret.getCount();
+				}
+			}
+		}
+		return false;
 	}
+
+	public static boolean transferOut(TileEntity tile, ItemStorageCoFH slot, int amount, EnumFacing side) {
+
+		if (slot.isEmpty()) {
+			return false;
+		}
+		ItemStack initialStack = slot.getItemStack().copy();
+		initialStack.setCount(Math.min(amount, initialStack.getCount()));
+		TileEntity adjInv = BlockHelper.getAdjacentTileEntity(tile, side);
+		EnumFacing opposite = side.getOpposite();
+
+		if (hasItemHandlerCap(adjInv, opposite)) {
+			ItemStack inserted = addToInventory(tile, opposite, initialStack);
+			if (inserted.getCount() >= initialStack.getCount()) {
+				return false;
+			}
+			slot.modify(initialStack.getCount() - inserted.getCount());
+			return true;
+		}
+		return false;
+	}
+	// endregion
 
 	// region HELPERS
 	public static ItemStack addToInventory(TileEntity tile, EnumFacing side, ItemStack stack) {
@@ -171,19 +218,19 @@ public class InventoryHelper {
 		return stack;
 	}
 
-	public static boolean hasItemHandlerCap(TileEntity tileEntity, EnumFacing face) {
+	public static boolean hasItemHandlerCap(TileEntity tile, EnumFacing face) {
 
-		return tileEntity != null && (tileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, face) || tileEntity instanceof ISidedInventory || tileEntity instanceof IInventory);
+		return tile != null && (tile.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, face) || tile instanceof ISidedInventory || tile instanceof IInventory);
 	}
 
-	public static IItemHandler getItemHandlerCap(TileEntity tileEntity, EnumFacing face) {
+	public static IItemHandler getItemHandlerCap(TileEntity tile, EnumFacing face) {
 
-		if (tileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, face)) {
-			return tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, face);
-		} else if (tileEntity instanceof ISidedInventory && face != null) {
-			return new SidedInvWrapper(((ISidedInventory) tileEntity), face);
-		} else if (tileEntity instanceof IInventory) {
-			return new InvWrapper(((IInventory) tileEntity));
+		if (tile.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, face)) {
+			return tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, face);
+		} else if (tile instanceof ISidedInventory && face != null) {
+			return new SidedInvWrapper(((ISidedInventory) tile), face);
+		} else if (tile instanceof IInventory) {
+			return new InvWrapper(((IInventory) tile));
 		}
 		return EmptyHandler.INSTANCE;
 	}

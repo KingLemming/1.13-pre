@@ -1,11 +1,13 @@
 package cofh.thermal.core.block.machine;
 
 import cofh.core.network.PacketBufferCoFH;
+import cofh.lib.inventory.ItemStorageCoFH;
 import cofh.lib.util.StorageGroup;
 import cofh.lib.util.control.IReconfigurableTile;
 import cofh.lib.util.control.ITransferControllableTile;
 import cofh.lib.util.control.ReconfigControlModule;
 import cofh.lib.util.control.TransferControlModule;
+import cofh.lib.util.helpers.InventoryHelper;
 import cofh.thermal.core.block.AbstractTileBase;
 import cofh.thermal.core.block.AbstractTileType;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,6 +34,8 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 	protected ReconfigControlModule reconfigControl = new ReconfigControlModule(this);
 	protected TransferControlModule transferControl = new TransferControlModule(this);
 
+	protected boolean allow6WayRotation = false;
+
 	public TileMachine(AbstractTileType type) {
 
 		super(type);
@@ -57,28 +61,55 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 	protected void updateFacing() {
 
 		EnumFacing prevFacing = facing;
-		facing = getBlockState().getValue(FACING_HORIZONTAL);
-		if (prevFacing == null || facing == prevFacing) {
-			return;
-		}
-		int iPrev = prevFacing.ordinal();
-		int iFace = facing.ordinal();
-		SideConfig[] sides = new SideConfig[6];
 
-		if (iPrev == SIDE_RIGHT[iFace]) {
-			for (int i = 0; i < 6; i++) {
-				sides[i] = reconfigControl.getSideConfig()[ROTATE_CLOCK_Y[i]];
+		if (allow6WayRotation) {
+			facing = getBlockState().getValue(FACING_HORIZONTAL);
+			if (prevFacing == null || facing == prevFacing) {
+				return;
 			}
-		} else if (iPrev == SIDE_LEFT[iFace]) {
-			for (int i = 0; i < 6; i++) {
-				sides[i] = reconfigControl.getSideConfig()[ROTATE_COUNTER_Y[i]];
+			int iPrev = prevFacing.ordinal();
+			int iFace = facing.ordinal();
+			SideConfig[] sides = new SideConfig[6];
+
+			// TODO: 6-way facing logic.
+			//			if (iPrev == SIDE_RIGHT[iFace]) {
+			//				for (int i = 0; i < 6; i++) {
+			//					sides[i] = reconfigControl.getSideConfig()[ROTATE_CLOCK_Y[i]];
+			//				}
+			//			} else if (iPrev == SIDE_LEFT[iFace]) {
+			//				for (int i = 0; i < 6; i++) {
+			//					sides[i] = reconfigControl.getSideConfig()[ROTATE_COUNTER_Y[i]];
+			//				}
+			//			} else if (iPrev == SIDE_OPPOSITE[iFace]) {
+			//				for (int i = 0; i < 6; i++) {
+			//					sides[i] = reconfigControl.getSideConfig()[INVERT_AROUND_Y[i]];
+			//				}
+			//			}
+			reconfigControl.setSideConfig(sides);
+		} else {
+			facing = getBlockState().getValue(FACING_HORIZONTAL);
+			if (prevFacing == null || facing == prevFacing) {
+				return;
 			}
-		} else if (iPrev == SIDE_OPPOSITE[iFace]) {
-			for (int i = 0; i < 6; i++) {
-				sides[i] = reconfigControl.getSideConfig()[INVERT_AROUND_Y[i]];
+			int iPrev = prevFacing.ordinal();
+			int iFace = facing.ordinal();
+			SideConfig[] sides = new SideConfig[6];
+
+			if (iPrev == SIDE_RIGHT[iFace]) {
+				for (int i = 0; i < 6; i++) {
+					sides[i] = reconfigControl.getSideConfig()[ROTATE_CLOCK_Y[i]];
+				}
+			} else if (iPrev == SIDE_LEFT[iFace]) {
+				for (int i = 0; i < 6; i++) {
+					sides[i] = reconfigControl.getSideConfig()[ROTATE_COUNTER_Y[i]];
+				}
+			} else if (iPrev == SIDE_OPPOSITE[iFace]) {
+				for (int i = 0; i < 6; i++) {
+					sides[i] = reconfigControl.getSideConfig()[INVERT_AROUND_Y[i]];
+				}
 			}
+			reconfigControl.setSideConfig(sides);
 		}
-		reconfigControl.setSideConfig(sides);
 	}
 
 	// region HELPERS
@@ -105,16 +136,6 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		if (!transferControl.getTransferOut()) {
 			return;
 		}
-	}
-
-	protected boolean validateInputs() {
-
-		return true;
-	}
-
-	protected boolean validateOutputs() {
-
-		return true;
 	}
 	// endregion
 

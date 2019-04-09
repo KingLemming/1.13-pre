@@ -49,8 +49,6 @@ public class ItemPotionQuiver extends ItemPotionContainer implements IMultiModeI
 
 	protected static final int MB_PER_ARROW = 50;
 
-	protected static boolean enableEnchantEffect = true;
-
 	protected int arrowCapacity;
 
 	public ItemPotionQuiver(int fluidCapacity, int arrowCapacity) {
@@ -107,13 +105,6 @@ public class ItemPotionQuiver extends ItemPotionContainer implements IMultiModeI
 			arrows.shrink(addArrows(stack, arrows.getCount(), false));
 		}
 		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
-	}
-
-	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean hasEffect(ItemStack stack) {
-
-		return enableEnchantEffect && stack.isItemEnchanted();
 	}
 
 	// region HELPERS

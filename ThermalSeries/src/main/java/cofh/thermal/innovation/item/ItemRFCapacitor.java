@@ -45,8 +45,6 @@ public class ItemRFCapacitor extends ItemRFContainer implements IMultiModeItem, 
 	private static final int EQUIPMENT = 0;
 	private static final int INVENTORY = 1;
 
-	protected static boolean enableEnchantEffect = true;
-
 	protected int maxSend;
 
 	public ItemRFCapacitor(int maxEnergy, int maxReceive, int maxSend) {
@@ -131,13 +129,6 @@ public class ItemRFCapacitor extends ItemRFContainer implements IMultiModeItem, 
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
 		return EnumActionResult.FAIL;
-	}
-
-	@Override
-	@SideOnly (Side.CLIENT)
-	public boolean hasEffect(ItemStack stack) {
-
-		return enableEnchantEffect && stack.isItemEnchanted();
 	}
 
 	// region IMultiModeItem
