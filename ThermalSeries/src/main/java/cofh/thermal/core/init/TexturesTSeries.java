@@ -1,5 +1,6 @@
 package cofh.thermal.core.init;
 
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
@@ -8,6 +9,9 @@ import static cofh.lib.util.Constants.ID_THERMAL_SERIES;
 import static cofh.thermal.core.init.FluidsTSeries.*;
 
 public class TexturesTSeries {
+
+	//TODO, Lemming, Move this somewhere sane.
+	private static final boolean COLOR_BLIND_TEXTURES = false;
 
 	private TexturesTSeries() {
 
@@ -18,6 +22,21 @@ public class TexturesTSeries {
 
 		textureMap = map;
 
+		//region SIDE CONFIG
+		CONFIG_BLUE = registerConfig("blue");
+		CONFIG_ORANGE = registerConfig("orange");
+		CONFIG_OMNI = registerConfig("omni");
+		CONFIG_OPEN = registerConfig("open", false);
+		CONFIG = new TextureAtlasSprite[] {
+				null,
+				CONFIG_BLUE,
+				CONFIG_ORANGE,
+				CONFIG_OMNI,
+				CONFIG_OPEN
+		};
+		//endregion
+
+		//region FLUIDS
 		registerFluidTextures(fluidSteam);
 		registerFluidTextures(fluidExperience);
 
@@ -48,6 +67,7 @@ public class TexturesTSeries {
 		registerFluidTextures(fluidSyrup);
 		registerFluidTextures(fluidResin);
 		registerFluidTextures(fluidTreeOil);
+		// endregion
 	}
 	// endregion
 
@@ -62,10 +82,36 @@ public class TexturesTSeries {
 		registerFluidTextures(fluid.getName());
 	}
 
+	private static TextureAtlasSprite registerConfig(String config) {
+
+		return registerConfig(config, true);
+	}
+
+	private static TextureAtlasSprite registerConfig(String config, boolean hasCb) {
+
+		if (COLOR_BLIND_TEXTURES && hasCb) {
+			config += "_cb";
+		}
+
+		return textureMap.registerSprite(new ResourceLocation(ID_THERMAL_SERIES, "blocks/config/config_" + config));
+	}
+
 	private static void registerFluidTextures(String fluidName) {
 
 		textureMap.registerSprite(new ResourceLocation(ID_THERMAL_SERIES, "blocks/fluids/" + fluidName + "_still"));
 		textureMap.registerSprite(new ResourceLocation(ID_THERMAL_SERIES, "blocks/fluids/" + fluidName + "_flow"));
 	}
+
 	// endregion
+
+	//region REFERENCES
+
+	public static TextureAtlasSprite[] CONFIG;
+	public static TextureAtlasSprite CONFIG_BLUE;
+	public static TextureAtlasSprite CONFIG_ORANGE;
+	public static TextureAtlasSprite CONFIG_OMNI;
+	public static TextureAtlasSprite CONFIG_OPEN;
+
+	//endregion
+
 }

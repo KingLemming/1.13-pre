@@ -7,9 +7,10 @@ import cofh.lib.util.control.IReconfigurableTile;
 import cofh.lib.util.control.ITransferControllableTile;
 import cofh.lib.util.control.ReconfigControlModule;
 import cofh.lib.util.control.TransferControlModule;
-import cofh.lib.util.helpers.InventoryHelper;
+import cofh.thermal.core.ThermalSeries;
 import cofh.thermal.core.block.AbstractTileBase;
 import cofh.thermal.core.block.AbstractTileType;
+import cofh.thermal.core.init.TexturesTSeries;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -17,6 +18,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.EmptyFluidHandler;
 import net.minecraftforge.items.wrapper.EmptyHandler;
+
+import java.util.Map;
 
 import static cofh.lib.util.Constants.*;
 import static cofh.lib.util.control.IReconfigurable.SideConfig.SIDE_INPUT;
@@ -251,29 +254,52 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		}
 		if (capability == ITEM_HANDLER_CAPABILITY) {
 			switch (reconfigControl.getSideConfig(facing)) {
-				case SIDE_NONE:
-					return ITEM_HANDLER_CAPABILITY.cast(EmptyHandler.INSTANCE);
-				case SIDE_INPUT:
-					return ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.INPUT));
-				case SIDE_OUTPUT:
-					return ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.OUTPUT));
-				default:
-					return ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.ACCESSIBLE));
+			case SIDE_NONE:
+				return ITEM_HANDLER_CAPABILITY.cast(EmptyHandler.INSTANCE);
+			case SIDE_INPUT:
+				return ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.INPUT));
+			case SIDE_OUTPUT:
+				return ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.OUTPUT));
+			default:
+				return ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.ACCESSIBLE));
 			}
 		}
 		if (capability == FLUID_HANDLER_CAPABILITY) {
 			switch (reconfigControl.getSideConfig(facing)) {
-				case SIDE_NONE:
-					return FLUID_HANDLER_CAPABILITY.cast(EmptyFluidHandler.INSTANCE);
-				case SIDE_INPUT:
-					return FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.INPUT));
-				case SIDE_OUTPUT:
-					return FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.OUTPUT));
-				default:
-					return FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.ACCESSIBLE));
+			case SIDE_NONE:
+				return FLUID_HANDLER_CAPABILITY.cast(EmptyFluidHandler.INSTANCE);
+			case SIDE_INPUT:
+				return FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.INPUT));
+			case SIDE_OUTPUT:
+				return FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.OUTPUT));
+			default:
+				return FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.ACCESSIBLE));
 			}
 		}
 		return super.getCapability(capability, facing);
 	}
 	// endregion
+
+	//region RENDER
+
+	@Override
+	public boolean hasFastRenderer() {
+
+		return true;
+	}
+
+	@Override
+	public void buildModelProps(Map<String, String> properties) {
+
+		for (EnumFacing face : EnumFacing.VALUES) {
+			SideConfig config = reconfigControl.getSideConfig(face);
+			if (config == SideConfig.SIDE_NONE) {
+				continue;
+			}
+			properties.put("machine.side_config." + face.getName().toLowerCase(), TexturesTSeries.CONFIG[config.ordinal()].getIconName());
+		}
+		super.buildModelProps(properties);
+	}
+
+	//endregion
 }

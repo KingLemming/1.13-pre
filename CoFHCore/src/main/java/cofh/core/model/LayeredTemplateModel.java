@@ -15,9 +15,15 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.IResourceManager;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.*;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
@@ -70,6 +76,7 @@ public class LayeredTemplateModel implements IModel {
 			c_VanillaModelWrapper = Class.forName("net.minecraftforge.client.model.ModelLoader$VanillaModelWrapper");
 			f_VMW_model = c_VanillaModelWrapper.getDeclaredField("model");
 
+			ctr_FancyMissingModel.setAccessible(true);
 			m_getLoader.setAccessible(true);
 			f_instance.setAccessible(true);
 			f_VMW_model.setAccessible(true);
@@ -82,7 +89,7 @@ public class LayeredTemplateModel implements IModel {
 	private final IModelProperties modelProperties;
 	private final boolean isUVLock;
 	private final ResourceLocation template;
-	private final List<KickEntry> kickList;
+	private final List<OffsetEntry> offsetList;
 	private final List<TintEntry> tintList;
 	private final List<TextureEntry> textures;
 
@@ -95,12 +102,12 @@ public class LayeredTemplateModel implements IModel {
 	}
 
 	//Clone.
-	private LayeredTemplateModel(IModelProperties modelProperties, boolean isUVLock, ResourceLocation template, List<KickEntry> kickList, List<TintEntry> tintList, List<TextureEntry> textures) {
+	private LayeredTemplateModel(IModelProperties modelProperties, boolean isUVLock, ResourceLocation template, List<OffsetEntry> offsetList, List<TintEntry> tintList, List<TextureEntry> textures) {
 
 		this.modelProperties = modelProperties;
 		this.isUVLock = isUVLock;
 		this.template = template;
-		this.kickList = kickList;
+		this.offsetList = offsetList;
 		this.tintList = tintList;
 		this.textures = textures;
 	}
@@ -108,22 +115,22 @@ public class LayeredTemplateModel implements IModel {
 	//Specific clone.
 	private LayeredTemplateModel(LayeredTemplateModel other, IModelProperties properties) {
 
-		this(properties, other.isUVLock, other.template, other.kickList, other.tintList, other.textures);
+		this(properties, other.isUVLock, other.template, other.offsetList, other.tintList, other.textures);
 	}
 
 	private LayeredTemplateModel(LayeredTemplateModel other, boolean isUVLock) {
 
-		this(other.modelProperties, isUVLock, other.template, other.kickList, other.tintList, other.textures);
+		this(other.modelProperties, isUVLock, other.template, other.offsetList, other.tintList, other.textures);
 	}
 
-	public LayeredTemplateModel(LayeredTemplateModel other, ResourceLocation template, List<KickEntry> kickList, List<TintEntry> tintList) {
+	public LayeredTemplateModel(LayeredTemplateModel other, ResourceLocation template, List<OffsetEntry> offsetList, List<TintEntry> tintList) {
 
-		this(other.modelProperties, other.isUVLock, template, kickList, tintList, other.textures);
+		this(other.modelProperties, other.isUVLock, template, offsetList, tintList, other.textures);
 	}
 
 	public LayeredTemplateModel(LayeredTemplateModel other, List<TextureEntry> textures) {
 
-		this(other.modelProperties, other.isUVLock, other.template, other.kickList, other.tintList, textures);
+		this(other.modelProperties, other.isUVLock, other.template, other.offsetList, other.tintList, textures);
 	}
 
 	@Override
@@ -170,6 +177,7 @@ public class LayeredTemplateModel implements IModel {
 		if (textures.stream().anyMatch(TextureEntry.IS_PROPERTY)) {
 			List<String> validProps = textures.stream().filter(TextureEntry.IS_PROPERTY).map(e -> e.property).collect(Collectors.toList());//Add all texture props.
 			validProps.addAll(tintList.stream().map(e -> e.tintSourceProp).collect(Collectors.toList()));//Add all tint props.
+			validProps.add("model.cache.ext");
 			//Anon model class for dynamically baking.
 			return new BakedPropertiesModel(modelProps) {
 
@@ -177,6 +185,35 @@ public class LayeredTemplateModel implements IModel {
 				private Map<String, IBakedModel> bakedPropertyCache = new HashMap<>();
 				//Errors are a hard lock on the model.
 				private IBakedModel error = null;
+				private final ItemOverrideList overrideList = new ItemOverrideList(Collections.emptyList()) {
+
+					private IBakedModel simpleModel;
+
+					@Override
+					public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
+
+						NBTTagCompound propertiesTag = stack.getSubCompound("model_properties");
+						if (propertiesTag == null || propertiesTag.hasNoTags()) {
+							if (simpleModel == null) {
+								simpleModel = bakeImpl(modelProps, state, format, texFunc, Collections.emptyMap());
+							}
+							return simpleModel;
+						}
+						StringBuilder builder = new StringBuilder("item");
+						Map<String, String> properties = new HashMap<>();
+						for(String str : validProps) {
+							builder.append(str);
+							NBTBase tag = propertiesTag.getTag(str);
+							if (tag instanceof NBTTagString) {
+								String v = ((NBTTagString) tag).getString();
+								builder.append(v);
+								properties.put(str, v);
+							}
+						}
+
+						return bakedPropertyCache.computeIfAbsent(builder.toString(), e -> bakeImpl(modelProps, state, format, texFunc, properties));
+					}
+				};
 
 				@Override
 				public List<BakedQuad> getQuads(@Nullable IBlockState stateIn, @Nullable EnumFacing side, long rand) {
@@ -194,35 +231,22 @@ public class LayeredTemplateModel implements IModel {
 					}
 
 					Map<String, String> modelProperties = extendedState.getValue(Constants.MODEL_PROPERTIES);
-					if (retModel == null && !modelProperties.keySet().containsAll(validProps)) {
-						//Ohes no, we are missing some properties.
-						StringBuilder builder = new StringBuilder("Missing properties: ");
-						for (String prop : validProps) {
-							if (!modelProperties.containsKey(prop)) {
-								builder.append("'").append(prop).append("' ");
-							}
-						}
-						retModel = error = makeFancyMissingModel(builder.toString()).bake(state, format, texFunc);
-					}
 
 					if (retModel == null) {
 						//Everything seems to be in order, Gen cache key and compute if absent.
-						StringBuilder keyBuilder = new StringBuilder();
-						boolean first = true;
-						for (String prop : validProps) {
-							if (!first) {
-								keyBuilder.append(",");
-							}
-							first = false;
-							keyBuilder.append(prop).append("=").append(modelProperties.get(prop));
-						}
-						String cacheExt = modelProperties.get("model.cache.ext");
-						if (cacheExt != null) {
-							keyBuilder.append(",model.cache.ext=").append(cacheExt);
-						}
-						retModel = bakedPropertyCache.computeIfAbsent(keyBuilder.toString(), e -> bakeImpl(modelProps, state, format, texFunc, modelProperties));
+						String key = "block:" + validProps.stream()//
+								.filter(modelProperties::containsKey)//
+								.map(e -> e + "=" + modelProperties.get(e))//
+								.collect(Collectors.joining(","));
+						retModel = bakedPropertyCache.computeIfAbsent(key, e -> bakeImpl(modelProps, state, format, texFunc, modelProperties));
 					}
 					return retModel.getQuads(stateIn, side, rand);
+				}
+
+				@Override
+				public ItemOverrideList getOverrides() {
+
+					return overrideList;
 				}
 			};
 		} else {//Doesn't have any properties, just bake it normally.
@@ -246,20 +270,16 @@ public class LayeredTemplateModel implements IModel {
 		List<TextureEntry> resolvedTextures = textures.stream()//
 				.map(e -> e.resolve(properties))//
 				.collect(Collectors.toList());
-		//We haven't resolved all textures. Make a FancyMissingModel for it.
-		if (resolvedTextures.stream().anyMatch(TextureEntry.IS_PROPERTY)) {
-			StringBuilder builder = new StringBuilder("Unresolved Properties: ");
-			resolvedTextures.stream().filter(TextureEntry.IS_PROPERTY).forEach(e -> builder.append(e.property));
-			return makeFancyMissingModel(builder.toString()).bake(state, format, texFunc);
-		}
 		//Collect and sort our layerIndexes.
 		List<String> sortedLayerIndexes = resolvedTextures.stream()//
+				.filter(TextureEntry.IS_TEXTURE)//
 				.map(e -> e.layerIndex)//
 				.distinct()//
 				.sorted(Comparator.comparingInt(e -> Integer.parseUnsignedInt(e.replace("layer", ""))))//
 				.collect(Collectors.toList());
 		//Collect all used BlockRenderLayers
 		List<BlockRenderLayer> validRenderLayers = resolvedTextures.stream()//
+				.filter(TextureEntry.IS_TEXTURE)//
 				.map(e -> e.renderLayer)//
 				.distinct()//
 				.collect(Collectors.toList());
@@ -270,19 +290,22 @@ public class LayeredTemplateModel implements IModel {
 			for (String layerIndex : sortedLayerIndexes) {
 				//Build the textures map for the template.
 				ImmutableMap.Builder<String, String> textures = ImmutableMap.builder();
-				resolvedTextures.stream().filter(e -> e.equals(layerIndex, renderLayer)).forEach(e -> {
-					textures.put(colonJoiner.join(layerIndex, e.name), e.texture.toString());
-					textures.put(colonJoiner.join(layerIndex, renderLayer.name().toLowerCase(ROOT), e.name), e.texture.toString());
-				});
+				resolvedTextures.stream()//
+						.filter(TextureEntry.IS_TEXTURE)//
+						.filter(e -> e.equals(layerIndex, renderLayer))//
+						.forEach(e -> {
+							textures.put(colonJoiner.join(layerIndex, e.name), e.texture.toString());
+							textures.put(colonJoiner.join(layerIndex, renderLayer.name().toLowerCase(ROOT), e.name), e.texture.toString());
+						});
 				//Build the custom data for the template.
 				ImmutableMap.Builder<String, String> customData = ImmutableMap.builder();
 				//Give it the layer index.
 				customData.put("layerIndex", layerIndex);
-				//Give it the first kick that matches for this layerIndex + renderLayer.
-				kickList.stream()//
+				//Give it the first offset that matches for this layerIndex + renderLayer.
+				offsetList.stream()//
 						.filter(e -> e.equals(layerIndex, renderLayer))//
 						.findFirst()//
-						.ifPresent(e -> customData.put("kick", Float.toString(e.kick)));
+						.ifPresent(e -> customData.put("offset", Float.toString(e.offset)));
 				//Map unresolved texture properties to their tint counterpart and pass the values to the template.
 				this.textures.stream()//
 						.filter(TextureEntry.IS_PROPERTY)//
@@ -370,37 +393,37 @@ public class LayeredTemplateModel implements IModel {
 		if (template == null) {
 			throw new RuntimeException("Null template.");
 		}
-		List<KickEntry> kickList = new ArrayList<>(this.kickList);
+		List<OffsetEntry> offsetList = new ArrayList<>(this.offsetList);
 		List<TintEntry> tintList = new ArrayList<>(this.tintList);
 		customData.forEach((key, value) -> {
-			if (key.endsWith("kick")) {
-				String kickKey = key.replace("kick", "");
-				if (kickKey.endsWith(":")) {
-					kickKey = kickKey.substring(0, kickKey.length() - 1);
+			if (key.endsWith("offset")) {
+				String offsetKey = key.replace("offset", "");
+				if (offsetKey.endsWith(":")) {
+					offsetKey = offsetKey.substring(0, offsetKey.length() - 1);
 				}
-				String[] segs = kickKey.split(":");
+				String[] segs = offsetKey.split(":");
 				if (segs.length > 2) {
-					throw new RuntimeException("Invalid kick key. " + kickKey);
+					throw new RuntimeException("Invalid offset key. " + offsetKey);
 				}
 				String layerIndex = segs[0];
 				BlockRenderLayer renderLayer = segs.length > 1 ? parseLayer(segs[1]) : null;
 				//Always remove.
-				kickList.removeIf(e -> e.equals(layerIndex, renderLayer));
+				offsetList.removeIf(e -> e.equals(layerIndex, renderLayer));
 				if (!value.isEmpty()) {
-					//Add new kick if the value is not empty.
-					kickList.add(new KickEntry(layerIndex, renderLayer, Float.parseFloat(value)));
+					//Add new offset if the value is not empty.
+					offsetList.add(new OffsetEntry(layerIndex, renderLayer, Float.parseFloat(value)));
 				}
 			}
 			if (key.startsWith("tint:")) {
 				String targetProp = key.replace("tint:", "");
-				//Same comments as kick parsing.
+				//Same comments as offset parsing.
 				tintList.removeIf(e -> e.tintTargetProp.equals(targetProp));
 				if (!value.isEmpty()) {
 					tintList.add(new TintEntry(targetProp, value));
 				}
 			}
 		});
-		return new LayeredTemplateModel(this, new ResourceLocation(template), kickList, tintList);
+		return new LayeredTemplateModel(this, new ResourceLocation(template), offsetList, tintList);
 	}
 
 	private IModel getTemplate() {
@@ -440,7 +463,7 @@ public class LayeredTemplateModel implements IModel {
 		try {
 			return ctr_FancyMissingModel.newInstance(ModelLoaderRegistry.getMissingModel(), message);
 		} catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-			throw new RuntimeException("Unable to create FancyMissingModel.");
+			throw new RuntimeException("Unable to create FancyMissingModel.", e);
 		}
 	}
 
@@ -515,7 +538,7 @@ public class LayeredTemplateModel implements IModel {
 	/**
 	 * A Wrapper around a ModelBlock.
 	 * Heavily based off {@link ModelLoader.VanillaModelWrapper},
-	 * but supports our tinting, kicking, and removal of quads that
+	 * but supports our tinting, offsetting, and removal of quads that
 	 * did not have a texture resolved, forge would instead resolve to missing sprite.
 	 */
 	public static class ModelBlockWrapper implements IModel {
@@ -527,15 +550,15 @@ public class LayeredTemplateModel implements IModel {
 
 		private final ModelBlock model;
 		private final boolean uvLock;
-		private final OptionalDouble kick;
+		private final OptionalDouble offset;
 		private final Object2IntMap<String> tints;
 		private final int layerIndex;
 
-		public ModelBlockWrapper(ModelBlock model, boolean uvLock, OptionalDouble kick, Object2IntMap<String> tints, int layerIndex) {
+		public ModelBlockWrapper(ModelBlock model, boolean uvLock, OptionalDouble offset, Object2IntMap<String> tints, int layerIndex) {
 
 			this.model = model;
 			this.uvLock = uvLock;
-			this.kick = kick;
+			this.offset = offset;
 			this.tints = tints;
 			this.layerIndex = layerIndex;
 		}
@@ -572,10 +595,10 @@ public class LayeredTemplateModel implements IModel {
 							Quad transformerQuad = transformerQuads.get();//This is a ThreadLocal since Quad is a shared Mutable state. Someone may thread baking(\o/).
 							transformerQuad.reset(fmt);//Reset quad to the given format.
 							quad.pipe(transformerQuad);//Pipe the BakedQuad into the transformerQuad.
-							if (kick.isPresent()) {//If we have a kick, apply it.
+							if (offset.isPresent()) {//If we have an offset, apply it.
 								for (Quad.Vertex vertex : transformerQuad.vertices) {
 									for (int i = 0; i < 3; i++) {
-										vertex.vec[i] += vertex.normal[i] * kick.getAsDouble();
+										vertex.vec[i] += vertex.normal[i] * offset.getAsDouble();
 									}
 								}
 							}//If we have a tint, apply it.
@@ -619,10 +642,10 @@ public class LayeredTemplateModel implements IModel {
 		@Override
 		public IModel process(ImmutableMap<String, String> customData) {
 
-			String kickVal = customData.get("kick");
+			String offsetVal = customData.get("offset");
 			String layerVal = customData.get("layerIndex");
 			OptionalInt layerIndex = layerVal == null ? OptionalInt.empty() : OptionalInt.of(Integer.parseUnsignedInt(layerVal.replace("layer", "")));
-			OptionalDouble kick = kickVal == null ? OptionalDouble.empty() : OptionalDouble.of(Float.parseFloat(kickVal));
+			OptionalDouble offset = offsetVal == null ? OptionalDouble.empty() : OptionalDouble.of(Float.parseFloat(offsetVal));
 			Object2IntMap<String> tints = new Object2IntArrayMap<>(this.tints);
 			customData.forEach((k, v) -> {
 				if (k.startsWith("tint:")) {
@@ -630,7 +653,7 @@ public class LayeredTemplateModel implements IModel {
 					tints.put(tintKey, Integer.parseInt(v));
 				}
 			});
-			return new ModelBlockWrapper(model, uvLock, kick, tints, layerIndex.orElse(-1));
+			return new ModelBlockWrapper(model, uvLock, offset, tints, layerIndex.orElse(-1));
 		}
 
 		@Override//Clone of forge's impl.
@@ -665,7 +688,7 @@ public class LayeredTemplateModel implements IModel {
 			});
 			newModel.textures.putAll(remapped);
 			newModel.getElements().forEach(e -> e.mapFaces.values().removeIf(v -> removed.contains(v.texture)));
-			return new ModelBlockWrapper(newModel, uvLock, kick, tints, layerIndex);
+			return new ModelBlockWrapper(newModel, uvLock, offset, tints, layerIndex);
 		}
 
 		@Override
@@ -677,7 +700,7 @@ public class LayeredTemplateModel implements IModel {
 			ModelBlock newModel = new ModelBlock(model.getParentLocation(), model.getElements(), new HashMap<>(model.textures), value, model.isGui3d(), model.getAllTransforms(), new ArrayList<>(model.getOverrides()));
 			newModel.name = model.name;
 			newModel.parent = model.parent;
-			return new ModelBlockWrapper(newModel, uvLock, kick, tints, layerIndex);
+			return new ModelBlockWrapper(newModel, uvLock, offset, tints, layerIndex);
 		}
 
 		@Override
@@ -689,7 +712,7 @@ public class LayeredTemplateModel implements IModel {
 			ModelBlock newModel = new ModelBlock(model.getParentLocation(), model.getElements(), new HashMap<>(model.textures), model.isAmbientOcclusion(), value, model.getAllTransforms(), new ArrayList<>(model.getOverrides()));
 			newModel.name = model.name;
 			newModel.parent = model.parent;
-			return new ModelBlockWrapper(newModel, uvLock, kick, tints, layerIndex);
+			return new ModelBlockWrapper(newModel, uvLock, offset, tints, layerIndex);
 		}
 
 		@Override
@@ -698,7 +721,7 @@ public class LayeredTemplateModel implements IModel {
 			if (uvLock == value) {
 				return this;
 			}
-			return new ModelBlockWrapper(model, value, kick, tints, layerIndex);
+			return new ModelBlockWrapper(model, value, offset, tints, layerIndex);
 		}
 
 		/**
@@ -850,33 +873,33 @@ public class LayeredTemplateModel implements IModel {
 	}
 
 	/**
-	 * Simple triple for holding a kick entry.
+	 * Simple triple for holding a offset entry.
 	 */
-	public static class KickEntry {
+	public static class OffsetEntry {
 
 		@Nonnull
 		public final String layerIndex;
 		@Nullable
 		public final BlockRenderLayer renderLayer;
-		public final float kick;
+		public final float offset;
 
-		public KickEntry(@Nonnull String layerIndex, @Nullable BlockRenderLayer renderLayer, float kick) {
+		public OffsetEntry(@Nonnull String layerIndex, @Nullable BlockRenderLayer renderLayer, float offset) {
 
 			this.layerIndex = layerIndex;
 			this.renderLayer = renderLayer;
-			this.kick = kick;
+			this.offset = offset;
 		}
 
 		/**
-		 * Checks if this KickEntry can be applied to the provided layerIndex and renderLayer.
+		 * Checks if this OffsetEntry can be applied to the provided layerIndex and renderLayer.
 		 *
 		 * @param layerIndex  The layerIndex.
 		 * @param renderLayer The renderLayer
-		 * @return If this KickEntry is applicable.
+		 * @return If this OffsetEntry is applicable.
 		 */
 		public boolean equals(@Nonnull String layerIndex, @Nullable BlockRenderLayer renderLayer) {
 
-			return this.layerIndex.equals(layerIndex) && Objects.equals(this.renderLayer, renderLayer);
+			return this.layerIndex.equals(layerIndex) && (Objects.equals(this.renderLayer, renderLayer) || this.renderLayer == null);
 		}
 
 		@Override
@@ -885,13 +908,13 @@ public class LayeredTemplateModel implements IModel {
 			if (super.equals(obj)) {
 				return true;
 			}
-			if (!(obj instanceof KickEntry)) {
+			if (!(obj instanceof OffsetEntry)) {
 				return false;
 			}
-			KickEntry other = (KickEntry) obj;
+			OffsetEntry other = (OffsetEntry) obj;
 			return other.layerIndex.equals(layerIndex)//
 					&& Objects.equals(other.renderLayer, renderLayer)//
-					&& other.kick == kick;
+					&& other.offset == offset;
 		}
 
 		@Override
@@ -900,7 +923,7 @@ public class LayeredTemplateModel implements IModel {
 			int result = 1;
 			result = 31 * result + layerIndex.hashCode();
 			result = 31 * result + (renderLayer != null ? renderLayer.hashCode() : 0);
-			result = 31 * result + Float.floatToIntBits(kick);
+			result = 31 * result + Float.floatToIntBits(offset);
 			return result;
 		}
 	}

@@ -27,7 +27,6 @@ minecraft {
     version = "1.12.2-14.23.4.2718"
     mappings = 'snapshot_20171003'
     runDir = "run"
-    replace '${mod_version}', project.config.mod_version
     makeObfSourceJar = false
 }
 
@@ -48,13 +47,6 @@ def modules = [
         "Orbulation",
         "Quartermastery",
         "RedstoneArsenal",
-        "ThermalAtomics",
-        "ThermalCultivation",
-        "ThermalDynamics",
-        "ThermalExpansion",
-        "ThermalFoundation",
-        "ThermalInnovation",
-        "ThermalLocomotion",
         "ThermalSeries",
         "CodeChickenLib"
 ]

@@ -33,7 +33,6 @@ import static cofh.lib.util.Constants.MODEL_PROPERTIES;
 
 public abstract class TileCoFH extends TileEntity implements ITileCallback {
 
-	protected final Map<String, String> modelProperties = new HashMap<>();
 	protected IBlockState blockState;
 
 	@Override
@@ -143,7 +142,9 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 	protected IBlockState getExtendedState(IBlockState state) {
 
 		if (state instanceof IExtendedBlockState) {
-			((IExtendedBlockState) state).withProperty(MODEL_PROPERTIES, modelProperties);
+			Map<String, String> map = new HashMap<>();//TODO, pool these.
+			buildModelProps(map);
+			return ((IExtendedBlockState) state).withProperty(MODEL_PROPERTIES, map);
 		}
 		return state;
 	}
@@ -298,9 +299,8 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 	// endregion
 
 	//region MODELS
-	public void setModelProperty(String key, String value) {
+	public void buildModelProps(Map<String, String> properties) {
 
-		modelProperties.put(key, value);
 	}
 	//endregion
 

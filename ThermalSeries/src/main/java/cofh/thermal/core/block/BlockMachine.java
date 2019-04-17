@@ -5,12 +5,15 @@ import cofh.lib.util.helpers.FluidHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMachine extends BlockAbstractTile4Way {
 
@@ -35,6 +38,15 @@ public class BlockMachine extends BlockAbstractTile4Way {
 			}
 		}
 		return false;
+	}
+	// endregion
+
+	// region RENDER
+	@SideOnly (Side.CLIENT)
+	@Override
+	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+
+		return true;
 	}
 	// endregion
 }
