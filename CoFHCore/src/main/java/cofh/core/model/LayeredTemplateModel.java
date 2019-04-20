@@ -1,9 +1,9 @@
 package cofh.core.model;
 
-import codechicken.lib.bakedmodel.SimpleBakedModel;
-import codechicken.lib.bakedmodel.*;
-import codechicken.lib.bakedmodel.properties.IModelProperties;
-import codechicken.lib.bakedmodel.properties.ModelProperties;
+import codechicken.newlib.bakedmodel.SimpleBakedModel;
+import codechicken.newlib.bakedmodel.*;
+import codechicken.newlib.bakedmodel.properties.IModelProperties;
+import codechicken.newlib.bakedmodel.properties.ModelProperties;
 import cofh.lib.util.Constants;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
