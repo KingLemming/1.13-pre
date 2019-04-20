@@ -2,15 +2,12 @@ package cofh.thermal.core.item;
 
 import cofh.core.item.ItemCoFH;
 import cofh.lib.block.IDismantleable;
-import cofh.lib.item.IToolHammer;
 import cofh.lib.util.Utils;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,7 +33,7 @@ import static cofh.lib.util.Constants.TOOL_WRENCH;
 import static cofh.lib.util.helpers.StringHelper.getFlavorText;
 import static cofh.lib.util.helpers.StringHelper.getInfoText;
 
-public class ItemWrench extends ItemCoFH implements IToolHammer {
+public class ItemWrench extends ItemCoFH {
 
 	public ItemWrench() {
 
@@ -91,27 +88,4 @@ public class ItemWrench extends ItemCoFH implements IToolHammer {
 		return multimap;
 	}
 
-	// region IToolHammer
-	@Override
-	public boolean isUsable(ItemStack item, EntityLivingBase user, BlockPos pos) {
-
-		return true;
-	}
-
-	@Override
-	public boolean isUsable(ItemStack item, EntityLivingBase user, Entity entity) {
-
-		return true;
-	}
-
-	@Override
-	public void toolUsed(ItemStack item, EntityLivingBase user, BlockPos pos) {
-
-	}
-
-	@Override
-	public void toolUsed(ItemStack item, EntityLivingBase user, Entity entity) {
-
-	}
-	// endregion
 }

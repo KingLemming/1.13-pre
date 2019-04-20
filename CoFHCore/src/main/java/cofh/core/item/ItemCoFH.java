@@ -29,6 +29,8 @@ import static cofh.lib.util.helpers.StringHelper.getInfoText;
 
 public class ItemCoFH extends Item implements IModelRegister {
 
+	public static int ACTIVE_DURATION = 40;
+
 	protected EnumRarity rarity = EnumRarity.COMMON;
 	protected String group;
 	protected String info;
@@ -121,26 +123,26 @@ public class ItemCoFH extends Item implements IModelRegister {
 	}
 
 	// region HELPERS
-	public static boolean isActive(ItemStack stack) {
+	public boolean isActive(ItemStack stack) {
 
-		return stack.hasTagCompound() && stack.getTagCompound().getBoolean(TAG_ACTIVE);
+		return stack.hasTagCompound() && stack.getTagCompound().hasKey(TAG_ACTIVE);
 	}
 
-	public static void setActive(ItemStack stack, EntityLivingBase living) {
+	public void setActive(ItemStack stack, EntityLivingBase living) {
 
 		if (stack.hasTagCompound()) {
-			stack.getTagCompound().setLong(TAG_ACTIVE, living.world.getTotalWorldTime() + 40);
+			stack.getTagCompound().setLong(TAG_ACTIVE, living.world.getTotalWorldTime() + ACTIVE_DURATION);
 		}
 	}
 
-	public static void clearActive(ItemStack stack) {
+	public void clearActive(ItemStack stack) {
 
 		if (stack.hasTagCompound()) {
 			stack.getTagCompound().removeTag(TAG_ACTIVE);
 		}
 	}
 
-	public static boolean isCreative(ItemStack stack) {
+	public boolean isCreative(ItemStack stack) {
 
 		if (stack.getItem() instanceof ItemCoFH) {
 			return ((ItemCoFH) stack.getItem()).isCreative();
