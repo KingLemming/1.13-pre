@@ -6,6 +6,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.EnumMap;
+
 /**
  * Contains various helper functions to assist with {@link Block} and Block-related manipulation and interaction.
  *
@@ -22,6 +24,12 @@ public class BlockHelper {
 	public static final byte[] SIDE_OPPOSITE = { 1, 0, 3, 2, 5, 4 };
 	public static final byte[] SIDE_ABOVE = { 3, 2, 1, 1, 1, 1 };
 	public static final byte[] SIDE_BELOW = { 2, 3, 0, 0, 0, 0 };
+
+	private static final EnumMap<EnumFacing, EnumFacing> SIDE_LEFT_LOOKUP = computeMap(SIDE_LEFT);
+	private static final EnumMap<EnumFacing, EnumFacing> SIDE_RIGHT_LOOKUP = computeMap(SIDE_RIGHT);
+	private static final EnumMap<EnumFacing, EnumFacing> SIDE_OPPOSITE_LOOKUP = computeMap(SIDE_OPPOSITE);
+	private static final EnumMap<EnumFacing, EnumFacing> SIDE_ABOVE_LOOKUP = computeMap(SIDE_ABOVE);
+	private static final EnumMap<EnumFacing, EnumFacing> SIDE_BELOW_LOOKUP = computeMap(SIDE_BELOW);
 
 	// These assume facing is towards negative - looking AT side 1, 3, or 5.
 	public static final byte[] ROTATE_CLOCK_Y = { 0, 1, 4, 5, 3, 2 };
@@ -55,6 +63,33 @@ public class BlockHelper {
 	// endregion
 
 	// region ROTATION
-
+	public static EnumFacing left(EnumFacing face) {
+		return SIDE_LEFT_LOOKUP.get(face);
+	}
+	public static EnumFacing right(EnumFacing face) {
+		return SIDE_RIGHT_LOOKUP.get(face);
+	}
+	public static EnumFacing opposite(EnumFacing face) {
+		return SIDE_OPPOSITE_LOOKUP.get(face);
+	}
+	public static EnumFacing above(EnumFacing face) {
+		return SIDE_ABOVE_LOOKUP.get(face);
+	}
+	public static EnumFacing bellow(EnumFacing face) {
+		return SIDE_BELOW_LOOKUP.get(face);
+	}
 	// endregion
+
+	//region INTERNAL
+
+	//Convert a byte[] side lookup to an EnumMap.
+ 	private static EnumMap<EnumFacing, EnumFacing> computeMap(byte[] arr) {
+		EnumMap<EnumFacing, EnumFacing> map = new EnumMap<>(EnumFacing.class);
+		for (int i = 0; i < 6; i++) {
+			map.put(EnumFacing.VALUES[i], EnumFacing.VALUES[arr[i]]);
+		}
+		return map;
+	}
+	//endregion
+
 }

@@ -1,13 +1,11 @@
 package cofh.thermal.core.block.machine;
 
 import cofh.core.network.PacketBufferCoFH;
-import cofh.lib.inventory.ItemStorageCoFH;
 import cofh.lib.util.StorageGroup;
 import cofh.lib.util.control.IReconfigurableTile;
 import cofh.lib.util.control.ITransferControllableTile;
 import cofh.lib.util.control.ReconfigControlModule;
 import cofh.lib.util.control.TransferControlModule;
-import cofh.thermal.core.ThermalSeries;
 import cofh.thermal.core.block.AbstractTileBase;
 import cofh.thermal.core.block.AbstractTileType;
 import cofh.thermal.core.init.TexturesTSeries;
@@ -53,7 +51,8 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		updateFacing();
 	}
 
-	protected EnumFacing getFacing() {
+	@Override
+	public EnumFacing getFacing() {
 
 		if (facing == null) {
 			updateFacing();

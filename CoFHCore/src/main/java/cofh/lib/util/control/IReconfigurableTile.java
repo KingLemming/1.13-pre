@@ -37,5 +37,7 @@ public interface IReconfigurableTile extends IReconfigurable, ITileCallback {
 
 		return reconfigControl().clearAllSides();
 	}
+
+	EnumFacing getFacing();
 	// endregion
 }
