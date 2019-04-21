@@ -201,7 +201,7 @@ public class LayeredTemplateModel implements IModel {
 						}
 						StringBuilder builder = new StringBuilder("item");
 						Map<String, String> properties = new HashMap<>();
-						for(String str : validProps) {
+						for (String str : validProps) {
 							builder.append(str);
 							NBTBase tag = propertiesTag.getTag(str);
 							if (tag instanceof NBTTagString) {

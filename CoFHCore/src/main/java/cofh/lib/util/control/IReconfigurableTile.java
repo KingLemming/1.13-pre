@@ -7,6 +7,8 @@ public interface IReconfigurableTile extends IReconfigurable, ITileCallback {
 
 	ReconfigControlModule reconfigControl();
 
+	EnumFacing getFacing();
+
 	// region IReconfigurable
 	@Override
 	default SideConfig getSideConfig(EnumFacing side) {
@@ -37,7 +39,5 @@ public interface IReconfigurableTile extends IReconfigurable, ITileCallback {
 
 		return reconfigControl().clearAllSides();
 	}
-
-	EnumFacing getFacing();
 	// endregion
 }

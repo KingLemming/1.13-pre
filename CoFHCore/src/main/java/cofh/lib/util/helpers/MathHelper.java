@@ -16,6 +16,10 @@ public final class MathHelper {
 	public static final Random RANDOM = new Random();
 	public static final double PI = Math.PI;
 	public static final double PHI = 1.618033988749894;
+	public static final double TO_DEG = 57.29577951308232;
+	public static final double TO_RAD = 0.017453292519943;
+	public static final double SQRT_2 = 1.414213562373095;
+
 	public static final double[] SIN_TABLE = new double[65536];
 
 	static {

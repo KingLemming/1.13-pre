@@ -27,13 +27,7 @@ public class TexturesTSeries {
 		CONFIG_ORANGE = registerConfig("orange");
 		CONFIG_OMNI = registerConfig("omni");
 		CONFIG_OPEN = registerConfig("open", false);
-		CONFIG = new TextureAtlasSprite[] {
-				null,
-				CONFIG_BLUE,
-				CONFIG_ORANGE,
-				CONFIG_OMNI,
-				CONFIG_OPEN
-		};
+		CONFIG = new TextureAtlasSprite[] { null, CONFIG_BLUE, CONFIG_ORANGE, CONFIG_OMNI, CONFIG_OPEN };
 		//endregion
 
 		//region FLUIDS

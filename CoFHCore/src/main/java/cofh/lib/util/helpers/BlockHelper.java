@@ -64,32 +64,41 @@ public class BlockHelper {
 
 	// region ROTATION
 	public static EnumFacing left(EnumFacing face) {
+
 		return SIDE_LEFT_LOOKUP.get(face);
 	}
+
 	public static EnumFacing right(EnumFacing face) {
+
 		return SIDE_RIGHT_LOOKUP.get(face);
 	}
+
 	public static EnumFacing opposite(EnumFacing face) {
+
 		return SIDE_OPPOSITE_LOOKUP.get(face);
 	}
+
 	public static EnumFacing above(EnumFacing face) {
+
 		return SIDE_ABOVE_LOOKUP.get(face);
 	}
-	public static EnumFacing bellow(EnumFacing face) {
+
+	public static EnumFacing below(EnumFacing face) {
+
 		return SIDE_BELOW_LOOKUP.get(face);
 	}
 	// endregion
 
-	//region INTERNAL
+	// region INTERNAL
 
-	//Convert a byte[] side lookup to an EnumMap.
- 	private static EnumMap<EnumFacing, EnumFacing> computeMap(byte[] arr) {
+	// Convert a byte[] side lookup to an EnumMap.
+	private static EnumMap<EnumFacing, EnumFacing> computeMap(byte[] arr) {
+
 		EnumMap<EnumFacing, EnumFacing> map = new EnumMap<>(EnumFacing.class);
 		for (int i = 0; i < 6; i++) {
 			map.put(EnumFacing.VALUES[i], EnumFacing.VALUES[arr[i]]);
 		}
 		return map;
 	}
-	//endregion
-
+	// endregion
 }

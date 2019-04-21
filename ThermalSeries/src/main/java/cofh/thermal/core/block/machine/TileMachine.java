@@ -36,8 +36,6 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 	protected ReconfigControlModule reconfigControl = new ReconfigControlModule(this);
 	protected TransferControlModule transferControl = new TransferControlModule(this);
 
-	protected boolean allow6WayRotation = false;
-
 	public TileMachine(AbstractTileType type) {
 
 		super(type);
@@ -61,12 +59,17 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		return facing;
 	}
 
+	protected boolean allow6WayFacing() {
+
+		return false;
+	}
+
 	protected void updateFacing() {
 
 		EnumFacing prevFacing = facing;
 
-		if (allow6WayRotation) {
-			facing = getBlockState().getValue(FACING_HORIZONTAL);
+		if (allow6WayFacing()) {
+			facing = getBlockState().getValue(FACING_ALL);
 			if (prevFacing == null || facing == prevFacing) {
 				return;
 			}
@@ -254,26 +257,26 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		}
 		if (capability == ITEM_HANDLER_CAPABILITY) {
 			switch (reconfigControl.getSideConfig(facing)) {
-			case SIDE_NONE:
-				return ITEM_HANDLER_CAPABILITY.cast(EmptyHandler.INSTANCE);
-			case SIDE_INPUT:
-				return ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.INPUT));
-			case SIDE_OUTPUT:
-				return ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.OUTPUT));
-			default:
-				return ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.ACCESSIBLE));
+				case SIDE_NONE:
+					return ITEM_HANDLER_CAPABILITY.cast(EmptyHandler.INSTANCE);
+				case SIDE_INPUT:
+					return ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.INPUT));
+				case SIDE_OUTPUT:
+					return ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.OUTPUT));
+				default:
+					return ITEM_HANDLER_CAPABILITY.cast(inventory.getHandler(StorageGroup.ACCESSIBLE));
 			}
 		}
 		if (capability == FLUID_HANDLER_CAPABILITY) {
 			switch (reconfigControl.getSideConfig(facing)) {
-			case SIDE_NONE:
-				return FLUID_HANDLER_CAPABILITY.cast(EmptyFluidHandler.INSTANCE);
-			case SIDE_INPUT:
-				return FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.INPUT));
-			case SIDE_OUTPUT:
-				return FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.OUTPUT));
-			default:
-				return FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.ACCESSIBLE));
+				case SIDE_NONE:
+					return FLUID_HANDLER_CAPABILITY.cast(EmptyFluidHandler.INSTANCE);
+				case SIDE_INPUT:
+					return FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.INPUT));
+				case SIDE_OUTPUT:
+					return FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.OUTPUT));
+				default:
+					return FLUID_HANDLER_CAPABILITY.cast(tankInv.getHandler(StorageGroup.ACCESSIBLE));
 			}
 		}
 		return super.getCapability(capability, facing);
