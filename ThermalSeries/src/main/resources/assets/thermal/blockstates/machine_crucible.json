@@ -7,7 +7,13 @@
 			"top": "thermal:blocks/machines/machine_top",
 			"side": "thermal:blocks/machines/machine_side",
 			"bottom": "thermal:blocks/machines/machine_bottom",
-			"front": "thermal:blocks/machines/machine_front_crucible"
+			"front": "thermal:blocks/machines/machine_front_crucible",
+			"layer1:cutout_mipped:sc_down": "model_property:machine.side_config.down",
+			"layer1:cutout_mipped:sc_up": "model_property:machine.side_config.up",
+			"layer1:cutout_mipped:sc_north": "model_property:machine.side_config.north",
+			"layer1:cutout_mipped:sc_south": "model_property:machine.side_config.south",
+			"layer1:cutout_mipped:sc_west": "model_property:machine.side_config.west",
+			"layer1:cutout_mipped:sc_east": "model_property:machine.side_config.east"
 		},
 		"custom": {
 			"template": "thermal:block/machine"
