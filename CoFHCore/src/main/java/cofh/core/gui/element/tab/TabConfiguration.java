@@ -52,45 +52,31 @@ public class TabConfiguration extends TabBase {
 
 	static {
 		Matrix4 mat;//Storage.
-		//Position offsets.
-		int[][] offsets = {
-				{ 52, 24 },//Above
-				{ 32, 44 },//Left
-				{ 52, 44 },//Facing
-				{ 72, 44 },//Right
-				{ 52, 64 },//Bellow
-				{ 72, 64 }//Opposite
-		};
 
 		mat = new Matrix4();//Above - Up
-		mat.translate(new Vector3(offsets[0][0], offsets[0][1], 0));
 		mat.scale(16, 16, 0);
 		mat.apply(Rotation.sideRotations[EnumFacing.UP.ordinal()].inverse());
 		mat.apply(Rotation.sideRotations[EnumFacing.NORTH.ordinal()]);
 		faceMatrices.put(EnumFacing.UP, mat);
 
 		mat = new Matrix4();
-		mat.translate(new Vector3(offsets[1][0], offsets[1][1], 0));
 		mat.scale(16, 16, 0);
 		mat.apply(new Rotation(MathHelper.torad * -90F, new Vector3(0, 1, 0)).at(Vector3.center));
 		mat.apply(new Rotation(MathHelper.torad * 180F, new Vector3(0, 0, 1)).at(Vector3.center));
 		faceMatrices.put(EnumFacing.EAST, mat);
 
 		mat = new Matrix4();//Facing - North;
-		mat.translate(new Vector3(offsets[2][0], offsets[2][1], 0));
 		mat.scale(16, 16, 0);
 		mat.apply(new Rotation(MathHelper.torad * 180F, new Vector3(0, 0, 1)).at(Vector3.center));
 		faceMatrices.put(EnumFacing.NORTH, mat);
 
 		mat = new Matrix4();//Right - North
-		mat.translate(new Vector3(offsets[3][0], offsets[3][1], 0));
 		mat.scale(16, 16, 0);
 		mat.apply(new Rotation(MathHelper.torad * 90F, new Vector3(0, 1, 0)).at(Vector3.center));
 		mat.apply(new Rotation(MathHelper.torad * 180F, new Vector3(0, 0, 1)).at(Vector3.center));
 		faceMatrices.put(EnumFacing.WEST, mat);
 
 		mat = new Matrix4();//Bellow - Down
-		mat.translate(new Vector3(offsets[4][0], offsets[4][1], 0));
 		mat.translate(0, 16, 0);
 		mat.scale(16, 16, 0);
 		mat.apply(Rotation.sideRotations[EnumFacing.DOWN.ordinal()].inverse());
@@ -98,7 +84,6 @@ public class TabConfiguration extends TabBase {
 		faceMatrices.put(EnumFacing.DOWN, mat);
 
 		mat = new Matrix4();//Opposite - South.
-		mat.translate(new Vector3(offsets[5][0], offsets[5][1], 0));
 		mat.scale(16, 16, 0);
 		mat.apply(new Rotation(MathHelper.torad * 180F, new Vector3(0, 1, 0)).at(Vector3.center));
 		mat.apply(new Rotation(MathHelper.torad * 180F, new Vector3(0, 0, 1)).at(Vector3.center));
@@ -196,12 +181,12 @@ public class TabConfiguration extends TabBase {
 			buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 
 			IVertexConsumer consumer = new VertexBufferConsumer(buffer);
-			bufferBlockFace(consumer, BlockHelper.above(myReconfig.getFacing()), faceQuads);
-			bufferBlockFace(consumer, BlockHelper.left(myReconfig.getFacing()), faceQuads);
-			bufferBlockFace(consumer, myReconfig.getFacing(), faceQuads);
-			bufferBlockFace(consumer, BlockHelper.right(myReconfig.getFacing()), faceQuads);
-			bufferBlockFace(consumer, BlockHelper.bellow(myReconfig.getFacing()), faceQuads);
-			bufferBlockFace(consumer, BlockHelper.opposite(myReconfig.getFacing()), faceQuads);
+			bufferBlockFace(consumer, BlockHelper.above(myReconfig.getFacing()), 52, 24, faceQuads);
+			bufferBlockFace(consumer, BlockHelper.left(myReconfig.getFacing()), 32, 44, faceQuads);
+			bufferBlockFace(consumer, myReconfig.getFacing(), 52, 44, faceQuads);
+			bufferBlockFace(consumer, BlockHelper.right(myReconfig.getFacing()), 72, 44, faceQuads);
+			bufferBlockFace(consumer, BlockHelper.bellow(myReconfig.getFacing()), 52, 64, faceQuads);
+			bufferBlockFace(consumer, BlockHelper.opposite(myReconfig.getFacing()), 72, 64, faceQuads);
 
 			tess.draw();
 
@@ -337,9 +322,9 @@ public class TabConfiguration extends TabBase {
 		myReconfig.callBlockUpdate();
 	}
 
-	private void bufferBlockFace(IVertexConsumer parent, EnumFacing face, EnumMap<EnumFacing, List<BakedQuad>> faceQuads) {
+	private void bufferBlockFace(IVertexConsumer parent, EnumFacing face, int xOff, int yOff, EnumMap<EnumFacing, List<BakedQuad>> faceQuads) {
 
-		Transformer transformer = new Transformer(parent, faceMatrices.get(face));
+		Transformer transformer = new Transformer(parent, faceMatrices.get(face), xOff, yOff);
 
 		for (BakedQuad quad : faceQuads.get(face)) {
 			quad.pipe(transformer);
@@ -351,12 +336,16 @@ public class TabConfiguration extends TabBase {
 		private final Vector3 vec = new Vector3();
 		private final CachedFormat format;
 		private final Matrix4 matrix;
+		private final int xOff;
+		private final int yOff;
 
-		public Transformer(IVertexConsumer parent, Matrix4 matrix) {
+		public Transformer(IVertexConsumer parent, Matrix4 matrix, int xOff, int yOff) {
 
 			super(parent);
 			format = CachedFormat.lookup(parent.getVertexFormat());
 			this.matrix = matrix;
+			this.xOff = xOff;
+			this.yOff = yOff;
 		}
 
 		@Override
@@ -366,6 +355,7 @@ public class TabConfiguration extends TabBase {
 				vec.set(Vector3.zero);
 				vec.set(data);
 				matrix.apply(vec);
+				vec.add(xOff, yOff, 0);
 				super.put(element, (float) vec.x, (float) vec.y, (float) vec.z, 0);
 			} else {
 				super.put(element, data);
