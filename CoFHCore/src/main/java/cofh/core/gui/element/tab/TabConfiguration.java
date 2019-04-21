@@ -59,7 +59,7 @@ public class TabConfiguration extends TabBase {
 		mat.apply(Rotation.sideRotations[EnumFacing.NORTH.ordinal()]);
 		faceMatrices.put(EnumFacing.UP, mat);
 
-		mat = new Matrix4();
+		mat = new Matrix4();//Left - East
 		mat.scale(16, 16, 0);
 		mat.apply(new Rotation(MathHelper.torad * -90F, new Vector3(0, 1, 0)).at(Vector3.center));
 		mat.apply(new Rotation(MathHelper.torad * 180F, new Vector3(0, 0, 1)).at(Vector3.center));
@@ -70,7 +70,7 @@ public class TabConfiguration extends TabBase {
 		mat.apply(new Rotation(MathHelper.torad * 180F, new Vector3(0, 0, 1)).at(Vector3.center));
 		faceMatrices.put(EnumFacing.NORTH, mat);
 
-		mat = new Matrix4();//Right - North
+		mat = new Matrix4();//Right - West
 		mat.scale(16, 16, 0);
 		mat.apply(new Rotation(MathHelper.torad * 90F, new Vector3(0, 1, 0)).at(Vector3.center));
 		mat.apply(new Rotation(MathHelper.torad * 180F, new Vector3(0, 0, 1)).at(Vector3.center));

@@ -6,6 +6,7 @@ import cofh.lib.util.control.IReconfigurableTile;
 import cofh.lib.util.control.ITransferControllableTile;
 import cofh.lib.util.control.ReconfigControlModule;
 import cofh.lib.util.control.TransferControlModule;
+import cofh.lib.util.helpers.BlockHelper;
 import cofh.thermal.core.block.AbstractTileBase;
 import cofh.thermal.core.block.AbstractTileType;
 import cofh.thermal.core.init.TexturesTSeries;
@@ -18,10 +19,10 @@ import net.minecraftforge.fluids.capability.templates.EmptyFluidHandler;
 import net.minecraftforge.items.wrapper.EmptyHandler;
 
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 import static cofh.lib.util.Constants.*;
-import static cofh.lib.util.control.IReconfigurable.SideConfig.SIDE_INPUT;
-import static cofh.lib.util.control.IReconfigurable.SideConfig.SIDE_OUTPUT;
+import static cofh.lib.util.control.IReconfigurable.SideConfig.*;
 import static cofh.lib.util.helpers.BlockHelper.*;
 import static net.minecraftforge.energy.CapabilityEnergy.ENERGY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
@@ -290,13 +291,19 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 	@Override
 	public void buildModelProps(Map<String, String> properties) {
 
-		for (EnumFacing face : EnumFacing.VALUES) {
-			SideConfig config = reconfigControl.getSideConfig(face);
-			if (config == SideConfig.SIDE_NONE) {
-				continue;
+		//God i wish we had anon funcs..
+		BiConsumer<EnumFacing, SideConfig> func = (face, config) -> {
+			if (config != SIDE_NONE) {
+				properties.put("machine.side_config." + face.getName().toLowerCase(), TexturesTSeries.CONFIG[config.ordinal()].getIconName());
 			}
-			properties.put("machine.side_config." + face.getName().toLowerCase(), TexturesTSeries.CONFIG[config.ordinal()].getIconName());
-		}
+		};
+
+		func.accept(EnumFacing.UP, reconfigControl.getSideConfig(BlockHelper.above(getFacing())));
+		func.accept(EnumFacing.EAST, reconfigControl.getSideConfig(BlockHelper.left(getFacing())));
+		func.accept(EnumFacing.NORTH, reconfigControl.getSideConfig(getFacing()));
+		func.accept(EnumFacing.WEST, reconfigControl.getSideConfig(BlockHelper.right(getFacing())));
+		func.accept(EnumFacing.DOWN, reconfigControl.getSideConfig(BlockHelper.bellow(getFacing())));
+		func.accept(EnumFacing.SOUTH, reconfigControl.getSideConfig(BlockHelper.opposite(getFacing())));
 		super.buildModelProps(properties);
 	}
 
