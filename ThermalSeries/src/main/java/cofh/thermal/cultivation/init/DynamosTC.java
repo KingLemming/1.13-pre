@@ -13,6 +13,6 @@ public class DynamosTC {
 
 	}
 
-	public static final AbstractTileType GOURMAND = registerDynamo("gourmand", 7, TileDynamoGourmand.class, ContainerDynamoGourmand.class, GuiDynamoGourmand.class);
+	public static final AbstractTileType GOURMAND = registerDynamo("gourmand", 7, TileDynamoGourmand.class, ContainerDynamoGourmand.class, () -> GuiDynamoGourmand.class);
 
 }

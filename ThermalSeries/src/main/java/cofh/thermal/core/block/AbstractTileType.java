@@ -11,6 +11,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import java.util.function.Supplier;
+
 import static cofh.lib.util.Constants.ID_THERMAL_SERIES;
 
 /**
@@ -23,9 +25,9 @@ public class AbstractTileType {
 
 	public final Class<? extends TileCoFH> tileEntityClass;
 	public final Class<? extends ContainerCoFH> guiServerClass;
-	public final Class<? extends GuiContainerCoFH> guiClientClass;
+	public final Supplier<Class<? extends GuiContainerCoFH>> guiClientClass;
 
-	private AbstractTileType(String name, int light, Class<? extends TileCoFH> tileEntityClass, Class<? extends ContainerCoFH> guiServerClass, Class<? extends GuiContainerCoFH> guiClientClass) {
+	private AbstractTileType(String name, int light, Class<? extends TileCoFH> tileEntityClass, Class<? extends ContainerCoFH> guiServerClass, Supplier<Class<? extends GuiContainerCoFH>> guiClientClass) {
 
 		this.name = name;
 		this.light = light;
@@ -65,7 +67,7 @@ public class AbstractTileType {
 			return null;
 		}
 		try {
-			return guiClientClass.getConstructor(InventoryPlayer.class, TileEntity.class).newInstance(inventory, tile);
+			return guiClientClass.get().getConstructor(InventoryPlayer.class, TileEntity.class).newInstance(inventory, tile);
 		} catch (Exception e) {
 			ThermalSeries.log.error("Unable to create instance of Gui from {}.", tileEntityClass.getName());
 			e.printStackTrace();
@@ -88,14 +90,14 @@ public class AbstractTileType {
 	}
 
 	// region HELPERS
-	public static AbstractTileType registerMachine(String name, int light, Class<? extends TileCoFH> tileEntityClass, Class<? extends ContainerCoFH> guiServerClass, Class<? extends GuiContainerCoFH> guiClientClass) {
+	public static AbstractTileType registerMachine(String name, int light, Class<? extends TileCoFH> tileEntityClass, Class<? extends ContainerCoFH> guiServerClass, Supplier<Class<? extends GuiContainerCoFH>> guiClientClass) {
 
 		AbstractTileType ret = new AbstractTileType(name, light, tileEntityClass, guiServerClass, guiClientClass);
 		GameRegistry.registerTileEntity(tileEntityClass, new ResourceLocation(ID_THERMAL_SERIES + ":machine_" + ret.name));
 		return ret;
 	}
 
-	public static AbstractTileType registerDynamo(String name, int light, Class<? extends TileCoFH> tileEntityClass, Class<? extends ContainerCoFH> guiServerClass, Class<? extends GuiContainerCoFH> guiClientClass) {
+	public static AbstractTileType registerDynamo(String name, int light, Class<? extends TileCoFH> tileEntityClass, Class<? extends ContainerCoFH> guiServerClass, Supplier<Class<? extends GuiContainerCoFH>> guiClientClass) {
 
 		AbstractTileType ret = new AbstractTileType(name, light, tileEntityClass, guiServerClass, guiClientClass);
 		GameRegistry.registerTileEntity(tileEntityClass, new ResourceLocation(ID_THERMAL_SERIES + ":dynamo_" + ret.name));

@@ -116,7 +116,8 @@ public class Constants {
 	public static final int PACKET_FILTER = 17;
 	public static final int PACKET_SECURITY_CONTROL = 24;
 	public static final int PACKET_REDSTONE_CONTROL = 25;
-	public static final int PACKET_TRANSFER_CONTROL = 27;
+	public static final int PACKET_TRANSFER_CONTROL = 26;
+	public static final int PACKET_SIDE_CONFIG = 27;
 	public static final int PACKET_KEY = 32;
 	// endregion
 

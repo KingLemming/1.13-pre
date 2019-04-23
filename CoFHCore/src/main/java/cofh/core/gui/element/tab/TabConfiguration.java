@@ -185,7 +185,7 @@ public class TabConfiguration extends TabBase {
 			bufferBlockFace(consumer, BlockHelper.left(myReconfig.getFacing()), 32, 44, faceQuads);
 			bufferBlockFace(consumer, myReconfig.getFacing(), 52, 44, faceQuads);
 			bufferBlockFace(consumer, BlockHelper.right(myReconfig.getFacing()), 72, 44, faceQuads);
-			bufferBlockFace(consumer, BlockHelper.bellow(myReconfig.getFacing()), 52, 64, faceQuads);
+			bufferBlockFace(consumer, BlockHelper.below(myReconfig.getFacing()), 52, 64, faceQuads);
 			bufferBlockFace(consumer, BlockHelper.opposite(myReconfig.getFacing()), 72, 64, faceQuads);
 
 			tess.draw();
@@ -275,7 +275,7 @@ public class TabConfiguration extends TabBase {
 		} else if (72 <= x && x < 88 && 44 <= y && y < 60 && hasReconfig) {
 			handleSideChange(BlockHelper.right(myReconfig.getFacing()), mouseButton);
 		} else if (52 <= x && x < 68 && 64 <= y && y < 80 && hasReconfig) {
-			handleSideChange(BlockHelper.bellow(myReconfig.getFacing()), mouseButton);
+			handleSideChange(BlockHelper.below(myReconfig.getFacing()), mouseButton);
 		} else if (72 <= x && x < 88 && 64 <= y && y < 80 && hasReconfig) {
 			handleSideChange(BlockHelper.opposite(myReconfig.getFacing()), mouseButton);
 		}
