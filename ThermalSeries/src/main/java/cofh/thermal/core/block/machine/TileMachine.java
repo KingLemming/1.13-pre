@@ -284,7 +284,6 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 	// endregion
 
 	//region RENDER
-
 	@Override
 	public boolean hasFastRenderer() {
 
@@ -294,7 +293,6 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 	@Override
 	public void buildModelProps(Map<String, String> properties) {
 
-		//God i wish we had anon funcs..
 		BiConsumer<EnumFacing, SideConfig> func = (face, config) -> {
 			if (config != SIDE_NONE) {
 				properties.put("machine.side_config." + face.getName().toLowerCase(), TexturesTSeries.CONFIG[config.ordinal()].getIconName());
@@ -305,10 +303,10 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		func.accept(EnumFacing.EAST, reconfigControl.getSideConfig(BlockHelper.left(getFacing())));
 		func.accept(EnumFacing.NORTH, reconfigControl.getSideConfig(getFacing()));
 		func.accept(EnumFacing.WEST, reconfigControl.getSideConfig(BlockHelper.right(getFacing())));
-		func.accept(EnumFacing.DOWN, reconfigControl.getSideConfig(BlockHelper.bellow(getFacing())));
+		func.accept(EnumFacing.DOWN, reconfigControl.getSideConfig(BlockHelper.below(getFacing())));
 		func.accept(EnumFacing.SOUTH, reconfigControl.getSideConfig(BlockHelper.opposite(getFacing())));
+
 		super.buildModelProps(properties);
 	}
-
 	//endregion
 }

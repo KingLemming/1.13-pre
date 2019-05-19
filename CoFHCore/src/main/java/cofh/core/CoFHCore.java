@@ -119,7 +119,7 @@ public class CoFHCore {
 	private void registerHandlers() {
 
 		packetHandler = new PacketHandler("cofh");
-		
+
 		packetHandler.registerPacket(PACKET_CONTROL, PacketTileControl::new);
 		packetHandler.registerPacket(PACKET_GUI, PacketTileGui::new);
 		packetHandler.registerPacket(PACKET_STATE, PacketTileState::new);

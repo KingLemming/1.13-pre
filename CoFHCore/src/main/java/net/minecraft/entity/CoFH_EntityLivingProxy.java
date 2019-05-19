@@ -20,5 +20,5 @@ public class CoFH_EntityLivingProxy extends EntityLiving {
 
 		return entity.getLootTable();
 	}
-	
+
 }

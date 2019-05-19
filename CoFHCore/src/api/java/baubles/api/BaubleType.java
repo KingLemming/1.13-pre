@@ -5,7 +5,7 @@ public enum BaubleType {
 
 	int[] validSlots;
 
-	private BaubleType(int... validSlots) {
+	BaubleType(int... validSlots) {
 
 		this.validSlots = validSlots;
 	}
