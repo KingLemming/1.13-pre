@@ -4,7 +4,6 @@ import cofh.core.CoFHCore;
 import cofh.core.network.PacketBufferCoFH;
 import cofh.core.network.packet.IPacketServer;
 import cofh.core.network.packet.PacketBase;
-import cofh.lib.util.control.ITransferControllable;
 import cofh.lib.util.control.ITransferControllableTile;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
@@ -53,10 +52,9 @@ public class PacketTransferControl extends PacketBase<PacketTransferControl> imp
 	public static void sendToServer(ITransferControllableTile tile) {
 
 		PacketTransferControl packet = new PacketTransferControl();
-		ITransferControllable control = tile.transferControl();
 		packet.pos = tile.pos();
-		packet.transferIn = control.getTransferIn();
-		packet.transferOut = control.getTransferOut();
+		packet.transferIn = tile.transferControl().getTransferIn();
+		packet.transferOut = tile.transferControl().getTransferOut();
 		packet.sendToServer();
 	}
 

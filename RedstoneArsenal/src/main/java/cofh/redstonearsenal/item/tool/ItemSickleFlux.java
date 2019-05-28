@@ -14,7 +14,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import java.util.ArrayList;
 
 import static cofh.lib.util.Constants.TOOL_SICKLE;
-import static cofh.lib.util.modhelpers.EnsorcellmentHelper.FARMER;
 import static cofh.lib.util.modhelpers.EnsorcellmentHelper.HOLDING;
 
 public class ItemSickleFlux extends ItemToolFlux {
@@ -84,9 +83,6 @@ public class ItemSickleFlux extends ItemToolFlux {
 
 		if (HOLDING != null) {
 			enchants.add(HOLDING.getRegistryName());
-		}
-		if (FARMER != null) {
-			enchants.add(FARMER.getRegistryName());
 		}
 		return new EnergyEnchantableItemWrapper(stack, this, enchants);
 	}

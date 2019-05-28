@@ -283,7 +283,7 @@ public class ItemBowFlux extends ItemBowCoFH implements IEnergyContainerItem, IM
 	@Override
 	public float getArrowDamageMultiplier(ItemStack item) {
 
-		return isEmpowered(item) ? damageMultiplier * 1.5F : damageMultiplier;
+		return isEmpowered(item) ? damageMultiplier * 2.5F : damageMultiplier;
 	}
 
 	@Override

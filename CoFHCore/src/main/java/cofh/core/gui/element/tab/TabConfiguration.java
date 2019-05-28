@@ -120,7 +120,6 @@ public class TabConfiguration extends TabBase {
 		this.setVisible(myReconfig.isReconfigurable());
 	}
 
-	// TODO: Figure out side configuration rendering.
 	@Override
 	protected void drawForeground() {
 
@@ -257,27 +256,57 @@ public class TabConfiguration extends TabBase {
 		}
 		int x = mouseX - this.posX();
 		int y = mouseY - this.posY;
-		if (x < 8 || x >= 92 || y < 20 || y >= 84) {
-			return super.mouseClicked(x, y, mouseButton);
+
+		return myTransfer != null ? clickTransfer(x, y, mouseButton) : clickNoTransfer(x, y, mouseButton);
+	}
+
+	protected boolean clickNoTransfer(int x, int y, int mouseButton) {
+
+		if (x < 16 || x >= 80 || y < 20 || y >= 84) {
+			return false;
 		}
-		boolean hasTransfer = myTransfer != null;
-		boolean hasReconfig = myReconfig != null;
-		if (8 <= x && x < 24 && 34 <= y && y < 50 && hasTransfer) {
+		if (myTransfer != null) {
+			if (40 <= x && x < 68 && 24 <= y && y < 40) {
+				handleSideChange(BlockHelper.above(myReconfig.getFacing()), mouseButton);
+			} else if (20 <= x && x < 36 && 44 <= y && y < 60) {
+				handleSideChange(BlockHelper.left(myReconfig.getFacing()), mouseButton);
+			} else if (40 <= x && x < 56 && 44 <= y && y < 60) {
+				handleSideChange(myReconfig.getFacing(), mouseButton);
+			} else if (60 <= x && x < 76 && 44 <= y && y < 60) {
+				handleSideChange(BlockHelper.right(myReconfig.getFacing()), mouseButton);
+			} else if (40 <= x && x < 56 && 64 <= y && y < 80) {
+				handleSideChange(BlockHelper.below(myReconfig.getFacing()), mouseButton);
+			} else if (60 <= x && x < 76 && 64 <= y && y < 80) {
+				handleSideChange(BlockHelper.opposite(myReconfig.getFacing()), mouseButton);
+			}
+		}
+		return true;
+	}
+
+	protected boolean clickTransfer(int x, int y, int mouseButton) {
+
+		if (x < 4 || x >= 92 || y < 20 || y >= 84) {
+			return false;
+		}
+		if (8 <= x && x < 24 && 34 <= y && y < 50) {
 			handleTransferChange(true);
-		} else if (8 <= x && x < 24 && 54 <= y && y < 68 && hasTransfer) {
+		} else if (8 <= x && x < 24 && 54 <= y && y < 68) {
 			handleTransferChange(false);
-		} else if (52 <= x && x < 68 && 24 <= y && y < 40 && hasReconfig) {
-			handleSideChange(BlockHelper.above(myReconfig.getFacing()), mouseButton);
-		} else if (32 <= x && x < 48 && 44 <= y && y < 60 && hasReconfig) {
-			handleSideChange(BlockHelper.left(myReconfig.getFacing()), mouseButton);
-		} else if (52 <= x && x < 68 && 44 <= y && y < 60 && hasReconfig) {
-			handleSideChange(myReconfig.getFacing(), mouseButton);
-		} else if (72 <= x && x < 88 && 44 <= y && y < 60 && hasReconfig) {
-			handleSideChange(BlockHelper.right(myReconfig.getFacing()), mouseButton);
-		} else if (52 <= x && x < 68 && 64 <= y && y < 80 && hasReconfig) {
-			handleSideChange(BlockHelper.below(myReconfig.getFacing()), mouseButton);
-		} else if (72 <= x && x < 88 && 64 <= y && y < 80 && hasReconfig) {
-			handleSideChange(BlockHelper.opposite(myReconfig.getFacing()), mouseButton);
+		}
+		if (myTransfer != null) {
+			if (52 <= x && x < 68 && 24 <= y && y < 40) {
+				handleSideChange(BlockHelper.above(myReconfig.getFacing()), mouseButton);
+			} else if (32 <= x && x < 48 && 44 <= y && y < 60) {
+				handleSideChange(BlockHelper.left(myReconfig.getFacing()), mouseButton);
+			} else if (52 <= x && x < 68 && 44 <= y && y < 60) {
+				handleSideChange(myReconfig.getFacing(), mouseButton);
+			} else if (72 <= x && x < 88 && 44 <= y && y < 60) {
+				handleSideChange(BlockHelper.right(myReconfig.getFacing()), mouseButton);
+			} else if (52 <= x && x < 68 && 64 <= y && y < 80) {
+				handleSideChange(BlockHelper.below(myReconfig.getFacing()), mouseButton);
+			} else if (72 <= x && x < 88 && 64 <= y && y < 80) {
+				handleSideChange(BlockHelper.opposite(myReconfig.getFacing()), mouseButton);
+			}
 		}
 		return true;
 	}
@@ -290,7 +319,7 @@ public class TabConfiguration extends TabBase {
 				SoundHelper.playClickSound(myTransfer.getTransferIn() ? 0.8F : 0.4F);
 			}
 		} else {
-			if (myTransfer.hasTransferIn()) {
+			if (myTransfer.hasTransferOut()) {
 				myTransfer.setControl(myTransfer.getTransferIn(), !myTransfer.getTransferOut());
 				SoundHelper.playClickSound(myTransfer.getTransferOut() ? 0.8F : 0.4F);
 			}

@@ -64,6 +64,7 @@ public class Constants {
 	// endregion
 
 	// region MOD IDS
+	public static final String ID_COFH = "cofh";
 	public static final String ID_COFH_CORE = "cofh_core";
 	public static final String ID_COFH_LIB = "cofh_lib";
 
@@ -173,6 +174,8 @@ public class Constants {
 	public static final String TAG_SLOT = "Slot";
 	public static final String TAG_TANK = "Tank";
 	public static final String TAG_TANK_ARRAY = "TankArray";
+	public static final String TAG_TRACK_IN = "TrackIn";
+	public static final String TAG_TRACK_OUT = "TrackOut";
 	public static final String TAG_TRANSFER = "Transfer";
 	public static final String TAG_TYPE = "Type";
 
@@ -196,6 +199,7 @@ public class Constants {
 
 	public static final String GROUP_COINS = "coins";
 	public static final String GROUP_CROPS = "crops";
+	public static final String GROUP_DECO = "deco";
 	public static final String GROUP_DUSTS = "dusts";
 	public static final String GROUP_FOODS = "foods";
 	public static final String GROUP_GEARS = "gears";

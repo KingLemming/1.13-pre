@@ -4,7 +4,6 @@ import cofh.lib.fluid.FluidStorageCoFH;
 import cofh.thermal.core.block.dynamo.TileDynamo;
 import cofh.thermal.expansion.init.DynamosTE;
 import cofh.thermal.expansion.util.managers.dynamo.CompressionFuelManager;
-import cofh.thermal.expansion.util.managers.dynamo.MagmaticFuelManager;
 
 import static cofh.lib.util.Constants.TANK_SMALL;
 import static cofh.lib.util.StorageGroup.INPUT;
@@ -25,7 +24,7 @@ public class TileDynamoCompression extends TileDynamo {
 	// region PROCESS
 	protected boolean canProcessStart() {
 
-		curFuel = MagmaticFuelManager.instance().getFuel(getInputSlots(), getInputTanks());
+		curFuel = CompressionFuelManager.instance().getFuel(getInputSlots(), getInputTanks());
 		if (curFuel != null) {
 			return fuelTank.getFluidAmount() >= FLUID_FUEL_AMOUNT;
 		}

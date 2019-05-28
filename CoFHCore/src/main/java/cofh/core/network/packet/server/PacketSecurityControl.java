@@ -4,7 +4,6 @@ import cofh.core.CoFHCore;
 import cofh.core.network.PacketBufferCoFH;
 import cofh.core.network.packet.IPacketServer;
 import cofh.core.network.packet.PacketBase;
-import cofh.lib.util.control.ISecurable;
 import cofh.lib.util.control.ISecurable.AccessMode;
 import cofh.lib.util.control.ISecurableTile;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -51,9 +50,8 @@ public class PacketSecurityControl extends PacketBase<PacketSecurityControl> imp
 	public static void sendToServer(ISecurableTile tile) {
 
 		PacketSecurityControl packet = new PacketSecurityControl();
-		ISecurable control = tile.securityControl();
 		packet.pos = tile.pos();
-		packet.mode = (byte) control.getAccess().ordinal();
+		packet.mode = (byte) tile.securityControl().getAccess().ordinal();
 		packet.sendToServer();
 	}
 

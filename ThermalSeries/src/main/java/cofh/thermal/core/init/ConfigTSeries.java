@@ -60,6 +60,10 @@ public class ConfigTSeries {
 
 	}
 
+	// region CLIENT OPTIONS
+	public static boolean enableColorBlindTextures = false;
+	// endregion
+
 	// region MODPACK OPTIONS
 	public static boolean disableAllRecipes = false;
 	public static boolean disableAllHostileMobSpawns = false;

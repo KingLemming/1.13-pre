@@ -47,7 +47,6 @@ public class EnsorcellmentHelper {
 	public static final String ID_PHALANX = ID_ENSORCELLMENT + ":phalanx";
 
 	public static final String ID_ANGLER = ID_ENSORCELLMENT + ":angler";
-	public static final String ID_FARMER = ID_ENSORCELLMENT + ":farmer";
 	public static final String ID_HUNTER = ID_ENSORCELLMENT + ":hunter";
 	// endregion
 
@@ -120,9 +119,6 @@ public class EnsorcellmentHelper {
 	 */
 	@ObjectHolder (ID_ANGLER)
 	public static final Enchantment ANGLER = null;
-
-	@ObjectHolder (ID_FARMER)
-	public static final Enchantment FARMER = null;
 
 	@ObjectHolder (ID_HUNTER)
 	public static final Enchantment HUNTER = null;

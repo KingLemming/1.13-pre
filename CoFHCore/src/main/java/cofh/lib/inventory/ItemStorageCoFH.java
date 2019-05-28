@@ -92,6 +92,12 @@ public class ItemStorageCoFH implements IItemHandler, IItemStackHolder {
 	}
 
 	@Override
+	public int getSpace() {
+
+		return item.getMaxStackSize() - item.getCount();
+	}
+
+	@Override
 	public boolean isEmpty() {
 
 		return item.isEmpty();
@@ -124,6 +130,9 @@ public class ItemStorageCoFH implements IItemHandler, IItemStackHolder {
 
 		if (stack.isEmpty()) {
 			return ItemStack.EMPTY;
+		}
+		if (!isItemValid(stack)) {
+			return stack;
 		}
 		if (item.isEmpty()) {
 			if (!simulate) {

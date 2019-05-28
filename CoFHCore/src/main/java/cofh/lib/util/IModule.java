@@ -35,7 +35,6 @@ public interface IModule {
 
 	}
 
-	// TODO: Placeholder for 1.13.
 	default void registerFluids() {
 
 	}

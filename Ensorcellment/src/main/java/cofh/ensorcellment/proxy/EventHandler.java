@@ -7,7 +7,6 @@ import cofh.ensorcellment.enchantment.digger.EnchantmentInsight;
 import cofh.ensorcellment.enchantment.digger.EnchantmentSmashing;
 import cofh.ensorcellment.enchantment.digger.EnchantmentSmelting;
 import cofh.ensorcellment.enchantment.looting.EnchantmentAngler;
-import cofh.ensorcellment.enchantment.looting.EnchantmentFarmer;
 import cofh.ensorcellment.enchantment.looting.EnchantmentHunter;
 import cofh.ensorcellment.enchantment.misc.EnchantmentSoulbound;
 import cofh.ensorcellment.enchantment.override.EnchantmentMendingAlt;
@@ -19,7 +18,6 @@ import cofh.lib.util.Utils;
 import cofh.lib.util.helpers.MathHelper;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentFrostWalker;
 import net.minecraft.enchantment.EnchantmentThorns;
@@ -53,8 +51,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraftforge.common.EnumPlantType;
-import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AnvilUpdateEvent;
@@ -452,23 +448,10 @@ public class EventHandler {
 			return;
 		}
 		final ItemStack tool = player.getHeldItemMainhand();
-		final int encFarmer = getEnchantmentLevel(FARMER, tool);
 		final int encSmashing = getEnchantmentLevel(SMASHING, tool);
 		final int encSmelting = getEnchantmentLevel(SMELTING, tool);
 
 		List<ItemStack> drops = event.getDrops();
-
-		// FARMER
-		Block block = event.getState().getBlock();
-		if (encFarmer > 0 && block instanceof IPlantable && ((IPlantable) block).getPlantType(event.getWorld(), event.getPos()) == EnumPlantType.Crop) {
-			for (int i = 0; i < encFarmer; i++) {
-				if (player.getRNG().nextInt(100) < EnchantmentFarmer.chance) {
-					for (ItemStack stack : drops) {
-						stack.grow(1);
-					}
-				}
-			}
-		}
 
 		// SMASHING / SMELTING
 		drops.replaceAll(stack -> {

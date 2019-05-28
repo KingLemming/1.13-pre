@@ -139,7 +139,6 @@ public class ThermalSeries {
 		for (IModule module : modules) {
 			module.registerBlocks(event);
 		}
-		// TODO: Temporary - remove in 1.13.
 		registerFluids();
 
 		proxy.registerBlockModels();
@@ -180,7 +179,6 @@ public class ThermalSeries {
 		}
 	}
 
-	// TODO: Placeholder for 1.13.
 	public void registerFluids() {
 
 		FluidsTSeries.registerFluids();

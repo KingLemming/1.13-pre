@@ -14,6 +14,7 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import static cofh.lib.util.Constants.ID_COFH;
 import static cofh.lib.util.helpers.ItemHelper.cloneStack;
 
 public class ShapelessFluidRecipeFactory implements IRecipeFactory {
@@ -23,7 +24,7 @@ public class ShapelessFluidRecipeFactory implements IRecipeFactory {
 
 		ShapelessOreRecipe recipe = ShapelessOreRecipe.factory(context, json);
 
-		return new ShapelessFluidRecipe(new ResourceLocation("cofh", "fluid_shapeless"), recipe.getRecipeOutput(), recipe.getIngredients().toArray());
+		return new ShapelessFluidRecipe(new ResourceLocation(ID_COFH, "fluid_shapeless"), recipe.getRecipeOutput(), recipe.getIngredients().toArray());
 	}
 
 	// region RECIPE CLASS

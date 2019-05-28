@@ -1,22 +1,15 @@
 package cofh.core.item.tool;
 
-import cofh.lib.capabilities.EnchantableItemWrapper;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-import java.util.ArrayList;
 
 import static cofh.lib.util.Constants.TOOL_SICKLE;
-import static cofh.lib.util.modhelpers.EnsorcellmentHelper.FARMER;
 
 public class ItemSickleCoFH extends ItemToolCoFH {
 
@@ -81,17 +74,6 @@ public class ItemSickleCoFH extends ItemToolCoFH {
 			stack.damageItem(used, player);
 		}
 		return false;
-	}
-
-	@Override
-	public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
-
-		ArrayList<ResourceLocation> enchants = new ArrayList<>();
-
-		if (FARMER != null) {
-			enchants.add(FARMER.getRegistryName());
-		}
-		return new EnchantableItemWrapper(enchants);
 	}
 
 }

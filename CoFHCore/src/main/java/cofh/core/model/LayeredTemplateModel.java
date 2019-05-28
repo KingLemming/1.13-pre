@@ -43,6 +43,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static cofh.lib.util.Constants.ID_COFH;
 import static java.util.Locale.ROOT;
 
 /**
@@ -525,7 +526,7 @@ public class LayeredTemplateModel implements IModel {
 		public boolean accepts(ResourceLocation modelLocation) {
 
 			String path = modelLocation.getResourcePath();
-			return modelLocation.getResourceDomain().equals("cofh") && (path.equals("layered_template") || path.equals("models/block/layered_template"));
+			return modelLocation.getResourceDomain().equals(ID_COFH) && (path.equals("layered_template") || path.equals("models/block/layered_template"));
 		}
 
 		@Override
@@ -604,7 +605,7 @@ public class LayeredTemplateModel implements IModel {
 							}//If we have a tint, apply it.
 							if (tints.containsKey(partFace.texture)) {
 								int tint = tints.getInt(partFace.texture);
-								//TODO, Complain if there is no color?
+								// TODO: Complain if there is no color?
 								if (fmt.hasColor) {
 									float r = (tint >> 0x10 & 0xFF) / 255F;
 									float g = (tint >> 0x08 & 0xFF) / 255F;
@@ -753,7 +754,7 @@ public class LayeredTemplateModel implements IModel {
 					}
 					return wrapper;
 				} catch (IOException ex) {
-					//TODO, Hook into Forge's Model error map?
+					// TODO: Hook into Forge's Model error map?
 					logger.error("Failed to load model '{}'.", model, ex);
 					return ModelLoaderRegistry.getMissingModel();
 				}
@@ -984,7 +985,7 @@ public class LayeredTemplateModel implements IModel {
 
 		/**
 		 * Parses a TextureEntry from key and value, See the design doc for more info on the format.
-		 * //TODO, make design doc available somewhere.
+		 * // TODO, make design doc available somewhere.
 		 *
 		 * @param key     The Key.
 		 * @param texture The Value.

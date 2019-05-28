@@ -6,12 +6,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 
 import static cofh.lib.util.Constants.ID_THERMAL_SERIES;
+import static cofh.thermal.core.init.ConfigTSeries.enableColorBlindTextures;
 import static cofh.thermal.core.init.FluidsTSeries.*;
 
 public class TexturesTSeries {
-
-	//TODO, Lemming, Move this somewhere sane.
-	private static final boolean COLOR_BLIND_TEXTURES = false;
 
 	private TexturesTSeries() {
 
@@ -22,15 +20,15 @@ public class TexturesTSeries {
 
 		textureMap = map;
 
-		//region SIDE CONFIG
+		// region SIDE CONFIG
 		CONFIG_BLUE = registerConfig("blue");
 		CONFIG_ORANGE = registerConfig("orange");
 		CONFIG_OMNI = registerConfig("omni");
 		CONFIG_OPEN = registerConfig("open", false);
 		CONFIG = new TextureAtlasSprite[] { null, CONFIG_BLUE, CONFIG_ORANGE, CONFIG_OMNI, CONFIG_OPEN };
-		//endregion
+		// endregion
 
-		//region FLUIDS
+		// region FLUIDS
 		registerFluidTextures(fluidSteam);
 		registerFluidTextures(fluidExperience);
 
@@ -83,10 +81,9 @@ public class TexturesTSeries {
 
 	private static TextureAtlasSprite registerConfig(String config, boolean hasCb) {
 
-		if (COLOR_BLIND_TEXTURES && hasCb) {
+		if (enableColorBlindTextures && hasCb) {
 			config += "_cb";
 		}
-
 		return textureMap.registerSprite(new ResourceLocation(ID_THERMAL_SERIES, "blocks/config/config_" + config));
 	}
 
@@ -98,14 +95,11 @@ public class TexturesTSeries {
 
 	// endregion
 
-	//region REFERENCES
-
+	// region REFERENCES
 	public static TextureAtlasSprite[] CONFIG;
 	public static TextureAtlasSprite CONFIG_BLUE;
 	public static TextureAtlasSprite CONFIG_ORANGE;
 	public static TextureAtlasSprite CONFIG_OMNI;
 	public static TextureAtlasSprite CONFIG_OPEN;
-
-	//endregion
-
+	// endregion
 }

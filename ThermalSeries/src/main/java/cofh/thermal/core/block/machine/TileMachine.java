@@ -1,12 +1,16 @@
 package cofh.thermal.core.block.machine;
 
 import cofh.core.network.PacketBufferCoFH;
+import cofh.lib.fluid.FluidStorageCoFH;
+import cofh.lib.inventory.ItemStorageCoFH;
 import cofh.lib.util.StorageGroup;
 import cofh.lib.util.control.IReconfigurableTile;
 import cofh.lib.util.control.ITransferControllableTile;
 import cofh.lib.util.control.ReconfigControlModule;
 import cofh.lib.util.control.TransferControlModule;
 import cofh.lib.util.helpers.BlockHelper;
+import cofh.lib.util.helpers.FluidHelper;
+import cofh.lib.util.helpers.InventoryHelper;
 import cofh.thermal.core.block.AbstractTileBase;
 import cofh.thermal.core.block.AbstractTileType;
 import cofh.thermal.core.init.TexturesTSeries;
@@ -32,6 +36,9 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 
 	protected EnumFacing facing;
 	protected FluidStack renderFluid;
+
+	protected int inputTracker;
+	protected int outputTracker;
 
 	protected ReconfigControlModule reconfigControl = new ReconfigControlModule(this);
 	protected TransferControlModule transferControl = new TransferControlModule(this);
@@ -129,12 +136,34 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		return renderFluid;
 	}
 
-	// TODO: Finish
 	protected void transferInput() {
 
 		if (!transferControl.getTransferIn()) {
 			return;
 		}
+		int newTracker = inputTracker;
+		boolean updateTracker = false;
+
+		for (int i = inputTracker + 1; i <= inputTracker + 6; i++) {
+			EnumFacing side = EnumFacing.VALUES[i % 6];
+			if (reconfigControl.getSideConfig(side).autoInput()) {
+				for (ItemStorageCoFH slot : getInputSlots()) {
+					if (slot.getSpace() > 0) {
+						InventoryHelper.extractFromAdjacent(this, slot, slot.getSpace(), side);
+					}
+				}
+				for (FluidStorageCoFH tank : getInputTanks()) {
+					if (tank.getSpace() > 0) {
+						FluidHelper.extractFromAdjacent(this, tank, side);
+					}
+				}
+				if (!updateTracker) {
+					newTracker = side.ordinal();
+					updateTracker = true;
+				}
+			}
+		}
+		inputTracker = newTracker;
 	}
 
 	protected void transferOutput() {
@@ -142,6 +171,25 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		if (!transferControl.getTransferOut()) {
 			return;
 		}
+		int newTracker = outputTracker;
+		boolean updateTracker = false;
+
+		for (int i = outputTracker + 1; i <= outputTracker + 6; i++) {
+			EnumFacing side = EnumFacing.VALUES[i % 6];
+			if (reconfigControl.getSideConfig(side).autoOutput()) {
+				for (ItemStorageCoFH slot : getOutputSlots()) {
+					InventoryHelper.insertIntoAdjacent(this, slot, 64, side);
+				}
+				for (FluidStorageCoFH tank : getOutputTanks()) {
+					FluidHelper.insertIntoAdjacent(this, tank, side);
+				}
+				if (!updateTracker) {
+					newTracker = side.ordinal();
+					updateTracker = true;
+				}
+			}
+		}
+		outputTracker = newTracker;
 	}
 	// endregion
 
@@ -216,6 +264,9 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 		reconfigControl.readFromNBT(nbt.getCompoundTag(TAG_SIDE_CONFIG));
 		transferControl.readFromNBT(nbt.getCompoundTag(TAG_TRANSFER));
 
+		inputTracker = nbt.getInteger(TAG_TRACK_IN);
+		outputTracker = nbt.getInteger(TAG_TRACK_OUT);
+
 		renderFluid = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag(TAG_RENDER_FLUID));
 	}
 
@@ -226,6 +277,9 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 
 		nbt.setTag(TAG_SIDE_CONFIG, reconfigControl.writeToNBT(new NBTTagCompound()));
 		nbt.setTag(TAG_TRANSFER, transferControl.writeToNBT(new NBTTagCompound()));
+
+		nbt.setInteger(TAG_TRACK_IN, inputTracker);
+		nbt.setInteger(TAG_TRACK_OUT, outputTracker);
 
 		if (renderFluid != null) {
 			nbt.setTag(TAG_RENDER_FLUID, renderFluid.writeToNBT(new NBTTagCompound()));
@@ -283,7 +337,7 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 	}
 	// endregion
 
-	//region RENDER
+	// region RENDER
 	@Override
 	public boolean hasFastRenderer() {
 
@@ -308,5 +362,5 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 
 		super.buildModelProps(properties);
 	}
-	//endregion
+	// endregion
 }

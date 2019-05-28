@@ -28,7 +28,6 @@ enchantment.ensorcellment.bulwark=Bulwark
 enchantment.ensorcellment.phalanx=Phalanx
 
 enchantment.ensorcellment.angler=Angler's Bounty
-enchantment.ensorcellment.farmer=Farmer's Bounty
 enchantment.ensorcellment.hunter=Hunter's Bounty
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -59,5 +58,4 @@ enchantment.ensorcellment.bulwark.desc=Prevents the wielder from being knocked b
 enchantment.ensorcellment.phalanx.desc=Allows the wielder to move faster while using the shield.
 
 enchantment.ensorcellment.angler.desc=Provides a chance of catching extra items when fishing.
-enchantment.ensorcellment.farmer.desc=Provides a chance of harvesting extra items from crops.
 enchantment.ensorcellment.hunter.desc=Provides a chance of additional drops from slain animals.

@@ -31,7 +31,7 @@ public class BlockCoFH extends Block {
 
 	public BlockCoFH setLightLevel(int value) {
 
-		this.lightValue = value;
+		this.lightValue = MathHelper.clamp(value, 0, 15);
 		return this;
 	}
 

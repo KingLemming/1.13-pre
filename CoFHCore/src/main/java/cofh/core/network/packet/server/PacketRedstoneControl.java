@@ -4,7 +4,6 @@ import cofh.core.CoFHCore;
 import cofh.core.network.PacketBufferCoFH;
 import cofh.core.network.packet.IPacketServer;
 import cofh.core.network.packet.PacketBase;
-import cofh.lib.util.control.IRedstoneControllable;
 import cofh.lib.util.control.IRedstoneControllable.ControlMode;
 import cofh.lib.util.control.IRedstoneControllableTile;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -54,10 +53,9 @@ public class PacketRedstoneControl extends PacketBase<PacketRedstoneControl> imp
 	public static void sendToServer(IRedstoneControllableTile tile) {
 
 		PacketRedstoneControl packet = new PacketRedstoneControl();
-		IRedstoneControllable control = tile.redstoneControl();
 		packet.pos = tile.pos();
-		packet.threshold = control.getThreshold();
-		packet.mode = (byte) control.getMode().ordinal();
+		packet.threshold = tile.redstoneControl().getThreshold();
+		packet.mode = (byte) tile.redstoneControl().getMode().ordinal();
 		packet.sendToServer();
 	}
 

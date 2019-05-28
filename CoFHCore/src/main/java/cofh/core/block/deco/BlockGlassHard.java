@@ -1,5 +1,6 @@
-package cofh.core.block;
+package cofh.core.block.deco;
 
+import cofh.core.block.BlockCoFH;
 import cofh.lib.block.IDismantleable;
 import cofh.lib.util.Utils;
 import net.minecraft.block.SoundType;
@@ -19,32 +20,27 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockStrongGlass extends BlockCoFH implements IDismantleable {
+public class BlockGlassHard extends BlockCoFH implements IDismantleable {
 
-	float[] beaconColor = null;
+	protected float[] beaconColorMult = new float[] { 1.0F, 1.0F, 1.0F };
 
-	public BlockStrongGlass() {
+	public BlockGlassHard() {
 
 		this(Material.GLASS.getMaterialMapColor());
 	}
 
-	public BlockStrongGlass(MapColor color) {
+	public BlockGlassHard(MapColor color) {
 
-		this(Material.GLASS, color);
-	}
+		super(Material.GLASS, color);
 
-	public BlockStrongGlass(Material blockMaterial, MapColor color) {
-
-		super(blockMaterial, color);
-
-		setHardness(3.0F);
-		setResistance(200.0F);
+		setHardness(5.0F);
+		setResistance(500.0F);
 		setSoundType(SoundType.GLASS);
 	}
 
-	public BlockStrongGlass setBeaconColor(float r, float g, float b) {
+	public BlockGlassHard setBeaconColorMult(float r, float g, float b) {
 
-		beaconColor = new float[] { r, g, b };
+		beaconColorMult = new float[] { r, g, b };
 		return this;
 	}
 
@@ -93,7 +89,7 @@ public class BlockStrongGlass extends BlockCoFH implements IDismantleable {
 	@Override
 	public float[] getBeaconColorMultiplier(IBlockState state, World world, BlockPos pos, BlockPos beaconPos) {
 
-		return beaconColor;
+		return beaconColorMult;
 	}
 
 	@Override

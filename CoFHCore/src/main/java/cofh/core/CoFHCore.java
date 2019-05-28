@@ -118,7 +118,7 @@ public class CoFHCore {
 
 	private void registerHandlers() {
 
-		packetHandler = new PacketHandler("cofh");
+		packetHandler = new PacketHandler(ID_COFH);
 
 		packetHandler.registerPacket(PACKET_CONTROL, PacketTileControl::new);
 		packetHandler.registerPacket(PACKET_GUI, PacketTileGui::new);
@@ -129,6 +129,7 @@ public class CoFHCore {
 		packetHandler.registerPacket(PACKET_SECURITY_CONTROL, PacketSecurityControl::new);
 		packetHandler.registerPacket(PACKET_REDSTONE_CONTROL, PacketRedstoneControl::new);
 		packetHandler.registerPacket(PACKET_TRANSFER_CONTROL, PacketTransferControl::new);
+		packetHandler.registerPacket(PACKET_SIDE_CONFIG, PacketSideConfig::new);
 		packetHandler.registerPacket(PACKET_KEY, PacketKey::new);
 
 		MinecraftForge.EVENT_BUS.register(KeyHandler.INSTANCE);

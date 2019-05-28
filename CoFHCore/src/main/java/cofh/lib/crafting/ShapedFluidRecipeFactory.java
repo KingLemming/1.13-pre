@@ -16,6 +16,7 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
+import static cofh.lib.util.Constants.ID_COFH;
 import static cofh.lib.util.helpers.ItemHelper.cloneStack;
 
 public class ShapedFluidRecipeFactory implements IRecipeFactory {
@@ -31,7 +32,7 @@ public class ShapedFluidRecipeFactory implements IRecipeFactory {
 		primer.mirrored = JsonUtils.getBoolean(json, "mirrored", true);
 		primer.input = recipe.getIngredients();
 
-		return new ShapedFluidRecipe(new ResourceLocation("cofh", "fluid_shaped"), recipe.getRecipeOutput(), primer);
+		return new ShapedFluidRecipe(new ResourceLocation(ID_COFH, "fluid_shaped"), recipe.getRecipeOutput(), primer);
 	}
 
 	// region RECIPE CLASS

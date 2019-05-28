@@ -1,5 +1,6 @@
 package cofh.lib.util.helpers;
 
+import cofh.lib.fluid.FluidStorageCoFH;
 import com.google.common.collect.Lists;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
@@ -11,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.text.TextFormatting;
@@ -64,6 +67,93 @@ public class FluidHelper {
 
 		return stack.tag != null ? stack.getFluid().getName().hashCode() + 31 * stack.tag.toString().hashCode() : stack.getFluid().getName().hashCode();
 	}
+
+	// region BLOCK TRANSFER
+	public static boolean extractFromAdjacent(TileEntity tile, FluidStorageCoFH tank, EnumFacing side) {
+
+		return tank.getFluidStack() == null ? extractFromAdjacent(tile, tank, tank.getCapacity(), side) : extractFromAdjacent(tile, tank, new FluidStack(tank.getFluidStack(), tank.getSpace()), side);
+	}
+
+	public static boolean extractFromAdjacent(TileEntity tile, FluidStorageCoFH tank, int amount, EnumFacing side) {
+
+		TileEntity adjTile = BlockHelper.getAdjacentTileEntity(tile, side);
+		EnumFacing opposite = side.getOpposite();
+
+		if (hasFluidHandlerCap(adjTile, opposite)) {
+			IFluidHandler handler = getFluidHandlerCap(adjTile, opposite);
+			if (handler == null) {
+				return false;
+			}
+			FluidStack drainStack = handler.drain(amount, false);
+			int drainAmount = tank.fill(drainStack, true);
+			if (drainAmount > 0) {
+				handler.drain(drainAmount, true);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean extractFromAdjacent(TileEntity tile, FluidStorageCoFH tank, FluidStack resource, EnumFacing side) {
+
+		TileEntity adjTile = BlockHelper.getAdjacentTileEntity(tile, side);
+		EnumFacing opposite = side.getOpposite();
+
+		if (hasFluidHandlerCap(adjTile, opposite)) {
+			IFluidHandler handler = getFluidHandlerCap(adjTile, opposite);
+			if (handler == null) {
+				return false;
+			}
+			FluidStack drainStack = handler.drain(resource, false);
+			int drainAmount = tank.fill(drainStack, true);
+			if (drainAmount > 0) {
+				handler.drain(new FluidStack(resource, drainAmount), true);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean insertIntoAdjacent(TileEntity tile, FluidStorageCoFH tank, EnumFacing side) {
+
+		return insertIntoAdjacent(tile, tank, tank.getFluidAmount(), side);
+	}
+
+	public static boolean insertIntoAdjacent(TileEntity tile, FluidStorageCoFH tank, int amount, EnumFacing side) {
+
+		if (tank.isEmpty()) {
+			return false;
+		}
+		TileEntity adjTile = BlockHelper.getAdjacentTileEntity(tile, side);
+		EnumFacing opposite = side.getOpposite();
+
+		if (hasFluidHandlerCap(adjTile, opposite)) {
+			IFluidHandler handler = getFluidHandlerCap(adjTile, opposite);
+			if (handler == null) {
+				return false;
+			}
+			int fillAmount = handler.fill(new FluidStack(tank.getFluidStack(), amount), true);
+			if (fillAmount > 0) {
+				tank.drain(fillAmount, true);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean hasFluidHandlerCap(TileEntity tile, EnumFacing face) {
+
+		return tile != null && tile.hasCapability(FLUID_HANDLER, face);
+	}
+
+	public static IFluidHandler getFluidHandlerCap(TileEntity tile, EnumFacing face) {
+
+		if (tile.hasCapability(FLUID_HANDLER, face)) {
+			return tile.getCapability(FLUID_HANDLER, face);
+		}
+		return null;
+	}
+	// endregion
 
 	// region COMPARISON
 	public static boolean fluidsEqual(FluidStack resourceA, FluidStack resourceB) {
@@ -227,6 +317,7 @@ public class FluidHelper {
 
 		return fillItemFromHandler(stack, handler, player, hand) || drainItemToHandler(stack, handler, player, hand);
 	}
+
 	// endregion
 
 	// region PROPERTY HELPERS

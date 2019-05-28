@@ -142,7 +142,7 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 	protected IBlockState getExtendedState(IBlockState state) {
 
 		if (state instanceof IExtendedBlockState) {
-			Map<String, String> map = new HashMap<>();//TODO, pool these.
+			Map<String, String> map = new HashMap<>(); // TODO: Pool these.
 			buildModelProps(map);
 			return ((IExtendedBlockState) state).withProperty(MODEL_PROPERTIES, map);
 		}
@@ -298,11 +298,11 @@ public abstract class TileCoFH extends TileEntity implements ITileCallback {
 	}
 	// endregion
 
-	//region MODELS
+	// region MODELS
 	public void buildModelProps(Map<String, String> properties) {
 
 	}
-	//endregion
+	// endregion
 
 	// region ITileCallback
 	@Override

@@ -1,6 +1,8 @@
 package cofh.lib.util.control;
 
 import cofh.core.network.PacketBufferCoFH;
+import cofh.core.network.packet.server.PacketSideConfig;
+import cofh.lib.util.Utils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 
@@ -78,6 +80,14 @@ public class ReconfigControlModule implements IReconfigurable {
 	}
 	// endregion
 
+	public SideConfig getSideConfig(int side) {
+
+		if (side > 5) {
+			return SIDE_ACCESSIBLE;
+		}
+		return sides[side];
+	}
+
 	// region IReconfigurable
 	@Override
 	public boolean isReconfigurable() {
@@ -101,6 +111,12 @@ public class ReconfigControlModule implements IReconfigurable {
 			return false;
 		}
 		sides[side.ordinal()] = sides[side.ordinal()].prev();
+
+		if (Utils.isClientWorld(tile.world())) {
+			PacketSideConfig.sendToServer(this.tile);
+		} else {
+			tile.onControlUpdate();
+		}
 		return true;
 	}
 
@@ -111,6 +127,12 @@ public class ReconfigControlModule implements IReconfigurable {
 			return false;
 		}
 		sides[side.ordinal()] = sides[side.ordinal()].next();
+
+		if (Utils.isClientWorld(tile.world())) {
+			PacketSideConfig.sendToServer(this.tile);
+		} else {
+			tile.onControlUpdate();
+		}
 		return true;
 	}
 
@@ -121,6 +143,12 @@ public class ReconfigControlModule implements IReconfigurable {
 			return false;
 		}
 		sides[side.ordinal()] = config;
+
+		if (Utils.isClientWorld(tile.world())) {
+			PacketSideConfig.sendToServer(this.tile);
+		} else {
+			tile.onControlUpdate();
+		}
 		return true;
 	}
 
@@ -128,6 +156,12 @@ public class ReconfigControlModule implements IReconfigurable {
 	public boolean clearAllSides() {
 
 		sides = new SideConfig[] { SIDE_NONE, SIDE_NONE, SIDE_NONE, SIDE_NONE, SIDE_NONE, SIDE_NONE };
+
+		if (Utils.isClientWorld(tile.world())) {
+			PacketSideConfig.sendToServer(this.tile);
+		} else {
+			tile.onControlUpdate();
+		}
 		return true;
 	}
 	// endregion

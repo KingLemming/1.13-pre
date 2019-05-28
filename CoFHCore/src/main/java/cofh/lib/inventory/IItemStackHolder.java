@@ -15,6 +15,8 @@ public interface IItemStackHolder {
 
 	int getCount();
 
+	int getSpace();
+
 	boolean isEmpty();
 
 	boolean isFull();

@@ -24,9 +24,29 @@ public interface IReconfigurable {
 
 	// region CONFIGS
 	enum SideConfig {
-		SIDE_NONE, SIDE_INPUT, SIDE_OUTPUT, SIDE_BOTH, SIDE_ACCESSIBLE;
+
+		SIDE_NONE(false, false), SIDE_INPUT(true, false), SIDE_OUTPUT(false, true), SIDE_BOTH(true, true), SIDE_ACCESSIBLE(false, false);
 
 		public static final SideConfig[] VALUES = values();
+
+		boolean autoInput;
+		boolean autoOutput;
+
+		SideConfig(boolean autoInput, boolean autoOutput) {
+
+			this.autoInput = autoInput;
+			this.autoOutput = autoOutput;
+		}
+
+		public boolean autoInput() {
+
+			return autoInput;
+		}
+
+		public boolean autoOutput() {
+
+			return autoOutput;
+		}
 
 		SideConfig prev() {
 
