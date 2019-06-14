@@ -51,21 +51,21 @@ public class TabConfiguration extends TabBase {
 	public static int defaultBackgroundColor = 0x226688;
 
 	static {
-		Matrix4 mat;//Storage.
+		Matrix4 mat; //Storage
 
-		mat = new Matrix4();//Above - Up
+		mat = new Matrix4(); // Above - Up
 		mat.scale(16, 16, 0);
 		mat.apply(Rotation.sideRotations[EnumFacing.UP.ordinal()].inverse());
 		mat.apply(Rotation.sideRotations[EnumFacing.NORTH.ordinal()]);
 		faceMatrices.put(EnumFacing.UP, mat);
 
-		mat = new Matrix4();//Left - East
+		mat = new Matrix4(); // Left - East
 		mat.scale(16, 16, 0);
 		mat.apply(new Rotation(MathHelper.torad * -90F, new Vector3(0, 1, 0)).at(Vector3.center));
 		mat.apply(new Rotation(MathHelper.torad * 180F, new Vector3(0, 0, 1)).at(Vector3.center));
 		faceMatrices.put(EnumFacing.EAST, mat);
 
-		mat = new Matrix4();//Facing - North;
+		mat = new Matrix4(); // Facing - North
 		mat.scale(16, 16, 0);
 		mat.apply(new Rotation(MathHelper.torad * 180F, new Vector3(0, 0, 1)).at(Vector3.center));
 		faceMatrices.put(EnumFacing.NORTH, mat);
@@ -76,14 +76,14 @@ public class TabConfiguration extends TabBase {
 		mat.apply(new Rotation(MathHelper.torad * 180F, new Vector3(0, 0, 1)).at(Vector3.center));
 		faceMatrices.put(EnumFacing.WEST, mat);
 
-		mat = new Matrix4();//Bellow - Down
+		mat = new Matrix4(); // Below - Down
 		mat.translate(0, 16, 0);
 		mat.scale(16, 16, 0);
 		mat.apply(Rotation.sideRotations[EnumFacing.DOWN.ordinal()].inverse());
 		mat.apply(Rotation.sideRotations[EnumFacing.NORTH.ordinal()]);
 		faceMatrices.put(EnumFacing.DOWN, mat);
 
-		mat = new Matrix4();//Opposite - South.
+		mat = new Matrix4(); // Opposite - South
 		mat.scale(16, 16, 0);
 		mat.apply(new Rotation(MathHelper.torad * 180F, new Vector3(0, 1, 0)).at(Vector3.center));
 		mat.apply(new Rotation(MathHelper.torad * 180F, new Vector3(0, 0, 1)).at(Vector3.center));
@@ -117,7 +117,7 @@ public class TabConfiguration extends TabBase {
 		myReconfig = reconfig;
 		myTransfer = transfer;
 
-		this.setVisible(myReconfig.isReconfigurable());
+		this.setVisible(myReconfig::isReconfigurable);
 	}
 
 	@Override

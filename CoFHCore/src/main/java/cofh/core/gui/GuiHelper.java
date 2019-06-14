@@ -2,8 +2,10 @@ package cofh.core.gui;
 
 import cofh.core.gui.element.ElementEnergyStorage;
 import cofh.core.gui.element.ElementFluidStorage;
+import cofh.core.gui.element.ElementSimple;
 import cofh.lib.energy.EnergyStorageCoFH;
 import cofh.lib.fluid.FluidStorageCoFH;
+import cofh.lib.util.control.IReconfigurable;
 
 import static cofh.lib.util.Constants.PATH_ELEMENTS;
 
@@ -41,6 +43,12 @@ public class GuiHelper {
 	public static ElementFluidStorage createDefaultFluidStorage(IGuiAccess gui, int posX, int posY, FluidStorageCoFH storage, int width, int height, String texture, String overlayTexture, int texW, int texH) {
 
 		return (ElementFluidStorage) new ElementFluidStorage(gui, posX, posY, storage).setOverlayTexture(overlayTexture).setSize(width, height).setTexture(texture, texW, texH);
+	}
+
+	// TODO: Fix/Finish
+	public static ElementSimple createSlotOverlay(IGuiAccess gui, int posX, int posY, IReconfigurable reconfig) {
+
+		return (ElementSimple) new ElementSimple(gui, posX, posY).setVisible(reconfig::hasInputSide);
 	}
 
 	public static final int DURATION = 16;

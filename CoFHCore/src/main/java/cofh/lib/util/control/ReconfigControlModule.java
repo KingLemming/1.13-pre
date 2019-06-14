@@ -164,5 +164,27 @@ public class ReconfigControlModule implements IReconfigurable {
 		}
 		return true;
 	}
+
+	@Override
+	public boolean hasInputSide() {
+
+		for (SideConfig side : sides) {
+			if (side.isInput()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean hasOutputSide() {
+
+		for (SideConfig side : sides) {
+			if (side.isOutput()) {
+				return true;
+			}
+		}
+		return false;
+	}
 	// endregion
 }

@@ -39,5 +39,17 @@ public interface IReconfigurableTile extends IReconfigurable, ITileCallback {
 
 		return reconfigControl().clearAllSides();
 	}
+
+	@Override
+	default boolean hasInputSide() {
+
+		return reconfigControl().hasInputSide();
+	}
+
+	@Override
+	default boolean hasOutputSide() {
+
+		return reconfigControl().hasOutputSide();
+	}
 	// endregion
 }

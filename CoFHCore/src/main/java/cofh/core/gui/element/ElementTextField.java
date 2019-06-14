@@ -143,15 +143,6 @@ public class ElementTextField extends ElementBase {
 		return text.length;
 	}
 
-	/**
-	 * @deprecated Use <tt>getMaxLength</tt>
-	 */
-	@Deprecated
-	public int getMaxStringLength() {
-
-		return text.length;
-	}
-
 	public boolean isFocused() {
 
 		return enabled() && isFocused;

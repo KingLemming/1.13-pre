@@ -146,7 +146,7 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 
 		for (int i = inputTracker + 1; i <= inputTracker + 6; i++) {
 			EnumFacing side = EnumFacing.VALUES[i % 6];
-			if (reconfigControl.getSideConfig(side).autoInput()) {
+			if (reconfigControl.getSideConfig(side).isInput()) {
 				for (ItemStorageCoFH slot : getInputSlots()) {
 					if (slot.getSpace() > 0) {
 						InventoryHelper.extractFromAdjacent(this, slot, slot.getSpace(), side);
@@ -176,7 +176,7 @@ public abstract class TileMachine extends AbstractTileBase implements ITickable,
 
 		for (int i = outputTracker + 1; i <= outputTracker + 6; i++) {
 			EnumFacing side = EnumFacing.VALUES[i % 6];
-			if (reconfigControl.getSideConfig(side).autoOutput()) {
+			if (reconfigControl.getSideConfig(side).isOutput()) {
 				for (ItemStorageCoFH slot : getOutputSlots()) {
 					InventoryHelper.insertIntoAdjacent(this, slot, 64, side);
 				}

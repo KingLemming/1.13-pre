@@ -5,15 +5,19 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 public abstract class ElementBase {
+
+	protected static final BooleanSupplier TRUE = () -> true;
+	protected static final BooleanSupplier FALSE = () -> false;
+
+	protected BooleanSupplier enabled = TRUE;
+	protected BooleanSupplier visible = TRUE;
 
 	protected final IGuiAccess gui;
 	protected ResourceLocation texture;
 	protected String name = "";
-
-	private boolean enabled = true;
-	private boolean visible = true;
 
 	protected int posX;
 	protected int posY;
@@ -69,11 +73,23 @@ public abstract class ElementBase {
 	// region SETTERS / GETTERS
 	public final ElementBase setEnabled(boolean enabled) {
 
-		this.enabled = enabled;
+		this.enabled = enabled ? TRUE : FALSE;
 		return this;
 	}
 
 	public final ElementBase setVisible(boolean visible) {
+
+		this.visible = visible ? TRUE : FALSE;
+		return this;
+	}
+
+	public final ElementBase setEnabled(BooleanSupplier enabled) {
+
+		this.enabled = enabled;
+		return this;
+	}
+
+	public final ElementBase setVisible(BooleanSupplier visible) {
 
 		this.visible = visible;
 		return this;
@@ -109,12 +125,12 @@ public abstract class ElementBase {
 
 	public final boolean enabled() {
 
-		return enabled;
+		return enabled.getAsBoolean();
 	}
 
 	public final boolean visible() {
 
-		return visible;
+		return visible.getAsBoolean();
 	}
 
 	public final String name() {

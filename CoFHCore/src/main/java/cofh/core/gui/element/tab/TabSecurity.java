@@ -43,7 +43,7 @@ public class TabSecurity extends TabBase {
 		mySecurable = securable;
 		myPlayer = playerID;
 
-		this.setVisible(mySecurable.isSecurable());
+		this.setVisible(mySecurable::isSecurable);
 	}
 
 	@Override

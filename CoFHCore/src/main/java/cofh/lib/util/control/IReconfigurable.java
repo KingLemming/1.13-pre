@@ -14,6 +14,10 @@ public interface IReconfigurable {
 
 	boolean clearAllSides();
 
+	boolean hasInputSide();
+
+	boolean hasOutputSide();
+
 	/**
 	 * This returns whether or not reconfiguration functionality is enabled at all.
 	 */
@@ -29,23 +33,23 @@ public interface IReconfigurable {
 
 		public static final SideConfig[] VALUES = values();
 
-		boolean autoInput;
-		boolean autoOutput;
+		boolean input;
+		boolean output;
 
-		SideConfig(boolean autoInput, boolean autoOutput) {
+		SideConfig(boolean input, boolean output) {
 
-			this.autoInput = autoInput;
-			this.autoOutput = autoOutput;
+			this.input = input;
+			this.output = output;
 		}
 
-		public boolean autoInput() {
+		public boolean isInput() {
 
-			return autoInput;
+			return input;
 		}
 
-		public boolean autoOutput() {
+		public boolean isOutput() {
 
-			return autoOutput;
+			return output;
 		}
 
 		SideConfig prev() {
