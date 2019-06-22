@@ -4,7 +4,7 @@ import cofh.core.gui.container.ContainerInventoryItem;
 import cofh.core.network.packet.server.PacketSecurity;
 import cofh.core.util.CoreUtils;
 import cofh.enstoragement.item.ItemSatchel;
-import cofh.lib.gui.slot.SlotLocked;
+import cofh.lib.inventory.container.slot.SlotLocked;
 import cofh.lib.util.control.ISecurable;
 import cofh.lib.util.helpers.MathHelper;
 import cofh.lib.util.helpers.SecurityHelper;

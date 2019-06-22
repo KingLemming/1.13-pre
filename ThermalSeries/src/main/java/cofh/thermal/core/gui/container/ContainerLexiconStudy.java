@@ -2,7 +2,7 @@ package cofh.thermal.core.gui.container;
 
 import cofh.core.gui.container.ContainerInventoryItem;
 import cofh.core.util.oredict.OreDictionaryArbiter;
-import cofh.lib.gui.slot.SlotLocked;
+import cofh.lib.inventory.container.slot.SlotLocked;
 import cofh.thermal.core.network.PacketLexiconStudy;
 import cofh.thermal.core.util.managers.LexiconManager;
 import net.minecraft.entity.player.EntityPlayer;

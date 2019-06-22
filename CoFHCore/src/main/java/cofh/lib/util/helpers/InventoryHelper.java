@@ -1,6 +1,6 @@
 package cofh.lib.util.helpers;
 
-import cofh.lib.gui.slot.SlotFalseCopy;
+import cofh.lib.inventory.container.slot.SlotFalseCopy;
 import cofh.lib.inventory.ItemStorageCoFH;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;

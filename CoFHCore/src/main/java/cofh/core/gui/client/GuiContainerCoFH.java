@@ -4,7 +4,7 @@ import cofh.core.gui.IGuiAccess;
 import cofh.core.gui.element.ElementBase;
 import cofh.core.gui.element.tab.TabBase;
 import cofh.core.gui.element.tab.TabTracker;
-import cofh.lib.gui.slot.SlotFalseCopy;
+import cofh.lib.inventory.container.slot.SlotFalseCopy;
 import cofh.lib.util.helpers.RenderHelper;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;

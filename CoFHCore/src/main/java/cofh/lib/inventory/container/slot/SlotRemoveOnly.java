@@ -1,4 +1,4 @@
-package cofh.lib.gui.slot;
+package cofh.lib.inventory.container.slot;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

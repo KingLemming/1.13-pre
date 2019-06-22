@@ -1,6 +1,6 @@
 package cofh.core.gui.container;
 
-import cofh.lib.gui.slot.SlotFalseCopy;
+import cofh.lib.inventory.container.slot.SlotFalseCopy;
 import cofh.lib.util.helpers.InventoryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

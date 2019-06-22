@@ -1,6 +1,6 @@
 package cofh.thermal.expansion.gui.slot;
 
-import cofh.lib.gui.slot.SlotFalseCopy;
+import cofh.lib.inventory.container.slot.SlotFalseCopy;
 import cofh.thermal.core.util.managers.LexiconManager;
 import cofh.thermal.expansion.block.machine.TileMachineLexicon;
 import net.minecraft.inventory.IInventory;

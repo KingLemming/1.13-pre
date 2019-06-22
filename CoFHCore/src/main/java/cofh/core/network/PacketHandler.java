@@ -28,9 +28,6 @@ import java.util.function.Supplier;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-/**
- * @author covers1624
- */
 public class PacketHandler {
 
 	private static Logger log = LogManager.getLogger("cofh.PacketHandler");

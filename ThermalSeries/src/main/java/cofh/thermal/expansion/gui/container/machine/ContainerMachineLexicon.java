@@ -1,8 +1,8 @@
 package cofh.thermal.expansion.gui.container.machine;
 
 import cofh.core.gui.container.ContainerTileAugmentable;
-import cofh.lib.gui.slot.SlotCoFH;
-import cofh.lib.gui.slot.SlotRemoveOnly;
+import cofh.lib.inventory.container.slot.SlotCoFH;
+import cofh.lib.inventory.container.slot.SlotRemoveOnly;
 import cofh.lib.inventory.InvWrapper;
 import cofh.thermal.core.block.machine.TileMachine;
 import cofh.thermal.expansion.block.machine.TileMachineLexicon;

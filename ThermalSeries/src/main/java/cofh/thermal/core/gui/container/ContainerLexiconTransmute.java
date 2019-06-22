@@ -1,8 +1,8 @@
 package cofh.thermal.core.gui.container;
 
 import cofh.core.util.oredict.OreDictionaryArbiter;
-import cofh.lib.gui.slot.SlotLocked;
-import cofh.lib.gui.slot.SlotRemoveOnly;
+import cofh.lib.inventory.container.slot.SlotLocked;
+import cofh.lib.inventory.container.slot.SlotRemoveOnly;
 import cofh.thermal.core.network.PacketLexiconTransmute;
 import cofh.thermal.core.util.managers.LexiconManager;
 import net.minecraft.entity.player.EntityPlayer;
